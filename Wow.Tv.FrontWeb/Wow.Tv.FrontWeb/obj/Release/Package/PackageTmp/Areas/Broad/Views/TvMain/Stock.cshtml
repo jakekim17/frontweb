@@ -1,0 +1,34 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.editVOD
+
+@model List<tblStockClass>
+
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+}
+
+
+
+
+@foreach (var item in Model)
+{
+@*<div>
+    <img src="http://vodimg.wowtv.co.kr/@item.EditFolder.Trim()/@item.ImageS" alt="종목영상" width="285" height="160" style="cursor:pointer;" onclick="return TvMainIndex.OpenVod(@item.vodNum);" >
+    <span class="icon-play medium"></span>
+    <strong onclick="return TvMainIndex.OpenVod(@item.vodNum);" style="cursor:pointer;">@item.StockName<span class="font-color02">(@item.StockCode)</span></strong>
+    <a href="#" onclick="return TvMainIndex.OpenStockItem('@item.StockCode');" class="btn sort01">종목보기</a>
+</div>*@
+
+<div>
+    <a href="#" onclick="return TvMainIndex.OpenVod(@item.vodNum);"><img src="http://vodimg.wowtv.co.kr/@item.EditFolder.Trim()/@item.ImageS" alt="" width="285" height="160"></a>
+    <span class="icon-play medium"></span>
+    <a href="#" onclick="return TvMainIndex.OpenVod(@item.vodNum);"><strong>@item.StockName<span class="font-color02">(@item.StockCode)</span></strong></a>
+    <a href="#" class="btn sort01" onclick="return TvMainIndex.OpenStockItem('@item.StockCode.Replace("A","")');">종목보기</a>
+</div>
+}
+

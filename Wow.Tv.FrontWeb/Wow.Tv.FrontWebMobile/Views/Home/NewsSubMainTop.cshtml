@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="swiper-slide @(Model.IndexOf(item))">
+            <!-- box img start -->
+            <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID')" class="box-img-01">
+                <div class="img-area">
+                    <img alt="" src="@Wow.WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("16M")'">
+                    @if (!String.IsNullOrEmpty(item.GUBUN_NAME))
+                    {
+                        @MvcHtmlString.Create(Wow.WowExtensionMethod.NewsMobileGubunIcon(item.GUBUN_NAME))
+                    }
+                    @if (item.VOD_NUM > 0)
+                    {
+                        <span class="icon-play"></span>
+                    }
+                </div>
+                <p class="txt">@MvcHtmlString.Create(Wow.WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</p>
+            </a>
+            <!--// box img end -->
+        </div>
+    }
+}
+else
+{
+    <a href="javascript:void(0)">
+        등록된 내용이 없습니다.
+    </a>
+}

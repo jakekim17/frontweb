@@ -1,0 +1,1789 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfusp_web_getStockInvestorSum_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getStockInvestorSum_Result" nillable="true" type="tns:usp_web_getStockInvestorSum_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getStockInvestorSum_Result" nillable="true" type="tns:ArrayOfusp_web_getStockInvestorSum_Result" />
+  <xs:complexType name="usp_web_getStockInvestorSum_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DataDT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="buy" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dday" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="foreinerbuy" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="foreinersell" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="mmonth" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="orgbuy" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="orgsell" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="sell" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="stockcode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getStockInvestorSum_Result" nillable="true" type="tns:usp_web_getStockInvestorSum_Result" />
+  <xs:complexType name="ArrayOfusp_web_getStockPart_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getStockPart_Result" nillable="true" type="tns:usp_web_getStockPart_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getStockPart_Result" nillable="true" type="tns:ArrayOfusp_web_getStockPart_Result" />
+  <xs:complexType name="usp_web_getStockPart_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="f_part_code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="f_part_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="part" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="rate" nillable="true" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getStockPart_Result" nillable="true" type="tns:usp_web_getStockPart_Result" />
+  <xs:complexType name="ArrayOfusp_web_getStockThema_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getStockThema_Result" nillable="true" type="tns:usp_web_getStockThema_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getStockThema_Result" nillable="true" type="tns:ArrayOfusp_web_getStockThema_Result" />
+  <xs:complexType name="usp_web_getStockThema_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FallCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="MiddleCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PartName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartNum" type="xs:int" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="RiseCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalCnt" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getStockThema_Result" nillable="true" type="tns:usp_web_getStockThema_Result" />
+  <xs:complexType name="ArrayOfusp_web_getRelativeStock_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getRelativeStock_Result" nillable="true" type="tns:usp_web_getRelativeStock_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getRelativeStock_Result" nillable="true" type="tns:ArrayOfusp_web_getRelativeStock_Result" />
+  <xs:complexType name="usp_web_getRelativeStock_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ARJ_CODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STOCK_CODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STOCK_NICKNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STOCK_WANNAME" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getRelativeStock_Result" nillable="true" type="tns:usp_web_getRelativeStock_Result" />
+  <xs:complexType name="ArrayOfusp_web_getNoticeTop6List_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getNoticeTop6List_Result" nillable="true" type="tns:usp_web_getNoticeTop6List_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getNoticeTop6List_Result" nillable="true" type="tns:ArrayOfusp_web_getNoticeTop6List_Result" />
+  <xs:complexType name="usp_web_getNoticeTop6List_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DISP_DATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_CONTENT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_CONTENTS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_DATA_DAY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_SEQ" type="xs:int" />
+      <xs:element minOccurs="0" name="F_STOCK_CODE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getNoticeTop6List_Result" nillable="true" type="tns:usp_web_getNoticeTop6List_Result" />
+  <xs:complexType name="ArrayOfusp_web_getUSAIndex_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getUSAIndex_Result" nillable="true" type="tns:usp_web_getUSAIndex_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getUSAIndex_Result" nillable="true" type="tns:ArrayOfusp_web_getUSAIndex_Result" />
+  <xs:complexType name="usp_web_getUSAIndex_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getUSAIndex_Result" nillable="true" type="tns:usp_web_getUSAIndex_Result" />
+  <xs:complexType name="ArrayOfusp_web_getAsiaIndex_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getAsiaIndex_Result" nillable="true" type="tns:usp_web_getAsiaIndex_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getAsiaIndex_Result" nillable="true" type="tns:ArrayOfusp_web_getAsiaIndex_Result" />
+  <xs:complexType name="usp_web_getAsiaIndex_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TITLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getAsiaIndex_Result" nillable="true" type="tns:usp_web_getAsiaIndex_Result" />
+  <xs:complexType name="usp_LatestStockPrice_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="afterChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="afterChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="afterprice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="askprice_1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="baseprice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="bidprice_1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="capital" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="chgprice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="deal" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="eps" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="foriholdper" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="highprice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="limithigh" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="limitlow" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="listcount" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="lowprice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="max52" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="min52" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="mov20" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="mov5" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="openprice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="parprice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="per" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="pgaskdeal" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="pgbiddeal" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="settlementmon" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="totalprice" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="totalvol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="trademoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="tradeprice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="tradevol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="updnper" nillable="true" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_LatestStockPrice_Result" nillable="true" type="tns:usp_LatestStockPrice_Result" />
+  <xs:complexType name="usp_web_stock_hoga_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AfterAskVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AfterBidVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskPrice_1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskPrice_10" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskPrice_2" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskPrice_3" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskPrice_4" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskPrice_5" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskPrice_6" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskPrice_7" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskPrice_8" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskPrice_9" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="AskVol_1" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskVol_10" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskVol_2" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskVol_3" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskVol_4" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskVol_5" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskVol_6" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskVol_7" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskVol_8" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AskVol_9" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidPrice_1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidPrice_10" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidPrice_2" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidPrice_3" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidPrice_4" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidPrice_5" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidPrice_6" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidPrice_7" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidPrice_8" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidPrice_9" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BidVol_1" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidVol_10" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidVol_2" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidVol_3" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidVol_4" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidVol_5" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidVol_6" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidVol_7" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidVol_8" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BidVol_9" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="InsertDT" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Market" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MarketState" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StockCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalAskVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalBidVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TradeType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_stock_hoga_Result" nillable="true" type="tns:usp_web_stock_hoga_Result" />
+  <xs:complexType name="ArrayOfusp_web_getStockDealing5_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getStockDealing5_Result" nillable="true" type="tns:usp_web_getStockDealing5_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getStockDealing5_Result" nillable="true" type="tns:ArrayOfusp_web_getStockDealing5_Result" />
+  <xs:complexType name="usp_web_getStockDealing5_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BUY_CORP_CODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BUY_CORP_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BUY_VOL" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="SELL_CORP_CODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SELL_CORP_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SELL_VOL" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getStockDealing5_Result" nillable="true" type="tns:usp_web_getStockDealing5_Result" />
+  <xs:complexType name="ArrayOfusp_getDayStockPriceBand_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getDayStockPriceBand_Result" nillable="true" type="tns:usp_getDayStockPriceBand_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getDayStockPriceBand_Result" nillable="true" type="tns:ArrayOfusp_getDayStockPriceBand_Result" />
+  <xs:complexType name="usp_getDayStockPriceBand_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PRICE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TOT" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="VOL" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getDayStockPriceBand_Result" nillable="true" type="tns:usp_getDayStockPriceBand_Result" />
+  <xs:complexType name="ArrayOfusp_SelectStockRecentlyTime_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_SelectStockRecentlyTime_Result" nillable="true" type="tns:usp_SelectStockRecentlyTime_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_SelectStockRecentlyTime_Result" nillable="true" type="tns:ArrayOfusp_SelectStockRecentlyTime_Result" />
+  <xs:complexType name="usp_SelectStockRecentlyTime_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_SelectStockRecentlyTime_Result" nillable="true" type="tns:usp_SelectStockRecentlyTime_Result" />
+  <xs:complexType name="ArrayOfusp_SelectStockRecentlyDay_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_SelectStockRecentlyDay_Result" nillable="true" type="tns:usp_SelectStockRecentlyDay_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_SelectStockRecentlyDay_Result" nillable="true" type="tns:ArrayOfusp_SelectStockRecentlyDay_Result" />
+  <xs:complexType name="usp_SelectStockRecentlyDay_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_SelectStockRecentlyDay_Result" nillable="true" type="tns:usp_SelectStockRecentlyDay_Result" />
+  <xs:complexType name="ArrayOfusp_web_getNowPriceTime_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getNowPriceTime_Result" nillable="true" type="tns:usp_web_getNowPriceTime_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getNowPriceTime_Result" nillable="true" type="tns:ArrayOfusp_web_getNowPriceTime_Result" />
+  <xs:complexType name="usp_web_getNowPriceTime_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CALLBUY" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CALLSELL" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CHGPRICE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CHGTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CONCLUSION" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="DEALING" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="DT" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PRICE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QUANTITYBUY" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="QUANTITYSELL" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TRADEDATE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getNowPriceTime_Result" nillable="true" type="tns:usp_web_getNowPriceTime_Result" />
+  <xs:complexType name="ArrayOfusp_getDailyStockPricePop_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getDailyStockPricePop_Result" nillable="true" type="tns:usp_getDailyStockPricePop_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getDailyStockPricePop_Result" nillable="true" type="tns:ArrayOfusp_getDailyStockPricePop_Result" />
+  <xs:complexType name="usp_getDailyStockPricePop_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CHGPRICE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CHGRATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CHGTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DEALING" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="HIGHPRICE" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LOWPRICE" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PRICE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STARTPRICE" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TRADEDATE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getDailyStockPricePop_Result" nillable="true" type="tns:usp_getDailyStockPricePop_Result" />
+  <xs:complexType name="ArrayOfusp_web_getTradeTrend_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getTradeTrend_Result" nillable="true" type="tns:usp_web_getTradeTrend_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getTradeTrend_Result" nillable="true" type="tns:ArrayOfusp_web_getTradeTrend_Result" />
+  <xs:complexType name="usp_web_getTradeTrend_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ACCRUE10" type="xs:int" />
+      <xs:element minOccurs="0" name="CHGPRICE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CHGRATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CHGTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FOREINERSELL" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="ORGSELL" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="PRICE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SHARE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TRADEDATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getTradeTrend_Result" nillable="true" type="tns:usp_web_getTradeTrend_Result" />
+  <xs:complexType name="ArrayOfusp_web_getStockGongsi_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getStockGongsi_Result" nillable="true" type="tns:usp_web_getStockGongsi_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getStockGongsi_Result" nillable="true" type="tns:ArrayOfusp_web_getStockGongsi_Result" />
+  <xs:complexType name="usp_web_getStockGongsi_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DISP_DATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_CONTENT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_DATA_DAY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="F_SEQ" type="xs:int" />
+      <xs:element minOccurs="0" name="F_STOCK_CODE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getStockGongsi_Result" nillable="true" type="tns:usp_web_getStockGongsi_Result" />
+  <xs:complexType name="ArrayOftblMyFavoriteJongMok">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="tblMyFavoriteJongMok" nillable="true" type="tns:tblMyFavoriteJongMok" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOftblMyFavoriteJongMok" nillable="true" type="tns:ArrayOftblMyFavoriteJongMok" />
+  <xs:complexType name="tblMyFavoriteJongMok">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Groupid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="arj_code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="banner" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="capital" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chg_type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="curr_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="data_day" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="final_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="foreinerbuy" type="xs:long" />
+      <xs:element minOccurs="0" name="gubun" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="high_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="highest_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="idx" type="xs:int" />
+      <xs:element minOccurs="0" name="init_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="k_gbn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="list_num" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="list_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="list_sum" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="low_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="lowest_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="mkt_halt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="net_chg" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="net_turnover" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="net_vol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="orderNo" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="orgbuy" type="xs:long" />
+      <xs:element minOccurs="0" name="part_code1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="part_code2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stock_code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stock_nickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stock_wanname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stockcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="usernumber" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="tblMyFavoriteJongMok" nillable="true" type="tns:tblMyFavoriteJongMok" />
+  <xs:complexType name="ArrayOfusp_web_getStockGongsiView_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getStockGongsiView_Result" nillable="true" type="tns:usp_web_getStockGongsiView_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getStockGongsiView_Result" nillable="true" type="tns:ArrayOfusp_web_getStockGongsiView_Result" />
+  <xs:complexType name="usp_web_getStockGongsiView_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="f_content" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="f_data_day" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getStockGongsiView_Result" nillable="true" type="tns:usp_web_getStockGongsiView_Result" />
+  <xs:complexType name="ArrayOfusp_web_getExchangeTimeList_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getExchangeTimeList_Result" nillable="true" type="tns:usp_web_getExchangeTimeList_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getExchangeTimeList_Result" nillable="true" type="tns:ArrayOfusp_web_getExchangeTimeList_Result" />
+  <xs:complexType name="usp_web_getExchangeTimeList_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgCode" nillable="true" type="xs:short" />
+      <xs:element minOccurs="0" name="chgPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="exchangeDT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="insertDT" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getExchangeTimeList_Result" nillable="true" type="tns:usp_web_getExchangeTimeList_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseMainmergecode_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseMainmergecode_Result" nillable="true" type="tns:usp_getSiseMainmergecode_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseMainmergecode_Result" nillable="true" type="tns:ArrayOfusp_getSiseMainmergecode_Result" />
+  <xs:complexType name="usp_getSiseMainmergecode_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Foreigner" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Market" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Personal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Security" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseMainmergecode_Result" nillable="true" type="tns:usp_getSiseMainmergecode_Result" />
+  <xs:complexType name="ArrayOfusp_web_getVirtualMoney_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getVirtualMoney_Result" nillable="true" type="tns:usp_web_getVirtualMoney_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getVirtualMoney_Result" nillable="true" type="tns:ArrayOfusp_web_getVirtualMoney_Result" />
+  <xs:complexType name="usp_web_getVirtualMoney_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TradePrice" type="xs:int" />
+      <xs:element minOccurs="0" name="chgPrice" type="xs:int" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="chgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stockCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getVirtualMoney_Result" nillable="true" type="tns:usp_web_getVirtualMoney_Result" />
+  <xs:complexType name="ArrayOfusp_web_clfSelectOnlineIndex_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_clfSelectOnlineIndex_Result" nillable="true" type="tns:usp_web_clfSelectOnlineIndex_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_clfSelectOnlineIndex_Result" nillable="true" type="tns:ArrayOfusp_web_clfSelectOnlineIndex_Result" />
+  <xs:complexType name="usp_web_clfSelectOnlineIndex_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DataType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IndustryCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InsertDt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Market" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TradePrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TradeTime" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_clfSelectOnlineIndex_Result" nillable="true" type="tns:usp_web_clfSelectOnlineIndex_Result" />
+  <xs:complexType name="ArrayOfusp_web_clfSelectOnlineItem_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_clfSelectOnlineItem_Result" nillable="true" type="tns:usp_web_clfSelectOnlineItem_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_clfSelectOnlineItem_Result" nillable="true" type="tns:ArrayOfusp_web_clfSelectOnlineItem_Result" />
+  <xs:complexType name="usp_web_clfSelectOnlineItem_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AfterTradeMoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="AfterTradeVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BasePrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BeforeTradeMoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="BeforeTradeVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClosePrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CloseType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InsertDT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Market" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StockCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalMoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalMoney1" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalVol1" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TradeDay" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradePrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TradeStop" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="engName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_clfSelectOnlineItem_Result" nillable="true" type="tns:usp_web_clfSelectOnlineItem_Result" />
+  <xs:complexType name="ArrayOfusp_web_clfSelectHoliday_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_clfSelectHoliday_Result" nillable="true" type="tns:usp_web_clfSelectHoliday_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_clfSelectHoliday_Result" nillable="true" type="tns:ArrayOfusp_web_clfSelectHoliday_Result" />
+  <xs:complexType name="usp_web_clfSelectHoliday_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MARKET_DT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MARKET_END_H" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MARKET_END_M" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MARKET_HOLY_DESC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MARKET_STA_H" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MARKET_STA_M" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_clfSelectHoliday_Result" nillable="true" type="tns:usp_web_clfSelectHoliday_Result" />
+  <xs:complexType name="ArrayOft_part">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_part" nillable="true" type="tns:t_part" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOft_part" nillable="true" type="tns:ArrayOft_part" />
+  <xs:complexType name="t_part">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="F_part_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="f_part_code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="f_part_code1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="f_part_code2" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_part" nillable="true" type="tns:t_part" />
+  <xs:complexType name="ArrayOft_kosdaq_part">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_kosdaq_part" nillable="true" type="tns:t_kosdaq_part" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOft_kosdaq_part" nillable="true" type="tns:ArrayOft_kosdaq_part" />
+  <xs:complexType name="t_kosdaq_part">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="k_part_code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="k_part_gubun" nillable="true" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="k_part_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="web_flag" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_kosdaq_part" nillable="true" type="tns:t_kosdaq_part" />
+  <xs:complexType name="ArrayOfFNC_GetThemaJisuTop_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FNC_GetThemaJisuTop_Result" nillable="true" type="tns:FNC_GetThemaJisuTop_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFNC_GetThemaJisuTop_Result" nillable="true" type="tns:ArrayOfFNC_GetThemaJisuTop_Result" />
+  <xs:complexType name="FNC_GetThemaJisuTop_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Names" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartNum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FNC_GetThemaJisuTop_Result" nillable="true" type="tns:FNC_GetThemaJisuTop_Result" />
+  <xs:complexType name="ArrayOfusp_web_getCurrentSearchStockList_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getCurrentSearchStockList_Result" nillable="true" type="tns:usp_web_getCurrentSearchStockList_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getCurrentSearchStockList_Result" nillable="true" type="tns:ArrayOfusp_web_getCurrentSearchStockList_Result" />
+  <xs:complexType name="usp_web_getCurrentSearchStockList_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ARJ_CODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CHG_TYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="COUNTER" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CURR_PRICE" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NET_CHG" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NET_VOL" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="STOCK_NAME" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getCurrentSearchStockList_Result" nillable="true" type="tns:usp_web_getCurrentSearchStockList_Result" />
+  <xs:complexType name="ArrayOfusp_web_getDomesticIndex_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getDomesticIndex_Result" nillable="true" type="tns:usp_web_getDomesticIndex_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getDomesticIndex_Result" nillable="true" type="tns:ArrayOfusp_web_getDomesticIndex_Result" />
+  <xs:complexType name="usp_web_getDomesticIndex_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TITLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getDomesticIndex_Result" nillable="true" type="tns:usp_web_getDomesticIndex_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseTimeKosdaqChartData_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseTimeKosdaqChartData_new_Result" nillable="true" type="tns:usp_getSiseTimeKosdaqChartData_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseTimeKosdaqChartData_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseTimeKosdaqChartData_new_Result" />
+  <xs:complexType name="usp_getSiseTimeKosdaqChartData_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseTimeKosdaqChartData_new_Result" nillable="true" type="tns:usp_getSiseTimeKosdaqChartData_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseTimeFutChartData_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseTimeFutChartData_new_Result" nillable="true" type="tns:usp_getSiseTimeFutChartData_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseTimeFutChartData_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseTimeFutChartData_new_Result" />
+  <xs:complexType name="usp_getSiseTimeFutChartData_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseTimeFutChartData_new_Result" nillable="true" type="tns:usp_getSiseTimeFutChartData_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseTimeKpi200ChartData_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseTimeKpi200ChartData_new_Result" nillable="true" type="tns:usp_getSiseTimeKpi200ChartData_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseTimeKpi200ChartData_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseTimeKpi200ChartData_new_Result" />
+  <xs:complexType name="usp_getSiseTimeKpi200ChartData_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseTimeKpi200ChartData_new_Result" nillable="true" type="tns:usp_getSiseTimeKpi200ChartData_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseTimeKospi_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseTimeKospi_new_Result" nillable="true" type="tns:usp_getSiseTimeKospi_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseTimeKospi_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseTimeKospi_new_Result" />
+  <xs:complexType name="usp_getSiseTimeKospi_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeMoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgprice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="prevolume" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="volume" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseTimeKospi_new_Result" nillable="true" type="tns:usp_getSiseTimeKospi_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseDayKospi_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseDayKospi_new_Result" nillable="true" type="tns:usp_getSiseDayKospi_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseDayKospi_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseDayKospi_new_Result" />
+  <xs:complexType name="usp_getSiseDayKospi_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeMoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgprice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="prevolume" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="volume" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseDayKospi_new_Result" nillable="true" type="tns:usp_getSiseDayKospi_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseDayKosdaq_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseDayKosdaq_new_Result" nillable="true" type="tns:usp_getSiseDayKosdaq_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseDayKosdaq_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseDayKosdaq_new_Result" />
+  <xs:complexType name="usp_getSiseDayKosdaq_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeMoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgprice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="prevolume" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="volume" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseDayKosdaq_new_Result" nillable="true" type="tns:usp_getSiseDayKosdaq_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseTimeKosdaq_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseTimeKosdaq_new_Result" nillable="true" type="tns:usp_getSiseTimeKosdaq_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseTimeKosdaq_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseTimeKosdaq_new_Result" />
+  <xs:complexType name="usp_getSiseTimeKosdaq_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeMoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgprice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="prevolume" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="volume" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseTimeKosdaq_new_Result" nillable="true" type="tns:usp_getSiseTimeKosdaq_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseTimeKpi200_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseTimeKpi200_new_Result" nillable="true" type="tns:usp_getSiseTimeKpi200_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseTimeKpi200_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseTimeKpi200_new_Result" />
+  <xs:complexType name="usp_getSiseTimeKpi200_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TradeMoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgprice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="prevolume" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="volume" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseTimeKpi200_new_Result" nillable="true" type="tns:usp_getSiseTimeKpi200_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseDayKpi200_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseDayKpi200_new_Result" nillable="true" type="tns:usp_getSiseDayKpi200_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseDayKpi200_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseDayKpi200_new_Result" />
+  <xs:complexType name="usp_getSiseDayKpi200_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeMoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgprice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="prevolume" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="volume" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseDayKpi200_new_Result" nillable="true" type="tns:usp_getSiseDayKpi200_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseDayFut_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseDayFut_new_Result" nillable="true" type="tns:usp_getSiseDayFut_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseDayFut_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseDayFut_new_Result" />
+  <xs:complexType name="usp_getSiseDayFut_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeMoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="chgprice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="prevolume" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="volume" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseDayFut_new_Result" nillable="true" type="tns:usp_getSiseDayFut_new_Result" />
+  <xs:complexType name="ArrayOfusp_getSiseTimeFut_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_getSiseTimeFut_new_Result" nillable="true" type="tns:usp_getSiseTimeFut_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_getSiseTimeFut_new_Result" nillable="true" type="tns:ArrayOfusp_getSiseTimeFut_new_Result" />
+  <xs:complexType name="usp_getSiseTimeFut_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TradeMoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="chgprice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="prevolume" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="volume" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_getSiseTimeFut_new_Result" nillable="true" type="tns:usp_getSiseTimeFut_new_Result" />
+  <xs:complexType name="ArrayOfusp_wownet_kpi200_stock_group_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_wownet_kpi200_stock_group_new_Result" nillable="true" type="tns:usp_wownet_kpi200_stock_group_new_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_wownet_kpi200_stock_group_new_Result" nillable="true" type="tns:ArrayOfusp_wownet_kpi200_stock_group_new_Result" />
+  <xs:complexType name="usp_wownet_kpi200_stock_group_new_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShortCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SortCondition" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalMarketValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalMoney" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradePrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_kpi200_stock_group_new_Result" nillable="true" type="tns:usp_wownet_kpi200_stock_group_new_Result" />
+  <xs:complexType name="usp_GetSiseCurrentKospi_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_5" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="curPoint" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="volPrice" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetSiseCurrentKospi_Result" nillable="true" type="tns:usp_GetSiseCurrentKospi_Result" />
+  <xs:complexType name="usp_GetSiseCurrentKosdaq_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_5" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="curPoint" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="volPrice" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetSiseCurrentKosdaq_Result" nillable="true" type="tns:usp_GetSiseCurrentKosdaq_Result" />
+  <xs:complexType name="usp_GetSiseCurrent_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HighPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LimitHigh" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LimitLow" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ListHighDay" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListHighPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ListLowDay" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListLowPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LowPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OpenPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeMoney" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeVolume" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetSiseCurrent_Result" nillable="true" type="tns:usp_GetSiseCurrent_Result" />
+  <xs:complexType name="usp_GetSiseCurrentKPI_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType_1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgType_2" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgType_3" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgType_4" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgType_5" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="high52price" type="xs:int" />
+      <xs:element minOccurs="0" name="highprice" type="xs:int" />
+      <xs:element minOccurs="0" name="low52price" type="xs:int" />
+      <xs:element minOccurs="0" name="lowprice" type="xs:int" />
+      <xs:element minOccurs="0" name="preprice" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetSiseCurrentKPI_Result" nillable="true" type="tns:usp_GetSiseCurrentKPI_Result" />
+  <xs:complexType name="ArrayOfusp_wownet_ETF_stock_group_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_wownet_ETF_stock_group_Result" nillable="true" type="tns:usp_wownet_ETF_stock_group_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_wownet_ETF_stock_group_Result" nillable="true" type="tns:ArrayOfusp_wownet_ETF_stock_group_Result" />
+  <xs:complexType name="usp_wownet_ETF_stock_group_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalMarketValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradePrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_ETF_stock_group_Result" nillable="true" type="tns:usp_wownet_ETF_stock_group_Result" />
+  <xs:complexType name="ArrayOfusp_GetIndustryState_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_GetIndustryState_Result" nillable="true" type="tns:usp_GetIndustryState_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_GetIndustryState_Result" nillable="true" type="tns:ArrayOfusp_GetIndustryState_Result" />
+  <xs:complexType name="usp_GetIndustryState_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Foreigner" type="xs:long" />
+      <xs:element minOccurs="0" name="PartCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Personal" type="xs:long" />
+      <xs:element minOccurs="0" name="Security" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetIndustryState_Result" nillable="true" type="tns:usp_GetIndustryState_Result" />
+  <xs:complexType name="ArrayOfusp_GetIndustryDetail_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_GetIndustryDetail_Result" nillable="true" type="tns:usp_GetIndustryDetail_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_GetIndustryDetail_Result" nillable="true" type="tns:ArrayOfusp_GetIndustryDetail_Result" />
+  <xs:complexType name="usp_GetIndustryDetail_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Foreigner" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Gubun" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Personal" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Security" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetIndustryDetail_Result" nillable="true" type="tns:usp_GetIndustryDetail_Result" />
+  <xs:complexType name="TAB_MARKET_RESEARCH">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ANNOUNCE_DATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ASTROMANCY_CNT" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ASTROMANCY_NUM" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BCODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BUSINESS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CLASS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CONTENT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EMAIL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EMOTICON" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="END_PRICE" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="INVEST_OPINION" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="INVEST_STANDARD" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ISSUE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MARKET" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MARKET_TYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MEMO_CNT" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PUBLICITY_CNT" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="READ_CNT" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="RECOMMEND_CNT" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="REF" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="REF_LEVEL" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="REF_STEP" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="REG_DATE" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="REVERSE_CNT" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SEQ" type="xs:int" />
+      <xs:element minOccurs="0" name="SOURCE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TARGET_PRICE" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TITLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USER_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USER_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VIEW_FLAG" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TAB_MARKET_RESEARCH" nillable="true" type="tns:TAB_MARKET_RESEARCH" />
+  <xs:complexType name="usp_web_getDomesticIndustryIndex_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BottomCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FallCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PartCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartTurn" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PartVol" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RiseCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SteadyCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TopCnt" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getDomesticIndustryIndex_Result" nillable="true" type="tns:usp_web_getDomesticIndustryIndex_Result" />
+  <xs:complexType name="ArrayOfusp_web_getDomesticIndustryStock_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getDomesticIndustryStock_Result" nillable="true" type="tns:usp_web_getDomesticIndustryStock_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getDomesticIndustryStock_Result" nillable="true" type="tns:ArrayOfusp_web_getDomesticIndustryStock_Result" />
+  <xs:complexType name="usp_web_getDomesticIndustryStock_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NetChange" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="StockCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StockName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="buy" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chg_type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="curr_price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="net_chg" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="net_turn" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="net_vol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="sell" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getDomesticIndustryStock_Result" nillable="true" type="tns:usp_web_getDomesticIndustryStock_Result" />
+  <xs:complexType name="ArrayOfusp_GetThemaJisu_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_GetThemaJisu_Result" nillable="true" type="tns:usp_GetThemaJisu_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_GetThemaJisu_Result" nillable="true" type="tns:ArrayOfusp_GetThemaJisu_Result" />
+  <xs:complexType name="usp_GetThemaJisu_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FallCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="MiddleCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PartName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartNum" type="xs:int" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RiseCnt" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalCnt" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetThemaJisu_Result" nillable="true" type="tns:usp_GetThemaJisu_Result" />
+  <xs:complexType name="ArrayOfusp_GetThemaOnline_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_GetThemaOnline_Result" nillable="true" type="tns:usp_GetThemaOnline_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_GetThemaOnline_Result" nillable="true" type="tns:ArrayOfusp_GetThemaOnline_Result" />
+  <xs:complexType name="usp_GetThemaOnline_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NetChg" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="curPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="haltFlag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stockcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stockname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetThemaOnline_Result" nillable="true" type="tns:usp_GetThemaOnline_Result" />
+  <xs:complexType name="ArrayOfusp_web_getSiseUpper_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getSiseUpper_Result" nillable="true" type="tns:usp_web_getSiseUpper_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getSiseUpper_Result" nillable="true" type="tns:ArrayOfusp_web_getSiseUpper_Result" />
+  <xs:complexType name="usp_web_getSiseUpper_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BeforeTradeVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HighPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="HoldRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListCount" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="LowPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="OpenPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShortCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StockCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalAskVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalBidVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TradePrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="askprice1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="bidprice1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="normalmoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="onerealmoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="pbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="per" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="roa" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="totalmoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="totalvolprice" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getSiseUpper_Result" nillable="true" type="tns:usp_web_getSiseUpper_Result" />
+  <xs:complexType name="ArrayOfusp_web_getSiseLower_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getSiseLower_Result" nillable="true" type="tns:usp_web_getSiseLower_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getSiseLower_Result" nillable="true" type="tns:ArrayOfusp_web_getSiseLower_Result" />
+  <xs:complexType name="usp_web_getSiseLower_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BeforeTradeVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HighPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="HoldRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListCount" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="LowPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="OpenPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShortCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StockCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalAskVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalBidVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TradePrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="askprice1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="bidprice1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="normalmoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="onerealmoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="pbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="per" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="roa" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="totalmoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="totalvolprice" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getSiseLower_Result" nillable="true" type="tns:usp_web_getSiseLower_Result" />
+  <xs:complexType name="ArrayOfusp_web_GetSiseStockPlus_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_GetSiseStockPlus_Result" nillable="true" type="tns:usp_web_GetSiseStockPlus_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_GetSiseStockPlus_Result" nillable="true" type="tns:ArrayOfusp_web_GetSiseStockPlus_Result" />
+  <xs:complexType name="usp_web_GetSiseStockPlus_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LastPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="cPart" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="partCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_GetSiseStockPlus_Result" nillable="true" type="tns:usp_web_GetSiseStockPlus_Result" />
+  <xs:complexType name="ArrayOfusp_web_GetSiseStockPlusK_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_GetSiseStockPlusK_Result" nillable="true" type="tns:usp_web_GetSiseStockPlusK_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_GetSiseStockPlusK_Result" nillable="true" type="tns:ArrayOfusp_web_GetSiseStockPlusK_Result" />
+  <xs:complexType name="usp_web_GetSiseStockPlusK_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LastPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="cPart" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="partCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_GetSiseStockPlusK_Result" nillable="true" type="tns:usp_web_GetSiseStockPlusK_Result" />
+  <xs:complexType name="ArrayOfusp_web_getSiseMarketSum_Result1">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getSiseMarketSum_Result1" nillable="true" type="tns:usp_web_getSiseMarketSum_Result1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getSiseMarketSum_Result1" nillable="true" type="tns:ArrayOfusp_web_getSiseMarketSum_Result1" />
+  <xs:complexType name="usp_web_getSiseMarketSum_Result1">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BeforeTradeVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HighPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="HoldRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListCount" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="LowPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="OpenPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShortCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StockCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalAskVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalBidVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TradePrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="askprice1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="bidprice1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="normalmoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="onerealmoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="pbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="per" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="roa" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="totalmoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="totalvolprice" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getSiseMarketSum_Result1" nillable="true" type="tns:usp_web_getSiseMarketSum_Result1" />
+  <xs:complexType name="ArrayOfusp_web_getSiseForeignHold_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getSiseForeignHold_Result" nillable="true" type="tns:usp_web_getSiseForeignHold_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getSiseForeignHold_Result" nillable="true" type="tns:ArrayOfusp_web_getSiseForeignHold_Result" />
+  <xs:complexType name="usp_web_getSiseForeignHold_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BeforeTradeVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HighPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="HoldRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListCount" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="LowPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="OpenPrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PChange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShortCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StockCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalAskVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalBidVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalVol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TradePrice" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="askprice1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="bidprice1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="korName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="normalmoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="onerealmoney" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="pbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="per" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="roa" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="totalmoney" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="totalvolprice" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getSiseForeignHold_Result" nillable="true" type="tns:usp_web_getSiseForeignHold_Result" />
+  <xs:complexType name="usp_wownet_usa_index_online_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HistoryClose" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MaxPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MinPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_usa_index_online_Result" nillable="true" type="tns:usp_wownet_usa_index_online_Result" />
+  <xs:complexType name="ArrayOfusp_wownet_usa_index_hour_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_wownet_usa_index_hour_Result" nillable="true" type="tns:usp_wownet_usa_index_hour_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_wownet_usa_index_hour_Result" nillable="true" type="tns:ArrayOfusp_wownet_usa_index_hour_Result" />
+  <xs:complexType name="usp_wownet_usa_index_hour_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_usa_index_hour_Result" nillable="true" type="tns:usp_wownet_usa_index_hour_Result" />
+  <xs:complexType name="ArrayOfusp_wownet_usa_index_history_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_wownet_usa_index_history_Result" nillable="true" type="tns:usp_wownet_usa_index_history_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_wownet_usa_index_history_Result" nillable="true" type="tns:ArrayOfusp_wownet_usa_index_history_Result" />
+  <xs:complexType name="usp_wownet_usa_index_history_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_usa_index_history_Result" nillable="true" type="tns:usp_wownet_usa_index_history_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_stock_group_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_stock_group_Result" nillable="true" type="tns:usp_web_usa_stock_group_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_stock_group_Result" nillable="true" type="tns:ArrayOfusp_web_usa_stock_group_Result" />
+  <xs:complexType name="usp_web_usa_stock_group_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DayHigh" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DayLow" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="knam" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_stock_group_Result" nillable="true" type="tns:usp_web_usa_stock_group_Result" />
+  <xs:complexType name="usp_wownet_Asia_Index_online_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HistoryClose" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MaxPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MinPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_Asia_Index_online_Result" nillable="true" type="tns:usp_wownet_Asia_Index_online_Result" />
+  <xs:complexType name="ArrayOfusp_wownet_Asia_Index_hour_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_wownet_Asia_Index_hour_Result" nillable="true" type="tns:usp_wownet_Asia_Index_hour_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_wownet_Asia_Index_hour_Result" nillable="true" type="tns:ArrayOfusp_wownet_Asia_Index_hour_Result" />
+  <xs:complexType name="usp_wownet_Asia_Index_hour_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Vol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_Asia_Index_hour_Result" nillable="true" type="tns:usp_wownet_Asia_Index_hour_Result" />
+  <xs:complexType name="ArrayOfusp_wownet_Asia_Index_history_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_wownet_Asia_Index_history_Result" nillable="true" type="tns:usp_wownet_Asia_Index_history_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_wownet_Asia_Index_history_Result" nillable="true" type="tns:ArrayOfusp_wownet_Asia_Index_history_Result" />
+  <xs:complexType name="usp_wownet_Asia_Index_history_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_Asia_Index_history_Result" nillable="true" type="tns:usp_wownet_Asia_Index_history_Result" />
+  <xs:complexType name="ArrayOfusp_web_korea_adr_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_korea_adr_Result" nillable="true" type="tns:usp_web_korea_adr_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_korea_adr_Result" nillable="true" type="tns:ArrayOfusp_web_korea_adr_Result" />
+  <xs:complexType name="usp_web_korea_adr_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="chgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="part_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="u_date_time" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_korea_adr_Result" nillable="true" type="tns:usp_web_korea_adr_Result" />
+  <xs:complexType name="usp_wownet_Europe_Index_online_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HistoryClose" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MaxPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MinPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_Europe_Index_online_Result" nillable="true" type="tns:usp_wownet_Europe_Index_online_Result" />
+  <xs:complexType name="ArrayOfusp_wownet_Europe_Index_history_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_wownet_Europe_Index_history_Result" nillable="true" type="tns:usp_wownet_Europe_Index_history_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_wownet_Europe_Index_history_Result" nillable="true" type="tns:ArrayOfusp_wownet_Europe_Index_history_Result" />
+  <xs:complexType name="usp_wownet_Europe_Index_history_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TradeTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="chgtype" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_Europe_Index_history_Result" nillable="true" type="tns:usp_wownet_Europe_Index_history_Result" />
+  <xs:complexType name="ArrayOfusp_GetInvestOnline_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_GetInvestOnline_Result" nillable="true" type="tns:usp_GetInvestOnline_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_GetInvestOnline_Result" nillable="true" type="tns:ArrayOfusp_GetInvestOnline_Result" />
+  <xs:complexType name="usp_GetInvestOnline_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Foreigner" type="xs:long" />
+      <xs:element minOccurs="0" name="Market" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Personal" type="xs:long" />
+      <xs:element minOccurs="0" name="Security" type="xs:long" />
+      <xs:element minOccurs="0" name="Trade" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetInvestOnline_Result" nillable="true" type="tns:usp_GetInvestOnline_Result" />
+  <xs:complexType name="ArrayOfusp_GetInvestTotal_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_GetInvestTotal_Result" nillable="true" type="tns:usp_GetInvestTotal_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_GetInvestTotal_Result" nillable="true" type="tns:ArrayOfusp_GetInvestTotal_Result" />
+  <xs:complexType name="usp_GetInvestTotal_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Foreigner" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Personal" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Security" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Trade" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="market" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetInvestTotal_Result" nillable="true" type="tns:usp_GetInvestTotal_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_Result" nillable="true" type="tns:usp_web_usa_adr_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_Result" />
+  <xs:complexType name="usp_web_usa_adr_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_ENG_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_GROUP_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_Result" nillable="true" type="tns:usp_web_usa_adr_Result" />
+  <xs:complexType name="ArrayOfUSP_WOWNET_USA_DETAIL_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="USP_WOWNET_USA_DETAIL_Result" nillable="true" type="tns:USP_WOWNET_USA_DETAIL_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUSP_WOWNET_USA_DETAIL_Result" nillable="true" type="tns:ArrayOfUSP_WOWNET_USA_DETAIL_Result" />
+  <xs:complexType name="USP_WOWNET_USA_DETAIL_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="USP_WOWNET_USA_DETAIL_Result" nillable="true" type="tns:USP_WOWNET_USA_DETAIL_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_dawo_semiconductor_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_dawo_semiconductor_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_semiconductor_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_dawo_semiconductor_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_dawo_semiconductor_Result" />
+  <xs:complexType name="usp_web_usa_adr_dawo_semiconductor_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_dawo_semiconductor_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_semiconductor_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_dawo_media_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_dawo_media_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_media_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_dawo_media_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_dawo_media_Result" />
+  <xs:complexType name="usp_web_usa_adr_dawo_media_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_dawo_media_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_media_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_dawo_insurance_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_dawo_insurance_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_insurance_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_dawo_insurance_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_dawo_insurance_Result" />
+  <xs:complexType name="usp_web_usa_adr_dawo_insurance_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_dawo_insurance_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_insurance_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_dawo_retail_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_dawo_retail_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_retail_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_dawo_retail_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_dawo_retail_Result" />
+  <xs:complexType name="usp_web_usa_adr_dawo_retail_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_dawo_retail_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_retail_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_dawo_energy_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_dawo_energy_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_energy_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_dawo_energy_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_dawo_energy_Result" />
+  <xs:complexType name="usp_web_usa_adr_dawo_energy_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_dawo_energy_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_energy_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_dawo_pharmacy_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_dawo_pharmacy_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_pharmacy_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_dawo_pharmacy_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_dawo_pharmacy_Result" />
+  <xs:complexType name="usp_web_usa_adr_dawo_pharmacy_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_dawo_pharmacy_Result" nillable="true" type="tns:usp_web_usa_adr_dawo_pharmacy_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_nasdaq_internet_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_nasdaq_internet_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_internet_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_nasdaq_internet_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_nasdaq_internet_Result" />
+  <xs:complexType name="usp_web_usa_adr_nasdaq_internet_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_nasdaq_internet_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_internet_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_nasdaq_network_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_nasdaq_network_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_network_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_nasdaq_network_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_nasdaq_network_Result" />
+  <xs:complexType name="usp_web_usa_adr_nasdaq_network_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_nasdaq_network_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_network_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_nasdaq_comunications_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_nasdaq_comunications_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_comunications_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_nasdaq_comunications_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_nasdaq_comunications_Result" />
+  <xs:complexType name="usp_web_usa_adr_nasdaq_comunications_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_nasdaq_comunications_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_comunications_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_nasdaq_computer_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_nasdaq_computer_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_computer_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_nasdaq_computer_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_nasdaq_computer_Result" />
+  <xs:complexType name="usp_web_usa_adr_nasdaq_computer_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_nasdaq_computer_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_computer_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_nasdaq_semiconductor_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_nasdaq_semiconductor_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_semiconductor_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_nasdaq_semiconductor_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_nasdaq_semiconductor_Result" />
+  <xs:complexType name="usp_web_usa_adr_nasdaq_semiconductor_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_nasdaq_semiconductor_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_semiconductor_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_nasdaq_bio_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_nasdaq_bio_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_bio_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_nasdaq_bio_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_nasdaq_bio_Result" />
+  <xs:complexType name="usp_web_usa_adr_nasdaq_bio_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_nasdaq_bio_Result" nillable="true" type="tns:usp_web_usa_adr_nasdaq_bio_Result" />
+  <xs:complexType name="ArrayOfusp_web_usa_adr_sandp500_internet_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_usa_adr_sandp500_internet_Result" nillable="true" type="tns:usp_web_usa_adr_sandp500_internet_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_usa_adr_sandp500_internet_Result" nillable="true" type="tns:ArrayOfusp_web_usa_adr_sandp500_internet_Result" />
+  <xs:complexType name="usp_web_usa_adr_sandp500_internet_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PART_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_CHG_GUBUN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_NET_CHGP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="U_PRICE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_usa_adr_sandp500_internet_Result" nillable="true" type="tns:usp_web_usa_adr_sandp500_internet_Result" />
+  <xs:complexType name="ArrayOfusp_wownet_Marketindex_BankExchange_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_wownet_Marketindex_BankExchange_Result" nillable="true" type="tns:usp_wownet_Marketindex_BankExchange_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_wownet_Marketindex_BankExchange_Result" nillable="true" type="tns:ArrayOfusp_wownet_Marketindex_BankExchange_Result" />
+  <xs:complexType name="usp_wownet_Marketindex_BankExchange_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AskPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BidPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Commission" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Conversion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RecvPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SendPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Times" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chgCode" nillable="true" type="xs:short" />
+      <xs:element minOccurs="0" name="chgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="exchangeDT" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_Marketindex_BankExchange_Result" nillable="true" type="tns:usp_wownet_Marketindex_BankExchange_Result" />
+  <xs:complexType name="ArrayOfusp_wownet_Marketindex_worldExchange_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_wownet_Marketindex_worldExchange_Result" nillable="true" type="tns:usp_wownet_Marketindex_worldExchange_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_wownet_Marketindex_worldExchange_Result" nillable="true" type="tns:ArrayOfusp_wownet_Marketindex_worldExchange_Result" />
+  <xs:complexType name="usp_wownet_Marketindex_worldExchange_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChgPrice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChgType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="exchangeDT" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_wownet_Marketindex_worldExchange_Result" nillable="true" type="tns:usp_wownet_Marketindex_worldExchange_Result" />
+  <xs:complexType name="usp_GetStockPrice_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Groupid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="arj_code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="banner" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="capital" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="chg_type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="curr_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="data_day" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="final_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="gubun" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="high_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="highest_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="init_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="k_gbn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="list_num" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="list_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="list_sum" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="low_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="lowest_price" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="mkt_halt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="net_chg" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="net_turnover" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="net_vol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="part_code1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="part_code2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stock_code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stock_nickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stock_wanname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_GetStockPrice_Result" nillable="true" type="tns:usp_GetStockPrice_Result" />
+  <xs:complexType name="ArrayOfusp_web_getStockInvestorList_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="usp_web_getStockInvestorList_Result" nillable="true" type="tns:usp_web_getStockInvestorList_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfusp_web_getStockInvestorList_Result" nillable="true" type="tns:ArrayOfusp_web_getStockInvestorList_Result" />
+  <xs:complexType name="usp_web_getStockInvestorList_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="corpname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="totalvol" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_web_getStockInvestorList_Result" nillable="true" type="tns:usp_web_getStockInvestorList_Result" />
+</xs:schema>

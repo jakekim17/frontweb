@@ -1,0 +1,42 @@
+﻿@model List<Wow.Tv.Middle.Model.Db49.wowtv.TAB_BOARD>
+
+@{
+    Layout = null;
+    string rootUrl = AppState["RootUrl"].ToString();
+}
+
+<script>
+    var totalDataCount = "@ViewBag.TotalDataCount";
+</script>
+<script src="@rootUrl/Scripts/Pilot2/List.js"></script>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    No
+                </td>
+                <td>
+                    제목
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.SEQ
+                    </td>
+                    <td>
+                        <a href="#" onclick="return PilotList.OpenDetail(@item.SEQ);">@item.TITLE</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="divPaging"></div>
+
+

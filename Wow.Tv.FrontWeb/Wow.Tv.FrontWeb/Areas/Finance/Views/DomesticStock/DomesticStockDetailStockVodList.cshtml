@@ -1,0 +1,51 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.editVOD
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model ListModel<usp_web_vodList_Result>
+@{
+    ViewBag.Title = "DomesticStockDetailStockVodList";
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    
+}
+<script>
+    var totalDataCount_stockVodList = "@Model.TotalDataCount";
+</script>
+<script src="@wowTvScript/Finance/DomesticStock/DomesticStockDetailStockVodList.js"></script>
+
+<div class="box-top-type1 date">
+    <div class="inner-right" id="stockVodSearchVal">
+        <input type="text" style="width:200px" class="form-control" id="title" placeholder="제목">
+        <input type="submit" value="검색" class="btn-type3" id="btnSearch">
+    </div>
+</div>
+
+<div class="list-type-thumnail">
+    <ul>
+        @if (Model.ListData.Count > 0)
+        {
+            foreach (var item in Model.ListData)
+            {
+                <li>
+                    <a href="#none">
+                        @*<img src="@wowTvStyle/images/temp/temp_news3.jpg" alt="" width="205" height="132" />*@
+                        <img src="@Html.DomesticStockDetailRightConsultImgUrl(item.ArticleID, item.EditFolder, item.Image_S)" alt="@item.stockname" width="205" height="132" onclick="PopupPlayVod('@item.vodNum')" onerror="this.src='@wowTvStyle/images/common/no_image_16m.jpg'" />
+                        <span class="title" onclick="PopupPlayVod('@item.vodNum')">@item.stockname (@item.stockcode.ToString().Replace("A", ""))</span>
+                        <span class="date">@String.Format("{0}", item.insdate.Substring(0, 10))</span>
+                    </a>
+                </li>
+            }
+        }
+        else
+        {
+            <li>데이터가 없습니다.</li>
+        }
+
+    </ul>
+</div>
+
+<!-- Paginate -->
+<div id="divPaging_vodList" class="box-paginate"></div>
+<!-- //Paginate -->
+

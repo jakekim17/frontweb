@@ -1,0 +1,121 @@
+﻿@using Wow.Tv.Middle.Model.Db49.wowtv
+
+@model NTB_BOARD_CONTENT
+
+@{
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string uploadWebPath = AppState["UploadWebPath"].ToString();
+}
+
+<script>
+    var boardContentSeq = "@Model.BOARD_CONTENT_SEQ";
+    var commonCode = "@Model.COMMON_CODE";
+</script>
+
+<form id="frmSearch">
+    <input type="hidden" id="seq" name="seq" value="@ViewBag.Seq" />
+    <input type="hidden" name="CurrentMenuSeq" id="hidFrontMenuSeq" value="@ViewBag.Condition.CurrentMenuSeq" />
+    <input type="hidden" id="SearchType" name="SearchType" value="@ViewBag.Condition.SearchType" />
+    <input type="hidden" id="SearchText" name="SearchText" value="@ViewBag.Condition.SearchText" />
+    <input type="hidden" id="pageSize" name="pageSize" value="@ViewBag.Condition.PageSize" />
+    <input type="hidden" id="currentIndex" name="currentIndex" value="@ViewBag.Condition.CurrentIndex" />
+</form>
+
+
+
+@using (Html.BeginForm("Save", "FeedBack", FormMethod.Post, new { id = "frmSave" }))
+{
+    <input type="hidden" name="COMMON_CODE" value="@Model.COMMON_CODE" />
+    <input type="hidden" id="BOARD_SEQ" name="BOARD_SEQ" value="@ViewBag.BoradInfo.BOARD_SEQ" />
+    <input type="hidden" id="BOARD_CONTENT_SEQ" name="BOARD_CONTENT_SEQ" value="@ViewBag.Condition.BOARD_CONTENT_SEQ" />
+
+            <!-- 소개부분 -->
+            <div class="section-area pt15">
+                <div class="list-dotted">
+                    <ul>
+                        <li>
+                            회원님의 기본정보가 틀린 경우 마이페이지 > 회원정보수정에서 변경하시기 바랍니다
+                            <div class="btn-area txt-l">
+                                <a href="#" class="btn type04 small">회원정보 수정하기<span class="icon btn-arr-go"></span></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- //소개부분 -->
+            @*<!-- 프로그램 -->
+                <div class="section-area">
+                    <!-- 타이틀안에 다른 컨텐츠가 있을 경우 사용-->
+                    <div class="title-area">
+                        <h3>프로그램 <span class="astar">*</span> </h3>
+                        <div class="point-text">
+                            <span class="astar">*</span>표시는 필수 입력입니다.
+                        </div>
+                    </div>
+                    <!-- 타이틀안에 다른 컨텐츠가 있을 경우 사용 -->
+                    <select disabled="disabled">
+                        <option>방송상태선택</option>
+                        <option>방영중</option>
+                        <option>종영</option>
+                    </select>
+                    <select disabled="disabled">
+                        <option>프로그램선택</option>
+                        <option>프로그램목록연동</option>
+                    </select>
+                </div>
+                <!-- //프로그램 -->*@
+            <!-- 작성자 -->
+            <div class="section-area">
+                <h3>작성자</h3>
+                <input type="text" placeholder="한결아비 (kimkorea)" disabled="disabled" value="@LoginHandler.CurrentLoginUser.NickName (@LoginHandler.CurrentLoginUser.UserId)" />
+            </div>
+            <!-- // 작성자 -->
+            <!-- 제목 -->
+            <div class="section-area">
+                <h3>제목 <span class="astar">*</span> </h3>
+                <input type="text" placeholder="제목" name="TITLE" id="TITLE" value="@Model.TITLE" />
+            </div>
+            <!-- 제목 -->
+            <!-- 첨부파일 -->
+            <div class="section-area">
+                <h3>첨부파일</h3>
+                <div class="file-box">
+                    @if (Model.AttachFileList != null)
+                    {
+                        <input type="text" id="fileText" class="file-name" readonly="readonly" placeholder="첨부파일" value="@(Model.AttachFileList.Count != 0 ? Model.AttachFileList[0].USER_UPLOAD_FILE_NAME : "")">
+                    }
+                    else
+                    {
+                        <input type="text" id="fileText" class="file-name" readonly="readonly" placeholder="첨부파일" >
+                    }
+                    <label for="uploadBtn" class="btn-file">찾아보기</label>
+                    <a href="#" class="file-btn">삭제</a><!-- 2017-11-22 html 추가 -->
+                    <input type="file" id="uploadBtn" name="files" class="upload-btn">
+                </div>
+                <p class="txt-notice">이미지파일만 업로드가 가능하며 용량은 2MB를 초과할 수 없습니다.</p>
+                <textarea id="txtCONTENT" name="CONTENT" placeholder="회원님의 개인정보보호를 위해 휴대폰번호, 이메일 등의 민감한 개인정보는 입력하지 마세요.">@Model.CONTENT</textarea>
+                <!-- 버튼영역 -->
+                <div class="btn-area">
+                    <ul class="btn-list">
+                        <li>
+                        @if (LoginHandler.IsLogin)
+                        {
+                            <a href="#" id="btnModify" class="btn type01">등록</a>
+                        }
+                        </li>
+                        <li><a href="#" id="btnList" class="btn type02">취소</a></li>
+                    </ul>
+                </div>
+                <!-- //버튼영역 -->
+            </div>
+            <!-- //첨부파일 -->
+
+
+}
+
+
+
+<script src="@wowTvScript/Broad/FeedBack/Edit.js?date=20171106171000"></script>
+
+

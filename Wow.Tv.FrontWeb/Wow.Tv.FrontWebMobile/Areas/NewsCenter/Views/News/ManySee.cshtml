@@ -1,0 +1,112 @@
+﻿@using Wow
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/News/ManySee.js"></script>
+
+    <script>
+        var tabType = "@Request["tabType"]";
+    </script>
+}
+
+<div class="reporter-select">
+    <!-- 탭 영역 -->
+    <div class="tab-area">
+        <ul>
+            <li><a href="javascript:void(0)" id="total" onclick="return NewsManySee.ChangeContent('total');">종합</a></li>
+            <li><a href="javascript:void(0)" id="entSpo" onclick="return NewsManySee.ChangeContent('entSpo');">연예/스포츠</a></li>
+        </ul>
+    </div>
+    <div class="section-area pd0 mb10">
+        <ul class="list-type-pin type02 level-ft bdt-none ulContents" id="ultotal">
+            @if (Model.NewsTotalCountList != null && Model.NewsTotalCountList.Count > 0)
+            {
+                foreach (var item in Model.NewsTotalCountList)
+                {
+                    <li>
+                        <div class="box-type07">
+                            <div class="box-best-top">@(Model.NewsTotalCountList.IndexOf(item) + 1)위</div>
+                            <div class="list-type-new02">
+                                <a href="javascript:NewsCommon.GoNewsView('@item.ARTICLEID')" class="obj-cont">
+                                    @if (!string.IsNullOrEmpty(item.IMAGE_FILE))
+                                    {
+                                        <div class="img-area">
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("11S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11S")'" alt="">
+                                            @if (item.VOD_NUM != null && item.VOD_NUM > 0)
+                                            {
+                                                <span class="icon-play small"></span>
+                                            }
+                                        </div>
+                                    }
+                                    <p class="txt">
+                                        @if(item.GUBUN_NAME != null && item.GUBUN_NAME != "")
+                                        {
+                                            <span class="text-icon">@item.GUBUN_NAME</span> 
+                                        }
+                                        @item.TITLE
+                                    </p>
+                                    <p class="aside-area">
+                                        <span class="aside-txt">뉴스</span>
+                                        <span class="aside-txt">@item.SECTION_NAME</span>
+                                        <span class="aside-txt">@item.COMP_NAME</span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li><div class="box-no-data">등록된 내용이 없습니다.</div></li>
+            }
+        </ul>
+        <ul class="list-type-pin type02 level-ft bdt-none ulContents" id="ulentSpo" style="display:none;">
+            @if (Model.NewsEntSpoCountList != null && Model.NewsEntSpoCountList.Count > 0)
+            {
+                foreach (var item in Model.NewsEntSpoCountList)
+                {
+                    <li>
+                        <div class="box-type07">
+                            <div class="box-best-top">@(Model.NewsEntSpoCountList.IndexOf(item) + 1)위</div>
+                            <div class="list-type-new02">
+                                <a href="javascript:NewsCommon.GoNewsView('@item.ARTICLEID')" class="obj-cont">
+                                    @if (!string.IsNullOrEmpty(item.IMAGE_FILE))
+                                    {
+                                        <div class="img-area">
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("11S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11S")'" alt="">
+                                            @if (item.VOD_NUM != null && item.VOD_NUM > 0)
+                                            {
+                                                <span class="icon-play medium"></span>
+                                            }
+                                        </div>
+                                    }
+                                    <p class="txt">
+                                        @if (item.GUBUN_NAME != null && item.GUBUN_NAME != "")
+                                        {
+                                            <span class="text-icon">@item.GUBUN_NAME</span>
+                                        }
+                                        @item.TITLE
+                                    </p>
+                                    <p class="aside-area">
+                                        <span class="aside-txt">뉴스</span>
+                                        <span class="aside-txt">@item.SECTION_NAME</span>
+                                        <span class="aside-txt">@item.COMP_NAME</span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li><div class="box-no-data">등록된 내용이 없습니다.</div></li>
+            }
+        </ul>
+    </div>
+</div>

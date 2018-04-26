@@ -1,0 +1,17 @@
+﻿@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@{
+    Layout = null;
+    //string currentFdMenuSeq = Request["fdLeftMenuSeq"];
+    string currentFdMenuSeq = Request["CurrentMenuSeq"];
+
+    if (String.IsNullOrEmpty(currentFdMenuSeq))
+    {
+        currentFdMenuSeq = "0";
+    }
+}
+<div class="location-page">
+    <span class="home">HOME</span>
+    <span>국내증시</span>
+    <span class="current">@Html.LocationStr(currentFdMenuSeq)</span>
+</div>
+

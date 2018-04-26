@@ -1,0 +1,285 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Models
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@model DomesticStockDetailTotalInfoModel
+@{
+    ViewBag.Title = "DomesticStockDetailTotalInfo";
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    var supplyDemandSellList = Model.SupplyDemandSellList;
+    var supplyDemandBuyList = Model.SupplyDemandBuyList;
+    var investorSumList = Model.InvestorSumList;
+    var stockPartList = Model.StockPartList;
+    var stockThemaList = Model.StockThemaList;
+    var relativeStockList = Model.RelativeStockList;
+    var discussionTop9List = Model.DiscussionList;
+    var consultTop9List = Model.ConsultList;
+    var stockCafeTop3List = Model.StockCafeList;
+    var recentNewsTop4List = Model.RecentNewsList;
+    var recentNoticeTop6List = Model.RecentNoticeList;
+    
+    //var adBanner1 = Model.AdBanner1;
+    //var adBanner2 = Model.AdBanner2;
+    int idxNum;
+}
+
+<script src="@wowTvScript/Finance/DomesticStock/DomesticStockDetailTotalInfo.js"></script>
+
+<!-- 종합정보 start -->
+<div class="section-area pd0">
+
+    <h3 class="tit-line plr15 bd-none"><a href="javascript:void(0)">외국인 · 기관</a></h3>
+    <!-- 테이블-->
+    <div class="table-type1 type02 line mlr15 mb10">
+        <table>
+            <caption>검색 상세</caption>
+            <colgroup>
+                <col style="width:;">
+                <col style="width:;">
+                <col style="width:;">
+                <col style="width:;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">날짜</th>
+                    <th scope="col">종가</th>
+                    <th scope="col">전일비</th>
+                    <th scope="col">기관</th>
+                    <th scope="col">외국인</th>
+                </tr>
+            </thead>
+            <tbody>
+    @if (supplyDemandBuyList == null)
+    {
+        <tr>
+            <td colspan="5">
+                데이터가 없습니다.
+            </td>
+        </tr>
+    }
+    else
+    {
+        for (idxNum = 0; idxNum < Model.SupplyDemandSellList.ListData.Count; idxNum++)
+        {
+            <tr>
+                @if (investorSumList.ListData.Count > 0)
+                {
+                    <td><span class="num">@String.Format("{0}-{1}-{2}", investorSumList.ListData[idxNum].DataDT.Substring(0, 4), investorSumList.ListData[idxNum].DataDT.Substring(4, 2), investorSumList.ListData[idxNum].DataDT.Substring(6, 2))</span></td>
+                    <td class="txt-r"><span class="num">@investorSumList.ListData[idxNum].Price</span></td>
+                    <td class="txt-r">@Html.PublishChgPriceFormat(investorSumList.ListData[idxNum].ChgType, investorSumList.ListData[idxNum].ChgPrice)</td>
+                    <td class="txt-r">@Html.DomesticStockDetailInvsetorOrgForeinerFormat(investorSumList.ListData[idxNum].orgbuy, investorSumList.ListData[idxNum].orgsell)</td>
+                    <td class="txt-r">@Html.DomesticStockDetailInvsetorOrgForeinerFormat(investorSumList.ListData[idxNum].foreinerbuy, investorSumList.ListData[idxNum].foreinersell)</td>
+                }
+                else
+                {
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                }
+            </tr>
+
+        }
+    }
+                
+                
+            </tbody>
+        </table>
+    </div>
+    <!-- // 테이블 -->
+    <!-- 테이블-->
+    <div class="table-type1 type02 line mlr15">
+        <table>
+            <caption>검색 상세</caption>
+            <colgroup>
+                <col style="width:30%;">
+                <col style="width:70%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td class="txt-l">업종 &amp; 테마</td>
+                    <td class="txt-l">
+                        @if (stockPartList != null)
+                        {
+                            foreach (var item in stockPartList.ListData)
+                            {
+                                @item.f_part_name @Html.DomesticStockTotalInfoRateFormat(item.rate)
+                            }
+                        }
+
+                        @if (stockThemaList != null)
+                        {
+                            foreach (var item in stockThemaList.ListData)
+                            {
+                                @item.PartName  @Html.DomesticStockTotalInfoRateFormat(item.Rate)
+                            }
+                        }
+                        @*전기전자 <span class="stock minus dis-inline">0.39%</span>*@
+                    </td>
+                </tr>
+                <tr>
+                    <td class="txt-l">관련종목</td>
+                    <td class="txt-l">
+                        @if (Model.RelativeStockList != null)
+                        {
+
+                            for (idxNum = 0; idxNum <= Model.RelativeStockList.ListData.Count - 2; idxNum++)
+                            {
+                                @Html.ActionLink(Model.RelativeStockList.ListData[idxNum].STOCK_WANNAME, "DomesticStockDetail", "DomesticStock", new { searchStr = Model.RelativeStockList.ListData[idxNum].ARJ_CODE.Replace("A", "") }, null)
+
+                                if (idxNum != 5)
+                                {
+                                    <span class="division1"></span>
+
+                                }
+
+
+                            }
+                        }
+                        @*<span class="line-type">SK하이닉스</span>
+                        <span class="line-type">동부하이텍</span>
+                        <span class="line-type">동부하이텍1우</span>
+                        <span class="line-type">금호전기</span>
+                        <span class="line-type">대한전선</span>*@
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- // 테이블 -->
+
+</div>
+<!--// 종합정보 end -->
+<!-- start -->
+<div class="box-type-bann">
+    <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/past/mentomembership/mento_intro.asp?bcode=N78110100&proID=P530&mseq=2678">
+        <div class="obj">
+            <span>김동진박사</span>
+            <strong>모닝브리핑</strong>
+        </div>
+        <span class="txt-arrow"></span>
+    </a>
+    <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/sabu/jjg_intro.asp?bcode=N52020100&mseq=1066&proID=P724">
+        <div class="obj">
+            <span>최승욱의</span>
+            <strong>쪽집게 방송</strong>
+        </div>
+        <span class="txt-arrow"></span>
+    </a>
+</div>
+<!--// end -->
+<!-- 뉴스 &amp; 공시 start -->
+<div class="section-area pd0">
+    <h3 class="tit-line plr15 bd-none"><a href="http://m.wowtv.co.kr/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.ArjCode&menuSeq=0&tabseq=4">뉴스 &amp; 공시</a></h3>
+
+    <!-- tab start -->
+    <div class="tab-area" id="newsAndNotice">
+        <ul>
+            <li class="on"><a href="javascript:void(0)" id="recentNews">최신뉴스</a></li>
+            <li><a href="javascript:void(0)" id="recentNotice">최신공시</a></li>
+        </ul>
+    </div>
+    <div class="tab-body">
+        <div class="tab-cont on">
+            <ul class="list-type-todayNew">
+                @if (Model.RecentNewsList.ListData.Count > 0 && Model.RecentNewsList.ListData != null)
+                {
+                    foreach(var item in Model.RecentNewsList.ListData)
+                    {
+                        <li><a href="#none" onclick="return DomesticStockDetail.NewsGoDetail('@Model.ArjCode', '@item.ArticleID', '4', '1', '')">@item.Title</a></li>
+                    }
+                    
+                }
+                else
+                {
+                    <li>데이터가 없습니다.</li>
+                }
+                
+            </ul>
+        </div>
+        <div class="tab-cont">
+            <ul class="list-type-todayNew">
+                @if (Model.RecentNewsList.ListData.Count > 0 && Model.RecentNoticeList.ListData != null)
+                {
+                    foreach (var item in Model.RecentNoticeList.ListData.Take(5))
+                    {
+                        <li><a href="#none" onclick="return DomesticStockDetail.NoticeGoDetail('@item.F_SEQ','@item.F_DATA_DAY', '@item.F_STOCK_CODE', '@item.F_CONTENT','')">@item.F_CONTENT</a></li>
+                    }
+
+                }
+                else
+                {
+                    <li>데이터가 없습니다.</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <!--// tab end -->
+</div>
+<!--// 뉴스 &amp; 공시 end -->
+<!-- 종목토론 start -->
+<div class="section-area pd0 mb10">
+    <h3 class="tit-line plr15 bd-none"><a href="http://board.wownet.co.kr/board/debate/list.asp?bcode=N03040000&mseq=162" target="_blank">종목토론</a></h3>
+    <ul class="list-type-todayNew mt0">
+        @if (discussionTop9List != null && discussionTop9List.ListData.Count > 0)
+        {
+
+            foreach (var item in discussionTop9List.ListData)
+            {
+                string jongMockHref1 = "http://board.wownet.co.kr/board/debate/view.asp?seq=" + item.SEQ + "&mseq=162&pseq=158&bcode=N03040000&cname=" + item.CNAME + "&ref=" + item.REF + "&ref_step=" + item.REF_STEP;
+                <li>
+                    <a href="@jongMockHref1" target="_blank">
+                        <span class="tit">
+                            @if (item.REF_STEP != 0)
+                            {
+                                <span>&nbsp;[Re]&nbsp;</span>
+                            }
+                            @item.TITLE
+                        </span>
+                        <span class="aside">@item.USER_NAME</span>
+                    </a>
+                    
+                </li>
+            }
+        }
+        else
+        {
+            <li>해당 게시글이 없습니다.</li>
+        }
+        
+    </ul>
+</div>
+<!--// 종목토론 end -->
+<!-- Slider Menu start -->
+<h5 class="blind">sub gnb</h5>
+
+<div class="swiper-container sub-gnb01 mb0" id="stockPredictionChartTab">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide on"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7551', '@Model.ArjCode', '334', '357');">일간</a></span></div>
+        <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7552','@Model.ArjCode', '334', '357');">주간</a></span></div>
+        <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7553','@Model.ArjCode', '334', '357');">월간</a></span></div>
+        <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7554','@Model.ArjCode', '334', '357');">5분봉</a></span></div>
+        <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7555','@Model.ArjCode', '334', '357');">10분봉</a></span></div>
+        <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7556','@Model.ArjCode', '334', '357');">30분봉</a></span></div>
+        <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7557','@Model.ArjCode', '334', '357');">60분봉</a></span></div>
+        <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('9101','@Model.ArjCode', '334', '357');">5일 주가예측</a></span></div>
+    </div>
+</div>
+
+<!--// Slider Menu end -->
+<!-- chart start -->
+<div class="section-area mb50">
+    @*<p class="time-txt btn-area pr0 mt10">
+        <span class="font-color03">한국경제TV</span>
+        <span class="num">2017/06/12 ~ 2017/07/31</span>
+    </p>*@
+    <div class="box-type-chart">
+        <div class="chart-view" id="stockPredictionChart">
+            <img id="imgChart" alt="chart" style="width: 100%;">
+            <input type="hidden" id="arjCode" value="@Model.ArjCode" />
+        </div>
+    </div>
+</div>
+<!--// chart end -->
+
+

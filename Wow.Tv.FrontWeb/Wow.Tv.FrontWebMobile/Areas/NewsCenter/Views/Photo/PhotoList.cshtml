@@ -1,0 +1,92 @@
+﻿@using Wow
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    AppState["BodyClass"] = "photo";
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/Photo/PhotoList.js"></script>
+}
+
+<div class="box-photo-slider mb10">
+    <div class="swiper-container photo-slider bg-back">
+        <div class="swiper-wrapper">
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="swiper-slide photoTopList @(Model.IndexOf(item) == 0 ? "on" : "")">
+                        <div class="img-cont">
+                            <div class="img-area">
+                                <img src="@WowExtensionMethod.NewsThumbnailPath("34S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("34S")'" alt="">
+                            </div>
+                            <div class="txt-area">
+                                <p class="txt">@item.TITLE</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="swiper-slide">등록된 기사가 없습니다.</div>
+            }
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</div>
+<!--// visual photo slider end -->
+<!-- img slider start -->
+<div class="box-photo-img-slider">
+    <div class="swiper-container visul-slider">
+        <div class="swiper-wrapper">
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="swiper-slide photoList @(Model.IndexOf(item) == 0 ? "on" : "")" @(Model.IndexOf(item) == 0 ? "" : "style=display:none;")>
+                        <div class="box-reporter">
+                            <div class="img-cont type02">
+                                <div class="img-area">
+                                    <img src="@WowExtensionMethod.NewsThumbnailPath("34M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("34M")'">
+                                </div>
+                                <div class="txt-area">
+                                    <p class="txt">
+                                        @item.TITLE
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="reporter-view">
+                                <p class="txt">@Wow.WowExtensionMethod.RemoveTagAndReplace(MvcHtmlString.Create(item.CONTENTS_CUT).ToString(), 100, true)</p>
+                                <div class="btn-area mt10">
+                                    <a href="javascript:NewsCommon.GoNewsDetailView('photo','','','@item.ARTICLEID')" class="btn type04 icon-arrow"><span>기사 원문보기</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="swiper-slide">등록된 기사가 없습니다.</div>
+            }
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next" id="btnNext"></div>
+        <div class="swiper-button-prev" id="btnPrev"></div>
+    </div>
+</div>
+<!--// img slider end -->
+
+@* AD area *@
+<div class="news-list-box">
+    <div class="banner-area txt-c">
+        <iframe src="http://adex.ednplus.com/xc/h/Fz56JCGe" width="320" height="270" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"></iframe>
+    </div>
+</div>

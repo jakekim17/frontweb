@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="183c3f8b-2444-450c-9655-f5876652546a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/CommonCode/CommconCodeService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CommconCodeService1.disco" MetadataType="Disco" ID="ac923a93-2194-483c-ad30-da5e210b7ff3" SourceId="1" SourceUrl="http://localhost:8088/CommonCode/CommconCodeService.svc?disco" />
+    <MetadataFile FileName="CommconCodeService1.wsdl" MetadataType="Wsdl" ID="574a5038-a254-4177-ad60-b24368a182ce" SourceId="1" SourceUrl="http://localhost:8088/CommonCode/CommconCodeService.svc?wsdl" />
+    <MetadataFile FileName="CommconCodeService5.xsd" MetadataType="Schema" ID="35470f11-493a-4a2f-9f75-e5837b40c5f5" SourceId="1" SourceUrl="http://localhost:8088/CommonCode/CommconCodeService.svc?xsd=xsd3" />
+    <MetadataFile FileName="CommconCodeService51.xsd" MetadataType="Schema" ID="866ac1ec-cc84-46fc-bd37-018e672f8651" SourceId="1" SourceUrl="http://localhost:8088/CommonCode/CommconCodeService.svc?xsd=xsd4" />
+    <MetadataFile FileName="CommconCodeService52.xsd" MetadataType="Schema" ID="78ccd60f-fed7-432c-b1ac-ec1e83471f61" SourceId="1" SourceUrl="http://localhost:8088/CommonCode/CommconCodeService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CommconCodeService53.xsd" MetadataType="Schema" ID="2924cb1d-a542-4fa1-bb2e-d7463a11f43a" SourceId="1" SourceUrl="http://localhost:8088/CommonCode/CommconCodeService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CommconCodeService54.xsd" MetadataType="Schema" ID="34d6b5f3-5bc0-42e1-9f5e-8a1f31c98616" SourceId="1" SourceUrl="http://localhost:8088/CommonCode/CommconCodeService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

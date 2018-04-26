@@ -1,0 +1,40 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model ListModel<usp_wownet_ETF_stock_group_Result> 
+@{
+    ViewBag.Title = "ETF";
+}
+
+<h1 class="title">ETF</h1>
+<!-- Table -->
+<div class="table-type1 row5">
+    <table>
+        <thead>
+            <tr>
+                <th>종목명</th>
+                <th>체결가</th>
+                <th>전일대비</th>
+                <th>등락률</th>
+                <th>거래량</th>
+                <th>시가총액(억)</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.ListData)
+        {
+            <tr>
+                <td>@item.korName</td>
+                <td class="number">@item.TradePrice</td>
+                <td>@Html.PublishChgPriceFormat(item.ChgType, item.ChgPrice)</td>
+                <td>@Html.PublishUpDownSymbolPChangeFormat(item.ChgType, item.ChgRate)</td>                
+                <td>@Html.CommaFormat(item.TotalVol)</td>
+                <td>@Html.CommaFormat(item.TotalMarketValue)</td>
+            </tr>
+        }
+    </table>
+</div>
+<!-- //Table -->
+
+
+
+

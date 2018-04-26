@@ -1,0 +1,182 @@
+﻿@using Wow.Tv.Middle.Model.Db49.wowtv
+
+@model Wow.Tv.Middle.Model.Common.ListModel<NTB_BOARD_CONTENT>
+
+
+@{
+    Layout = null;
+
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+<script>
+        var totalDataCount = "@ViewBag.TotalDataCount";
+        var currentIndex = "@ViewBag.currentIndex";
+        var searchType = "@ViewBag.Condition.SearchType";
+</script>
+<script src="@wowTvScript/Broad/FeedBack/Index.js?date=20171218145000"></script>
+
+
+@{
+    var searchListItem = new SelectList(
+        new List<SelectListItem>
+        {
+            new SelectListItem { Text = "전체", Value = "ALL"},
+            new SelectListItem { Text = "제목", Value = "TITLE"},
+            new SelectListItem { Text = "내용", Value = "CONTENT"}
+        }, "Value", "Text");
+
+
+    string selectSearchType = string.IsNullOrWhiteSpace(ViewBag.Condition.SearchType) ? "ALL" : ViewBag.Condition.SearchType;
+
+    var searchList = new SelectList(searchListItem, "Value", "Text", selectSearchType);
+
+    var boardInfo = ViewBag.BoardInfo as NTB_BOARD;
+
+}
+
+
+
+
+<input type="hidden" id="hidFeedBackSeq" value="@Request["contentSeq"]" />
+<input type="hidden" id="hidFeedBackMenuSeq" value="@ViewBag.Condition.CurrentMenuSeq" />
+
+<!-- Content Area -->
+<div class="contain-content">
+    <!-- 좌측 영역 -->
+    <div class="left-section">
+
+
+        <input type="hidden" id="hidFrontMenuSeq" name="FrontMenuSeq" value="@ViewBag.condition.CurrentMenuSeq" />
+
+        <form id="frmSearch">
+
+            <div class="search-area">
+                <label for="search01">검색</label>
+                <div class="selector" style="width:90px;;">
+                    <!-- width 100%일때 class="selector full" -->
+                    <label for="selector01" id="labelSelector">전체</label>
+                    @Html.DropDownList("SearchType", searchList, new { @class = "form-control", id = "selector01" })
+                </div>
+                <input type="text" name="SearchText" id="txtSearch" value="@ViewBag.Condition.SearchText" style="width:490px;" />
+                <input type="button" value="검색" id="btnSearch" class="btn-type3">
+            </div>
+
+
+            <input type="hidden" id="seq" name="seq" />
+            <input type="hidden" id="pageSize" name="pageSize" value="10" />
+            <input type="hidden" id="currentIndex" name="currentIndex" value="@ViewBag.CurrentIndex" />
+            <input type="hidden" id="BOARD_SEQ" name="BOARD_SEQ" value="@boardInfo?.BOARD_SEQ" />
+            <input type="hidden" id="CurrentMenuSeq" name="CurrentMenuSeq" value="@ViewBag.Condition.CurrentMenuSeq" />
+        </form>
+
+
+        @if (!string.IsNullOrWhiteSpace(boardInfo?.TOP_CONTENT))
+        {
+            @Html.Raw(boardInfo.TOP_CONTENT);
+        }
+
+        <!-- // table list -->
+        <div class="table-type2 list">
+            <table class="table">
+                <colgroup>
+                    <col width="9%">
+                    @*<col width="20%">*@
+                    <col width="auto">
+                    <col width="10%">
+                    <col width="15%">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        @*<th>프로그램</th>*@
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.TotalDataCount == 0)
+            {
+
+                        <tr>
+                            <td colspan="5" style="height:400px">게시물이 없습니다.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        var cnt = 0;
+                        foreach (var item in Model.ListData)
+                        {
+
+                            <tr>
+                                <td>@(Model.TotalDataCount - (Model.ListData.IndexOf(item) + ViewBag.Condition.CurrentIndex))</td>
+                                @*<td>@item.CommonName</td>*@
+                                <td class="text">
+
+                                    @if (!string.IsNullOrWhiteSpace(item.BLIND_YN) && item.BLIND_YN.Equals("Y"))
+                                    {
+                                        @:관리자에 의해 비공개(삭제) 처리되었습니다.
+                            }
+                                    else
+                                    {
+                                        <a href="javascript:void(0);" class="board-title" onclick="return FeedBackIndex.GoDetail(@item.BOARD_CONTENT_SEQ);">
+                                            @Wow.WowExtensionMethod.RemoveTag(item.TITLE)
+                                            @if (item.CommentList != null && item.CommentList.Count > 0)
+                                            {
+                                                <span>(@item.CommentList.Count)</span>
+                                            }
+                                        </a>
+                                    }
+                                </td>
+                                <td>@item.USER_NAME</td>
+                                <td>@item.REG_DATE.ToString("yyyy-MM-dd")</td>
+                                <td>@item.READ_CNT</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- //BBS List -->
+        <!-- Pagenate -->
+        <div class="box-paginate">
+            <div id="divPaging"></div>
+
+            <!-- btn start -->
+            <div class="box-button">
+                <div class="inner-right">
+                    @if (LoginHandler.IsLogin == true)
+                    {
+                        <span class="btn-type1"><button type="button" id="btnAdd">등록</button></span>
+                    }
+                    else
+                    {
+                        <span class="btn-type1"><button type="button" id="btnGoLogin">등록</button></span>
+                    }
+                </div>
+            </div>
+            <!--// btn end -->
+
+
+        </div>
+        <!-- //Pagenate -->
+
+
+        @if (!string.IsNullOrWhiteSpace(boardInfo?.BOTTOM_CONTENT))
+        {
+            @Html.Raw(boardInfo.BOTTOM_CONTENT);
+        }
+
+
+
+    </div>
+    <!-- 우측 영역 -->
+    <div class="right-section" id="divBanner">
+    </div>
+    <!-- // 우측 영역 -->
+</div>

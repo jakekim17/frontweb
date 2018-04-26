@@ -1,0 +1,503 @@
+﻿@using System.Configuration
+@using Wow.Tv.FrontWeb.MenuService
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    string bodyClass = AppState["BodyClass"].ToString();
+    string MainTitle = AppState["MainTitle"].ToString();
+
+
+    bool isMain = true;
+    bool isPageLocation = false;
+    string currentMenuSeq = Request["menuSeq"];
+    if (String.IsNullOrEmpty(currentMenuSeq) == false)
+    {
+        var currentMenu = new MenuServiceClient().GetAt(int.Parse(currentMenuSeq));
+        if (currentMenu.DEPTH > 1)
+        {
+            isMain = false;
+        }
+    }
+
+    if (Request["PageLocation"] == "Y")
+    {
+        isPageLocation = true;
+    }
+
+
+    // 홈의 메인만 메인으로 하고 나머지는 무조건 sub 로 한다(신차장님 확인)
+    if (Request.Url.LocalPath == "/" || Request.Url.LocalPath == "/Home/Index")
+    {
+        isMain = true;
+    }
+    else
+    {
+        isMain = false;
+    }
+
+}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    @if (Request.Url.LocalPath.ToLower().IndexOf("/newscenter/news/read") < 0 && Request.Url.LocalPath.ToLower().IndexOf("/newscenter/news/travelread") < 0)
+    {
+        <title>한국경제TV - 대한민국 대표 경제방송</title>
+    }
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1240">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="한국경제티브이" />
+    <meta name="description" content="보는재미 버는기쁨 대한민국 대표 경제방송" />
+    <meta name="Keyword" content="한국경제TV, WOWTV, 와우TV, 와우티비, 한경TV, TV, 와우, WOW, HKWOWTV, 증권경제방송, 경제뉴스, 뉴스, 증권교육, 금융, 증권, 주식, 투자정보, 투자전략, 종목토론, 전문가 방송, 증권시황, 재테크, 펀드, 선물옵션, 창업, 연예스포츠, 부동산, 포토영상, 티비텐플러스, K-VINA비즈센터, 와우넷, WOWNET, 와우파, WOWFA" />
+    <meta name="copyright" content="wowtv, Inc" />
+    <meta name="google-site-verification" content="MvH75U9ZJFcxkx7VsyQUUPyLVgIRIIarSHLSAMJoAs0" />
+    <meta name="naver-site-verification" content="3078e060f9e05a27c5a50806d54b2fd8359ea8a1" />
+    <meta name="msvalidate.01" content="7D99C57188C1C3ECBCFCB85124084D41" />
+    <meta property="fb:app_id" content="@ConfigurationManager.AppSettings["FacebookAppId"]" />
+    @RenderSection("metas", false)
+    <link rel="stylesheet" href="@wowTvStyle/css/fonts.css">
+    <link rel="stylesheet" href="@wowTvStyle/css/common.css">
+    <link rel="stylesheet" href="@wowTvStyle/css/news.css">
+    @if (Request.Url.LocalPath == "/" || Request.Url.LocalPath == "/Home/Index")
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/main.css">
+    }
+    @if (bodyClass == "finance")
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/finance.css">
+    }
+
+    @if (bodyClass == "entertain")
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/entertain.css">
+    }
+
+    @if (bodyClass == "opinion sub")
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/opinion.css">
+    }
+    @if (bodyClass == "photo" || bodyClass == "photo sub")
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/photo.css">
+    }
+    @if (bodyClass.Contains("land"))
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/land.css">
+    }
+
+    @RenderSection("styles", false)
+
+    <script type="text/javascript">
+
+        /********************************************************************************
+         * Facebook(https://developers.facebook.com/)
+         ********************************************************************************/
+        var FacebookAppId     = "@ConfigurationManager.AppSettings["FacebookAppId"]";
+        var FacebookAPIVer    = "@ConfigurationManager.AppSettings["FacebookAPIVer"]";
+        var FacebookUserToken = "@ConfigurationManager.AppSettings["FacebookUserToken"]";
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: FacebookAppId,
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: FacebookAPIVer
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        /****************************************************************************************/
+        var userLoginUrl = "@ConfigurationManager.AppSettings["UserLoginUrl"]";
+
+    </script>
+    <script type="text/javascript" src="@wowTvScript/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery.plugin.js"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery.xdomainrequest.min.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Define.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Common.js"></script>
+    <script type="text/javascript" src="@wowTvScript/paging.js"></script>
+    <script type="text/javascript" src="@wowTvScript/lib.js"></script>
+    <script type="text/javascript" src="@wowTvScript/design.js"></script>
+    <script type="text/javascript" src="@wowTvScript/bxslider.js"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery.plugin.js"></script>
+    <script type="text/javascript" src="@wowTvScript/flipster.js"></script>
+
+    <script type="text/javascript" src="@wowTvScript/Finance/finance_common.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Finance/middleStockData.js"></script>
+    <script type="text/javascript" src="@wowTvScript/kakao.story.min.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Share.js"></script>
+    <script type="text/javascript" src="@wowTvScript/SearchApi.js?date=20180103141500"></script>
+    <script type="text/javascript" src="//static.criteo.net/js/ld/publishertag.js"></script>
+
+    @RenderSection("scripts", false)
+
+    <script type="text/javascript">
+
+        var docReferrer = document.referrer;
+        var chkArticleId = getUrlParameter('articleId');
+
+        //console.log("chkArticleId " + chkArticleId);
+        //console.log("chkArticleId.length " + chkArticleId.length);
+
+        if (docReferrer.indexOf("newsstand.naver.com") > -1 && (chkArticleId == false || chkArticleId == "undefined" || typeof (chkArticleId) == "undefined")) {
+            location.href = "/NewsCenter/Main/";
+        }
+
+        var TopMenu = {
+            MoveCableTv: function () {
+                window.open(SITE_DOMAIN.HELP + "/ServiceInfo/Hankyung/CableTVInfo?menuSeq=" + MENU_SEQ_DEFINE.HELP.SERVICE_CABLE_TV);
+                return false;
+            },
+            MoveTvSchedule: function () {
+                location.href = "/Broad/TvSchedule/Index?menuSeq=" + MENU_SEQ_DEFINE.BROAD.SCHEDULE;
+                return false;
+            },
+            MoveTvOnAir: function () {
+                location.href = "/Broad/OnAir/Index?menuSeq=" + MENU_SEQ_DEFINE.BROAD.ONAIR;
+                return false;
+            }
+        };
+
+        function LayOutMain_OpenPopUp(url) {
+            window.open(url);
+
+            return false;
+        }
+
+        function LayOutMain_GoPage(url) {
+            location.href = url;
+
+            return false;
+        }
+    </script>
+
+    <script type="text/javascript">
+        //jQuery(function ($) {
+
+
+        //    var lastRotateIndex = 1;
+        //    var bRotate = true;
+        //    var bRotateStop = false;
+
+        //    if ($('.box-breaknews.list-slick dd ul li').length > 0)
+        //        $('.box-breaknews.list-slick dd ul li').first().clone().appendTo('.box-breaknews.list-slick dd ul');
+
+        //    function rotateRank(index) {
+
+        //        setTimeout(function () {
+
+        //            lastRotateIndex = index;
+
+        //            if (!bRotate) {
+        //                bRotateStop = true;
+        //                return;
+        //            }
+
+        //            $('.box-breaknews.list-slick dd ul').animate({
+        //                top: -$('.box-breaknews.list-slick dd ul li').height() * index
+        //            }, 500, function () {
+        //                if (index == $('.box-breaknews.list-slick dd ul li').length - 1) {
+        //                    $('.box-breaknews.list-slick dd ul').css('top', '0px');
+        //                    index = 0;
+        //                }
+        //                rotateRank(index + 1);
+        //            });
+        //        }, 2000);
+        //    }
+
+        //    rotateRank(1);
+
+
+        //    //$('.box-breaknews.list-slick dd li').clone().appendTo('.box-breaknews.list-slick dd ul');
+
+        //    $(".box-breaknews.list-slick dd ul").mouseover(function (e) {
+        //        bRotateStop = false;
+        //        bRotate = false;
+        //    });
+
+        //    $(".box-breaknews.list-slick dd ul").mouseout(function (e) {
+        //        bRotate = true;
+        //        if (bRotateStop) {
+        //            bRotateStop = false;
+        //            rotateRank(lastRotateIndex);
+        //        }
+
+        //    });
+        //});
+
+
+        $(document).ready(function () {
+            try {
+                var topBannerShowHide = getCookie("TopBannerShowHide");
+
+                if (topBannerShowHide != null && topBannerShowHide != "") {
+                    if (topBannerShowHide == "Show") {
+                        //$(".top-banner-area").show();
+                    }
+                    else {
+                        $(".top-banner-area").hide();
+                        $(".header-sub .top-ad-btn span").css({
+                            display: "block"
+                        });
+                    }
+                }
+            }
+            catch (e) {
+            }
+        });
+
+        function MainLayOut_SiteMapChange(obj) {
+
+            //뉴스 상세 배너 체크
+            var $topBannerFind = $('.header-sub').find('.ui-top-banner');
+            if ($topBannerFind.hasClass('ui-top-banner') && typeof $(obj).attr('name') == 'undefined') {
+
+                $('.contain-sitemap').css({
+                    'position': 'absolute',
+                    'top': '195px'
+                });
+            }
+
+            if ($('.contain-search').hasClass('on') == true && $(obj).parent().hasClass('on') != true) {
+                hs = 1;
+            } else if ($('.contain-search').hasClass('on') == true && $(obj).parent().hasClass('on') == true) {
+                hs = 2;
+            } else if ($(obj).parent().hasClass('on') != true) {
+                hs = 3
+            } else if ($(obj).parent().hasClass('on') == true) {
+                hs = 4
+            }
+
+            switch (hs) {
+                case 1:
+                    $('.btn-sitemap').addClass('on');
+                    $('.contain-sitemap').animate({
+                        //height: '820px'
+                        height: $('.contain-sitemap .inner').height()
+                    }, function () {
+                        $('.contain-sitemap').addClass('on');
+                    });
+                    $('.box-sitemap').delay(100).animate({
+                        top: '0',
+                        opacity: 1
+                    });
+                    break
+
+                case 2:
+                    $('.box-sitemap').animate({
+                        top: '50px',
+                        opacity: 0
+                    });
+                    $('.contain-sitemap').removeClass('on');
+                    $('.contain-sitemap').animate({
+                        height: '0'
+                    }, function () {
+                        $('.btn-sitemap').removeClass('on');
+                    });
+                    break;
+
+                case 3:
+
+                    $('.btn-sitemap').addClass('on');
+                    $('.contain-sitemap').animate({
+                        //height: '820px'
+                        height: $('.contain-sitemap .inner').height()
+                    }, function () {
+
+                        $('.contain-sitemap').addClass('on');
+                    });
+                    $('.box-sitemap').delay(100).animate({
+                        top: '0',
+                        opacity: 1
+                    });
+                    break;
+
+                case 4:
+                    $('.box-sitemap').animate({
+                        top: '50px',
+                        opacity: 0
+                    });
+
+                    $('.contain-sitemap').removeClass('on');
+                    $('.contain-sitemap').animate({
+                        height: '0'
+                    }, function () {
+                        $('.btn-sitemap').removeClass('on');
+                    });
+                    break;
+
+                default:
+            }
+            return false;
+        }
+
+        function MainLayOut_SearchChange(obj) {
+            $('.box-search-global').animate({
+                width: '319px'
+            });
+            $('.box-search-global').addClass('on')
+            return false;
+        }
+    </script>
+
+
+    
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M47P4NW');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+
+
+
+
+<body class="@bodyClass@(isMain == true ? " main" : " sub")">
+
+    @* <body>바로 뒤에 넣어달라 *@
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M47P4NW"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+
+
+    <div id="whole-wrap">
+        <!-- Header -->
+        <header class="header">
+
+            <!-- 상단 슬라이더 추가 -->
+            @*@Html.Partial("~/Views/Shared/_topBanner.cshtml")*@
+            @Html.Action("_topBanner", "Home", new { Area = "" })
+            <!-- 상단 슬라이더 추가 -->
+            <!-- HTML 변경 -->
+            <div class="header-sub">
+
+                @Html.Partial("~/Views/Shared/_Header.cshtml", MainTitle.Replace("·", ""))
+
+                <div class="contain-navigation">
+                    @*@Html.Partial("~/Views/Shared/_TopMenu.cshtml")*@
+                    @Html.Action("_TopMenu", "Home", new { Area = "", menuSeq = currentMenuSeq })
+                </div>
+                <div class="contain-newsnstock">
+                    @Html.Partial("~/Views/Shared/_SiSe.cshtml")
+                </div>
+
+                <!-- Site Map -->
+                <div class="contain-sitemap">
+                    @*@Html.Partial("~/Views/Shared/_SiteMap.cshtml")*@
+                    @Html.Action("_SiteMap", "Home", new { Area = "" })
+                </div>
+                <!-- //Site Map -->
+            </div>
+        </header>
+        <!-- //Header -->
+
+        @RenderSection("WrapOutTop", false)
+        @if (Request.Url.LocalPath == "/" || Request.Url.LocalPath == "/Home/Index")
+        {
+            @RenderBody()
+        }
+        else
+        {
+            <div class="wrap">
+                @if (isMain == true || bodyClass.ToUpper() == "TV" || bodyClass.ToUpper() == "NEWS" || bodyClass.ToUpper() == "OPINION SUB")
+                {
+                }
+                else
+                {
+            <!-- Side Bar Area -->
+                    @*@Html.Partial("~/Views/Shared/_LeftMenu.cshtml")*@
+                    @Html.Action("_LeftMenu", "Home", new { Area = "", menuSeq = currentMenuSeq })
+            <!-- //Side Bar Area -->    }
+
+                <!-- Content Area -->
+                <div class="contain-content">
+                    @if (isMain == true || Request.Url.LocalPath == "/Broad/ProgramMain/Index")
+                    {
+                        if (isPageLocation == true)
+                        {
+                            @Html.Action("_PageLocation", "Home", new { Area = "", menuSeq = currentMenuSeq })
+}
+                    }
+                    else
+                    {
+                        if (Request.Url.LocalPath == "/Home/SiteMap")
+                        {
+                        }
+                        else
+                        {
+                            @*@Html.Partial("~/Views/Shared/_PageLocation.cshtml")*@
+                            @Html.Action("_PageLocation", "Home", new { Area = "", menuSeq = currentMenuSeq })
+}
+                    }
+
+
+                    @RenderBody()
+                </div>
+                <!-- //Content Area -->
+            </div>
+        }
+        @RenderSection("WrapOutBottom", false)
+        @Html.Action("QuickMenu", "Home", new { Area = "" })
+        <!-- Footer -->
+        <footer class="footer">
+            @Html.Partial("~/Views/Shared/_Footer.cshtml")
+        </footer>
+        <!-- //Footer -->
+        @RenderSection("modalDiv", required: false)
+
+        <div id="divPopupCatagory" class="modal fade" role="dialog"></div>
+        <div id="divPopupLinkCopy" class="modal fade" role="dialog"></div>
+
+        @*
+            * 한국경제TV-PC버전 Google Analytics
+            * https://developers.google.com/analytics/devguides/collection/gtagjs/
+        *@
+        <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-51494055-1', 'auto');
+        ga('send', 'pageview');
+
+        @RenderSection("googleAnalyticsScript", required: false)
+
+        </script>
+        @RenderSection("adTraceIDAddArea", required: false)
+        @RenderSection("hardCodingAdArea", required: false)
+
+
+
+        @RenderSection("LastScriptArea", required: false)
+
+    </div>
+</body>
+</html>

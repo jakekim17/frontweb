@@ -1,0 +1,121 @@
+﻿@using Wow.Tv.Middle.Model.Db49.wowtv
+
+@model Wow.Tv.Middle.Model.Common.IntegratedBoard<NTB_BOARD_CONTENT>
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    var boardInfo = ViewBag.BoardInfo as NTB_BOARD;
+
+}
+
+
+<script>
+        var totalDataCount = "@ViewBag.TotalDataCount";
+        var currentIndex = "@ViewBag.currentIndex";
+        var searchType = "@ViewBag.Condition.SearchType";
+</script>
+
+
+@{
+    var searchListItem = new SelectList(
+        new List<SelectListItem>
+        {
+            new SelectListItem { Text = "전체", Value = "ALL"},
+            new SelectListItem { Text = "제목", Value = "TITLE"},
+            new SelectListItem { Text = "내용", Value = "CONTENT"}
+        }, "Value", "Text");
+
+
+    string selectSearchType = string.IsNullOrWhiteSpace(ViewBag.Condition.SearchType) ? "ALL" : ViewBag.Condition.SearchType;
+
+    var searchList = new SelectList(searchListItem, "Value", "Text", selectSearchType);
+}
+
+
+
+
+<input type="hidden" id="hidNoticeSeq" value="@Request["contentSeq"]" />
+
+
+<!-- 검색영역 -->
+<div class="search-area">
+    <form id="frmSearch">
+        <div class="search-basic">
+
+            @Html.DropDownList("SearchType", searchList, new { id = "selector01" })
+
+            <input type="text" name="SearchText" id="txtSearch" value="@ViewBag.Condition.SearchText" placeholder="검색어를 입력하세요.">
+            <div class="btn-area">
+                <a href="#" id="btnSearch" class="btn type03 full">검색하기</a>
+            </div>
+        </div>
+
+        <input type="hidden" id="seq" name="seq" />
+        <input type="hidden" id="pageSize" name="pageSize" value="20" />
+        <input type="hidden" id="currentIndex" name="currentIndex" value="@ViewBag.CurrentIndex" />
+        <input type="hidden" id="BOARD_SEQ" name="BOARD_SEQ" value="@boardInfo?.BOARD_SEQ" />
+        <input type="hidden" name="CurrentMenuSeq" value="@ViewBag.Condition.CurrentMenuSeq" />
+        <input type="hidden" name="menuSeq" value="@ViewBag.Condition.CurrentMenuSeq" />
+    </form>
+</div>
+<!-- //검색영역 -->
+<!-- 결과리스트 start -->
+<div class="section-area">
+    <ul class="list-type02">
+        @if (ViewBag.TotalDataCount == 0)
+        {
+            <li>
+                <a href="javascript:void(0);">
+                    <p class="obj-tit type2">
+                        <span class="text">게시물이 없습니다.</span>
+                    </p>
+                    <div>
+                        <span class="txt-exer num"></span>
+                    </div>
+                </a>
+            </li>
+        }
+        else
+        {
+            var cnt = 0;
+            foreach (var item in Model.ListData.OrderByDescending(a => a.NOTICE_YN))
+            {
+
+                <li>
+                    <a href="javascript:void(0);" onclick="return NoticeIndex.GoDetail(@item.BOARD_CONTENT_SEQ);">
+                @if (item.NOTICE_YN == "Y" && cnt < 5)
+                {
+                    cnt++;
+                        <span class="text-icon type03">공지</span> <!-- 공지시 text-icon 추가 -->
+                }
+                        <p class="obj-tit type2">
+                            <span class="text">@Html.Raw(item.TITLE)</span>
+                        </p>
+                        <div>
+                            <span class="txt-exer num">@item.REG_DATE.ToString("yyyy-MM-dd")</span>
+                            <span class="txt-exer">조회수 <span class="num">@Html.DisplayFor(modelItem => item.READ_CNT)</span></span>
+                        </div>
+                    </a>
+                </li>
+            }
+        }
+
+    </ul>
+</div>
+<!--// 결과리스트 end -->
+<!-- paging start -->
+<div class="txt-paging pb0" id="divPaging">
+</div>
+<!--// paging end -->
+
+
+
+
+
+
+<script src="@wowTvScript/Broad/Notice/Index.js?date=20171018170000"></script>
+

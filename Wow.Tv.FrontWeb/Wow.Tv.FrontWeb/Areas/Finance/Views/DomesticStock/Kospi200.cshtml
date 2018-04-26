@@ -1,0 +1,168 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model StockInfoModel<usp_GetSiseCurrentKPI_Result, usp_getSiseMainmergecode_Result>
+
+@{
+    ViewBag.Title = "코스피200";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+
+    bool checkHoliday = ViewBag.CheckStockHoliday;
+}
+
+@section styles{
+    <style>
+        
+    </style>
+}
+@section scripts{
+@Scripts.Render("~/bundles/raphael")
+@Scripts.Render("~/bundles/webponentcommon")
+@Scripts.Render("~/bundles/webponentvisual")
+@Scripts.Render("~/bundles/chart")
+@Scripts.Render("~/bundles/chartstyle")
+    
+    <script src="@wowTvScript/Finance/Charts/stockChart.js"></script>
+    <script src="@wowTvScript/Finance/DomesticStock/KPI200.js"></script>
+    <script>
+
+        //차트에서 사용할 스크립트
+        $(document).ready(function () {
+
+            FinanceChartJs.CurrentDbKPI200ChartData($(".contain-chart"));
+            //elements, totalArea
+            CommonJs.ElementsValTotal(".chgType", "#totalStock");
+
+            //typeVal(단일/마켓), codeVal(마켓구분), sec, classElements, checkHoliday
+            MiddleData.CurrentMarket("INDEX", "1D2029", 10, $(".contain-detail .middleStockData"), @checkHoliday.ToString().ToLower());
+            $('.WEBPONENT-TRIAL-UI').css('background', '');
+        });
+    </script>
+}
+
+<h1 class="title">코스피200</h1>
+
+
+<!-- Top Information box -->
+<div class="box-top-type1">
+    <div class="inner-left">
+        <p class="text-realtime-reload"><span class="title">실시간</span> @Html.MarketTimeStatus() <span class="btn-type-reload"><button><a href="/Finance/DomesticStock/Kospi200?menuSeq=@currentMenuSeq">새로고침</a></button></span></p>
+    </div>
+</div>
+<!-- Top Information box -->
+<!-- Stock Detail -->
+<div class="article-detail-stock1">
+    <div class="contain-chart">
+        <!-- Chart -->
+    </div>
+    <div class="contain-detail">
+       
+        <div class="box-detail-stock">
+            <!-- // 2017-10-24 HTML 수정 -->
+            @Html.PublishPriceMiddleFormat(Model.StockInfo.ChgType, Model.StockInfo.Price) <!--주가-->
+            <span class="box">
+                @Html.PublishChgPriceMiddleFormat(Model.StockInfo.ChgType, Model.StockInfo.ChgPrice)<!-- 등락 -->
+                @Html.PublishUpDownSymbolPChangeMiddleFormat(Model.StockInfo.ChgType, Model.StockInfo.PChange)<!-- 등락폭 -->
+            </span>
+            <!-- // 2017-10-24 HTML 수정 -->
+        </div>
+        <div class="box-detail-price1">
+            <dl>
+                <dt>거래량<span>천주</span></dt>
+                <dd><span class="data-normal middleStockData">@Model.StockInfo.Volume</span></dd><!-- 거래량 -->
+            </dl>
+            <dl>
+                <dt>거래금액<span>백만</span></dt>
+                <dd><span class="data-normal middleStockData">@Model.StockInfo.TotalPrice</span></dd><!-- 거래 금액 -->
+            </dl>
+        </div>
+
+        <p class="box-total-infor">총 <span class="data-normal" id="totalStock">000</span>종목</p><!-- 총 종목 수 -->
+        <div class="box-detail-price2">
+            <dl>
+                <dt>상한가</dt>
+                <dd><span class="data-up chgType">@Model.StockInfo.chgType_1</span></dd><!-- 상한가 -->
+            </dl>
+            <dl>
+                <dt>상승</dt>
+                <dd><span class="data-up chgType">@Model.StockInfo.chgType_2</span></dd><!-- 상승 -->
+            </dl>
+            <dl>
+                <dt>하락</dt>
+                <dd><span class="data-down chgType">@Model.StockInfo.chgType_5</span></dd><!-- 하락 -->
+            </dl>
+            <dl>
+                <dt>하한가</dt>
+                <dd><span class="data-down chgType">@Model.StockInfo.chgType_4</span></dd><!-- 하한가 -->
+             
+            </dl>
+        </div>
+    </div>
+</div>
+<!-- //Stock Detail -->
+
+<h2 class="title">시간대별 체결</h2>
+<form id="frmList_timeKPI200">
+    <input type="hidden" id="pageSize" name="pageSize" value="7" />
+    <input type="hidden" id="currentIndex" name="currentIndex" />
+    <div id="divList">
+
+    </div>
+</form>
+
+<hr class="division5 no-border">
+
+<h2 class="title">일별 체결</h2>
+
+<form id="frmList_dayKPI200">
+    <input type="hidden" id="pageSize" name="pageSize" value="7" />
+    <input type="hidden" id="currentIndex" name="currentIndex" />
+    <div id="divList">
+
+    </div>
+</form>
+
+<hr class="division5 no-border">
+
+<h2 class="title">편입종목상위</h2>
+
+<form id="frmList_enrollmentTopKPI200">
+    <input type="hidden" id="pageSize" name="pageSize" value="7" />
+    <input type="hidden" id="currentIndex" name="currentIndex" />
+    <div id="divList">
+
+    </div>
+</form>
+
+<hr class="division5 no-border">
+
+<!-- Tab -->
+<div class="tab-type1">
+    <ul class="col3" id="hpChart">
+        <li class="on"><a href="javascript:DomesticStockKPI200.GetHpChart('7551', '999990');">일간</a></li>
+        <li><a href="javascript:DomesticStockKPI200.GetHpChart('7552', '999990');">주간</a></li> 
+        <li><a href="javascript:DomesticStockKPI200.GetHpChart('7553', '999990');">월간</a></li>
+    </ul>
+</div>
+<!-- //Tab -->
+<!-- Top Information box -->
+@*김나란 담당자가 삭제요청<div class="box-top-type1">
+        <div class="inner-left" id="chartDate">
+            <p class="text-normal">KOSPI200 <span class="text-number"></span></p>
+        </div>
+    </div>*@
+<!-- Top Information box -->
+
+<div style="height:400px;">
+    <!-- Chart -->
+    <img id="imgChart" />
+</div>
+
+
+
+
+
+
+
+

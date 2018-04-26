@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bbb4f689-f0ce-45b7-a164-bf4d40d7aa71" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/Member/JoinService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="JoinService.wsdl" MetadataType="Wsdl" ID="841ffdf9-d4e9-4958-85af-481ba745d91d" SourceId="1" SourceUrl="http://localhost:8088/Member/JoinService.svc?wsdl" />
+    <MetadataFile FileName="JoinService.xsd" MetadataType="Schema" ID="03e06ccf-2c6d-4837-9c19-b2dff46a8371" SourceId="1" SourceUrl="http://localhost:8088/Member/JoinService.svc?xsd=xsd3" />
+    <MetadataFile FileName="JoinService1.xsd" MetadataType="Schema" ID="67f3a569-a6b5-4102-ac3d-b32437466ca4" SourceId="1" SourceUrl="http://localhost:8088/Member/JoinService.svc?xsd=xsd2" />
+    <MetadataFile FileName="JoinService2.xsd" MetadataType="Schema" ID="7a12fbf9-450f-4a2f-93b9-d76b8a308b55" SourceId="1" SourceUrl="http://localhost:8088/Member/JoinService.svc?xsd=xsd1" />
+    <MetadataFile FileName="JoinService3.xsd" MetadataType="Schema" ID="98996d4f-cedb-404f-b46b-6ec6ea5b00da" SourceId="1" SourceUrl="http://localhost:8088/Member/JoinService.svc?xsd=xsd0" />
+    <MetadataFile FileName="JoinService.disco" MetadataType="Disco" ID="7b0cd629-4d62-4022-93ce-5951df78c763" SourceId="1" SourceUrl="http://localhost:8088/Member/JoinService.svc?disco" />
+    <MetadataFile FileName="JoinService4.xsd" MetadataType="Schema" ID="e80cbdde-22c8-4b29-abf6-be8b5b048305" SourceId="1" SourceUrl="http://localhost:8088/Member/JoinService.svc?xsd=xsd5" />
+    <MetadataFile FileName="JoinService5.xsd" MetadataType="Schema" ID="c49e7894-830f-4c2e-af59-3c69d859b593" SourceId="1" SourceUrl="http://localhost:8088/Member/JoinService.svc?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Rank";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string WowTvStyle = AppState["WowTvStyle"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+}
+
+@section scripts{
+    <script src="@wowTvScript/Finance/Trading/Rank.js"></script>
+    <script>
+        var menuSeq = @Request["menuSeq"];
+    </script>
+}
+
+<section class="container">  
+    <!-- title area -->
+    <div class="section-area mb15">
+        <h2>랭킹100</h2>
+        <select class="mb20" id="time">
+            <option value="LAST">전일종가랭킹</option>
+            <option value="0930">오전 09:30</option>
+            <option value="1000">오전 10:00</option>
+            <option value="1030">오전 10:30</option>
+            <option value="1100">오전 11:00</option>
+            <option value="1130">오전 11:30</option>
+            <option value="1200">오후 12:00</option>
+            <option value="1230">오후 12:30</option>
+            <option value="1300">오후 01:00</option>
+            <option value="1330">오후 01:30</option>
+            <option value="1400">오후 02:00</option>
+            <option value="1430">오후 02:30</option>
+            <option value="1500">당일종가랭킹</option>
+        </select>
+        <!-- 매매신호 아이콘 설명 테이블 -->
+        <div class="trade-icon-area">
+            <table>
+                <caption>매매신호 아이콘 설명 상세</caption>
+                <colgroup>
+                    <col style="width:50px">
+                    <col style="width:auto">
+                    <col style="width:50px">
+                    <col style="width:auto">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th><span class="text-icon type06 trade"><span class="icon buy"></span>매수</span></th>
+                        <td>단기 매수신호</td>
+                        <th><span class="text-icon type06 trade"><span class="icon owns"></span>보유</span></th>
+                        <td>단기 매수신호 후 보유</td>
+                    </tr>
+                    <tr>
+                        <th><span class="text-icon type06 trade"><span class="icon sell"></span>매도</span></th>
+                        <td>단기 매도신호</td>
+                        <th><span class="text-icon type06 trade"><span class="icon prog"></span>진행</span></th>
+                        <td>단기 매수신호 후 진행</td>
+                    </tr>
+                    <tr>
+                        <th><span class="text-icon type06 trade"><span class="font-color04">급 </span>급등</span></th>
+                        <td colspan="3">급등주 표시, 고위험 고수익 패턴</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- // 매매신호 아이콘 설명 테이블 -->
+    </div>
+    <!-- // title area -->
+    <!-- 탭영역 -->
+    <div class="tab-area mb15">
+        <ul id="rankTab">
+            <li class="on" style="width: 33%;"><a href="javascript:Rank.GetList('','0');">전체</a></li>
+            <li class="" style="width: 33%;"><a href="javascript:Rank.GetList('','1');">코스피</a></li>
+            <li class="" style="width: 33.6667%;"><a href="javascript:Rank.GetList('','2');">코스닥</a></li>
+        </ul>
+    </div>
+
+    <div class="table-type1" id="dataArea">
+
+    </div>
+    <form id="rankfrm">
+        <input type="hidden" name="TrId" value="5001" />
+        <input type="hidden" name="RnkTime" />
+        <input type="hidden" name="Sect" />
+        <input type="hidden" name="Count" value="100" />
+    </form>
+
+
+    <!-- //탭영역 -->
+
+</section>

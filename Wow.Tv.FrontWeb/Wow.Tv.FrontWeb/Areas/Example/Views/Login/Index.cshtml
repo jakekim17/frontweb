@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Login Cookie 예제 설명 페이지";
+
+    string rootUrl = AppState["RootUrl"].ToString();
+}
+
+@section ScriptImport
+{
+    <script type="text/javascript" src="@Url.Content($"{rootUrl}/Scripts/example/login.js")"></script>
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Login Cookie 예제</div>
+    <div class="panel-body">
+        <form  id="frmCookie">
+            <div class="input-group">
+                <input id="value" type="text" class="form-control" name="value" placeholder="아무거나 입력"><button type="button" class="btn btn-success" id="btnAdminLogin">로그인</button>
+                <br />
+                <input id="txtAdmin" type="text" class="form-control" name="txtAdmin" readonly="readonly">
+            </div>
+        </form>
+    </div>
+</div>
+

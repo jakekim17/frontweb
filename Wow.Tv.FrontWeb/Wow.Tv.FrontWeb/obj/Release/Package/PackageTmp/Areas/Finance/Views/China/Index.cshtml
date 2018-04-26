@@ -1,0 +1,129 @@
+﻿@using Wow.Tv.Middle.Model.Db35.chinaguide.Article
+
+
+@{
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    List<ArticleInfo> list1 = ViewBag.List1;
+    List<ArticleInfo> list2 = ViewBag.List2;
+    List<ArticleInfo> list3 = ViewBag.List3;
+    List<ArticleInfo> list4 = ViewBag.List4;
+    List<ArticleInfo> list5 = ViewBag.List5;
+    List<ArticleInfo> list6 = ViewBag.List6;
+    List<ArticleInfo> list7 = ViewBag.List7;
+
+    string videoContent = ViewBag.VideoContent;
+}
+
+
+@section scripts{
+    <script src="@wowTvScript/Finance/China/Index.js?date=20171012160000"></script>
+}
+@**@
+<!-- Content Area -->
+<div class="col2">
+    <div class="contain-cols">
+        <h2 class="title">뉴스</h2>
+        <div class="tab-type2">
+            <ul class="col4">
+                <li class="on"><a href="#none" onclick="return China_Index.BindData(this, 'Total');">종합</a></li>
+                <li><a href="#none" onclick="return China_Index.BindData(this, 'Market');">시황</a></li>
+                <li><a href="#none" onclick="return China_Index.BindData(this, 'Event');">종목</a></li>
+                <li><a href="#none" onclick="return China_Index.BindData(this, 'Network');">경제망뷰</a></li>
+            </ul>
+        </div>
+        <!-- 게시물 목록 -->
+        <div class="list-type-topic1">
+            <ul id="ulTotal">
+                @foreach (var item in list1)
+                {
+                    <li><a href='http://hkchina.wowtv.co.kr/@("@")page/newsTotal.asp?p_market=SH&b_idx=@item.NewsNO'>@item.Title</a><span class="date">@item.MakeDT.Substring(0, 10)</span></li>
+                }
+            </ul>
+            <ul id="ulMarket" style="display:none;">
+                @foreach (var item in list2)
+                {
+                    <li><a href='http://hkchina.wowtv.co.kr/@("@")page/newsTotal.asp?p_market=SH&b_idx=@item.NewsNO'>@item.Title</a><span class="date">@item.MakeDT.Substring(0, 10)</span></li>
+                }
+            </ul>
+            <ul id="ulEvent" style="display:none;">
+                @foreach (var item in list3)
+                {
+                    <li>
+                        <a href='http://hkchina.wowtv.co.kr/@("@")page/newsTotal.asp?p_market=SH&b_idx=@item.NewsNO'>@item.Title</a>
+                        <span class="date">@item.MakeDT.Substring(0, 10)</span>
+                    </li>
+                }
+            </ul>
+            <ul id="ulNetwork" style="display:none;">
+                @foreach (var item in list4)
+                {
+                    <li><a href='http://hkchina.wowtv.co.kr/@("@")page/newsTotal.asp?p_market=SH&b_idx=@item.NewsNO'>@item.Title</a><span class="date">@item.MakeDT.Substring(0, 10)</span></li>
+                }
+            </ul>
+        </div>
+        <!-- //게시물 목록 -->
+
+        <span class="btn-moreview" style="right:25px"><a href='http://hkchina.wowtv.co.kr/@("@")page/newsTotal.asp?p_market=SH'>더 보기</a></span>
+    </div>
+    <div class="contain-cols">
+        <h2 class="title">관심주</h2>
+        <div class="tab-type2">
+            <ul class="col2">
+                <li class="on"><a href="#none" onclick="return China_Index.BindData(this, 'Attention');">경제망 관심주</a></li>
+                <li><a href="#none" onclick="return China_Index.BindData(this, 'Enterprise');">경제망 기업분석</a></li>
+            </ul>
+        </div>
+        <!-- 게시물 목록 -->
+        <div class="list-type-topic1">
+            <ul id="ulAttention">
+                @foreach (var item in list5)
+                {
+                    <li><a href="http://hkchina.wowtv.co.kr/@("@")page/eventView.asp?TICKER=@item.StockCode"> <span class="code">@item.StockCode</span> @item.Title</a><span class="category">@item.StockNM</span></li>
+                }
+            </ul>
+            <ul id="ulEnterprise" style="display:none;">
+                @foreach (var item in list6)
+                {
+                    <li><a href="http://hkchina.wowtv.co.kr/@("@")page/eventView.asp?TICKER=@item.StockCode"> <span class="code">@item.StockCode</span> @item.Title</a><span class="category">@item.StockNM</span></li>
+                }
+            </ul>
+        </div>
+        <!-- //게시물 목록 -->
+        <span class="btn-moreview"><a href="http://hkchina.wowtv.co.kr/@("@")page/issueList.asp">더 보기</a></span>
+    </div>
+</div>
+
+<hr class="division5 no-border">
+
+<div class="col2">
+    <div class="contain-cols">
+        <h2 class="title">오늘의 리포트</h2>
+        @if (list7.Count > 0)
+        {
+        <p class="text-headline-topic"><a href="http://hkchina.wowtv.co.kr/@("@")page/analysisReport.asp?p_market=SH&b_idx=@list7.First().NewsNO">@list7.First().Title</a></p>
+        }
+        <!-- 게시물 목록 -->
+        <div class="list-type-topic1">
+            <ul>
+                @foreach (var item in list7)
+                {
+                    <li><a href="http://hkchina.wowtv.co.kr/@("@")page/analysisReport.asp?p_market=SH&b_idx=@item.NewsNO">@item.Title</a></li>
+                }
+            </ul>
+        </div>
+        <!-- //게시물 목록 -->
+        <span class="btn-moreview" style="right:25px"><a href="http://hkchina.wowtv.co.kr/@("@")page/analysisReport.asp">더 보기</a></span>
+    </div>
+    <div class="contain-cols">
+        <h2 class="title">중국경제망 이슈</h2>
+        <!-- 영상링크 블록 -->
+        @*<div class="box-movie big" > 단위테스트 요청으로 아래 div로 대체 class 값 제거*@
+        <div class="">
+            <iframe width="575" height="370" src="https://www.youtube.com/embed/@videoContent" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+        <!-- 영상링크 블록 -->
+    </div>
+</div>
+
+

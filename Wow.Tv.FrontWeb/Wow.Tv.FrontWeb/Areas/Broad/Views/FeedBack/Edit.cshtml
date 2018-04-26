@@ -1,0 +1,141 @@
+﻿@using Wow.Tv.Middle.Model.Db49.wowtv
+
+@model NTB_BOARD_CONTENT
+
+@{
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string uploadWebPath = AppState["UploadWebPath"].ToString();
+}
+
+<script>
+    var boardContentSeq = "@Model.BOARD_CONTENT_SEQ";
+    var commonCode = "@Model.COMMON_CODE";
+</script>
+
+
+<script src="@wowTvScript/Broad/FeedBack/Edit.js?date=20171106171000"></script>
+
+
+
+<!-- Content Area -->
+<div class="contain-content">
+    <!-- 좌측 영역 -->
+    <div class="left-section">
+
+        <form id="frmSearch">
+            <input type="hidden" id="seq" name="seq" value="@ViewBag.Seq" />
+            <input type="hidden" id="SearchType" name="SearchType" value="@ViewBag.Condition.SearchType" />
+            <input type="hidden" id="SearchText" name="SearchText" value="@ViewBag.Condition.SearchText" />
+            <input type="hidden" id="pageSize" name="pageSize" value="@ViewBag.Condition.PageSize" />
+            <input type="hidden" id="currentIndex" name="currentIndex" value="@ViewBag.Condition.CurrentIndex" />
+            <input type="hidden" name="CurrentMenuSeq" id="hidFrontMenuSeq" value="@ViewBag.Condition.CurrentMenuSeq" />
+        </form>
+
+        <div class="list-type2">
+            <ul>
+                <li>회원님의 기본정보가 틀린 경우 마이페이지 &gt; 회원정보수정에서 변경하시기 바랍니다. <span class="btn-type4"><button onclick="window.open('http://member.wowtv.co.kr/Info/InfoEditAuth?returnurl=');">회원정보 수정하기</button></span></li>
+            </ul>
+        </div>
+
+        <p class="top-notice type2">* 표시는 필수 입력입니다.</p>
+
+
+        @using (Html.BeginForm("FileUpdate", "FeedBack", FormMethod.Post, new { id = "frmSave" }))
+        {
+            var txtContent = Model.CONTENT.Replace("<br>", "\r\n");
+            <input type="hidden" name="COMMON_CODE" value="@Model.COMMON_CODE" />
+            <input type="hidden" id="BOARD_SEQ" name="BOARD_SEQ" value="@ViewBag.BoradInfo.BOARD_SEQ" />
+            <input type="hidden" id="BOARD_CONTENT_SEQ" name="BOARD_CONTENT_SEQ" value="@ViewBag.Condition.BOARD_CONTENT_SEQ" />
+
+
+    <!-- // table list -->
+            <div class="table-type1 list">
+                <table>
+                    <colgroup>
+                        <col width="20%">
+                        <col width="auto">
+                    </colgroup>
+                    <tbody>
+                        @*<tr>
+                            <th class="text">
+                                <label for="label01">프로그램<span>*</span></label>
+                            </th>
+                            <td class="text">
+                                <select class="form-control" name="IngYn" id="cboIngYn">
+                                    <option value="Y" @(ViewBag.IngYn == "Y" ? "selected" : "")>방영중</option>
+                                    <option value="N" @(ViewBag.IngYn == "N" ? "selected" : "")>종영</option>
+                                </select>
+                                <select class="form-control" id="cboPRG_CD" name="COMMON_CODE"></select>
+                            </td>
+                        </tr>*@
+                        <tr>
+                            <th class="text">작성자</th>
+                            <td class="text">
+                                <p>
+                                    @LoginHandler.CurrentLoginUser.NickName @*<span>@LoginHandler.CurrentLoginUser.UserId</span>*@
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text">
+                                <label for="label02">제목<span>*</span></label>
+                            </th>
+                            <td class="text"><input type="text" style="width:100%" id="TITLE" name="TITLE" value="@Model.TITLE"></td>
+                        </tr>
+                        <tr>
+                            <th class="text vt">내용</th>
+                            <td>
+                                <!-- write area -->
+                                <div class="writer-box">
+                                    <textarea style="height:180px;" id="txtContent" placeholder="회원님의 개인정보보호를 위해 휴대폰번호, 이메일 등의 민감한 개인정보는 입력하지 마세요.">@txtContent</textarea>
+                                    <textarea name="CONTENT" id="hidContent" style="display:none;"></textarea>
+                                </div>
+                                <!-- // write area -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text vt">첨부파일</th>
+                            <td class="text">
+                                <!-- input file -->
+                                <div class="file-box">
+                                    @if (Model.AttachFileList != null)
+                                    {
+                                        <input type="text" id="fileText" class="file-name" readonly="readonly" style="width: 330px;" value="@(Model.AttachFileList.Count != 0 ? Model.AttachFileList[0].USER_UPLOAD_FILE_NAME : "")">
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="fileText" class="file-name" readonly="readonly" style="width: 330px;" value="">
+                                    }
+                                    <label for="uploadBtn" class="btn-file">찾아보기</label>
+                                    <input type="file" id="uploadBtn" name="files" class="upload-btn">
+                                </div>
+                                <!-- // input file -->
+                                <p class="notice-txt font-color03">※ MS-WORD, HWP 문서 파일, JPG, GIF 이미지, 동영상 파일만 업로드 가능 합니다.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+    <!-- btn area -->
+            <div class="box-button">
+                <div class="inner-right">
+                    @if (LoginHandler.IsLogin)
+                    {
+                        <span class="btn-type1"><button type="button" id="btnModify">등록</button></span>
+                    }
+                    <span class="btn-type2"><button type="button" id="btnList">취소하기</button></span>
+                </div>
+            </div>
+    <!-- // btn area -->
+        }
+
+
+    </div>
+    <!-- 우측 영역 -->
+    <div class="right-section" id="divBanner">
+    </div>
+    <!-- // 우측 영역 -->
+</div>

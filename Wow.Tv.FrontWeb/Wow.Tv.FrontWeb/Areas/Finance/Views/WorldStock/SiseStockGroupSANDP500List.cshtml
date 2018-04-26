@@ -1,0 +1,58 @@
+﻿@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+@model ListModel<usp_web_usa_stock_group_Result>
+@{
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    Layout = null;
+}
+<script>
+    var totalDataCount_enrollmentSANDP500 = "@Model.TotalDataCount";
+</script>
+<script src="@wowTvScript/Finance/finance_common.js"></script>
+<script src="@wowTvScript/Finance/WorldStock/SiseEnrollmentSANDP500List.js"></script>
+<!-- Table -->
+<div class="table-type1 row5">
+    <table id="enrollmentStockTbl">
+        <caption></caption>
+        <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>종목명<span class="btn-type-sort sort-up index0"></span></th>
+                <th>현재가<span class="btn-type-sort sort-up index1"></span></th>
+                <th>전일대비<span class="btn-type-sort sort-up index2"></span></th>
+                <th>등락률<span class="btn-type-sort sort-up index3"></span></th>
+                <th>거래량<span class="btn-type-sort sort-up index4"></span></th>
+                <th>시가총액(백만)<span class="btn-type-sort sort-up index5"></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ListData)
+            {
+                <tr>
+                    <td class="text">@item.knam</td>
+                    <td class="number">@Html.PublishPriceFormat(item.ChgType, item.Price)</td>
+                    <td class="number">@Html.PublishChgPriceFormat(item.ChgType, item.ChgPrice)</td>
+                    <td class="number">@Html.PublishChgRateFormat(item.ChgType, item.ChgRate)</td>
+                    <td class="number">@Html.CommaFormat(item.Volume)</td>
+                    <td class="number">@item.OpenPrice</td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
+<!-- //Table -->
+<!-- Paginate -->
+<div class="box-paginate" id="divPaging_enrollmentSANDP500">
+
+</div>
+<!-- //Paginate -->

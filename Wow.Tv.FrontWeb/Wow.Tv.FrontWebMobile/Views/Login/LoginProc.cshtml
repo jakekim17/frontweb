@@ -1,0 +1,147 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@{
+    Layout = "/Views/Shared/_LayoutNone.cshtml";
+
+    string rootUrl = AppState["RootUrl"].ToString();
+    string userId = ViewBag.LoginId;
+    bool isSuccess = ViewBag.IsSuccess;
+    string shareUserId = ViewBag.ShareUserId;
+    string sharePassword = ViewBag.SharePassword;
+    string returnMessage = ViewBag.ReturnMessage;
+    string returnUrl = ViewBag.ReturnUrl;
+    string historyBack = ViewBag.HistoryBack == true ? "Y" : "N";
+    string loginFrom = ((int)((LoginDomain)ViewBag.LoginFrom)).ToString();
+
+    string domainUrlFront = System.Configuration.ConfigurationManager.AppSettings["DomainUrlFront"];
+    string domainUrlHelp = System.Configuration.ConfigurationManager.AppSettings["DomainUrlHelp"];
+    string domainUrlCompany = System.Configuration.ConfigurationManager.AppSettings["DomainUrlCompany"];
+    string domainUrlProvision = System.Configuration.ConfigurationManager.AppSettings["DomainUrlProvision"];
+    string domainUrlMyPage = System.Configuration.ConfigurationManager.AppSettings["DomainUrlMyPage"];
+}
+
+@if (isSuccess == true)
+{
+    <script type="text/javascript">
+
+        var iframeWowtvLoaded = false;
+        var iframeWowstarLoaded = false;
+        var iframeWownetLoaded = false;
+        var iframeWowfaLoaded = false;
+        var iframeFrontLoaded = false;
+        var iframeHelpLoaded = false;
+        var iframeCompanyLoaded = false;
+        var iframeProvisionLoaded = false;
+        var iframeMyPageLoaded = false;
+
+        var loadedDate = null;
+
+        $(window).load(function () {
+            loadedDate = new Date();
+            setTimeout("CheckIFrame();", 500);
+        });
+
+        function CheckIFrame () {
+            var currentDate = new Date();
+            var diffSeconds = currentDate.getSeconds() - loadedDate.getSeconds();
+
+            //$("#logDiv").append("currentDate.getSeconds(): " + currentDate.getSeconds() + ", loadedDate.getSeconds(): " + loadedDate.getSeconds() + "<br />");
+
+            if (iframeWowtvLoaded == true && iframeWowstarLoaded == true && iframeWownetLoaded == true &&
+                iframeWowfaLoaded == true && iframeFrontLoaded == true && iframeHelpLoaded == true &&
+                iframeCompanyLoaded == true && iframeProvisionLoaded == true && iframeMyPageLoaded == true) {
+                //$("#logDiv").append("IFrame Load Completed<br />");
+                location.href = "@returnUrl";
+            }
+            else if (diffSeconds > 3 || diffSeconds < -3) {
+                //$("#logDiv").append("diffSeconds: " + diffSeconds + "<br />");
+                location.href = "@returnUrl";
+            }
+            else {
+                //$("#logDiv").append("CheckIFrame();<br />");
+                setTimeout("CheckIFrame();", 500);
+            }
+        }
+
+        function iframeWowtv_load () {
+            iframeWowtvLoaded = true;
+            //$("#logDiv").append("iframeWowtv loaded<br />");
+        }
+        function iframeWowstar_load () {
+            iframeWowstarLoaded = true;
+            //$("#logDiv").append("iframeWowstar loaded<br />");
+        }
+        function iframeWownet_load () {
+            iframeWownetLoaded = true;
+            //$("#logDiv").append("iframeWownet loaded<br />");
+        }
+        function iframeWowfa_load () {
+            iframeWowfaLoaded = true;
+            //$("#logDiv").append("iframeWowfa loaded<br />");
+        }
+        function iframeFront_load () {
+            iframeFrontLoaded = true;
+            //$("#logDiv").append("iframeFront loaded<br />");
+        }
+        function iframeHelp_load () {
+            iframeHelpLoaded = true;
+            //$("#logDiv").append("iframeHelp loaded<br />");
+        }
+        function iframeCompany_load () {
+            iframeCompanyLoaded = true;
+            //$("#logDiv").append("iframeCompany loaded<br />");
+        }
+        function iframeProvision_load () {
+            iframeProvisionLoaded = true;
+            //$("#logDiv").append("iframeProvision loaded<br />");
+        }
+        function iframeMyPage_load () {
+            iframeMyPageLoaded = true;
+            //$("#logDiv").append("iframeMyPage loaded<br />");
+        }
+    </script>
+    @*<div id="logDiv"></div>*@
+    <!-- 와우티비 -->
+    <iframe id="iframeWowtv" onload="iframeWowtv_load();" src="https://www.wowtv.co.kr:8443/member/login/login_proc_net.asp?p1=@sharePassword&p2=@shareUserId" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+    <!-- 와우스타 -->
+    <iframe id="iframeWowstar" onload="iframeWowstar_load()" src="https://www.wowstar.co.kr:8443/member/outLogin.asp?p1=@sharePassword&p2=@shareUserId" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+    <!-- 와우넷 -->
+    <iframe id="iframeWownet" onload="iframeWownet_load()" src="https://www.wownet.co.kr/member/login/login_proc_tv.asp?p1=@sharePassword&p2=@shareUserId" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+    <!-- 와우파 -->
+    <iframe id="iframeWowfa" onload="iframeWowfa_load()" src="https://www.wowfa.co.kr/member/login_proc_wowfaCookie.asp?p1=@sharePassword&p2=@shareUserId" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+    <!-- Front -->
+    <iframe id="iframeFront" onload="iframeFront_load()" src="@domainUrlFront/Login/LoginProcSSO?p1=@sharePassword&p2=@shareUserId&loginfrom=@loginFrom" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+    <!-- Help -->
+    <iframe id="iframeHelp" onload="iframeHelp_load()" src="@domainUrlHelp/Login/LoginProcSSO?p1=@sharePassword&p2=@shareUserId&loginfrom=@loginFrom" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+    <!-- Company -->
+    <iframe id="iframeCompany" onload="iframeCompany_load()" src="@domainUrlCompany/Login/LoginProcSSO?p1=@sharePassword&p2=@shareUserId&loginfrom=@loginFrom" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+    <!-- Provision -->
+    <iframe id="iframeProvision" onload="iframeProvision_load()" src="@domainUrlProvision/Login/LoginProcSSO?p1=@sharePassword&p2=@shareUserId&loginfrom=@loginFrom" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+    <!-- MyPage -->
+    <iframe id="iframeMyPage" onload="iframeMyPage_load()" src="@domainUrlMyPage/Login/LoginProcSSO?p1=@sharePassword&p2=@shareUserId&loginfrom=@loginFrom" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+}
+else
+{
+    <script type="text/javascript">
+        $(window).load(function () {
+            if ("@returnMessage" != "") {
+                alert("@returnMessage");
+            }
+
+            if ("@returnUrl" != "") {
+                location.href = "@returnUrl";
+            }
+            else if ("@historyBack" == "Y") {
+                history.back();
+            }
+
+        });
+    </script>
+}

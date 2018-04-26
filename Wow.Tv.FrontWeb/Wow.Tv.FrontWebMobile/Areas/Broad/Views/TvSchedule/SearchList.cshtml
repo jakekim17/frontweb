@@ -1,0 +1,55 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db90.DNRS
+
+@model List<T_RUNDOWN>
+
+@{
+    Layout = null;
+    
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    string currentMenuSeq = Request["menuSeq"];
+}
+
+
+<div class="table-type1 type03">
+    <table>
+        <caption>날짜별 편성표 상세 테이블</caption>
+        <colgroup>
+            <col style="width:55px">
+            <col style="width:auto">
+            <col style="width:55px">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>시간</th>
+                <th class="txt-l">프로그램명</th>
+                <th>진행</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.RUN_START</td>
+                <td class="txt-l" onclick="return TvScheduleIndex.GoProgram('@item.PRG_CD');">
+                    @item.PRG_NM
+                    <div class="text-icon-area">
+                        @if (item.IsFirst == true)
+                        {
+                            <span class="text-icon type02">첫방송</span>
+                        }
+                        @if (item.IsRenewal == true)
+                        {
+                            <span class="text-icon">개편</span>
+                        }
+                    </div>
+                </td>
+                <td>@item.ANC1_NM @item.ANC2_NM</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

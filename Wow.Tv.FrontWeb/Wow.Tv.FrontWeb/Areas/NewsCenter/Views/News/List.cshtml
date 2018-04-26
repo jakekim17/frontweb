@@ -1,0 +1,72 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model  ListModel<NUP_NEWS_SECTION_SELECT_Result>
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    Layout = null;
+}
+<!-- News Block -->
+@if (Model.TotalDataCount > 0)
+{
+    foreach (var item in Model.ListData)
+    {
+        <div class="article-news-list">
+            <div class="contian-news photo-right">
+                @if (!string.IsNullOrEmpty(item.IMAGE_FILE))
+                {
+                    <div class="photo-news">
+                        <img src="@WowExtensionMethod.NewsThumbnailPath("11S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11S")'" alt="">
+                        @if (item.VOD_NUM != null && item.VOD_NUM > 0)
+                        {
+                            <span class="icon-play medium"></span>
+                        }
+                    </div>
+                }
+                <a href="javascript:NewsCommon.GoNewsView('@item.ARTICLEID')">
+                    <p class="title-text">@item.TITLE <span class="date">@item.ARTDATE.Value.ToString("yyyy-MM-dd HH:mm")</span></p>
+                    <p class="main-text">@WowExtensionMethod.NewsListContentCut(MvcHtmlString.Create(item.CONTENTS_CUT).ToString(), string.IsNullOrEmpty(item.IMAGE_FILE))</p>
+                </a>
+                <div class="footer-text">
+                    <p class="category-text">
+                        @ViewBag.topMenuName &gt; @item.SECTION_NAME
+                    </p>
+                    <span class="division-bar"></span>
+                    <p class="reporter">
+                        @item.COMP_NAME
+                    </p>
+                    @if (!string.IsNullOrEmpty(item.TAG))
+                    {
+                        <span class="division-bar"></span>
+                        <div class="tags">
+                            @MvcHtmlString.Create(WowExtensionMethod.NewsHashTag(item.TAG, 3, ""))
+                        </div>
+                    }
+                    else
+                    {
+                        
+                    }
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="article-news-list">
+        <div class="contian-news">
+            <div class="contian-news" style="vertical-align:middle;text-align:center;">
+                결과가 없습니다.
+            </div>
+        </div>
+    </div>
+}
+<!-- //News Block -->
+<script>
+    $("#totalDataCount").val("@Model.TotalDataCount");
+</script>
+<script src="@wowTvScript/NewsCenter/News/List.js"></script>

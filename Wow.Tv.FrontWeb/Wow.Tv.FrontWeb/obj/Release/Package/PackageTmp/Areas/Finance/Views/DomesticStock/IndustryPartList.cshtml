@@ -1,0 +1,284 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@model ListModel<usp_GetIndustryState_Result>
+@{
+    ViewBag.Title = "IndustryPartList";
+    Layout = null;
+    int indexNum;
+
+    IndustryCondition condition = (IndustryCondition)ViewBag.IndustryCondition;
+
+    condition.MenuSeq = Convert.ToInt32(Request["menuSeq"]);
+}
+
+<script>
+    $(document).ready(function () {
+        //alert($('.securityChart').attr("class"));
+        $("#totalIndustryStockTbl .btn-type-sort").click(function () {
+            //console.log("테스트");
+            DomesticStockIndustryPart.SortColumn($("#totalIndustryStockTbl"), $("#totalIndustryStockTbl .btn-type-sort"));
+            //return false;
+        });
+        CommonJs.TableTop3AddClass($("#tableSecurity td"));
+        CommonJs.TableTop3AddClass($("#tableForeigner td"));
+        CommonJs.TableTop3AddClass($("#tablePersonal td"));
+        //CommonJs.TableTop3AddClass($("#totalIndustryStockTbl td"));
+    });
+</script>
+@if (condition.ViewMode == true)
+{
+    <!-- 종목비교 -->
+    <div class="contain-diff-stock col3">
+        <!-- 종목 -->
+        <div class="box-detail-graph">
+            <h2 class="title">기관 매매 현황</h2>
+            <div class="inner">
+                <!-- Graph Table -->
+                <div class="box-chart-type1">
+                    <div class="securityChart"></div>
+                </div>
+                <!-- //Graph Table -->
+                <div class="table-type3 rank">
+                    <table id="tableSecurity">
+                        <tr>
+                            <th class="em">상위</th>
+                            <th>업종</th>
+                            <th>매매</th>
+                        </tr>
+                        @{ 
+                            indexNum = 1;
+                        }
+                        @foreach (var item in Model.ListData.OrderByDescending(m => m.Security).Select(m => new { m.PartName, m.PartCode, m.Security }))
+                        {
+                            if (item.Security != 0)
+                            {
+
+                                <tr>
+                                    <td>@indexNum</td>
+                                    <td>
+                                        @Html.ActionLink(item.PartName, "IndustryPartDetail", "DomesticStock", new
+                                   {
+                                       Market = condition.Market,
+                                       OrderBy = condition.OrderBy,
+                                       TargetDt = condition.TargetDT,
+                                       PartCode = item.PartCode,
+                                       PartName = item.PartName,
+                                       MenuSeq = condition.MenuSeq
+                                   }, null)
+                                    </td>
+                                    <td>@Html.CommaFormat(item.Security)</td>
+                                </tr>
+                                
+                            }
+                            @*else
+                            {
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                            }*@
+                            indexNum += 1;
+                        }
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <!-- //종목 -->
+        <!-- 종목 -->
+        <div class="box-detail-graph">
+            <h2 class="title">외국인 매매 현황</h2>
+            <div class="inner">
+                <!-- Graph Table -->
+                <div class="box-chart-type1">
+                    <div class="foreignerChart"></div>
+                </div>
+                <!-- //Graph Table -->
+                <div class="table-type3 rank">
+                    <table id="tableForeigner">
+                        <tr>
+                            <th class="em">상위</th>
+                            <th>업종</th>
+                            <th>매매</th>
+                        </tr>
+                        @{
+                            indexNum = 1;
+                        }
+                        @foreach (var item in Model.ListData.OrderByDescending(m => m.Foreigner).Select(m => new { m.PartName, m.PartCode, m.Foreigner }))
+                        {
+                            if (item.Foreigner != 0)
+                            {
+
+                                <tr>
+                                    <td>@indexNum</td>
+                                    <td>
+                                        @Html.ActionLink(item.PartName, "IndustryPartDetail", "DomesticStock", new
+                                   {
+                                       Market = condition.Market,
+                                       OrderBy = condition.OrderBy,
+                                       TargetDt = condition.TargetDT,
+                                       PartCode = item.PartCode,
+                                       PartName = item.PartName,
+                                       MenuSeq = condition.MenuSeq
+                                   }, null)
+                                    </td>
+                                    <td>@Html.CommaFormat(item.Foreigner)</td>
+                                </tr>
+
+                            }
+                            @*else
+                            {
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                            }*@
+                            indexNum += 1;
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- //종목 -->
+        <!-- 종목 -->
+        <div class="box-detail-graph">
+            <h2 class="title">개인 매매현황</h2>
+            <div class="inner">
+                <!-- Graph Table -->
+                <div class="box-chart-type1">
+                    <div class="personalChart"></div>
+                </div>
+                <!-- //Graph Table -->
+                <div class="table-type3 rank">
+                    <table id="tablePersonal">
+                        <tr>
+                            <th class="em">상위</th>
+                            <th>업종</th>
+                            <th>매매</th>
+                        </tr>
+                        @{
+                            indexNum = 1;
+                        }
+                        @foreach (var item in Model.ListData.OrderByDescending(m => m.Personal).Select(m => new { m.PartName, m.PartCode, m.Personal }))
+                        {
+                            if (item.Personal != 0)
+                            {
+
+                                <tr>
+                                    <td>@indexNum</td>
+                                    <td>
+                                        @Html.ActionLink(item.PartName, "IndustryPartDetail", "DomesticStock", new
+                                   {
+                                       Market = condition.Market,
+                                       OrderBy = condition.OrderBy,
+                                       TargetDt = condition.TargetDT,
+                                       PartCode = item.PartCode,
+                                       PartName = item.PartName,
+                                       MenuSeq = condition.MenuSeq
+                                   }, null)
+                                    </td>
+                                    <td>@Html.CommaFormat(item.Personal)</td>
+                                </tr>
+
+                            }
+                            @*else
+                            {
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                            }*@
+                            indexNum += 1;
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- //종목 -->
+</div>
+<!-- //종목비교 -->
+}
+else
+{
+<!-- 종목비교 -->
+        <div class="contain-diff-stock col3">
+            <!-- 종목 -->
+            <div class="box-detail-graph">
+                <h2 class="title">기관 매매 현황</h2>
+                <div class="inner">
+                    <!-- Graph Table -->
+                    <div class="box-chart-type1">
+                        <div class="securityChart" style="width: 100%; height: 198.81px;"></div>
+                    </div>
+                    <!-- //Graph Table -->
+                </div>
+            </div>
+            <!-- //종목 -->
+            <!-- 종목 -->
+            <div class="box-detail-graph">
+                <h2 class="title">외국인 매매현황</h2>
+                <div class="inner">
+                    <!-- Graph Table -->
+                    <div class="box-chart-type1">
+                        <div class="foreignerChart"></div>
+                    </div>
+                    <!-- //Graph Table -->
+                </div>
+            </div>
+            <!-- //종목 -->
+            <!-- 종목 -->
+            <div class="box-detail-graph">
+                <h2 class="title">개인 매매현황</h2>
+                <div class="inner">
+                    <!-- Graph Table -->
+                    <div class="box-chart-type1">
+                        <div class="personalChart"></div>
+                    </div>
+                    <!-- //Graph Table -->
+                </div>
+            </div>
+            <!-- //종목 -->
+        </div>
+        <!-- //종목비교 -->
+
+        <hr class="division5 no-border" >
+
+        <h2 class="title">업종별 매매현황</h2>
+
+        <div class="table-type1">
+            <table id="totalIndustryStockTbl">
+            <colgroup>
+            <col >
+            <col width="20%" >
+            <col width="20%" >
+            <col width="20%" >
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>업종<span class="btn-type-sort sort-up index0" style="display:none;"></span></th>
+                    <th>기관<span class="btn-type-sort sort-up index1"></span></th>
+                    <th>외국인<span class="btn-type-sort sort-up index2"></span></th>
+                    <th>개인<span class="btn-type-sort sort-up index3"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListData.OrderByDescending(m => m.Security))
+                {
+                <tr>
+                    <td>@Html.ActionLink(item.PartName, "IndustryPartDetail", "DomesticStock", new
+                   {
+                       Market = condition.Market,
+                       OrderBy = condition.OrderBy,
+                       TargetDt = condition.TargetDT,
+                       PartCode = item.PartCode,
+                       PartName = item.PartName,
+                       MenuSeq = condition.MenuSeq
+                   }, null)</td>
+                    <td class="number"><span class="data-normal">@Html.CommaFormat(item.Security)</span></td>
+                    <td class="number"><span class="data-normal">@Html.CommaFormat(item.Foreigner)</span></td>
+                    <td class="number"><span class="data-normal">@Html.CommaFormat(item.Personal)</span></td>
+                </tr>
+                }
+            </tbody>
+            </table>
+        </div>
+}                                                        

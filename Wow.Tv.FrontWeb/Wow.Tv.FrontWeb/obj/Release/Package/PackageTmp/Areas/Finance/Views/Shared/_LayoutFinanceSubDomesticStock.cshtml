@@ -1,0 +1,69 @@
+﻿@{
+    //string rootUrl = AppState["RootUrl"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string AssetsUrl = AppState["AssetsUrl"].ToString();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국경제TV</title>
+    
+    @Scripts.Render("~/bundles/jquery")
+    
+    @Scripts.Render("~/bundles/raphael")
+    @Scripts.Render("~/bundles/webponentcommon")
+    @Scripts.Render("~/bundles/webponentvisual")
+    @Scripts.Render("~/bundles/chart")
+    @Scripts.Render("~/bundles/chartstyle")
+
+    <link rel="stylesheet" href="@AssetsUrl/css/common.css" />
+    @if (IsSectionDefined("styles"))
+    {
+        @RenderSection("styles", false)
+    }
+    else
+    {
+
+    }
+
+    <script src="@wowTvScript/paging.js"></script>
+
+    @RenderSection("scripts", required: false)
+    <script src="@AssetsUrl/js/lib.js"></script>
+    <script src="@AssetsUrl/js/design.js"></script>
+</head>
+<body class="finance">
+    <div class="wrap">
+        <!-- Side Bar Area -->
+        <div class="contain-aside">
+            <h2 class="title"><span>국내증시</span></h2>
+            @Html.Partial("_SubDomesticLeft")
+        </div>
+        <!-- //Side Bar Area -->
+        <!-- Content Area -->
+        <div class="contain-content">
+            <!-- Page Location -->
+            @Html.Partial("_SubDomesticLocation")
+            <!-- //Page Location -->
+            <!-- Content Area -->
+            @RenderBody()
+            <!-- Content Area -->
+
+        </div>
+        <!-- //Content Area -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer"></footer>
+    <!-- //Footer -->
+
+    <div>
+
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    string broadWatchNumber = ViewBag.BroadWatchNumber;
+    string programCode = ViewBag.ProgramCode;
+}
+
+
+
+
+<form id="frmSearch">
+    <input type="hidden" id="BroadWatch_hidProgramCode" name="programCode" value="@programCode" />
+    <input type="hidden" id="BroadWatch_hidBroadWatchNumber" name="broadWatchNumber" value="@broadWatchNumber" />
+
+    <input type="hidden" name="currentIndex" value="0" />
+    <input type="hidden" name="pageSize" value="4" />
+</form>
+
+
+<!-- 프로그램홈 일반형 목록 start -->
+<div class="section-area pt15">
+    <!-- list-media -->
+    <div class="list-media">
+        <div class="list-media-main" id="divPlayInfo">
+        </div>
+        <ul id="divList"></ul>
+    </div>
+    <!-- //list-media -->
+</div>
+<!--// 프로그램홈 일반형 목록 end -->
+<!-- paging start -->
+<div id="SearchList_divPaging"></div>
+<!--// paging end -->
+
+
+<script src="@wowTvScript/Broad/BroadWatch/Index.js?date=20171018170000"></script>
+
+
+

@@ -1,0 +1,167 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@using Wow.Tv.Middle.Model.Db22.stock
+@model StockInfoModel<usp_GetSiseCurrent_Result, usp_getSiseMainmergecode_Result>
+
+@{
+    ViewBag.Title = "선물";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+}
+
+@section styles{
+    <style>
+    </style>
+}
+@section scripts{
+
+<script src="@wowTvScript/Finance/webponent/raphael.js"></script>
+<script src="@wowTvScript/Finance/webponent/webponent.comm.common.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.style.js"></script>
+<script src="@wowTvScript/Finance/Charts/stockChart.js"></script>
+<script src="@wowTvScript/Finance/DomesticStock/Fut.js"></script>
+    @*@Scripts.Render("~/bundles/raphael")
+    @Scripts.Render("~/bundles/webponentcommon")
+    @Scripts.Render("~/bundles/webponentvisual")
+    @Scripts.Render("~/bundles/chart")
+    @Scripts.Render("~/bundles/chartstyle")*@
+
+    
+    <script>
+
+    //차트에서 사용할 스크립트
+    $(document).ready(function () {
+        FinanceChartJs.CurrentDbFutChartData($(".chart-view"));     
+
+        $(window).on("orientationchange", function () {
+            if (window.orientation == 0)    //Portait
+            {
+                $(".chart-view").empty();
+                setInterval(FinanceChartJs.CurrentDbFutChartData($(".chart-view")), 1 * 300);
+            }
+            else {
+                $(".chart-view").empty();
+                setInterval(FinanceChartJs.CurrentDbFutChartData($(".chart-view")), 1 * 300);
+            }
+        });
+    });
+    </script>
+}
+
+<!-- title area -->
+<div class="section-area">
+    <h2>선물</h2>
+</div>
+<!-- // title area -->
+<!-- stock business -->
+<div class="stock-index">
+    <div class="box">
+        <dl class="stock-area">
+            <dt>선물</dt>
+            @Html.PublishPriceMiddleFormat(Model.StockInfo.ChgType, Model.StockInfo.Price)
+        </dl>
+        <ul class="stock-box">
+            <li>@Html.PublishChgPriceMiddleFormat(Model.StockInfo.ChgType, Model.StockInfo.ChgPrice)</li>
+            <li>@Html.PublishUpDownSymbolPChangeFormat(Model.StockInfo.ChgType, Model.StockInfo.PChange)</li>
+        </ul>
+    </div>
+    <!-- 테이블-->
+    <div class="table-type1 type01">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:25%">
+                <col style="width:25%">
+                <col style="width:25%">
+                <col style="width:*">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td class="txt-l">고가</td>
+                    <td class="txt-r"><strong class="num font-color04">@Model.StockInfo.HighPrice</strong></td>
+                    <td class="txt-l">약정수량</td>
+                    <td class="txt-r"><strong class="num">@Html.CommaFormat(Model.StockInfo.TradeVolume)</strong></td>
+                </tr>
+                <tr>
+                    <td class="txt-l">저가</td>
+                    <td class="txt-r"><strong class="num font-color05">@Model.StockInfo.LowPrice</strong></td>
+                    <td class="txt-l">약정대금(백만)</td>
+                    <td class="txt-r"><strong class="num">@Html.CommaFormat(Model.StockInfo.TradeMoney)</strong></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <ul class="box-type-stock">
+                            <li>
+                                <strong class="obj-tit">외국인</strong>
+                                @Html.PublishUpDownIconFormat(@Model.ThemaInfo.Foreigner)
+                            </li>
+                            <li>
+                                <strong class="obj-tit">기관</strong>
+                                @Html.PublishUpDownIconFormat(@Model.ThemaInfo.Security)
+                            </li>
+                            <li>
+                                <strong class="obj-tit">개인</strong>
+                               @Html.PublishUpDownIconFormat(@Model.ThemaInfo.Personal)
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- // 테이블 -->
+
+</div>
+<!-- // stock business -->
+<!-- chart start -->
+<div class="section-area mb20">
+    <div class="box-type-chart">
+        <div class="chart-view" style="height:310px">
+        </div>
+    </div>
+    <div class="time-txt btn-area pr0 mt10">
+        실시간 @Html.MarketTimeStatus()
+        <a href="/Finance/DomesticStock/Fut?MenuSeq=@currentMenuSeq" class="btn type04 small">새로고침<span class="icon reset"></span></a>
+    </div>
+</div>
+<!--// chart end -->
+<!-- tab start -->
+<div class="tab-area">
+    <ul>
+        <li class="on" style="width: 50%;"><a href="javascript:void(0)">시간대별</a></li>
+        <li style="width: 50%;"><a href="javascript:void(0)">일별</a></li>
+    </ul>
+</div>
+<!--// tab end -->
+<form id="frmList_Fut">
+    <input type="hidden" id="pageSize" name="pageSize" value="7" />
+    <input type="hidden" id="currentIndex" name="currentIndex" />
+    <div id="divList">
+
+    </div>
+</form>
+<!-- tab start -->
+<div class="tab-area">
+    <ul id="hpChart">
+        <li class="on" style="width: 33%;"><a href="javascript:DomesticStockFut.GetHpChart('7551','999991');">일봉</a></li>
+        <li style="width: 33%;"><a href="javascript:DomesticStockFut.GetHpChart('7552','999991');">주봉</a></li>
+        <li style="width: 33.6667%;"><a href="javascript:DomesticStockFut.GetHpChart('7553','999991');">월봉</a></li>
+    </ul>
+</div>
+<!--// tab end -->
+<!-- chart start -->
+<div class="section-area mb50">
+    <p class="time-txt btn-area pr0 mt10" id="txtChart">
+    </p>
+    <div class="box-type-chart">
+        <div class="chart-view">
+            <img id="imgChart" alt="chart" style="width:100%;">
+        </div>
+    </div>
+</div>
+<!--// chart end -->
+
+

@@ -1,0 +1,82 @@
+﻿@using Wow.Tv.FrontWeb.Areas.Finance.Helpers;
+
+@{ 
+    Layout = null;
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+}
+<div class="box-top-type1">
+    <div class="inner-right">
+        <p class="text-type-blt1 text-state">총 <span class="emphasize">@Model.Count</span>종목이 검색되었습니다.</p>
+    </div>
+</div>
+
+<div class="table-type1">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>종목명</th>
+                <th>종목코드</th>
+                <th>현재가</th>
+                <th>전일대비</th>
+                <th>등락률</th>
+                <th>거래량</th>
+                <th>검색시간</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.Length > 10)
+                {
+                    double rate = 0.0;
+                    if(Int32.Parse(item[4]) - Int32.Parse(item[5]) != 0)
+                    {
+                        rate = Double.Parse(item[5]) / (Double.Parse(item[4]) - Double.Parse(item[5])) * 100;
+                        rate = Math.Round(rate, 2);
+                    }
+                    var RateStr = rate.ToString();
+                    string stockName = item[10];
+                    //string chgPrice = item[5];
+                    <tr>
+                        <td class="text"><a href="#none" onclick="return BuyingProspects.DomesticStockDetailGo('@DomainUrlFront', '@item[3]')">@stockName.Substring(1, stockName.Length - 1)</a></td>
+                        <td>@item[3]</td>
+                        <td class="number">@String.Format("{0:#,###}", Int32.Parse(item[4]))</td>
+                        @*<td class="number">@Html.PublishUpDownIconFormat2(chgPrice)</td>
+                            <td class="number">@Html.PublishUpDownIconFormat2(chgPrice)</td>*@
+                        @if (Int32.Parse(item[5]) > 0)
+                        {
+                            <td class="number"><span class="data-up icon">@String.Format("{0:#,##0}", Int32.Parse(item[5])).Replace("+", "")</span></td>
+                            <td class="number"><span class="data-up symbol">@RateStr%</span></td>
+                        }
+                        else if(Int32.Parse(item[5]) < 0)
+                        {
+                            <td class="number"><span class="data-down icon">@String.Format("{0:#,##0}", Int32.Parse(item[5])).Replace("-", "")</span></td>
+                            <td class="number"><span class="data-down">@RateStr%</span></td>
+                        }
+                        else
+                        {
+                            <td class="number"><span class="">@item[5]</span></td>
+                            <td class="number"><span class="">0.00</span></td>
+                        }
+
+                        <td class="number">@String.Format("{0:#,###}", Int32.Parse(item[6]))</td>
+                        <td>@item[1].Substring(0, 4)-@item[1].Substring(4, 2)-@item[1].Substring(6, 2) @item[2].Substring(0, 2):@item[2].Substring(2, 2)</td>
+                    </tr>
+                }
+
+            }
+            
+        </tbody>
+    </table>
+</div>

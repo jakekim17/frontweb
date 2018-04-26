@@ -1,0 +1,52 @@
+﻿@using Wow.Tv.FrontWeb.MenuService;
+@using Wow.Tv.Middle.Model.Common;
+@using Wow.Tv.Middle.Model.Db49.wowtv;
+@using Wow.Tv.Middle.Model.Db49.wowtv.Menu;
+
+@model ListModel<NTB_MAIN_MANAGE>
+
+@{
+    Layout = null;
+    
+}
+
+@{
+    MenuServiceClient menuServiceClient = new MenuServiceClient();
+    string currentMenuSeq = Request["menuSeq"];
+    
+    MenuCondition menuCondition = new MenuCondition();
+    menuCondition.ChannelCode = "WowTv";
+    menuCondition.Depth = 1;
+    menuCondition.ActiveYn = "Y";
+    menuCondition.PageSize = -1;
+    var menuList_1 = menuServiceClient.SearchList(menuCondition);
+}
+
+
+<div class="inner">
+    <div class="box-sitemap">
+        @foreach (var item in menuList_1.ListData)
+        {
+            menuCondition.UpMenuSeq = item.MENU_SEQ;
+            menuCondition.Depth = item.DEPTH + 1;
+            var menuList_2 = menuServiceClient.SearchList(menuCondition);
+
+        <dl>
+            <dt><a href="@item.Href" target="@item.LINK_TYPE_CODE">@item.MENU_NAME</a></dt>
+
+            @foreach (var item2 in menuList_2.ListData)
+            {
+            <dd><a href="@item2.Href" target="@item2.LINK_TYPE_CODE">@item2.MENU_NAME</a></dd>
+            }
+        </dl>
+        }
+    </div>
+    <div class="box-adverticement">
+        @foreach (var item in Model.ListData)
+        {
+        <div>
+            <a href="@item.LINK_URL" target="@item.LINK_TYPE"><img src="@item.AttachFile.REAL_WEB_PATH" alt="" style="cursor:pointer;" width="225px" height="100px"></a>
+        </div>
+        }
+    </div>
+</div>

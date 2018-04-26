@@ -1,0 +1,208 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNone.cshtml";
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/tv.css">
+}
+
+@section scripts{
+    <script src="@wowTvScript/Broad/TvMain/ProgramBuy2.js?date=20171018170000"></script>
+}
+
+
+
+<form id="frmSave">
+    <!-- 소개부분 -->
+    <div class="section-area">
+        <h2>구매요청서 작성하기</h2>
+        <div class="list-dotted">
+            <ul>
+                <li>기업으로 구매를 원하시는 분은 하단에 맞게 작성해 주시고  사업자 사본은 스캔 받은 사본을 첨부파일로 넣어주시기 바랍니다.</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //소개부분 -->
+    <!-- 프로그램 -->
+    <div class="section-area">
+        <!-- 타이틀안에 다른 컨텐츠가 있을 경우 사용-->
+        <div class="title-area">
+            <h3>프로그램 <span class="astar">*</span> </h3>
+            <div class="point-text">
+                <span class="astar">*</span>표시는 필수 입력입니다.
+            </div>
+        </div>
+        <!-- 타이틀안에 다른 컨텐츠가 있을 경우 사용 -->
+        <select id="cboIngYn">
+            <option value="Y">방영</option>
+            <option value="N">종영</option>
+        </select>
+        <select id="cboProgram" name="PGM_ID">
+            <option>프로그램 선택</option>
+        </select>
+        <input type="hidden" id="hidProgramName" name="programName" />
+        <select name="PGM_GUBUN">
+            <option value="VOD">VOD</option>
+            <option value="DVD">DVD</option>
+        </select>
+    </div>
+    <!-- //프로그램 -->
+    <!-- 방송일자 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">방송일자</h3>
+        <div class="calendar-form">
+            <input type="text" name="BROAD_DATE" class="datepicker" readonly="readonly" style="width:100%;">
+        </div>
+    </div>
+    <!-- //방송일자 -->
+    <!-- 구매수량 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">구매수량 <span class="astar">*</span> </h3>
+        <input type="text" id="txtQuantity" name="ORDER_CNT">
+    </div>
+    <!-- //구매수량 -->
+    <!-- 세금계산서 발행 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">세금계산서 발행</h3>
+        <div class="box-grey-radio">
+            <input type="radio" name="RECEIPT" value="Y" checked>
+            <label for="rad1"><span class="radio"></span>동의합니다.</label>
+            <input type="radio" name="RECEIPT" value="N">
+            <label for="rad2"><span class="radio"></span>동의하지 않습니다.</label>
+        </div>
+    </div>
+    <!-- //세금계산서 발행 -->
+    <!-- 기업명 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">기업명 <span class="astar">*</span> </h3>
+        <input type="text" id="txtCompanyName" name="CMP_NAME" placeholder="기업명을 입력하세요">
+    </div>
+    <!-- //기업명 -->
+    <!-- 대표자명 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">대표자명 <span class="astar">*</span> </h3>
+        <input type="text" id="txtCeoName" name="CMP_CEO" placeholder="대표자명을 입력하세요">
+    </div>
+    <!-- //대표자명 -->
+    <!-- 사업자번호 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">사업자번호 <span class="astar">*</span> </h3>
+        <div class="box-phone-form mb0 mb0">
+            <input type="hidden" id="hidCompanyNumber" name="CMP_LIC_NO" />
+            <input type="text" id="txtCompanyNumber1" class="devNumber">
+            <span class="space">-</span>
+            <input type="text" id="txtCompanyNumber2" class="devNumber">
+            <span class="space">-</span>
+            <input type="text" id="txtCompanyNumber3" class="devNumber">
+        </div>
+    </div>
+    <!-- // 사업자번호 -->
+    <!-- 사업자주소 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">사업자주소 <span class="astar">*</span> </h3>
+        <input type="text" id="txtCompanyAddress" name="CMP_ADDR" placeholder="사업자주소를 입력하세요">
+    </div>
+    <!-- //사업자주소 -->
+    <!-- 업태 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">업태 <span class="astar">*</span> </h3>
+        <input type="text" id="txtCompanyType" name="CMP_BUSINESS" placeholder="업태를 입력하세요">
+    </div>
+    <!-- //업태 -->
+    <!-- 업종 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">업종 <span class="astar">*</span> </h3>
+        <input type="text" id="txtCompanySection" name="CMP_INDUSTRY" placeholder="업종을 입력하세요">
+    </div>
+    <!-- //업종 -->
+    <!-- 받을주소 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">받을주소 <span class="astar">*</span> </h3>
+        <div class="box-zip-form">
+
+            <input type="text" id="txtPostNumber" name="ZIPCODE">
+            <div class="btn-area">
+                <a href="#" id="btnSearchAddress" class="btn type03">우편번호 검색</a>
+            </div>
+            <input type="text" class="full" id="txtAddress1">
+            <input type="text" class="full" id="txtAddress2">
+            <input type="hidden" id="hidAddress" name="ADDRESS" />
+        </div>
+    </div>
+    <!-- //받을주소 -->
+    <!-- 부서명  -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">부서명 <span class="astar">*</span> </h3>
+        <input type="text" id="txtCompanyPartName" name="DPT_NAME" placeholder="부서명을 입력하세요.">
+    </div>
+    <!-- //부서명  -->
+    <!-- 담당자명  -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">담당자명 <span class="astar">*</span> </h3>
+        <input type="text" name="CHARGE_NAME" placeholder="담당자명을 입력하세요.">
+    </div>
+    <!-- //담당자명  -->
+    <!-- 직통번호 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">직통번호 <span class="astar">*</span> </h3>
+        <input type="text" placeholder="직통번호" id="txtACallNumber" name="TEL_NO">
+    </div>
+    <!-- //직통번호 -->
+    <!-- 휴대폰번호 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">휴대폰번호 <span class="astar">*</span> </h3>
+        <input type="text" placeholder="핸드폰번호" id="txtMobileNumber" name="MOBILE_NO">
+    </div>
+    <!-- //휴대폰번호 -->
+    <!-- 팩스번호 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">팩스번호 <span class="astar">*</span> </h3>
+        <input type="text" placeholder="팩스번호" id="txtFaxNUmber" name="FAX_NO">
+    </div>
+    <!-- //팩스번호 -->
+    <!-- 이메일 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">E-mail <span class="astar">*</span> </h3>
+        <input type="text" placeholder="이메일 주소 입력" id="txtEmail" name="EMAIL">
+    </div>
+    <!-- // 이메일 -->
+    <!-- 요구사항 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">요구사항 <span class="astar">*</span> </h3>
+        <textarea style="height:80px;" name="CONTENT"></textarea>
+    </div>
+    <!-- //요구사항 -->
+    <!-- VOD 사용처 -->
+    <div class="section-area pt15">
+        <h3 class="bd-t-grey">VOD 사용처 <span class="astar">*</span> </h3>
+        <select class="bd-b-grey" name="USE_VOD">
+            <option value="홍보용">홍보용</option>
+            <option value="소장용">소장용</option>
+            <option value="교육용">교육용</option>
+            <option value="기타">기타</option>
+        </select>
+    </div>
+    <!-- //VOD 사용처 -->
+    <!-- 버튼영역 -->
+    <div class="section-area pt15 pb35">
+        <div class="bd-t-grey pb15"></div>
+        <p class="txt-notice mt0 pb15">한국경제TV 동의없이 위 사용처 외의 사용은 도용으로 간주되어 경우에 따라 법적 제제를 받을 수 있으므로 주의 바랍니다.</p>
+        <div class="btn-area">
+            <ul class="btn-list">
+                <li><a href="#" id="btnSave" class="btn type01">등록</a></li>
+                <li><a href="#" id="btnClose" class="btn type02">취소</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- //버튼영역 -->
+</form>
+
+
+
+    @Html.Partial("~/Views/ZipSearch/AddressSearch.cshtml", "TvMainProgramBuy2.AddressSearchResult")
+
+
+

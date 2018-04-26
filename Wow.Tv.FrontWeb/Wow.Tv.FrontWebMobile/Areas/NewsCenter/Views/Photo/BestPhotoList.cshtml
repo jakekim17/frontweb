@@ -1,0 +1,54 @@
+﻿@using Wow
+@{
+    Layout = null;
+}
+
+<h3 class="tit-line plr15">인기포토</h3>
+<!-- start -->
+<div class="swiper-container hot-photo-slider">
+    <div class="swiper-wrapper">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <div class="swiper-slide @(Model.IndexOf(item) == 0 ? "on" : "")">
+                    <span>@item.TITLE</span>
+                </div>
+            }
+
+        }
+        else
+        {
+            <div>등록된 내용이 없습니다.</div>
+        }
+    </div>
+</div>
+<div class="tab-body bdb-col01">
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="tab-cont photoList @(Model.IndexOf(item) == 0 ? "on" : "")" id="@item.ARTICLEID">
+                <!-- img 1 start -->
+                <div class="img-cont w-full type01">
+                    <div class="img-area">
+                        <img src="@WowExtensionMethod.NewsThumbnailPath("11B", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11B")'" alt="">
+                    </div>
+                    <div class="txt-area type01">
+                        @if (item.GUBUN_NAME != "")
+                        {
+                            <span class="text-icon">@item.GUBUN_NAME</span>
+                        }
+                        <p class="txt">@item.TITLE</p>
+                    </div>
+                </div>
+                <!--// img 1 end -->
+            </div>
+        }
+    }
+    else
+    {
+        <div>등록된 내용이 없습니다.</div>
+    }
+</div>
+<!-- // end -->

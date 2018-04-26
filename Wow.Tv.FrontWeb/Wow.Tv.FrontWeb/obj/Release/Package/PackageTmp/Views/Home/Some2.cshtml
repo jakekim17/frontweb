@@ -1,0 +1,70 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model List<NUP_NEWS_MAIN_NEWSSTAND_SELECT_Result>
+
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+<h2 class="blind">뉴스 img area</h2>
+@for (int i = 0; i < 5; i++)
+{
+    if (Model.Count >= i + 1)
+    {
+        var item = Model[i];
+
+        if (i == 0)
+        {
+            <div class="col02">
+                <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID');">
+                    <img src="@Wow.WowExtensionMethod.NewsStandThumbnailPath(item.IMAGE_RRELATION, "16B", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" alt="" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("16B")'">
+
+                    @if (item.VOD_NUM != null && item.VOD_NUM > 0)
+                    {
+                        <span class="icon-play"></span>
+                    }
+                    <strong>                       
+                    @if (string.IsNullOrEmpty(item.TMPTITLE))
+                    {
+                        @item.TITLE
+                    }
+                    else
+                    {
+                        @item.TMPTITLE
+                    }
+                    </strong>
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="col01">
+                <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID');">
+                    <img src="@Wow.WowExtensionMethod.NewsStandThumbnailPath(item.IMAGE_RRELATION, "16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" alt="" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("16M")'">
+
+                    @if (item.VOD_NUM != null && item.VOD_NUM > 0)
+                    {
+                        <span class="icon-play"></span>
+                    }
+                    <strong>
+                        @if (string.IsNullOrEmpty(item.TMPTITLE))
+                        {
+                            @item.TITLE
+                        }
+                        else
+                        {
+                            @item.TMPTITLE
+                        }
+                    </strong>
+                </a>
+            </div>
+        }
+    }
+}
+
+

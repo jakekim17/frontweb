@@ -1,0 +1,43 @@
+﻿
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/tv.css">
+}
+
+@section scripts{
+    <script src="@wowTvScript/Broad/Life/Index.js?date=20171018170000"></script>
+}
+
+
+
+
+
+<h1 class="title">생활경제방송</h1>
+<!-- Tab -->
+<div class="tab-type1">
+    <ul class="col2">
+        <li class="on"><a href="#" onclick="return IngIndex.ChangeTab(this, 'Y');">방영 프로그램</a></li>
+        <li><a href="#" onclick="return IngIndex.ChangeTab(this, 'N');">종영 프로그램</a></li>
+    </ul>
+</div>
+<!-- //Tab -->
+
+<div id="divSearchPartial"></div>
+
+<!-- 한국경제TV 방송 목록 보기 start -->
+<div class="box-type02">
+    <h2 class="title02">한국경제TV 방송 목록 보기</h2>
+    <a href="javascript:void(0)" class="btn-arrow">arrow</a>
+</div>
+
+<div class="box-line-type01" id="divProgramList">
+</div>
+
+
+
+

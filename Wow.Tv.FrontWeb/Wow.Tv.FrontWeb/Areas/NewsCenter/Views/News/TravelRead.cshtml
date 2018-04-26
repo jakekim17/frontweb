@@ -1,0 +1,410 @@
+﻿@using System.Configuration
+@using Wow
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.FrontWeb.Areas.NewsCenter.Models
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.FrontWeb.Areas.Component.Models
+
+@model  ArticleClass_Hanatour
+
+@{
+    AppState["BodyClass"] = "news sub";
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    ArticleClass_Hanatour newsRead = Model;
+
+    string titleReplace = string.Empty;
+    if (newsRead != null)
+    {
+        titleReplace = HttpUtility.HtmlDecode(newsRead.Title);
+        titleReplace = MvcHtmlString.Create(Html.Raw(newsRead.Title).ToString()).ToString().Replace("&#39;", "＇").Replace("&quot;", "＂").Replace("'", "＇").Replace("\"", "＂");
+    }
+}
+
+@section metas{
+
+    @if (Model != null)
+    {
+        <title>@titleReplace</title>
+        <meta name="title" content="@titleReplace" />
+        <meta name="description" content="@WowExtensionMethod.RemoveTagAndReplace(MvcHtmlString.Create(newsRead.Contents).ToString(), 200, true)" />
+        <meta property="og:locale" content="kor" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="@titleReplace" />
+        <meta property="og:url" content="http://@ConfigurationManager.AppSettings["DomainUrlFront"]/NewsCenter/News/TravelRead?articleId=@newsRead.ArticleID" />
+        <meta property="og:image" content="@newsRead.thumbnail" />
+        <meta property="og:description" content="@WowExtensionMethod.RemoveTagAndReplace(MvcHtmlString.Create(newsRead.Contents).ToString(), 200, true)">
+    }
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/News/TravelRead.js"></script>
+    <script src="@wowTvScript/sticky.js"></script>
+    <script src="@wowTvScript/jquery.printThis.js"></script>
+    <script src="@wowTvScript/NewsCenter/NewsReadSearchApi.js"></script>
+}
+
+@section hardCodingAdArea{
+    @if (ViewBag.HardCodingAdList != null)
+    {
+        foreach (var item in ViewBag.HardCodingAdList)
+        {
+            if (item.AD_GUBUN == "PC" && !string.IsNullOrEmpty(item.AD_CONTENT))
+            {
+                @MvcHtmlString.Create(item.AD_CONTENT);
+            }
+        }
+    }
+}
+
+@if (newsRead == null)
+{
+    <div class="news-header-section">
+        <div class="title-area">
+            <p class="title-news">해당기사가 삭제되었거나 보유기간이 종료되었습니다. </p>
+        </div>
+    </div>
+}
+else
+{
+    <input type="hidden" id="hidNewsReadMovieVodNum" value="" />
+
+    @section modalDiv{
+        <div id="divSubScriptPopup" class="modal fade" role="dialog"></div>
+        @*인쇄*@
+        <div class="modal fade" role="dialog">
+            <div id="divPrintPopup" class="popup-type1 print" style="display:none;">
+                <div class="inner">
+                    <h1 class="title">인쇄하기</h1>
+                    <a href="javascript:TravelRead.GetPrintPopUpClose();" class="pop-close-btn">닫기</a>
+                    <div class="content-box">
+                        <div class="btn-area">
+                            <div class="box-util-links">
+                                <span class="btn-print">
+                                    <a href="javascript:TravelRead.Print()">인쇄하기</a>
+                                    <span class="tooltip">인쇄</span>
+                                </span>
+                            </div>
+                        </div>
+                        @*뉴스 영역*@
+                        <div class="news-cont-area">
+                            @*제목 & 일자*@
+                            <div class="main-head">
+                                <span class="date">
+                                    @newsRead.ArticleDate.Value.ToString("yyyy-MM-dd HH:mm");
+                                </span>
+                                <strong class="tit">@Html.Raw(newsRead.Title)</strong>
+                            </div>
+                            @*뉴스 내용*@
+                            <p class="cont">
+                                @MvcHtmlString.Create(WowExtensionMethod.NewsContentReplace(newsRead.Contents, "HANATOUR"))
+                            </p>
+                            @*작성자 정보*@
+                            <div class="info-reporter">@newsRead.Writer</div>
+                            @* Copyright *@
+                            <div class="copyright">Copyrightⓒ한국경제TV. All Rights Reserved. 무단전재 및 재배포 금지</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //스크롤 내리면 제목,영상,이전기사,다음기사 따라 내려오는 스크립트
+            ui_scroll_2();
+        });
+    </script>
+
+    @* AD Area *@
+
+    @* 상단 배너영역 *@
+    <div class="adv-area text-center" style="width:100%;">
+        <iframe width="970" height="90" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_2" title="AD Tag"></iframe>
+    </div>
+    @* 좌측 배너영역 *@
+    <div class="adv-area left" style="width:120px; height:600px;">
+        <iframe width="120" height="600" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_3" title="AD Tag"></iframe>
+    </div>
+    <div class="news-header-section">
+        <form id="frm" name="frm" method="post" onsubmit="return false;">
+            <input type="hidden" name="menuSeq" id="menuSeq" value="@Request["menuSeq"]" />
+            <input type="hidden" name="subMenu" id="subMenu" value="@Request["subMenu"]" />
+            <input type="hidden" name="SearchText" id="SearchText" value="@newsRead.Writer" />
+            <input type="hidden" name="SearchGubun" id="SearchGubun" value="@Request["SearchGubun"]" />
+            <input type="hidden" name="currentIndex" id="currentIndex" value="@Request["currentIndex"]" />
+            <input type="hidden" name="articleId" id="articleId" value="@newsRead.ArticleID" />
+        </form>
+        @* 타이틀 이전,다음기사 버튼 *@
+        <div class="title-area">
+            <p class="title-news">
+                @Html.Raw(newsRead.Title)
+            </p>
+            <span id="spPrev"></span>
+            <span id="spNext"></span>
+        </div>
+        @* 버튼영역 *@
+        <div class="box-util-button">
+            @* 페이스북, 트위터, 카카오 스토리, 블로그, 링크복사 *@
+            <div class="box-icon-sharesns">
+                <span class="btn-facebook">
+                    <button onclick="NewsFacebookShare('@newsRead.ArticleID')">페이스북</button>
+                    <span class="tooltip">페이스북</span>
+                </span>
+                <span class="btn-twitter">
+                    <button onclick="Share.Twitter(location.pathname + location.search,'@titleReplace')">트위터</button>
+                    <span class="tooltip">트위터</span>
+                </span>
+                <span class="btn-kakaostory">
+                    <button onclick="Share.kakaostory(location.pathname + location.search,'@titleReplace')">카카오스토리</button>
+                    <span class="tooltip">카카오스토리</span>
+                </span>
+                <span class="btn-blog">
+                    <button onclick="Share.Naver(location.pathname + location.search,'@titleReplace')">블로그</button>
+                    <span class="tooltip">블로그</span>
+                </span>
+                <span class="btn-copyurl">
+                    <a href="#" onclick="PopupCopyLinkScript();">링크 복사</a>
+                    <span class="tooltip">링크 복사</span>
+                </span>
+            </div>
+            @* 기사 입력,수정일자, SNS Count *@
+            <div class="news-aside">
+                <p class="date-news">
+                    입력
+                    <span class="text-number">@newsRead.ArticleDate.Value.ToString("yyyy-MM-dd HH:mm")</span>
+                </p>
+            </div>
+            @* 번역, 구독하기, 목록, 댓글링크, 인쇄 *@
+            <div class="box-util-links">
+                @*구글번역**@
+                <div id="google_translate_element"></div>
+                <span class="btn-list-link"><a href="javascript:TravelRead.GoList()">목록으로</a></span>
+                <span class="btn-print" name="spanNewsPrint">
+                    <a href="#">인쇄하기</a>
+                    <span class="tooltip">인쇄</span>
+                </span>
+                @* 본문 글자 조절 *@
+                <div class="box-zoom">
+                    <span class="btn-zoomin"><button onclick="ExpandFont('divNewsContent')">글자 크게</button></span>
+                    <span class="btn-zoomout"><button onclick="ReduceFont('divNewsContent')">글자 작게</button></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* 스크롤 내리면 제목,영상,이전기사,다음기사 따라 내려오는 Div(fix 기사) *@
+    <div class="box-hot-news")">
+        <div class="inner">
+            <h1 class="title02">@Html.Raw(newsRead.Title)</h1>
+            <span class="btn-sitemap"><button onclick="return MainLayOut_SiteMapChange(this);" name="newsRead">SITE MAP</button></span>
+        </div>
+        @*이전, 다음 기사 *@
+        <div class="bar-gray">
+             <div>
+                <div class="prev-area"></div>
+                <div class="next-area"></div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-right-adbox" data-sticky_parent>
+        <div class="section-content" data-sticky_column>
+
+            @* 기사 내용 *@
+            <div class="box-news-body" id="divNewsContent">
+                @MvcHtmlString.Create(WowExtensionMethod.NewsContentReplace(newsRead.Contents, "HANATOUR"))
+            </div>
+
+            @* AD Area 1. *@
+            <div class="article-infor">
+                <iframe width="650" height="85" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_8" title="AD Tag"></iframe>
+            </div>
+
+            <div class="article-repoter-infor">
+                <div class="type2">
+                    <div class="repoter-aside">
+                        <p class="reporter" style="padding-top:10px">
+                            @newsRead.Writer
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            @* 버튼 & 감정 표현 *@
+            <div class="box-section-emotion">
+                @* 핀, 페이스북, 트위터, 카카오 스토리, 블로그, 링크복사 *@
+                <div class="box-icon-sharesns">
+                    <span class="btn-facebook">
+                        <button onclick="NewsFacebookShare('@newsRead.ArticleID')">페이스북</button>
+                        <span class="tooltip">페이스북</span>
+                    </span>
+                    <span class="btn-twitter">
+                        <button onclick="Share.Twitter(location.pathname + location.search,'@titleReplace')">트위터</button>
+                        <span class="tooltip">트위터</span>
+                    </span>
+                    <span class="btn-kakaostory">
+                        <button onclick="Share.kakaostory(location.pathname + location.search,'@titleReplace')">카카오스토리</button>
+                        <span class="tooltip">카카오스토리</span>
+                    </span>
+                    <span class="btn-blog">
+                        <button onclick="Share.Naver(location.pathname + location.search,'@titleReplace')">블로그</button>
+                        <span class="tooltip">블로그</span>
+                    </span>
+                    <span class="btn-copyurl">
+                        @*<button onclick="PopupCopyLinkScript();">링크 복사</button>*@
+                        <a href="#" onclick="PopupCopyLinkScript();">링크 복사</a>
+                        <span class="tooltip">링크 복사</span>
+                    </span>
+                </div>
+                @* 감정 표현 *@
+                <div class="box-emotion" id="divLikeit">
+                    <span class="btn-emotion1"><button>좋아요 <i>0</i></button></span>
+                    <span class="btn-emotion2"><button>싫어요 <i>0</i></button></span>
+                    <span class="btn-emotion3"><button>후속기사 원해요 <i>0</i></button></span>
+                </div>
+                @* 목록, 인쇄 *@
+                <div class="box-util-links">
+                    <span class="btn-list-link icon">
+                        <a href="javascript:NewsRead.GoNewsList()">목록으로</a>
+                        <span class="tooltip">목록</span>
+                    </span>
+                    <span class="btn-print" name="spanNewsPrint">
+                        <a href="#">인쇄하기</a>
+                        <span class="tooltip">인쇄</span>
+                    </span>
+                </div>
+            </div>
+
+            @* 관련뉴스 *@
+            <div class="list-news-type01">
+                <h2 class="title02">관련뉴스</h2>
+                <ul id="ulRelationNews"></ul>
+            </div>
+            @* AD Area 2. *@
+            <div class="adv-area txt-c" style="width:100%; height:90px; text-align:center;">
+                <iframe width="728" height="90" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_9" title="AD Tag"></iframe>
+            </div>
+            @* AD Area 3. *@
+            <div class="adv-area" style="width:100%; height:150px;">
+                <iframe width="650" height="150" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_10" title="AD Tag"></iframe>
+            </div>
+
+            <p class="copyright-news">
+                Copyrightⓒ한국경제TV. All Rights Reserved. 무단전재 및 재배포 금지
+            </p>
+
+            @* 이 기사와 많이 본 기사 6개 *@
+            <div class="section-type1">
+                <h2 class="title">이 기사와 함께 많이 본 뉴스</h2>
+                <div class="contain-news-type1" id="divReadManySeeNews"></div>
+            </div>
+
+            @* 당신이 좋아할 만한 기사(PHOTO List)*@
+            <div class="section-type1">
+                <h2 class="title">인기 갤러리</h2>
+                <div class="contain-like-news bxslider" id="divReadPhotoNews"></div>
+            </div>
+
+            @* AD Area*@
+            <div class="adv-area text-center" style="width:100%; height:200px;">
+                <iframe src="http://adex.ednplus.com/xc/h/FyhqD7nq" width="870" height="200" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"></iframe>
+            </div>
+
+        </div>
+        @* Right Content *@
+        <div class="right-area" data-sticky_column id="divContentRight"></div>
+    </div>
+}
+
+    @section WrapOutBottom {
+    @* 당신에게 맞는 추천 뉴스(검색엔진&드라마 솔루션) *@
+        <div class="best-infor-news">
+            <div class="section-type1" id="divRecomNews"></div>
+        </div>
+    }
+
+    @*AD Right Banner Area*@
+    <div class="quickBanner">
+        <div><iframe width="120" height="600" src="http://ad.adinc.kr/cgi-bin/PelicanC.dll?impr?pageid=089l&amp;out=iframe" allowtransparency="true" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe></div>
+    </div>
+
+    @* 구글번역 *@
+    <!-- google translate script Start -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: 'ko'
+                    , includedLanguages: 'ko,en,zh-CN,zh-TW,ja,id,th,vi'
+                    , layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                    , autoDisplay: false
+                }
+                , 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- google translate script end -->
+
+
+@section LastScriptArea{
+    <script type="text/javascript">
+
+        // 오른쪽 컨텐츠 + 광고영역 스크롤 / Generated by CoffeeScript 1.9.2
+        (function () {
+            var reset_scroll;
+
+            $(function () {
+                return $("[data-sticky_column]").stick_in_parent({
+                    parent: "[data-sticky_parent]"
+                });
+            });
+
+            reset_scroll = function () {
+                var scroller;
+                scroller = $("body,html");
+                scroller.stop(true);
+                if ($(window).scrollTop() !== 0) {
+                    scroller.animate({
+                        scrollTop: 0
+                    }, "fast");
+                }
+                return scroller;
+            };
+
+            window.scroll_it = function () {
+                var max;
+                max = $(document).height() - $(window).height();
+                return reset_scroll().animate({
+                    scrollTop: max
+                }, max * 3).delay(100).animate({
+                    scrollTop: 0
+                }, max * 3);
+            };
+
+            window.scroll_it_wobble = function () {
+                var max, third;
+                max = $(document).height() - $(window).height();
+                third = Math.floor(max / 3);
+                return reset_scroll().animate({
+                    scrollTop: third * 2
+                }, max * 3).delay(100).animate({
+                    scrollTop: third
+                }, max * 3).delay(100).animate({
+                    scrollTop: max
+                }, max * 3).delay(100).animate({
+                    scrollTop: 0
+                }, max * 3);
+            };
+
+            $(window).on("resize", (function (_this) {
+                return function (e) {
+                    return $(document.body).trigger("sticky_kit:recalc");
+                };
+            })(this));
+
+        }).call(this);
+    </script>
+}

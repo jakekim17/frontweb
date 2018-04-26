@@ -1,0 +1,329 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@model usp_GetStockPrice_Result
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    //로그인 유무 체크
+    bool loginResult = LoginHandler.IsLogin;
+    //나의 관심종목 유무
+    LoginUserInfo loginUserInfo = new LoginUserInfo();
+    bool myFavoriteResult = false;
+
+    if (loginResult == true)
+    {
+        loginUserInfo = LoginHandler.CurrentLoginUser;
+        myFavoriteResult = new Wow.Tv.FrontWebMobile.MyActiveService.MyActiveServiceClient().IsMyFavoriteJongMok(loginUserInfo, Model.arj_code.Replace("A", ""));
+    }
+
+    DateTime curDate = new DateTime();
+    string sabuScore = ViewBag.SabuScore;
+    string arjCode = Model.arj_code.Replace("A", "");
+
+
+    var list = ViewBag.hotStockList;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var scriptRoot = "@AppState["WowTvScript"]";
+        var styleRoot = "@AppState["WowTvStyle"]";
+        var searchTerm = "@ViewBag.searchTerm";
+        var colTarget = "@ViewBag.colTarget";
+        var currentPage = "@ViewBag.currentPage";
+        var filterList = "@ViewBag.filterList";
+        var loginValue = "@loginResult";
+        callSearchSize(searchTerm);
+        callSearchTopicker(searchTerm, colTarget, scriptRoot, styleRoot, currentPage, filterList, loginValue);
+        $('#col'+colTarget).addClass("on");
+        if (colTarget == 'total' || colTarget == 'photo') {
+            if ($('#photoResultSize').html() != '포토(0)') {
+                var gallery = $('.photos').gallerify({
+                    margin: 2,
+                    mode: 'small',
+                    lastRow: 'hidden',
+                    debounceLoad: true,
+                    debounceTime: 0
+                });
+                gallery.gallerify.renderAsyncImages();
+            }
+        }
+        
+    });
+    /*
+    $(window).on("orientationchange", function () {
+        if (window.orientation == 0)    //Portait
+        {
+            //alert("가로");
+            $(".chart-view").empty();
+            //국내 코스피,코스닥,코스피200 차트
+            setInterval(FinanceChartJs.CurrentDbKospiChartData($("#chart_Kospi")), 1 * 400);
+            setInterval(FinanceChartJs.CurrentDbKosdaqChartData($("#chart_Kosdaq")), 1 * 400);
+            setInterval(FinanceChartJs.CurrentDbKPI200ChartData($("#chart_Kospi200")), 1 * 400);
+
+            //미국 다우존스,나스닥,S&P500 차트
+            setInterval(FinanceChartJs.UsaTimeChartData("D", "D", $("#chart_Dowjones")), 1 * 400);
+            setInterval(FinanceChartJs.UsaTimeChartData("N", "D", $("#chart_Nasdaq")), 1 * 400);
+            setInterval(FinanceChartJs.UsaTimeChartData("S", "D", $("#chart_SAndP500")), 1 * 400);
+
+            //아시아
+            setInterval(FinanceChartJs.AsiaTimeChartData("CH#SHC", "D", $("#chart_SHC")), 1 * 400);
+            setInterval(FinanceChartJs.AsiaTimeChartData("JP#NI225", "D", $("#chart_Nikkei")), 1 * 400);
+            setInterval(FinanceChartJs.AsiaTimeChartData("HK#HS", "D", $("#chart_HS")), 1 * 400);
+        }
+        else {
+            //alert("세로");
+            $(".chart-view").empty();
+            //국내 코스피,코스닥,코스피200 차트
+            setInterval(FinanceChartJs.CurrentDbKospiChartData($("#chart_Kospi")), 1 * 400);
+            setInterval(FinanceChartJs.CurrentDbKosdaqChartData($("#chart_Kosdaq")), 1 * 400);
+            setInterval(FinanceChartJs.CurrentDbKPI200ChartData($("#chart_Kospi200")), 1 * 400);
+
+            //미국 다우존스,나스닥,S&P500 차트
+            setInterval(FinanceChartJs.UsaTimeChartData("D", "D", $("#chart_Dowjones")), 1 * 400);
+            setInterval(FinanceChartJs.UsaTimeChartData("N", "D", $("#chart_Nasdaq")), 1 * 400);
+            setInterval(FinanceChartJs.UsaTimeChartData("S", "D", $("#chart_SAndP500")), 1 * 400);
+
+            //아시아
+            setInterval(FinanceChartJs.AsiaTimeChartData("CH#SHC", "D", $("#chart_SHC")), 1 * 400);
+            setInterval(FinanceChartJs.AsiaTimeChartData("JP#NI225", "D", $("#chart_Nikkei")), 1 * 400);
+            setInterval(FinanceChartJs.AsiaTimeChartData("HK#HS", "D", $("#chart_HS")), 1 * 400);
+        }
+    });
+    */
+</script>
+<section class="container">
+
+    <!-- sub tab -->
+    <div class="swiper-container sub-gnb01 mb0 bdt-none">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" id="coltotal"><a href="javascript:changeColTarget('total');"><span id="totalResultSize">통합검색(0)</span></a></div>
+            <div class="swiper-slide" id="colstock"><a href="javascript:changeColTarget('stock');"><span id="stockResultSize">종목(0)</span></a></div>
+            <div class="swiper-slide" id="colprogram"><a href="javascript:changeColTarget('program');"><span id="programResultSize">프로그램(0)</span></a></div>
+            <div class="swiper-slide" id="colperson"><a href="javascript:changeColTarget('person');"><span id="personResultSize">인물(0)</span></a></div>
+            <div class="swiper-slide" id="colnews"><a href="javascript:changeColTarget('news');"><span id="newsResultSize">뉴스(0)</span></a></div>
+            <div class="swiper-slide" id="colcafe"><a href="javascript:changeColTarget('cafe');"><span id="cafeResultSize">카페(0)</span></a></div>
+            <div class="swiper-slide" id="colphoto"><a href="javascript:changeColTarget('photo');"><span id="photoResultSize">포토(0)</span></a></div>
+            <div class="swiper-slide" id="colvod"><a href="javascript:changeColTarget('vod');"><span id="vodResultSize">동영상(0)</span></a></div>
+        </div>
+    </div>
+    <!-- // sub tab -->
+    <!-- 종목 검색결과 start -->
+    <div class="section-area pd0 mb10">
+        @if (@Model.stock_wanname != @Model.arj_code && (@ViewBag.colTarget == "total" || @ViewBag.colTarget == "stock"))
+        {
+            <script type="text/javascript">
+                    $(document).ready(function () {
+                        DomesticStockDetailTotalInfo.GetHpChart('7551', '@Model.arj_code.Replace("A", "")', '550', '372');
+                    });
+            </script>
+        <div class="box-tit-btn">
+            <div id="stockCount"></div>
+            <div class="btn-area">
+                @if (loginResult == true && myFavoriteResult == true)
+                {
+                    //로그인이 되어있고 관심종목에 등록이 되어있을때
+                    <a href="javascript:void(0)" class="btn type04 w-auto">나의 관심종목</a>
+                }
+                @if (loginResult == true)
+                {
+                    //로그인이 되었을때
+                    <a href="javascript:FavoriteStockReg('@Model.arj_code.Replace("A", "")');" class="btn type04 w-auto">관심종목 등록</a>
+                }
+                else
+                {
+                    //로그인이 안되었을때 로그인 요구
+
+                    <a href="javascript:FavoriteStockLogin();" class="btn type04 w-auto" >관심종목 등록</a>
+                }
+            </div>
+        </div>
+
+        <!-- start -->        
+        <div class="stock-index mb0">
+            <div class="box w-chan">
+                <dl class="stock-area type01">
+                    <dt><a href="javascript:goStockDetail('@Model.arj_code.Replace("A", "")');">@Model.stock_wanname</a></dt>
+                    @Html.DomesticStockDetailPriceMiddleFormat(Model.chg_type, Model.curr_price)
+                </dl>
+                <ul class="stock-box type01">
+                    @if (Model.mkt_halt != "0")
+                    {
+                        curDate = Convert.ToDateTime(Model.data_day);
+                        <li>@curDate.Year 년 @curDate.Month 월 @curDate.Day 일 거래정지된 종목입니다.</li>
+                    }
+                    else
+                    {
+                        <li>@Html.DomesticStockDetailChgPriceMiddleFormat(Model.chg_type, Model.net_chg)</li>
+                        <li>@Html.DomesticStockDetailChgRateMiddleFormat(Model.chg_type, Model.curr_price, Model.net_chg)</li>
+                    }
+                </ul>
+            </div>
+            <div class="btn-area f-chan">
+                @if (loginResult == true && myFavoriteResult == true)
+                {
+                    //로그인이 되어있고 관심종목에 등록이 되어있을때
+                    <a href="javascript:void(0)" class="btn type04 w-auto">나의 관심종목</a>
+                }
+                @if (loginResult == true)
+                {
+                    //로그인이 되었을때
+                    <a href="javascript:FavoriteStockReg('@Model.arj_code.Replace("A", "")');" class="btn type04 w-auto">관심종목 등록</a>
+                }
+                else
+                {
+                    //로그인이 안되었을때 로그인 요구
+
+                    <a href="javascript:FavoriteStockLogin();" class="btn type04 w-auto">관심종목 등록</a>
+                }
+            </div>
+            <div class="box-cont type01">
+                <strong class="obj">사부점수</strong>
+                <div class="cont">
+                    <p class="score-type">
+                        <span class="num">@Html.PublishSabuScoreChgPoint(sabuScore)</span>
+                        <span class="txt">점</span>
+                    </p>
+                    <p class="score-type">
+                        전일대비
+                        <span class="num">@Html.PublishSabuScoreChgPoint(sabuScore)</span>
+                        <span class="txt">점</span>
+                    </p>
+                </div>
+            </div>
+            <div class="table-type1 type01 line-chan mlr15">
+                <table>
+                    <caption>상세</caption>
+                    <colgroup>
+                        <col style="width:25%">
+                        <col style="width:25%">
+                        <col style="width:25%">
+                        <col style="width:*">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td class="txt-l">시가</td>
+                            <td class="txt-r"><strong class="num">@Html.CommaFormat(Convert.ToInt32(Model.init_price ?? 0))</strong></td>
+                            <td class="txt-l">상한가</td>
+                            <td class="txt-r"><strong class="num">@Html.CommaFormat(Convert.ToInt32(Model.highest_price ?? 0))</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="txt-l">고가</td>
+                            <td class="txt-r"><strong class="num">@Html.CommaFormat(Convert.ToInt32(Model.high_price ?? 0))</strong></td>
+                            <td class="txt-l">하한가</td>
+                            <td class="txt-r"><strong class="num">@Html.CommaFormat(Convert.ToInt32(Model.lowest_price ?? 0))</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="txt-l">저가</td>
+                            <td class="txt-r"><strong class="num">@Html.CommaFormat(Convert.ToInt32(Model.low_price ?? 0))</strong></td>
+                            <td class="txt-l">시가총액</td>
+                            <td class="txt-r"><strong class="num">@Html.DomesticStockDetailSigaTotalFormat(Model.list_sum)</strong>억</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end -->
+        <!-- sub tab -->
+        <div class="swiper-container sub-gnb01 mb0 bdt-none">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide on"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7551', '@Model.arj_code.Replace("A", "")', '550', '372');">일간</a></span></div>
+                <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7552','@Model.arj_code.Replace("A", "")', '550', '372');">주간</a></span></div>
+                <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7553','@Model.arj_code.Replace("A", "")', '550', '372');">월간</a></span></div>
+                <div class="swiper-slide"><span><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('9101','@Model.arj_code.Replace("A", "")', '550', '372');">5일 주가예측</a></span></div>
+            </div>
+        </div>
+        <!-- // sub tab -->
+        <!-- chart start -->
+        <div class="box-type-chart">
+            <div class="chart-view">
+                <img id="imgChart" />
+                <input type="hidden" id="arjCode" value="@Model.arj_code" />
+            </div>
+        </div>
+        <!-- chart end -->
+        }
+        <!-- silder start -->
+        <div id="stockContents"></div>
+       
+        <!-- silder end -->
+
+        @if (@ViewBag.colTarget == "total" || @ViewBag.colTarget == "stock")
+        {
+        <!-- start -->
+        <div class="section-area pd0">
+            <div class="box-type-sear01">
+                @if (@Model.stock_wanname != @Model.arj_code)
+                {
+                <div class="box-con">
+                    <span class="txt"><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.arj_code.Replace("A", "")&tabSeq=4">공시/전자공시</a></span>
+                    <span class="txt"><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.arj_code.Replace("A", "")&tabSeq=1">현재가분석</a></span>
+                </div>
+                }
+                @if (list != null && list.Length > 0)
+                {
+                    int count = 1;
+                <div class="box-hot" id="popularStock">
+                    <h3>인기검색종목</h3>
+                    <div class="swiper-container box-hot-area box01-slider">
+                        <div class="swiper-wrapper">
+                            @foreach (var item in list)
+                            {
+                                if (count < 6)
+                                {
+                            <div class="swiper-slide">
+                                <!-- box 1 start -->
+                                <div class="box-hot-cont">
+                                    <a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@item.arj_code.Replace("A", "")">
+                                        <span class="num num-hot">@count</span>
+                                        <span class="txt">@item.stock_name</span>
+                                    </a>
+                                </div>
+                                <!--// box 1 end -->
+                            </div>
+                                    count += 1;
+                                }
+                            }                            
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <!-- end -->
+        }
+    </div>
+    <!--// 종목 검색결과 end -->
+    <!-- 프로그램 검색결과 start -->
+    <div class="section-area pd0 mb10" id="programContents"></div>
+    <!--// 프로그램 검색결과 end -->
+    <!-- 인물 검색결과 start -->
+    <div id="personContents"></div>
+    <!--// 인물 검색결과 end -->
+    <!-- 뉴스 start -->
+    <div id="newsContents"></div>
+    <!--// 뉴스 end -->
+    <!-- 와우카페 start -->
+    <div class="section-area pd0 mb10" id="cafeContents"></div>
+    <!--// 와우카페 end -->
+    <!-- 포토 start -->
+    <div class="section-area pd0 mb10" id="photoContents"></div>
+    <!--// 포토 end -->
+    <!-- 영상 start -->
+    <div class="section-area pd0 mb10" id="vodContents"></div>
+    <!--// 영상 end -->
+    <div class="section-area" id="noResult" style="display:none;">
+        <div class="no-data">
+            <strong>'<em id="">@ViewData["searchTerm"]</em>' 에 대한 검색결과가 없습니다.</strong>
+            <p class="txt">단어의 철자나 맞춤법이 맞는지 확인해 주세요.<br>띄어쓰기를 넣어보거나 더 넓은 의미의 단어로 검색해 보세요.</p>
+        </div>
+    </div>
+
+
+
+
+
+
+</section>
+

@@ -1,0 +1,272 @@
+﻿@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@using Wow.Tv.FrontWeb.Areas.Finance.Models
+@model USAADRDowJonesModel
+
+@{
+    ViewBag.Title = "USAADRDowJones";
+    Layout = null; 
+}
+
+<h2 class="title">다우 반도체</h2>
+<!-- Table -->
+<div class="table-type1 row5">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>업종명</th>
+                <th>현재가($)</th>
+                <th>전일대비</th>
+                <th>등락률(%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.SemiconductorList.ListData.Count > 0)
+            {
+                foreach (var item in Model.SemiconductorList.ListData)
+                {
+                    <tr>
+                        <td class="text">@item.PART_NAME</td>
+                        <td class="number">@Html.WorldStockMainUSAADRPrice(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                        <td class="number">@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                        <td class="number">@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">검색된 데이터가 없습니다.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!-- //Table -->
+
+<h2 class="title">다우 방송, 광고</h2>
+<!-- Table -->
+<div class="table-type1 row5">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>업종명</th>
+                <th>현재가($)</th>
+                <th>전일대비</th>
+                <th>등락률(%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.MediaList.ListData.Count != 0)
+            {
+                foreach (var item in Model.MediaList.ListData)
+                {
+                    <tr>
+                        <td class="text">@item.PART_NAME</td>
+                        <td class="number">@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                        <td class="number">@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                        <td class="number">@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">검색된 데이터가 없습니다.</td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
+<!-- //Table -->
+
+<h2 class="title">다우 보험</h2>
+<!-- Table -->
+<div class="table-type1 row5">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>업종명</th>
+                <th>현재가($)</th>
+                <th>전일대비</th>
+                <th>등락률(%)</th>
+            </tr>
+        </thead>
+        <tbody>
+           @if (Model.InsuranceList.ListData.Count != 0)
+            {
+                foreach (var item in Model.InsuranceList.ListData)
+                {
+                <tr>
+                    <td class="text">@item.PART_NAME</td>
+                    <td class="number">@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                    <td class="number">@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                    <td class="number">@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                </tr>
+               }
+           }
+           else
+           {
+            <tr>
+                <td colspan="4">검색된 데이터가 없습니다.</td>
+            </tr>
+           }
+            
+        </tbody>
+    </table>
+</div>
+<!-- //Table -->
+
+<h2 class="title">다우 소매</h2>
+<!-- Table -->
+<div class="table-type1 row5">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>업종명</th>
+                <th>현재가($)</th>
+                <th>전일대비</th>
+                <th>등락률(%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.RetailList.ListData.Count != 0)
+            {
+                foreach (var item in Model.RetailList.ListData)
+                {
+                    <tr>
+                        <td class="text">@item.PART_NAME</td>
+                        <td class="number">@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                        <td class="number">@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                        <td class="number">@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">검색된 데이터가 없습니다.</td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
+<!-- //Table -->
+
+<h2 class="title">다우 에너지</h2>
+<!-- Table -->
+<div class="table-type1 row5">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>업종명</th>
+                <th>현재가($)</th>
+                <th>전일대비</th>
+                <th>등락률(%)</th>
+            </tr>
+        </thead>
+        <tbody>
+           @if (Model.EnergyList.ListData.Count != 0)
+            {
+                foreach (var item in Model.EnergyList.ListData)
+                {
+                <tr>
+                    <td class="text">@item.PART_NAME</td>
+                    <td class="number">@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                    <td class="number">@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                    <td class="number">@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                </tr>
+               }
+           }
+           else
+           {
+            <tr>
+                <td colspan="4">검색된 데이터가 없습니다.</td>
+            </tr>
+           }
+        </tbody>
+    </table>
+</div>
+<!-- //Table -->
+
+<h2 class="title">다우 제약</h2>
+<!-- Table -->
+<div class="table-type1 row5">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>업종명</th>
+                <th>현재가($)</th>
+                <th>전일대비</th>
+                <th>등락률(%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.PharmacyList.ListData.Count != 0)
+            {
+                foreach (var item in Model.PharmacyList.ListData)
+                {
+                    <tr>
+                        <td class="text">@item.PART_NAME</td>
+                        <td class="number">@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                        <td class="number">@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                        <td class="number">@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">검색된 데이터가 없습니다.</td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
+<!-- //Table -->
+
+

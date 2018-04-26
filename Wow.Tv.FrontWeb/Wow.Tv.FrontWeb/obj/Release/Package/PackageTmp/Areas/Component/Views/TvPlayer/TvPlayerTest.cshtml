@@ -1,0 +1,132 @@
+﻿@using Wow.Tv.FrontWeb.Areas.Component.Models
+@{
+    ViewBag.Title = "TvPlayerTest";
+    string domainUrlFront = System.Configuration.ConfigurationManager.AppSettings["DomainUrlFront"];
+    string scriptUrl = System.Configuration.ConfigurationManager.AppSettings["WowTvScript"];
+
+    TvPlayerModel tvPlayerParameter = new TvPlayerModel();
+    tvPlayerParameter.PlayType = TvPlayTypeModel.ByScript;
+    tvPlayerParameter.Width = 600;
+    tvPlayerParameter.Height = 380;
+    tvPlayerParameter.FloatingMode = true;
+}
+<script type="text/javascript" src="@scriptUrl/jquery-1.10.2.min.js"></script>
+@*<script type="text/javascript" src="@scriptUrl/jquery-1.10.2.js"></script>*@
+<script type="text/javascript" src="@scriptUrl/jquery.blockUI.js"></script>
+<script type="text/javascript" src="@scriptUrl/Common.js"></script>
+
+<h2>TvPlayerTest</h2>
+
+<script type="text/javascript">
+    function PopupLiveTv() {
+        PopupPlayLiveTv();
+        return false;
+    }
+    function PopupLiveAudio() {
+        PopupPlayLiveAudio();
+        return false;
+    }
+    function PopupTvReplay() {
+        PopupPlayTvReplay($("#popupTvReplayNum").val());
+        return false;
+    }
+    function PopupVod() {
+        PopupPlayVod($("#popupVodNum").val());
+        return false;
+    }
+    function ByScriptLiveTv() {
+        TvPlayer.PlayLiveTv();
+        return false;
+    }
+    function ByScriptLiveAudio() {
+        TvPlayer.PlayLiveAudio();
+        return false;
+    }
+    function ByScriptTvReplay() {
+        TvPlayer.PlayTvReplay($("#tvReplayNum").val());
+        return false;
+    }
+    function ByScriptVod() {
+        TvPlayer.PlayVod($("#vodNum").val());
+        return false;
+    }
+    function ByScriptFullScreen() {
+        TvPlayer.FullScreen();
+    }
+    function ByScriptResize() {
+        TvPlayer.Resize($("#sizeWidth").val(), $("#sizeHeight").val());
+    }
+</script>
+<h1>팝업</h1><br /><br />
+<a href="#" onclick="PopupLiveTv(); return false;">실시간 TV</a><br />
+<a href="#" onclick="PopupLiveAudio(); return false;">실시간 AUDIO</a><br />
+<a href="#" onclick="PopupTvReplay(); return false;">TV 다시보기</a><input type="text" id="popupTvReplayNum" value="104204" /><br />
+<a href="#" onclick="PopupVod(); return false;">VOD영상</a><input type="text" id="popupVodNum" value="273215" /><br />
+<br /><br /><br /><br />
+
+<h1>스크립트제어</h1><br /><br />
+<a onclick="ByScriptLiveTv(); return false;">실시간 TV</a><br />
+<a onclick="ByScriptLiveAudio(); return false;">실시간 AUDIO</a><br />
+<a onclick="ByScriptTvReplay(); return false;">TV 다시보기</a>, NUM: <input type="text" id="tvReplayNum" style="width:300px; max-width: 300px;" value="104267" /><br />
+<a onclick="ByScriptVod(); return false;">VOD</a>, NUM: <input type="text" id="vodNum" style="width:300px; max-width: 300px;" value="273228" /><br />
+
+<a onclick="ByScriptResize();">사이즈조절</a>, Width: <input type="text" id="sizeWidth" style="width:300px; max-width: 300px;" value="700" />, Height: <input type="text" id="sizeHeight" style="width:300px; max-width: 300px;" value="700" />
+
+@Html.Partial("TvPlayer", tvPlayerParameter)
+
+<br /><br /><br />
+<a onclick="ByScriptFullScreen();">풀스크린</a><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<!--
+http://cdnvod.wowtv.co.kr:8080/Program/4revolution/4revolution020170626.mp4
+-->

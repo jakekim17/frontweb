@@ -1,0 +1,48 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@model ListModel<usp_web_usa_adr_Result>
+@{
+    ViewBag.Title = "USAADRTotalList";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+    Layout = null;
+}
+<script src="@wowTvScript/Finance/finance_common.js"></script>
+<script src="@wowTvScript/Finance/WorldStock/USAADRTotalList.js"></script>
+<!-- Table -->
+<input type="hidden" id="currentMenuSeq" value="@currentMenuSeq" />
+
+<p class="time-txt">현지시각 2017-07-27 13:32 기준</p>
+<div class="section-area">
+    <div class="table-type1 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+                <col style="width:21%">
+                <col style="width:21%">
+                <col style="width:21%">
+            </colgroup>
+            <tbody>
+                @foreach (var item in Model.ListData)
+                {
+                    <tr>
+                        <td><a href="javascript:void(0)" class="detail">@item.PART_NAME (@item.U_GROUP_NAME)<span class="icon tbl-arrow"></span></a>                            
+                            <input type="hidden" id="partName" value="@item.PART_NAME" />
+                        </td>
+                        <td class="num">@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                        <td class="num">@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                        <td class="num">@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                        
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <form id="frmList_USAADDRList">
+            <input type="hidden" id="currentEngPartName" name="currentEngPartName2" />
+            <input type="hidden" name="CurrentMenuSeq" id="CurrentMenuSeq" value="@Request["menuSeq"]" />
+        </form>
+    </div>
+</div>

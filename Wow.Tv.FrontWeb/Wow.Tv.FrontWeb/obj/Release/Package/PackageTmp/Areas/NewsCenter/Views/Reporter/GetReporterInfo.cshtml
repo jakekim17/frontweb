@@ -1,0 +1,140 @@
+﻿
+@{
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string uploadWebPathRoot = AppState["UploadWebPathRoot"].ToString();
+}
+
+<script src="@wowTvScript/NewsCenter/Reporter/GetReporterInfo.js"></script>
+
+<div class="popup-type1" style="display:block;">
+    <div class="inner" id="divReporterInfo">
+        <!-- title -->
+        <h1 class="title">기자 정보 입력</h1>
+        <!-- // title -->
+        <a href="#none" class="pop-close-btn btnClose">닫기</a>
+        <!-- content -->
+        <div class="content-box">
+
+            <div class="list-type1">
+                <form id="frmReporterInfo">
+                    <ul>
+                        <li>
+                            <strong>프로필<br>이미지</strong>
+                            <!-- input file -->
+                            <div class="file-box">
+                                @{
+                                    if (Model != null && Model.IMAGE_URL != null)
+                                    {
+                                        var splitURL = Model.IMAGE_URL.Split('/');
+                                        <input type="text" class="file-name" name="txtImgURL" readonly="readonly" style="width:330px;"
+                                                value="@(Model.IMAGE_URL == "no_img_reporter.gif" ? "" : splitURL[splitURL.Length - 1])">
+                                    }
+                                    else
+                                    {
+                                        <input type="text" class="file-name" name="txtImgURL" readonly="readonly" style="width:330px;">
+                                    }
+                                }
+                                <label for="uploadBtn" class="btn-file" style="height:24px;">찾아보기</label>
+                                <input type="file" id="uploadBtn" class="upload-btn" name="IMAGE_URL">
+                            </div>
+                            <!-- // input file -->
+                            <div class="ir-photo">
+                                <img  id="reporterImg" src="@uploadWebPathRoot@Model.IMAGE_URL" alt="기자 이미지"/>
+                            </div>
+                            <p class="notice-txt">이미지 사이즈 : 160 × 160(px)</p>
+                        </li>
+                        <li>
+                            <strong>이름</strong>
+                            <input type="text" style="width:100%" readonly="readonly" value="@Model.USER_NM">
+                        </li>
+                        <li>
+                            <strong>부서</strong>
+                            <input type="text" style="width:100%" readonly="readonly" value="@Model.DEPT_NM">
+                        </li>
+                        <li>
+                            <strong>이메일</strong>
+                            <input type="text" style="width:100%" readonly="readonly" name="EMAIL" value="@Model.EMAIL">
+                        </li>
+                        <li>
+                            <strong>페이스북</strong>
+                            <input type="text" style="width:400px" name="FACEBOOK_URL" value="@Model.FACEBOOK">
+                                @if (Model.FACEBOOK_VIEW_YN == "Y")
+                                {
+                                    <label class="checkbox checked">
+                                        <input type="checkbox" name="FACEBOOK_VIEW_YN" value="Y" checked>
+                                        노출
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="FACEBOOK_VIEW_YN" value="Y">
+                                        노출
+                                    </label>
+                                }
+                        </li>
+                        <li>
+                            <strong>트위터</strong>
+                            <input type="text" style="width:400px" name="TWITTER_URL" value="@Model.TWITTER">
+                            @if (Model.TWITTER_VIEW_YN == "Y")
+                            {
+                                <label class="checkbox checked">
+                                    <input type="checkbox" name="TWITTER_VIEW_YN" value="Y" checked>
+                                    노출
+                                </label>
+                            }
+                            else
+                            {
+                                <label class="checkbox">
+                                    <input type="checkbox" name="TWITTER_VIEW_YN" value="Y">
+                                    노출
+                                </label>
+                            }
+                        </li>
+                        <li>
+                            <strong>블로그</strong>
+                            <input type="text" style="width:400px" name="BLOG_URL" value="@Model.BLOG">
+                            @if (Model.BLOG_VIEW_YN == "Y")
+                            {
+                                <label class="checkbox checked">
+                                    <input type="checkbox" name="BLOG_VIEW_YN" value="Y" checked>
+                                    노출
+                                </label>
+                            }
+                            else
+                            {
+                                <label class="checkbox">
+                                    <input type="checkbox" name="BLOG_VIEW_YN" value="Y">
+                                    노출
+                                </label>
+                            }
+                        </li>
+                        <li>
+                            <strong>자기소개</strong>
+                            <div class="inp-area text-area">
+                                @{
+                                    var txtContents = "";
+                                    if (@Model.INTRODUCTION != null)
+                                    {
+                                        txtContents = @Model.INTRODUCTION.Replace("<br>", "\r\n");
+                                    }
+                                    <textarea style="height:300px;" id="txtIntro">@txtContents</textarea>
+                                }
+                                <span class="type-limit" id="lenCheck">0/500</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <input type="hidden" name="REPORTER_ID" value="@Model.REPORTER_ID"/>
+                    <textarea style="display:none;" name="INTRODUCTION" id="hidTextArea"></textarea>
+                </form>
+            </div>
+            <div class="box-button">
+                <span class="btn-type1" id="btnSaveInfo"><a href="#none">저장</a></span>
+                <span class="btn-type3 btnClose"><a href="#none">취소</a></span>
+            </div>
+        </div>
+        <!-- content -->
+    </div>
+</div>
+

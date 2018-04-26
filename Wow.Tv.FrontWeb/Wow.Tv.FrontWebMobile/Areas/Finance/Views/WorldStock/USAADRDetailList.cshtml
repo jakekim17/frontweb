@@ -1,0 +1,53 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@model ListModel<USP_WOWNET_USA_DETAIL_Result>
+@{
+    ViewBag.Title = "USAADRDetailList";
+    string currentMenuSeq = Request["menuSeq"];
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section scripts{
+
+    <script src="@wowTvScript/Finance/WorldStock/USAADRDetailList.js"></script>
+}
+
+<div class="section-area">
+    <h2>주요업종지수</h2>
+</div>
+<!-- // title area -->
+<div class="stock-business type02">
+    <a href="#" class="ico-prev" id="btnPrev"><span class="icon prev"></span></a>
+    <strong class="title">@ViewBag.currentEngPartName2</strong>    
+</div>
+<form id="frm_USAADRDetail">
+    <input type="hidden" id="currentMenuSeq" value="@currentMenuSeq" />
+    <input type="hidden" id="menuTab" name="menuTab" value="USAADR" />
+</form>
+
+<div class="section-area">
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+
+                @foreach (var item in Model.ListData)
+                {
+                    <tr>
+                        <td class="txt-l">@item.PART_NAME</td>
+                        <td>@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                        <td>@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                        <td>@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP) </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

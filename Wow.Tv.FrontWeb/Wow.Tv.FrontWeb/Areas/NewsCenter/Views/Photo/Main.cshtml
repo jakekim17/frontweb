@@ -1,0 +1,154 @@
+﻿@using Wow
+@using Wow.Tv.FrontWeb.Areas.NewsCenter.Models
+
+@model PhotoMainModel
+
+@{
+    Layout = "~/Views/Shared/_MainLayout2.cshtml";
+    AppState["BodyClass"] = "photo";
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/photo.css">
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/Photo/Main.js"></script>
+}
+
+<!-- 이슈 갤러리 start -->
+<div class="box-img-slider photo-bg">
+    <div class="main_hot_sale">
+        <div class="new-slider type02">
+            <div class="bn" id="PhotoNewsSlider">
+                <ul class="swiper-wrapper">
+                    @foreach (var item in Model.topPhotoList)
+                    {
+                        <li class="swiper-slide">
+                            <a href="javascript:NewsCommon.GoNewsDetailView('photo','','','@item.ARTICLEID')">
+                                <dl>
+                                    <dt>
+                                        @item.TITLE
+                                    </dt>
+                                    <dd>
+                                        <span class="photo">
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("34M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("34M")'" alt="">
+                                        </span>
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <a href="#" class="swiper-bn-left">이전 배너 보기</a>
+        <a href="#" class="swiper-bn-right">다음 배너 보기</a>
+    </div>
+</div>
+<!--// 이슈 갤러리 end -->
+
+<div class="wrap">
+    <!-- Content Area -->
+    <div class="contain-entertain main">
+
+        <div class="tab-type1 mgb_0" id="mainTabArea">
+            <ul class="col2">
+                <li class="on"><a href="javascript:void(0);">포토</a></li>
+                <li><a href="javascript:void(0);">영상</a></li>
+            </ul>
+        </div>
+
+        <div class="box-img-gallery" id="galleryArea">
+            @foreach (var item in Model.photoTabList)
+            {
+                <a href="javascript:NewsCommon.GoNewsDetailView('photo','','','@item.ARTICLEID')">
+                    <img src="@Wow.WowExtensionMethod.NewsThumbnailPath("34M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("34M")'" alt="">
+                    @if(item.VIEW_COUNT > 100)
+                    {
+                        <span class="box-broadcast bg-red">BEST</span>
+                    }
+                    <p>@item.TITLE</p>
+                </a>
+            }
+        </div>
+        <div class="event-picture mt30" id="vodArea" style="display:none">
+            @foreach (var item in Model.vodTabList)
+            {
+                <div>
+                    <a href="javascript:NewsCommon.GoNewsDetailView('vod','','','@item.ARTICLEID')">
+                        <img src="@Wow.WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("16M")'" alt="">
+                        <span class="icon-play medium"></span>
+                        <a href="#none">
+                            @if (item.VIEW_COUNT > 100)
+                            {
+                                <span class="box-broadcast bg-red">BEST</span>
+                            }
+                            @item.TITLE
+                        </a>
+                    </a>
+                </div>
+            }
+        </div>
+
+
+        <div class="clearFix">
+
+            <!-- 많이 본 영상 start -->
+            <div class="box-view-photo">
+                <h2 class="title01">많이 본 영상</h2>
+                <div>
+                    @foreach (var item in Model.mostViewedList)
+                    {
+                        <a href="javascript:NewsCommon.GoNewsDetailView('vod','','','@item.ARTICLEID')">
+                            <div>
+                                <img src="@Wow.WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("16M")'" alt="">
+                                <span class="icon-play medium"></span>
+                            </div>
+                            @if (item.VIEW_COUNT > 99)
+                            {
+                                <span class="box-broadcast bg-red">BEST</span>
+                            }
+                            <p class="txt">@item.TITLE</p>
+                        </a>
+                    }
+                </div>
+            </div>
+            <!--// 많이 본 영상 end -->
+            <!-- 인기포토 start -->
+            <div class="box-best-photo img-over-chann">
+                <h2 class="title01">인기포토</h2>
+                <div class="img-area">
+                    @{
+                        var i = 0;
+                    }
+                    @foreach (var item in Model.bestPhotoList)
+                    {
+                        if (i == 0)
+                        {
+                            <div class="img-b">
+                                <a href="javascript:NewsCommon.GoNewsDetailView('photo','','','@item.ARTICLEID')">
+                                    <img src="@Wow.WowExtensionMethod.NewsThumbnailPath("11B", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" alt="@item.TITLE" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("11B")'">
+                                </a>
+                            </div>
+                        }
+                        <div class="img-s">
+                            <a href="javascript:NewsCommon.GoNewsDetailView('photo','','','@item.ARTICLEID')">
+                                <img src="@Wow.WowExtensionMethod.NewsThumbnailPath("11B", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" alt="@item.TITLE" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("11B")'">
+                            </a>
+                        </div>
+
+                        i++;
+                    }
+                </div>
+            </div>
+            <!--// 인기포토 end -->
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,123 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@{
+    Layout = null;
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+}
+
+<table>
+    <caption>전체 상세</caption>
+    <colgroup>
+        <col style="width:12%;">
+        <col style="width:22%;">
+        <col style="width:22%;">
+        <col style="width:22%;">
+        <col style="width:22%;">
+    </colgroup>
+    <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            string[] arrData = Model[i];
+            var tmpIco = "";
+            var tmpIcoText = "";
+            var icon = "";
+
+
+            //급등
+            if (arrData[6] == "1")
+            {
+                icon = "<span class='font-color04'>급등</span>";
+            }
+
+            //매매신호
+            if (arrData[7] != "")
+            {
+                switch (arrData[7])
+                {
+                    case "1": //단기매수신호
+                        tmpIco = "icon buy";
+                        tmpIcoText = "매수";
+                        break;
+                    case "2": //단기매수신호후 보유
+                        tmpIco = "icon owns";
+                        tmpIcoText = "보유";
+                        break;
+                    case "3"://단기매도
+                        tmpIco = "icon sell";
+                        tmpIcoText = "매도";
+                        break;
+                    case "4"://단기매수신호후진행
+                        tmpIco = "icon prog";
+                        tmpIcoText = "진행";
+                        break;
+                }
+            }
+
+
+            @*<tr>
+                <td>@arrData[8]</td>
+                <td><span class="@tmpIco">@tmpIcoText</span></td>
+                <td class="text"><a href="#none" onclick="DomesticStockIndex.DomesticStockDetailGo('@DomainUrlFront', '@arrData[0]')">@arrData[1]</a></td>
+                <td class="number">@Html.PublishCurrencyFormat(arrData[2])</td>
+                <td class="number">@Html.PublishChgPriceFormat2(arrData[3], arrData[4])</td>
+                <td class="number">@Html.PublishChgRateFormat(System.Convert.ToDecimal(arrData[5]))</td>
+                <td>@Html.PublishCurrencyFormat(arrData[9])@Html.Raw(@icon)</td>
+            </tr>*@
+
+            <tr>
+                @*<td><span class="num">@arrData[8]</span></td><!--순번-->
+                <td><a href="#none" onclick="DomesticStockIndex.DomesticStockDetailGo('@DomainUrlFront', '@arrData[0]')">@arrData[1]</a></td><!--종목명-->
+                <td><span class="text-icon type06 trade"><span class="@tmpIco"></span>@tmpIcoText</span></td><!--현재가-->
+                <td class="txt-r"><span class="num">@Html.PublishCurrencyFormat(arrData[2])</span></td>
+                <td>@Html.PublishChgPriceFormat2(arrData[3], arrData[4])</td>
+                <td>@Html.PublishChgRateFormat(System.Convert.ToDecimal(arrData[5]))</td>*@
+
+                <td><span class="num">@arrData[8]</span></td>
+                <td class="txt-l"><a href="#none" onclick="DomesticStockIndex.DomesticStockDetailGo('@DomainUrlFront', '@arrData[0]')">@arrData[1]</a></td>
+                <td class="txt-r"><span class="num">@Html.PublishCurrencyFormat(arrData[2])</span></td>
+                <td class="txt-r">@Html.PublishChgPriceFormat2(arrData[3], arrData[4])</td>
+                <td class="txt-r">
+                    @Html.PublishChgRateFormat(System.Convert.ToDecimal(arrData[5]))
+                    <span class="text-icon type06 trade"><span class="@tmpIco"></span>@tmpIcoText</span>
+                </td>
+
+            </tr>
+            @*<tr>
+                <td><span class="num">2</span></td>
+                <td class="txt-l">신라젠</td>
+                <td><span class="text-icon type06 trade"><span class="icon owns"></span>보유</span></td>
+                <td><span class="num">2,757</span></td>
+                <td><span class="stock down"> 5</span></td>
+                <td><span class="stock minus"> 0.19%</span></td>
+            </tr>
+            <tr>
+                <td><span class="num">3</span></td>
+                <td class="txt-l">경동제약</td>
+                <td><span class="text-icon type06 trade"><span class="icon sell"></span>매도</span></td>
+                <td><span class="num">92,200</span></td>
+                <td><span class="stock down"> 6,500</span></td>
+                <td><span class="stock minus"> 6.59%</span></td>
+            </tr>
+            <tr>
+                <td><span class="num">4</span></td>
+                <td class="txt-l">고려신용정보</td>
+                <td><span class="text-icon type06 trade"><span class="icon prog"></span>진행</span></td>
+                <td><span class="num">4,340</span></td>
+                <td><span class="stock up"> 110</span></td>
+                <td><span class="stock plus"> 2.47%</span></td>
+            </tr>
+            <tr>
+                <td><span class="num">5</span></td>
+                <td class="txt-l">해덕파워웨이</td>
+                <td><span class="text-icon type06 trade"><span class="font-color04">급 </span>급등</span></td>
+                <td><span class="num">9,800</span></td>
+                <td><span class="stock up"> 80</span></td>
+                <td><span class="stock plus"> 0.82%</span></td>
+            </tr>*@
+        }
+        
+    </tbody>
+</table>
+<p class="txt-exp mt10 txt-r">&lt;랭키스코어 : <em class="num">1000</em>점&gt;</p>
+
+
+

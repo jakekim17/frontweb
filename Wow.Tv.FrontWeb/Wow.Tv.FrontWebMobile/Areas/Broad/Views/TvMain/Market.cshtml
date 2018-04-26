@@ -1,0 +1,100 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model List<NUP_BROAD_MAIN_ARTICLE_SELECT_Result>
+
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+}
+
+
+
+
+<div class="list-program type2">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="program-area">
+                    <div class="photo-area">
+                        <a href="#" onclick="return TvMainIndex.OpenNews('@item.ARTIDX');">
+                            <img src="http://vodimg.wowtv.co.kr/@item.ROOTDIR/@item.IMG" alt="">
+                        </a>
+                    </div>
+                    <div class="info-area">
+                        <strong class="tit"><a href="javascript:void();" onclick="return TvMainIndex.OpenNews('@item.ARTIDX');">@WowExtensionMethod.SubStringWidthPad(item.ARTTITLE, 50)</a></strong>
+                    </div>
+                </div>
+            </li>
+        }
+
+        @*<li>
+            <div class="program-area">
+                <div class="photo-area">
+                    <a href="#none">
+                        <img src="@wowTvStyle/Images/temp/temp_img_tv_main4.jpg" alt="">
+                    </a>
+                </div>
+                <div class="info-area">
+                    <strong class="tit"><a href="#none">삼성전자 <span class="font-color06 num">(066570)</span></a></strong>
+                    <div class="btn-area news-util">
+                        <a href="#none" class="btn type04">종목보기</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="program-area">
+                <div class="photo-area">
+                    <a href="#none">
+                        <img src="@wowTvStyle/Images/temp/temp_img_tv_main4.jpg" alt="">
+                    </a>
+                </div>
+                <div class="info-area">
+                    <strong class="tit"><a href="#none">삼성전자 <span class="font-color06 num">(066570)</span></a></strong>
+                    <div class="btn-area news-util">
+                        <a href="#none" class="btn type04">종목보기</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="program-area">
+                <div class="photo-area">
+                    <a href="#none">
+                        <img src="@wowTvStyle/Images/temp/temp_img_tv_main4.jpg" alt="">
+                    </a>
+                </div>
+                <div class="info-area">
+                    <strong class="tit"><a href="#none">삼성전자 <span class="font-color06 num">(066570)</span></a></strong>
+                    <div class="btn-area news-util">
+                        <a href="#none" class="btn type04">종목보기</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="program-area">
+                <div class="photo-area">
+                    <a href="#none">
+                        <img src="@wowTvStyle/Images/temp/temp_img_tv_main4.jpg" alt="">
+                    </a>
+                </div>
+                <div class="info-area">
+                    <strong class="tit"><a href="#none">삼성전자 <span class="font-color06 num">(066570)</span></a></strong>
+                    <div class="btn-area news-util">
+                        <a href="#none" class="btn type04">종목보기</a>
+                    </div>
+                </div>
+            </div>
+        </li>*@
+    </ul>
+</div>
+
+

@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill" />
+  <xs:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" />
+  <xs:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Biz.Member" />
+  <xs:element name="EncryptCheck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="plainText" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EncryptCheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="EncryptCheckResult" nillable="true" type="q1:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill" minOccurs="0" name="LoginCheckResult" nillable="true" type="q2:tblUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckEncrypt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="encryptedUserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="encryptedPassword" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckEncryptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill" minOccurs="0" name="LoginCheckEncryptResult" nillable="true" type="q3:tblUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckTest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckTestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill" minOccurs="0" name="LoginCheckTestResult" nillable="true" type="q4:tblUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckByKakao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="kakaoId" type="xs:long" />
+        <xs:element minOccurs="0" name="kakaoEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="kakaoNickname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckByKakaoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill" minOccurs="0" name="LoginCheckByKakaoResult" nillable="true" type="q5:tblUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckByFacebook">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="facebookId" type="xs:long" />
+        <xs:element minOccurs="0" name="facebookEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="facebookName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckByFacebookResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill" minOccurs="0" name="LoginCheckByFacebookResult" nillable="true" type="q6:tblUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckByNaver">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="naverId" type="xs:long" />
+        <xs:element minOccurs="0" name="naverEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="naverName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginCheckByNaverResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill" minOccurs="0" name="LoginCheckByNaverResult" nillable="true" type="q7:tblUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancyCheckMember">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="mobile1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile3" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancyCheckMemberResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="AuthDormancyCheckMemberResult" nillable="true" type="q8:AuthDormancyCheckMemberResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancyIpinInit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="returnUrl" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancyIpinInitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="AuthDormancyIpinInitResult" nillable="true" type="q9:IpinInitResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancyIpinCheck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="encryptedData" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameter1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameter2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameter3" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancyIpinCheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="AuthDormancyIpinCheckResult" nillable="true" type="q10:AuthDormancyCheckIpinResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancySmsInit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="returnUrl" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="errorUrl" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancySmsInitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="AuthDormancySmsInitResult" nillable="true" type="q11:SmsInitResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancySmsCheck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="encryptedData" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthDormancySmsCheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="AuthDormancySmsCheckResult" nillable="true" type="q12:AuthDormancyCheckSmsResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MobileSendSms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="mobile1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile3" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MobileSendSmsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MobileSendSmsResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdSmsInit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="returnUrl" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="errorUrl" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdSmsInitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindIdSmsInitResult" nillable="true" type="q13:SmsInitResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdCheckSms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="encryptedData" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdCheckSmsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindIdCheckSmsResult" nillable="true" type="q14:FindIdResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdIpinInit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="returnUrl" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdIpinInitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindIdIpinInitResult" nillable="true" type="q15:IpinInitResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdCheckIpin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="encryptedData" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameter1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameter2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameter3" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdCheckIpinResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindIdCheckIpinResult" nillable="true" type="q16:FindIdResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdCheckByMobileInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile3" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdCheckByMobileInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindIdCheckByMobileInfoResult" nillable="true" type="q17:FindIdResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdCheckBySSNoInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ssno" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindIdCheckBySSNoInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindIdCheckBySSNoInfoResult" nillable="true" type="q18:FindIdResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordSmsInit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="returnUrl" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="errorUrl" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordSmsInitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindPasswordSmsInitResult" nillable="true" type="q19:SmsInitResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordCheckSms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="encryptedData" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordCheckSmsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindPasswordCheckSmsResult" nillable="true" type="q20:FindPasswordResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordIpinInit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="returnUrl" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordIpinInitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindPasswordIpinInitResult" nillable="true" type="q21:IpinInitResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordCheckIpin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="encryptedData" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameter1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameter2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameter3" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordCheckIpinResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindPasswordCheckIpinResult" nillable="true" type="q22:FindPasswordResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordCheckByMobileInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile3" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPasswordCheckByMobileInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" minOccurs="0" name="FindPasswordCheckByMobileInfoResult" nillable="true" type="q23:FindPasswordResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PasswordInitialize">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PasswordInitializeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Biz.Member" minOccurs="0" name="PasswordInitializeResult" nillable="true" type="q24:SetPasswordResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendTempPasswordToEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendTempPasswordToEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Biz.Member" minOccurs="0" name="SendTempPasswordToEmailResult" nillable="true" type="q25:SetPasswordResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyPassword">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyPasswordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Biz.Member" minOccurs="0" name="ModifyPasswordResult" nillable="true" type="q26:SetPasswordResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginLog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userNumber" type="xs:int" />
+        <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginLogResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DomainLoginLog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userNumber" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="webType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="webFrom" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="webServerName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="loginSite" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="loginDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="clientIp" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="requestUrl" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DomainLoginLogResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,114 @@
+﻿@using Wow.Tv.Middle.Model.Common
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string uploadWebPathRoot = AppState["UploadWebPathRoot"].ToString();
+
+
+    SnsLoginParameter snsLoginParameter = new SnsLoginParameter();
+    snsLoginParameter.LoginActionType = SnsLoginActionType.AutoEasyLogin;
+    snsLoginParameter.NaverReturnFunction = "GetAWordToReporter.SnsPopupResult";
+    snsLoginParameter.KakaoReturnFunction = "GetAWordToReporter.SnsPopupResult";
+    snsLoginParameter.FacebookReturnFunction = "GetAWordToReporter.SnsPopupResult";
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/Reporter/ReporterDetail.js"></script>
+    <script src="@wowTvScript/NewsCenter/Reporter/GetAWordToReporter.js"></script>
+    
+    <script>
+        var tabType = '@Request["tabType"]';
+        var reporterId = '@(Model != null ? Model.REPORTER_ID : "")';
+        var reporterName = '@(Model != null ? Model.USER_NM : "")';
+    </script>
+}
+@section modalDiv{
+    <div id="divSubScriptPopup" class="modal fade" role="dialog"></div>
+    <div id="divSharesPopup" class="modal fade" role="dialog"></div>
+}
+
+<form id="frm">
+    <input type="hidden" name="SearchId" id="SearchId" value="@ViewBag.Condition.SearchId" />
+    <input type="hidden" name="SearchName" value="@ViewBag.Condition.SearchName" />
+    <input type="hidden" id="CurrentMenuSeq" name="CurrentMenuSeq" value="@Request["menuSeq"]" />
+    <input type="hidden" name="SearchText" value="@Model.REPORTER_ID" />
+    <input type="hidden" name="ReporterId" value="@Model.REPORTER_ID" />
+    <input type="hidden" name="CurrentIndex" id="currentIndex" value="1" />
+    <input type="hidden" name="TotalDataCount" id="totalDataCount" value="0" />
+    <input type="hidden" name="PageSize" id="PageSize" value="20" />
+    <input type="hidden" name="IsAdd" id="isAdd" />
+    <input type="hidden" name="Email" value="@Model.EMAIL" />
+    <input type="hidden" name="ReporterName" value="@Model.USER_NM" />
+</form>
+
+<div class="reporter-area">
+    <!-- 기자 정보 -->
+    <div class="reporter-info">
+        <!-- 사진 -->
+        <div class="photo"><img src="@uploadWebPathRoot@Model.IMAGE_URL" alt="기자 이미지"></div>
+        <!-- // 사진 -->
+        <!-- 사진 -->
+        <dl class="info">
+            <dt>@string.Format(" {0} {1}", Model.USER_NM, Model.POSITION)</dt>
+            <dd>@Model.DEPT_NM</dd>
+        </dl>
+        <!-- // 사진 -->
+        @if (LoginHandler.IsLogin && LoginHandler.CurrentLoginUser.UserId == Model.USER_ID)
+        {
+            <div class="btn-area">
+                <a href="javascript:ReporterDetail.GoReporterInfo();" class="btn type04 medium">정보수정</a>
+            </div>
+        }
+    </div>
+    <div class="reporter-text">
+        @MvcHtmlString.Create(Model.INTRODUCTION)
+    </div>
+    <!-- // 기자 정보 -->
+    <!-- SNS 정보 -->
+    <ul class="news-sns">
+        <li><a href="javascript:ReporterDetail.GoEmailForm()" class="sns-icon"></a></li>
+        @if (Model.FACEBOOK_VIEW_YN == "Y")
+        {
+            <li><a href="@Model.FACEBOOK" class="sns-icon type03" target="_blank"></a></li>
+        }
+        @if (Model.TWITTER_VIEW_YN == "Y")
+        {
+            <li><a href="@Model.TWITTER" class="sns-icon type04" target="_blank"></a></li>
+        }
+
+        @if (Model.BLOG_VIEW_YN == "Y")
+        {
+            <li><a href="@Model.BLOG" class="sns-icon type05" target="_blank"></a></li>
+        }
+    </ul>
+    <!-- // SNS 정보 -->
+    <div class="btn-area reporter">
+        <a href="javascript:ReporterDetail.SaveRecommend('@Model.REPORTER_ID')" class="btn type04 heart">
+            <span class="icon">1</span>추천해요<strong id="recommendCnt">0</strong>
+        </a>
+        <a href="javascript:void(0);" class="btn type04 pin" id="btnMyPin"><span class="icon">1</span>핀하기</a>
+        <a href="javascript:void(0);" class="btn btnSubScribe">
+            @if (ViewBag.SubScript != null && ViewBag.SubScript.SEQ > 0)
+            {
+                <span class="icon check" id="btnCancleSub">1</span> @:구독취소
+            }
+            else
+            {
+                <span class="icon" id="btnSubScribe">1</span> @:구독하기
+            }
+        </a>
+    </div>
+</div>
+<!-- // 기자 영역 -->
+<div class="tab-area">
+    <ul>
+        <li id="latestArt" class="btnSubTab"><a href="javascript:ReporterDetail.GetLatestArtList(0)">최신기사</a></li>
+        <li id="aWordReporter" class="btnSubTab"><a href="javascript:ReporterDetail.GetAWordToReporter(0)">기자에게 한마디</a></li>
+    </ul>
+</div>
+<div class="news-list-box" id="divContents">
+</div>
+
+@Html.Partial("~/Areas/Component/Views/SnsLogin/SnsLogin.cshtml", snsLoginParameter)

@@ -1,0 +1,51 @@
+﻿@using Wow
+
+@{
+    Layout = null;
+}
+
+
+@if (Model != null)
+{
+    <div class="left-box">
+        @foreach (var item in Model)
+        {
+            if (Model.Count - 1 == Model.IndexOf(item))
+            {
+                break;
+            }
+            else
+            {
+                <a href="javascript:NewsCommon.GoNewsDetailView('card','','','@item.ARTICLEID')">
+                    <span class="box-wrap">
+                        @if (item.SECTION_NAME != null)
+                        {
+                            <span class="box-icon01 type2">@item.SECTION_NAME</span>
+                        }
+                        <img src="@WowExtensionMethod.NewsThumbnailPath("11M", item.THUMBNAIL_FILENM, null, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11M")'" alt="">
+                        <span class="title">
+                            @item.TITLE
+                        </span>
+                    </span>
+                </a>
+            }
+        }
+    </div>
+    <div class="right-box">
+        @{var index = Model.Count - 1;}
+        <a href="javascript:NewsCommon.GoNewsDetailView('card','','','@Model[index].ARTICLEID')">
+            <span class="box-wrap">
+                @if (@Model[index].SECTION_NAME != null)
+                {
+                    <span class="box-icon01 type2">@Model[index].SECTION_NAME</span>
+                }
+                <img src="@WowExtensionMethod.NewsThumbnailPath("11B", Model[index].THUMBNAIL_FILENM, null, Model[index].IMAGE_DIR, Model[index].IMAGE_FILE, Model[index].ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11B")'" alt="">
+                <span class="title">
+                    @Model[index].TITLE
+                </span>
+            </span>
+        </a>
+    </div>
+}
+
+      

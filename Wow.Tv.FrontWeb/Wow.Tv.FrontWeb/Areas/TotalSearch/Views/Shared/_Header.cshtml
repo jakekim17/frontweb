@@ -1,0 +1,71 @@
+﻿@using Wow.Tv.FrontWeb.MenuService;
+@using Wow.Tv.Middle.Model.Common;
+@using Wow.Tv.Middle.Model.Db49.wowtv;
+@using Wow.Tv.Middle.Model.Db49.wowtv.Menu;
+
+@{
+    Layout = null;
+}
+
+
+
+<div class="contain-util">
+    <div class="inner">
+        <!-- Relation Links -->
+        <div class="box-links">
+            <a href="http://www.wownet.co.kr/" target="_blank">와우넷</a>
+            <a href="http://www.wowfa.co.kr/" target="_blank">와우파</a>
+            <a href="http://www.wowstar.co.kr" target="_blank">WOW스타</a>
+            <a href="@System.Configuration.ConfigurationManager.AppSettings["MobileUrl"]" target="_blank">모바일</a>
+            <a href="http://www.tv10.co.kr" target="_blank">티비텐플러스</a>
+            <a href="http://kvina.wowtv.co.kr" target="_blank">K-VINA 비즈센터</a>
+        </div>
+        <!-- //Relation Links -->
+        <!-- Member Links -->
+        <div class="box-member">
+            <a id="Header_btnGoLogOut" style="display:none;" href="@System.Configuration.ConfigurationManager.AppSettings["UserLogoutUrl"]?returnurl=@Html.Raw(HttpUtility.UrlEncode(Request.Url.AbsoluteUri))">로그아웃</a>
+            <a id="Header_btnGoMyPage" style="display:none;" href="@System.Configuration.ConfigurationManager.AppSettings["DomainUrlMyPage"]">마이페이지</a>
+
+            <a id="Header_btnGoLogIn" style="display:none;" href="@System.Configuration.ConfigurationManager.AppSettings["UserLoginUrl"]?returnurl=@Html.Raw(HttpUtility.UrlEncode(Request.Url.AbsoluteUri))">로그인</a>
+            <a id="Header_btnGoJoin" style="display:none;" href="@System.Configuration.ConfigurationManager.AppSettings["UserJoinUrl"]">회원가입</a>
+            @*<a href="#">원격지원</a>*@
+            <a href="https://help.wowtv.co.kr/IntegratedBoard/Inquiry/Index?menuSeq=497" target="_blank">시민제보</a>
+            <a href="@System.Configuration.ConfigurationManager.AppSettings["DomainUrlHelp"]">고객센터</a>
+            <!-- <a href="#none" class="top-ad-btn"><span>열기</span></a> 2018-01-09 삭제-->
+        </div>
+        <!-- //Member Links -->
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+    $.ajax({
+        type: 'POST',
+        url: "/Login/IsLogin",
+        data: { },
+        success: function (data, textStatus) {
+            $("#Header_btnGoLogOut").hide();
+            $("#Header_btnGoMyPage").hide();
+            $("#Header_btnGoLogIn").hide();
+            $("#Header_btnGoJoin").hide();
+
+            if (data.IsLogin == true) {
+                $("#Header_btnGoLogOut").show();
+                $("#Header_btnGoMyPage").show();
+            }
+            else {
+                $("#Header_btnGoLogIn").show();
+                $("#Header_btnGoJoin").show();
+            }
+        }
+    });
+
+
+</script>
+
+
+

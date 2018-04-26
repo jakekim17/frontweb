@@ -1,0 +1,197 @@
+﻿@using Wow.Tv.FrontWeb.Areas.Finance.Models
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model PredictionChartModel
+@{
+    ViewBag.Title = "DomesticStockDetailPredictionChart";
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string cName = Request["cName"];
+    string chgType = Request["chgType"];
+    string curPrice = Request["curPrice"];
+
+    // 기술적분석 텍스트
+    string tmpAnalysisUrl = "http://wownet3.8080.co.kr:8080/wowsearch.asp?trid=1001&code=" + Model.ArjCode.Replace("A", "");
+}
+<script src="@wowTvScript/Finance/DomesticStock/DomesticDetailPredictionChart.js"></script>
+<!-- 주가 예측 차트 -->
+<div class="section-content">
+    <h2 class="title">검색된 투자의견 종합</h2>
+
+    <div class="box-top-type1">
+        <div class="inner-left">
+            <p class="text-normal">[@cName]의 최근 일주일간 투자의견은 <span class="data-sell">@Html.DomesticStockDetailInvestOpinionFormat(Model.InvestOpinionIdx)</span>의견이 <span class="data-sell">@Model.MaxInvestOpinionCnt</span>건으로 가장 많습니다.</p>
+        </div>
+        <div class="inner-right">
+            <p class="text-state-color">기준일 : @String.Format("{0}년 {1}월 {2}일 0시 0분 0초", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) </p>
+        </div>
+    </div>
+
+    <div class="table-type-row1">
+        <table>
+            <caption></caption>
+            <colgroup>
+                <col width="165">
+                <col>
+            </colgroup>
+            <tr>
+                <th>건수</th>
+                <td>
+                    <ul class="list-type-row col5">
+                        <li>강력매도</li>
+                        <li>매도</li>
+                        <li>중립</li>
+                        <li>매수</li>
+                        <li>강력매수</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>구분</th>
+                <td>
+                    @*0 : 강한매도, 1 매도, 2 중립, 3 매수, 4 강한매수 건수*@
+                    <ul class="list-type-row col5">
+                        <li>@Model.StrongSellCnt</li>
+                        <li>@Model.SellCnt</li>
+                        <li>@Model.MiddleCnt</li>
+                        <li>@Model.BuyCnt</li>
+                        <li>@Model.StrongBuyCnt</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <hr class="division5 no-border">
+
+    <div class="contain-block">
+
+        <div class="box-top-type1">
+            <div class="inner-left">
+                <h2 class="title">주가 미리보기</h2>
+            </div>
+            <div class="inner-right">
+                <p class="text-state-color">본 차트는 현재시각 기준으로 30초 지연된 데이터입니다.</p>
+            </div>
+        </div>
+
+        <div class="tab-type2" id="stockPredictionChartTab">
+            <ul class="col4">
+                <li class="on"><a href="javascript:DomesticDetailPredictionChart.GetHpChart('9101','@Model.ArjCode', '900', '285');">5일 주가예측</a></li>
+                <li><a href="javascript:DomesticDetailPredictionChart.GetHpChart('9102','@Model.ArjCode', '900', '285');">10일 주가예측</a></li>
+                <li><a href="javascript:DomesticDetailPredictionChart.GetHpChart('9103','@Model.ArjCode', '900', '285');">20일 주가예측</a></li>
+                <li><a href="javascript:DomesticDetailPredictionChart.GetHpChart('9201','@Model.ArjCode', '900', '285');">분봉 주가예측</a></li>
+            </ul>
+        </div>
+
+        <hr class="division4 no-border">
+
+        <div class="box-chart" style="height:285px;" id="stockPredictionChart">
+            <!-- 차트영역 -->
+            <img id="imgChart" />
+            <input type="hidden" id="arjCode" value="@Model.ArjCode" />
+        </div>
+       
+        <hr class="division4 no-border">
+
+        <h3 class="title">기술적 분석</h3>
+
+        <div class="box-infor-text">
+            <iframe src="@tmpAnalysisUrl" style="width:100%; height: 175px; border: none;" scrolling="yes"></iframe>
+        </div>
+
+        <hr class="division5 no-border">
+
+        <h3 class="title">매매신호</h3>
+
+        <div class="box-infor-trading">
+            <p class="company">@cName</p>
+            <p class="price">현재가 @Html.PredictionChartPriceFormat(chgType, String.Format("{0:#,##0}", Convert.ToInt32(curPrice)))</p>
+            <div class="detail">
+                <p class="title">@Html.DomesticStockDetailInvestOpinionFormat(Model.InvestOpinionIdx)</p>
+                <dl>
+                    <dt>강력매수</dt>
+                    <dd class="signalCnt">@Model.StrongBuyCnt</dd>
+                </dl>
+                <dl>
+                    <dt>매수</dt>
+                    <dd class="signalCnt">@Model.BuyCnt</dd>
+                </dl>
+                <dl>
+                    <dt>중립</dt>
+                    <dd class="signalCnt">@Model.MiddleCnt</dd>
+                </dl>
+                <dl>
+                    <dt>매도</dt>
+                    <dd class="signalCnt">@Model.SellCnt</dd>
+                </dl>
+                <dl>
+                    <dt>강력매도</dt>
+                    <dd class="signalCnt">@Model.StrongSellCnt</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="box-top-type1">
+            <p class="text-normal">@DateTime.Now.Hour.ToString()시 @DateTime.Now.Minute.ToString()분 현재 자동 검색된 리포트 <span class="data-up" id="signalTotal">00</span>개</p>
+        </div>
+
+
+        <div class="box-infor-text">
+
+            <h4 class="title">강한매도</h4>
+            <div class="list-type1">
+                <ul>
+                    @foreach (var item in Model.StrongSellReport)
+                    {
+                        <li>@item.ToString()</li>
+                    }
+                </ul>
+            </div>
+
+            <hr class="division2 no-border">
+
+            <h4 class="title">매도</h4>
+            <div class="list-type1">
+                <ul>
+                    @foreach(var item in Model.SellReport)
+                    {
+                        <li>@item.ToString()</li>
+                    }
+                    
+                </ul>
+            </div>
+
+            <hr class="division2 no-border">
+
+            <h4 class="title">중립</h4>
+            <div class="list-type1">
+                <ul>
+                    @foreach (var item in Model.MiddleReport)
+                    {
+                        <li>@item.ToString()</li>
+                    }
+                   
+                </ul>
+            </div>
+
+            <hr class="division2 no-border">
+
+            <h4 class="title">매수</h4>
+            <div class="list-type1">
+                <ul>
+                    @foreach(var item in Model.BuyReport)
+                    {
+                        <li>@item.ToString()</li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+<!-- //주가 예측 차트 -->
+
+

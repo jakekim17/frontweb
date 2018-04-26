@@ -1,0 +1,64 @@
+﻿@using Wow.Tv.Middle.Model.Db49.Article.Finance
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Models
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock
+@model NewsViewModel
+@{
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+
+    ViewBag.Title = "DomesticStockDetailStockNewsView";
+    Layout = null;
+
+    //ArticleStockCondition condition = ViewBag.Condition;
+    List<ArticleStock> articleStockList = ViewBag.articleStockList;
+}
+
+<!-- 뉴스 view start -->
+<div class="section-area mt10 mb50">
+
+    @if (Model.NewsContent == null)
+    {
+        <div class="news-detail-area">
+            <!-- 메인 헤드라인 -->
+            <div class="box-news-title">
+                <strong class="main-head">해당기사가 삭제되었거나 보유기간이 종료되었습니다.</strong>              
+            </div>
+            <!--// 메인 헤드라인 -->
+           
+        </div>
+    }
+    else
+    {
+        <div class="news-detail-area">
+            <!-- 메인 헤드라인 -->
+            <div class="box-news-title">
+                <strong class="main-head">@Model.NewsContent.TITLE</strong>
+                <div class="num-expose">
+                    <div class="num txt-exer">@String.Format("{0:yyyy-MM-dd}", Model.NewsContent.ARTDATE)</div>
+                </div>
+            </div>
+            <!--// 메인 헤드라인 -->
+            <!-- 뉴스 본문 영역 -->
+            <div class="box-news-body mt10">
+                <p>
+                    @MvcHtmlString.Create(WowExtensionMethod.NewsContentReplace(Model.NewsContent.CONTENT, Model.NewsContent.COMPCODE))
+                </p>
+            </div>
+            <!-- //뉴스 본문 영역 -->
+        </div>
+    }
+    
+
+    <!-- btn start -->
+    <div class="btn-area mt15">
+        <a href="#none" class="btn type01 w-typeAuto" onclick="return DomesticStockDetailNewsNotices.NewsGoBackList(@Request["currentIndex"]);">목록으로</a>
+    </div>
+    <!--// btn end -->
+
+</div>
+<!--// 뉴스 view end -->
+
+

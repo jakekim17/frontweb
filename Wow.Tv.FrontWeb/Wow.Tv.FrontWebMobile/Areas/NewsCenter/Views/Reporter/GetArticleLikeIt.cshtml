@@ -1,0 +1,24 @@
+﻿
+@using Wow
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model NTB_ARTICLE_LIKEIT
+
+@{
+    Layout = null;
+
+    int goodCount = 0;
+    int hateCount = 0;
+    int wantCount = 0;
+
+    if (Model != null)
+    {
+        goodCount = Model.GOOD_COUNT;
+        hateCount = Model.HATE_COUNT;
+        wantCount = Model.WANT_COUNT;
+    }
+}
+
+<span><span class="icon"></span> @goodCount.ToString("#,##0")</span>
+<span><span class="icon"></span> @hateCount.ToString("#,##0")</span>
+<span><span class="icon"></span> @wantCount.ToString("#,##0")</span>

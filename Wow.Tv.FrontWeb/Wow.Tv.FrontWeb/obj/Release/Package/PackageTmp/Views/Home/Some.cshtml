@@ -1,0 +1,30 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model ListModel<NUP_NEWS_MAIN_SECTION_SELECT_Result>
+
+
+@{ 
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+
+<h3 class="blind">tab body area</h3>
+@foreach (var item in Model.ListData)
+{
+<div>
+    <span class="photo">
+        <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID');"><img alt="" src="@Wow.WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("16M")'" width="270" height="146"></a>
+</span>
+    <input type="hidden" value="@item.ARTICLEID" />
+    <input type="hidden" class="devSomeArticle" value="@item.TAG" />
+    <dl>
+        <dt><a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID');">@Html.Raw(Wow.WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</a></dt>
+    </dl>
+</div>
+}
+
+

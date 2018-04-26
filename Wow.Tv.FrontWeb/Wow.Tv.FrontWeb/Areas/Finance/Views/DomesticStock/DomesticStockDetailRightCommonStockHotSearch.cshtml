@@ -1,0 +1,50 @@
+﻿
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model List<usp_GetBestSearchOnline_TypeA_Result>
+@{
+    ViewBag.Title = "DomesticStockDetailRightCommonStockHotSearch";
+    Layout = null;
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+    int idx = 1;
+}
+
+<div class="table-type3 no-header">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col width="30">
+            <col>
+            <col width="80">
+            <col width="80">
+        </colgroup>
+        <tr>
+            <th>No.</th>
+            <th>종목</th>
+            <th>가격</th>
+            <th>가격</th>
+        </tr>
+        @if (Model.ToList().Count > 0)
+        {
+            foreach (var item in Model.Take(5))
+            {
+                <tr>
+                    <td><strong class="data-up">@idx</strong></td>
+                    <td><a href="#none" onclick="return DomesticStockDetailRight.DomesticStockDetailGo('@DomainUrlFront', '@item.arj_code.Replace("A", "")')">@item.stock_name</a></td>
+                    <td class="number">@Html.DomesticStockDetailPriceFormat(item.chg_type, item.curr_price)</td>
+                    <td class="number">@Html.DomesticStockDetailChgRateFormat(item.chg_type, item.curr_price, item.net_chg)</td>
+                </tr>
+                idx += 1;
+            }
+        }
+        else
+        {
+            <tr>
+                <td>데이터가 없습니다.</td>
+            </tr>
+        }
+        
+        
+    </table>
+</div>
+

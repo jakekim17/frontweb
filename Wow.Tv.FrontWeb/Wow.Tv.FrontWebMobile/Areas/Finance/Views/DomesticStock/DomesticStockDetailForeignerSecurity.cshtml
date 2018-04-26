@@ -1,0 +1,69 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@model ListModel<usp_web_getTradeTrend_Result>
+@{
+    ViewBag.Title = "DomesticStockDetailForeignerSecurity";
+    Layout = null;
+}
+
+<!-- 외국인·기관 start -->
+<div class="section-area pd0">
+
+    <h3 class="tit-line plr15 bd-none">외국인 · 기관 매매동향</h3>
+    <div class="table-type1 type02 line01 mlr15 mb10 box-scroll-x w-150p">
+        <table>
+            <caption>상세</caption>
+            <colgroup>
+                <col style="width:;">
+                <col style="width:;">
+                <col style="width:;">
+                <col style="width:;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th rowspan="2" scope="col">날짜</th>
+                    <th rowspan="2" scope="col">종가</th>
+                    <th rowspan="2" scope="col">등락률(%)</th>
+                    <th colspan="2" scope="col">기관</th>
+                    <th scope="col">외국인</th>
+                </tr>
+                <tr>
+                    <th scope="col">10일누적</th>
+                    <th scope="col">일별 순매매</th>
+                    <th scope="col">일별 순매매</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ListData.Count > 0)
+                {
+                    foreach (var item in Model.ListData)
+                    {
+                        <tr>
+                            <td><span class="num">@item.TRADEDATE</span></td>
+                            <td class="txt-r"><span class="num">@item.PRICE</span></td>
+                            <td class="txt-r">@Html.SinglePriceFormat(item.CHGTYPE, item.CHGRATE)</td>
+                            <td class="txt-r">@Html.DomesticForeignerSecurityFormat(item.ACCRUE10)</td>
+                            <td class="txt-r">@Html.DomesticForeignerSecurityFormat(item.ORGSELL)</td>
+                            <td class="txt-r">@Html.DomesticForeignerSecurityFormat(item.FOREINERSELL)</td>
+                        </tr>
+                       
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6">데이터가 없습니다.</td>
+                    </tr>
+                }
+                
+                
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+<!--// 외국인·기관 end -->
+
+

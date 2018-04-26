@@ -1,0 +1,67 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@{
+    ViewBag.Title = "업종별";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+}
+<script src="@wowTvScript/Finance/DomesticStock/IndustryPart.js"></script>
+
+<section class="container">
+    <!-- title area -->
+    <div class="section-area">
+        <h2>업종별</h2>
+        <div class="list-dotted">
+            <ul class="mb20">
+                <li>
+                    <span class="font-color03"> 실시간 </span> @Html.MarketTimeStatus()
+                    <div class="btn-area txt-inline">
+                        <a href="/Finance/DomesticStock/IndustryPart?MenuSeq=@currentMenuSeq" class="btn type04 small" id="btnRefresh" >새로고침<span class="icon reset"></span></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- // title area -->
+    <!-- tab area -->
+    <div class="tab-area">
+        <ul>
+            <li class="on" style="width: 50%;"><a href="#none" class="btnMarket" id="T">코스피</a></li>
+            <li style="width: 50%;"><a href="#none" class="btnMarket" id="K">코스닥</a></li>
+        </ul>
+    </div>
+    <!-- // tab area -->
+    <!-- section-area -->
+    <div class="section-area mb10">
+        <div class="calendar-form">
+            <input type="text" class="datepicker" id="searchDate" name="searchDate" value="@String.Format("{0:yyyy-MM-dd}", DateTime.Now)" readonly="readonly" style="width:100%;">
+        </div>
+    </div>
+    <!-- // section-area -->
+    <!-- sub tab -->
+    <div class="swiper-container sub-gnb01">
+        <div class="swiper-wrapper" id="statusTab">
+            <div class="swiper-slide on" id="Security"><span>기관 매매현황</span></div>
+            <div class="swiper-slide" id="Foreigner"><span>외국인 매매현황</span></div>
+            <div class="swiper-slide" id="Personal"><span>개인 매매현황</span></div>
+        </div>
+    </div>
+    <!-- // sub tab -->
+    
+    <input type="hidden" id="prevTargetDt" value="@ViewBag.prevTargetDt" />
+    <input type="hidden" id="prevMarket" value="@ViewBag.prevMarket" />
+    <input type="hidden" id="preMenuTab" value="@ViewBag.prevMenuTab" />
+
+    <form id="frmList_industryPart">
+        <div>
+            <input type="hidden" id="targetDt" class="targetDt" name="targetDt" />
+            <input type="hidden" id="market" name="market" value="T" />
+            <input type="hidden" id="currentMenuSeq" value="@currentMenuSeq" />
+            <input type="hidden" id="menuTab" name="menuTab" value="Security" />
+        </div>
+        <div id="divList">
+
+        </div>
+    </form>
+    
+</section>
+

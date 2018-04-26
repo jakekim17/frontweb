@@ -1,0 +1,283 @@
+﻿@using Wow
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.Middle.Model.Db22.stock
+
+@model  NUP_NEWS_READ_SELECT_Result
+
+@{
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+
+    var newsRead = Model;
+
+    NUP_REPORTER_SELECT_Result reporterInfo = ViewBag.reporterInfo;
+    List<NUP_NEWS_SECTION_SELECT_Result> reporterArticel = ViewBag.reporterArticel;
+    List<ArticleStock> articleStockList = ViewBag.articleStockList;
+}
+
+@section modalDiv{
+    <div id="divSubScriptPopup" class="modal fade" role="dialog"></div>
+}
+
+<script>
+    var articleId = '@ViewBag.articleId';
+</script>
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/jquery.printThis.js"></script>
+    <script src="@wowTvScript/Finance/CharacterStock/Detail.js"></script>
+}
+
+@*<script>
+        $(document).ready(function () {
+            PopupSharesNCopyLink('', 'title', 'facebookImg');
+        });
+    </script>*@
+
+@*@section modalDiv{
+        <div id="divSharesPopup"></div>
+    }*@
+
+<!-- title area -->
+<div class="section-area">
+    <h2>특징주뉴스</h2>
+</div>
+<!-- // title area -->
+
+@if (newsRead == null)
+{
+    <div class="news-header-section">
+        <div class="title-area">
+            <p class="title-news">해당기사가 삭제되었거나 보유기간이 종료되었습니다.</p>
+        </div>
+    </div>
+}
+else
+{
+    <form id="frmSearch" name="frmSearch" method="post">
+        <input type="hidden" id="hdSearchId" name="SearchId" />
+        <input type="hidden" name="articleId" id="articleId" value="@newsRead.ARTICLEID" />
+    </form>
+
+    <!-- section-area -->
+    <div class="section-area">
+        <!-- 뉴스 조회 영역 -->
+        <div class="news-detail-area">
+            <!-- 메인 헤드라인 -->
+            <div class="box-news-title">
+                <strong class="main-head">@newsRead.TITLE</strong>
+                <div class="date-write">
+                    <ul>
+                        <li>
+                            <span class="txt-exer">입력</span>
+                            <span class="txt-exer num">@newsRead.ARTDATE.Value.ToString("yyyy-MM-dd HH:mm")</span>
+                        </li>
+                        @if (newsRead.ARTUPDATE != null)
+                        {
+                            <li>
+                                <span class="txt-exer">수정</span>
+                                <span class="txt-exer num">@newsRead.ARTUPDATE.Value.ToString("yyyy-MM-dd HH:mm")</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="num-expose">
+                    <div class="txt-exer"><span class="font-color06">페이스북 노출</span><span class="num">0</span></div>
+                    @*<div class="txt-exer"><span class="font-color06">트위터 확산</span><span class="num">0</span></div>*@
+                </div>
+            </div>
+            <!-- //메인 헤드라인 -->
+            <!-- 유틸버튼 영역 -->
+            <div class="box-util-links">
+                <div class="box-btn-area">
+
+                    @*기획 요청 삭제
+                        <div class="inner-right">
+                            <div class="btn-zoomin">
+                                <a href="#none" onclick="ExpandFont('divNewsContent')"><span class="icon ico-zoom-plus">plus</span></a>
+                                <a href="#none" onclick="ReduceFont('divNewsContent')"><span class="icon ico-zoom-minus">minus</span></a>
+                            </div>
+                        </div>*@
+                    @*</div>
+                        <div class="box-btn-area">*@
+                    <div class="btn-area inner-left news-util">
+                        @if (LoginHandler.IsLogin == true)
+                        {
+                            <a href="#none" onclick="co.PopupScrap('News', '@newsRead.TITLE', '@newsRead.ARTICLEID','@Request["menuSeq"]', '@Request.Url.AbsoluteUri.ToString()');" class="btn type02"><span class="icon ico-pin"></span>핀하기</a>
+                        }
+                        else
+                        {
+                            <a href="#none" onclick="LoginConfirm()" class="btn type02"><span class="icon ico-pin"></span>핀하기</a>
+                        }
+
+                        @if (ViewBag.reporterInfo != null)
+                        {
+                            <a href="#none" class="btn type02" id="btnSubScribe"><span class="icon ico-subs"></span>구독하기</a>
+                        }
+                    </div>
+                    <div class="btn-area inner-right news-util">
+                        <a href="/Finance/CharacterStock/CharacterStock?menuSeq=@Request["menuSeq"]" class="btn type04"><span class="icon ico-list"></span>목록으로</a>
+                    </div>
+                </div>
+            </div>
+            <!-- //유틸버튼 영역 -->
+            <!-- 서브 헤드라인 -->
+            <div class="sub-head-area">
+                @if (articleStockList != null && articleStockList.Count > 0)
+                {
+                    <div class="relate-keyword">
+                        <strong class="txt-exer">관련종목</strong>
+                        <span class="font-color06">
+                            <a href="#none" onclick="CharacterStockDetail.DomesticStockDetailGo('@DomainUrlFront','@ViewBag.CurrentPrice.arj_code.Replace("A", "")')">@ViewBag.CurrentPrice.stock_wanname</a>
+                        </span>
+                    </div>
+                }
+                @*<div class="relate-keyword">
+                        <strong class="txt-exer">관련종목</strong>
+                        <span class="font-color06">현대자동차, 기아자동차</span>
+                    </div>*@
+
+                @*한줄내용
+                        <strong class="tit">
+                        서울시 투자출연기관 11곳 소속<br>
+                        정부보다 1년 이른 2019년까지 생활임금 1만원대 인상
+                    </strong>*@
+            </div>
+            <!-- //서브 헤드라인 -->
+            <!-- 뉴스 본문 영역 -->
+            <div class="box-news-body" id="divNewsContent">
+                <!-- 뉴스 이미지 영역 -->
+                @*<div class="news-img-area">
+                        <img src="../../images/temp/temp_ir02.png" alt="">
+                    </div>*@
+                <!-- //뉴스 이미지 영역 -->
+                @*<p>
+                        국내 자동차시장은 ‘해치백(후면이 납작한 5도어 차량) 불모지’로 불
+                        린다. 세단을 선호하는 분위기 탓에 잘 팔리지 않아서다.<br><br>최근 판매 부진으로 어려움을 겪은 현대자동차 i30 1.6L 가솔린 터보
+                        를 타봤다. 서울 도심과 고속도로 등 400㎞ 이상을 다니는 동안 예상
+                        밖의 주행 실력을 발휘했다. 높은 실용성 등 숨겨진 매력은 소비자를
+                        유혹하기에 충분하다.
+                    </p>*@
+                @MvcHtmlString.Create(WowExtensionMethod.NewsContentReplace(newsRead.CONTENT, newsRead.COMPCODE))
+
+                <!-- 해시태그 영역 -->
+                @if (!string.IsNullOrEmpty(newsRead.TAG))
+                {
+                    <div class="box-news-tags">
+                        @MvcHtmlString.Create(WowExtensionMethod.NewsHashTag(newsRead.TAG, "READ"))
+                    </div>
+                }
+                @*<div class="box-news-tags">
+                        <span>한국경제</span>
+                        <span>해치백</span>
+                        <span>현대자동차</span>
+                        <span>가솔린</span>
+                        <span>터보</span>
+                        <span>고속도로</span>
+                    </div>*@
+                <!-- //해시태그 영역 -->
+            </div>
+            <!-- //뉴스 본문 영역 -->
+            <!-- 기자 정보 영역 -->
+            @if (reporterInfo != null)
+            {
+                <div class="article-repoter-infor">
+                    <div class="inner">
+                        <div class="box-photo-reporter">
+                            <img src="../../images/temp/temp_main_07.png" alt="">
+                        </div>
+                        <div class="info-area">
+                            <strong class="reporter"><span class="part">@reporterInfo.DEPT_NM</span> @reporterInfo.USER_NM @reporterInfo.POSITION</strong>
+                            @if (!string.IsNullOrEmpty(reporterInfo.EMAIL))
+                            {
+                                <span class="link-mail">@reporterInfo.EMAIL</span>
+                            }
+
+                            <div class="btn-area">
+                                <a href="javascript:CharacterStockDetail.GoReporterDetail('@reporterInfo.USER_ID')" class="btn type04">기자의 최신기사 보기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- /기자 정보 영역 -->
+            <!-- SNS 버튼 영역 -->
+            @*<div class="box-icon-sharesns">
+                    <a href="#none" class="btn-sns btn-facebook">페이스북</a>
+                    <a href="#none" class="btn-sns btn-twitter">트위터</a>
+                    <a href="#none" class="btn-sns btn-kakaostory">카카오스토리</a>
+                    <a href="#none" class="btn-sns btn-blog">블로그</a>
+                    <a href="#none" class="btn-sns btn-copyurl">링크 복사</a>
+                </div>*@
+            <!-- //SNS 버튼 영역 -->
+        </div>
+        <!-- 뉴스 조회 영역 -->
+    </div>
+    <!-- // section-area -->
+
+
+    <!-- section-area -->
+
+    if (ViewBag.stockCode != null)
+    {
+        <div class="section-area">
+            <h3>주차예측 차트</h3>
+            <div class="week-chart-area" style="height:320px">
+                <div style="background:#eee;">
+                    @{
+                        string chgType = ViewBag.CurrentPrice.chg_type;
+                        int? chgPrice = ViewBag.CurrentPrice.net_chg;
+                        int? curPrice = ViewBag.CurrentPrice.curr_price;
+                    }
+                    <a href="#none" onclick="CharacterStockDetail.DomesticStockDetailGo('@DomainUrlFront','@ViewBag.CurrentPrice.arj_code.Replace("A", "")')">
+                        <span style="float:left">@ViewBag.CurrentPrice.stock_wanname (@ViewBag.CurrentPrice.arj_code.Replace("A", ""))    현재가 @String.Format("{0:#,##0}", ViewBag.CurrentPrice.curr_price)    전일대비 </span> @Html.DomesticStockDetailChgPriceFormat(chgType, chgPrice)  @Html.DomesticStockDetailChgRateFormat(chgType, curPrice, chgPrice)
+                        <input type="hidden" id="arjCode" value="@ViewBag.CurrentPrice.arj_code.Replace("A", "")" />
+                        <!-- Chart -->
+                        <img id="imgChart" src="" style="height:280px;" />
+                    </a>
+                        
+</div>
+                @*<img id="imgChart" src="../../images/temp/temp_grey_box.jpg" alt="">*@
+            </div>
+        </div>
+    <!-- // section-area -->
+    <!-- section-area -->
+                        <div class="section-area">
+                            <h3>관련기업 동영상</h3>
+                            <div class="list-thumb media">
+                                <ul>
+                                    @if (ViewBag.vodList.Length == 0)
+                                    {
+                                        <li>내용이 없습니다.</li>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in ViewBag.vodList)
+                                        {
+                                            <li>
+                                                <a href="http://www.wownet.co.kr/board/movie/view.asp?vodnum=@item.vodNum&bcode=N03020000&mseq=160" target="_blank">
+                                                    <div class="thumb-area">
+                                                        <img src="http://vodimg.wowtv.co.kr/@item.EditFolder.Trim()/@item.Image_S.Trim()" alt="@ViewBag.CurrentPrice.stock_wanname" S>
+                                                    </div>
+                                                    <div class="cont-area">
+                                                        <div class="inner">
+                                                            <strong class="tit">@ViewBag.CurrentPrice.stock_wanname (@ViewBag.CurrentPrice.arj_code.Replace("A", ""))</strong>
+                                                            <span class="txt-info num">@item.insdate.ToString("yyyy-MM-dd")</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        }
+    <!-- // section-area -->
+
+                        }
+

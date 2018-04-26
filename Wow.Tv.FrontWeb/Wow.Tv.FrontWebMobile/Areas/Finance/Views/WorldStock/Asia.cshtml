@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "아시아";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+}
+@section scripts{
+    <script src="@wowTvScript/Finance/WorldStock/ASIA.js"></script>
+<script src="@wowTvScript/Finance/webponent/raphael.js"></script>
+<script src="@wowTvScript/Finance/webponent/webponent.comm.common.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.style.js"></script>
+<script src="@wowTvScript/Finance/Charts/stockChart.js"></script>
+<script src="@wowTvScript/Finance/WorldStock/DowJones.js"></script>
+}
+
+<div class="section-area">
+    <h2>아시아</h2>
+</div>
+
+<div class="swiper-container sub-gnb01 type02 swiper-container-horizontal">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide on w-auto swiper-slide-active" style="margin-right: 20px;" id="nikkei"><span>일본</span></div>
+        <div class="swiper-slide w-auto swiper-slide-next" style="margin-right: 20px;" id="shc"><span>중국</span></div>
+        <div class="swiper-slide w-auto" style="margin-right: 20px;" id="hs"><span>홍콩</span></div>
+        <div class="swiper-slide w-auto" style="margin-right: 20px;" id="wt"><span>대만</span></div>
+        <input type="hidden" id="MarketType" />
+    </div>
+</div>
+
+<form id="frmList_ASIA">
+    <div id="divList">
+
+    </div>
+</form>
+
+ <!-- tab start -->
+<div class="tab-area">
+    <ul>
+        <li class="btnChart" id="7551" style="width: 33%;"><a href="javascript:void(0)">일간</a></li>
+        <li class="btnChart" id="7552" style="width: 33%;"><a href="javascript:void(0)">주간</a></li>
+        <li class="btnChart" id="7553" style="width: 33.6667%;"><a href="javascript:void(0)">월간</a></li>
+    </ul>
+</div>
+<!--// tab end -->
+<!-- chart start -->
+<div class="section-area mb50">
+    <p class="time-txt pr0 mt10" id="txtChart"></p>
+    <div class="box-type-chart">
+        <div class="chart-view">
+            <img id="ImgChart" style="width:100%" />
+        </div>
+    </div>
+</div>
+<!--// chart end -->

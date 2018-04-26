@@ -1,0 +1,58 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@model ListModel<ArticleStock>
+@{
+    ViewBag.Title = "DomesticStockDetailStockNewsList";
+    Layout = null;
+    string wowScript = AppState["WowTvScript"].ToString();
+    string pageSize = Request["pageSize"].ToString();
+    string currentIndex = Request["currentIndex"].ToString();
+    string arjCode = Request["arjCode"];
+
+    int idx = Model.TotalDataCount;
+
+    if (!String.IsNullOrEmpty(currentIndex))
+    {
+        idx = Model.TotalDataCount - Convert.ToInt32(currentIndex);
+    }
+
+}
+<script>
+    var totalDatacount_stockNews = "@Model.TotalDataCount";
+</script>
+<script src="@wowScript/Finance/DomesticStock/DSDNewsList.js"></script>
+<!-- 뉴스 start -->
+<div class="section-area">
+    <ul class="list-type-finance">
+        @if (Model.ListData.Count > 0)
+        {
+            foreach (var item in Model.ListData)
+            {
+
+                <li>
+                    <a href="#none" onclick="return DomesticStockDetailNewsNotices.NewsGoDetail('@arjCode','@item.ArticleID.ToString().Trim()', '4', '1','@currentIndex')">
+                        <strong class="tit">@item.Title</strong>
+                        <span class="num">@item.ArticleDate.ToString("yyyy-MM-dd")</span>
+                    </a>
+                </li>
+                idx = idx - 1;
+            }
+        }
+        else
+        {
+            <li>데이터가 없습니다.</li>
+        }
+        
+        
+    </ul>
+
+    <!-- paging start -->
+    <div class="box-paginate" id="divPaging_newsList">
+
+    </div>
+    <!--// paging end -->
+    
+</div>
+<!--// 뉴스 end -->
+

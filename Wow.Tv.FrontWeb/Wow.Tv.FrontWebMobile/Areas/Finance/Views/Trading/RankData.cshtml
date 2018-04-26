@@ -1,0 +1,77 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@{
+    Layout = null;
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+}
+
+<div class="table-type1 type02 line mb0">
+    <table>
+        <caption>관심종목 상세</caption>
+        <colgroup>
+            <col style="width:auto">
+        </colgroup>
+        <tbody>
+
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                string[] arrData = Model[i];
+                var tmpIco = "";
+                var tmpIcoText = "";
+                var icon = "";
+
+
+                //급등
+                if (arrData[6] == "1")
+                {
+                    icon = "<span class='font-color04'>급등</span>";
+                }
+
+                //매매신호
+                if (arrData[7] != "")
+                {
+                    switch (arrData[7])
+                    {
+                        case "1": //단기매수신호
+                            tmpIco = "icon buy";
+                            tmpIcoText = "매수";
+                            break;
+                        case "2": //단기매수신호후 보유
+                            tmpIco = "icon owns";
+                            tmpIcoText = "보유";
+                            break;
+                        case "3"://단기매도
+                            tmpIco = "icon sell";
+                            tmpIcoText = "매도";
+                            break;
+                        case "4"://단기매수신호후진행
+                            tmpIco = "icon prog";
+                            tmpIcoText = "진행";
+                            break;
+                    }
+                }
+
+                <tr>
+                    <td><span class="num">@arrData[8]</span></td>
+                    <td class="txt-l"><a href="#none" onclick="Rank.DomesticStockDetailGo('@DomainUrlFront', '@arrData[0]')">@arrData[1]</a></td>
+                    <td>@Html.PublishCurrencyFormat(arrData[2])</td>
+                    <td>@Html.PublishChgPriceFormat2(arrData[3], arrData[4])</td>
+                    <td>
+                        @Html.PublishChgRateFormat(System.Convert.ToDecimal(arrData[5]))
+                    @if (arrData[6] == "1")
+                    {
+                        <span class="text-icon type06 trade"><span class="font-color04">급 </span>급등</span>
+                    }
+                    else
+                    {
+                    <span class="text-icon type06 trade"><span class="@tmpIco"></span>@tmpIcoText</span>
+                    }
+                    </td>
+                </tr>
+
+            }
+            
+         
+        </tbody>
+    </table>
+</div>
+

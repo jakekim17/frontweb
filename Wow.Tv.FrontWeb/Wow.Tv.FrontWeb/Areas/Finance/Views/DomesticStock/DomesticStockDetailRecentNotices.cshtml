@@ -1,0 +1,48 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+
+@model ListModel<usp_web_getNoticeTop6List_Result>
+@{
+    ViewBag.Title = "DomesticStockDetailRecentNotices";
+    Layout = null;
+    string arjCode = "";
+    if (!String.IsNullOrEmpty(Request["arjCode"]))
+    {
+        arjCode = Request["ArjCode"].ToString();
+    }
+}
+
+@if (Model.ListData != null && Model.ListData.Count > 0)
+{
+
+    <p class="text-headline-topic"><a href="#none" onclick="return DomesticStockDetail.NoticeGoDetail('@Model.ListData[0].F_SEQ','@Model.ListData[0].F_DATA_DAY', '@Model.ListData[0].F_STOCK_CODE', '@Model.ListData[0].F_CONTENT','')">@Model.ListData[0].F_CONTENT</a></p>
+    <!-- 게시물 목록 -->
+    <div class="list-type-topic1">
+        <ul style="border-top:1px solid #ebe9ea;">
+            @for (int i = 1; i < Model.ListData.Count; i++)
+            {
+                <li>
+                    <a href="#none" onclick="return DomesticStockDetail.NoticeGoDetail('@Model.ListData[i].F_SEQ','@Model.ListData[i].F_DATA_DAY', '@Model.ListData[i].F_STOCK_CODE', '@Model.ListData[i].F_CONTENT','')">@Model.ListData[i].F_CONTENT</a>
+                    <span class="date">@Model.ListData[i].DISP_DATE</span>
+                </li>
+            }
+
+
+        </ul>
+    </div>
+    <!-- //게시물 목록 -->
+    <span class="btn-moreview" style="right:25px">@Html.ActionLink("더 보기", "DomesticStockDetail", "DomesticStock", new { searchStr = arjCode.Replace("A", ""), tabSeq = "4", boardType = "2" }, null)</span>
+
+}
+else
+{
+    <p class="text-headline-topic"><a href="#none"></a></p>
+    <!-- 게시물 목록 -->
+    <div class="list-type-topic1">
+        <ul style="border-top:1px solid #ebe9ea;">
+            <li>해당 게시글이 없습니다.</li>
+        </ul>
+    </div>
+    <!-- //게시물 목록 -->
+    <span class="btn-moreview" style="right:25px"><a href="#none">더 보기</a></span>
+}

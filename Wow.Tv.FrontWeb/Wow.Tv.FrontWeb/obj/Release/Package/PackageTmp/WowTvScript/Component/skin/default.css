@@ -1,0 +1,113 @@
+@charset "utf-8";
+body {
+    background-color:#efefef;
+    cursor:default;
+}
+body.tvshow {
+    height:100vh;
+    margin:0;
+    padding:0;
+    width:100vw;
+}
+.header {
+    background-color:#343434;
+    color:#787878;
+    font-family:'Century Gothic', 'Trebuchet MS', 'Helvetica', sans-serif;
+    left:0;
+    padding:10px 20px;
+    position:fixed;
+    right:0;
+    top:0;
+    z-index:3;
+}
+.header h1 {
+    color:#cdcdcd;
+    font-size:10pt;
+    font-weight:bold;
+    line-height:1.1em;
+    margin:0;
+    padding:0;
+    white-space:nowrap;
+}
+.header h1 em {
+    color:#6699cc;
+    font-size:12pt;
+    font-style:normal;
+}
+.footer {
+    background-color:#343434;
+    bottom:0;
+    color:#787878;
+    font-family:'Tahoma', 'Helvetica', sans-serif;
+    font-size:8pt;
+    left:0;
+    line-height:1.1em;
+    padding:8px 12px;
+    position:fixed;
+    right:0;
+    word-spacing:0.2em;
+    z-index:1;
+}
+.footer a, .footer a:link {
+    color:#9a9a9a;
+    text-decoration:none;
+}
+.footer a:visited, .footer a:active {
+    color:#9a9a9a;
+}
+.footer a:hover {
+    border-bottom:1px dotted #efefef;
+    color:#efefef;
+}
+.content {
+    padding-top:40px;
+    z-index:1;
+}
+.tvshow .content {
+    padding:0;
+}
+.content #player_test {
+    height:360px;
+    padding-bottom:70px;
+    width:640px;
+}
+.content #video_test {
+    height:360px;
+    padding-bottom:70px;
+    width:640px;
+}
+.tvshow .content #video_test {
+    height:100%;
+    max-height:360px;
+    padding:0;
+    width:100%;
+    max-width:640px;
+}
+.content #audio_test {
+    height:40px;
+    padding-bottom:40px;
+    width:740px;
+}
+.content #video_test1 {
+    height:360px;
+    padding-bottom:70px;
+    width:640px;
+}
+.content #video_test2 {
+    height:360px;
+    padding-bottom:70px;
+    width:640px;
+}
+.content .player1 {
+    height:320px;
+    width:640px;
+}
+.content .player2 {
+    height:320px;
+    margin:20px 0;
+    width:640px;
+}
+.content .player3 {
+    height:320px;
+    width:640px;
+}

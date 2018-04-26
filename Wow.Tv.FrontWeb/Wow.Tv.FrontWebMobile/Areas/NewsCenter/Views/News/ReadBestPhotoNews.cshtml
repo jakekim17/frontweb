@@ -1,0 +1,59 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model List<NUP_NEWS_MAIN_SECTION_SELECT_Result>
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+}
+
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="swiper-container ui-slider">
+        <div class="swiper-wrapper">
+        @foreach (var item in Model)
+        {
+            int index = Model.IndexOf(item);
+
+            if (index == 0)
+            {
+                @Html.Raw("<div class='swiper-slide'>\r");
+            }
+            else if ((index % 3) == 0)
+            {
+                @Html.Raw("</div><div class='swiper-slide'>\r");
+            }
+            <div class="img-cont" onclick="NewsCommon.GoNewsDetailView('photo','','','@item.ARTICLEID')">
+                <div class="img-area">
+                    <img src="@WowExtensionMethod.NewsThumbnailPath("34M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("34M")'" alt="">
+                </div>
+                <div class="txt-area">
+                    <p class="txt">@item.TITLE</p>
+                </div>
+            </div>
+
+            if (index == (Model.Count) - 1)
+            {
+                @Html.Raw("</div>\r");
+            }
+        }
+        </div>
+        @* Pagination *@
+        <div class="swiper-pagination"></div>
+        @* Prev & Next *@
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            visual_slider();
+        });
+    </script>
+}
+else
+{
+    <div><p class="txt">베스트 포토가 없습니다.</p></div>
+}

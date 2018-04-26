@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfNUP_REPORTER_SELECT_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NUP_REPORTER_SELECT_Result" nillable="true" type="tns:NUP_REPORTER_SELECT_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNUP_REPORTER_SELECT_Result" nillable="true" type="tns:ArrayOfNUP_REPORTER_SELECT_Result" />
+  <xs:complexType name="NUP_REPORTER_SELECT_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ARTICLE_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARTICLE_TITLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BLOG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BLOG_VIEW_YN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DEPT_NM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EMAIL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FACEBOOK" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FACEBOOK_VIEW_YN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IMAGE_URL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="INTRODUCTION" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PAGE_YN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="REPORTER_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ROWCNT" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ROWNUM" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TWITTER" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TWITTER_VIEW_YN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USER_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USER_NM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WORD_YN" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NUP_REPORTER_SELECT_Result" nillable="true" type="tns:NUP_REPORTER_SELECT_Result" />
+  <xs:complexType name="NTB_REPORTER_AWORD">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CONTENT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LOGIN_TYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MOD_DATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MSEQ" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="REG_DATE" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="REPORTER_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SEQ" type="xs:int" />
+      <xs:element minOccurs="0" name="USER_ID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NTB_REPORTER_AWORD" nillable="true" type="tns:NTB_REPORTER_AWORD" />
+  <xs:complexType name="ArrayOfNTB_REPORTER_AWORD">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NTB_REPORTER_AWORD" nillable="true" type="tns:NTB_REPORTER_AWORD" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNTB_REPORTER_AWORD" nillable="true" type="tns:ArrayOfNTB_REPORTER_AWORD" />
+  <xs:complexType name="NTB_REPORTER_PROFILE">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BLOG_URL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BLOG_VIEW_YN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EMAIL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FACEBOOK_URL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FACEBOOK_VIEW_YN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IMAGE_URL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="INTRODUCTION" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MOD_DATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MOD_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="REG_DATE" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="REG_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="REPORTER_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TWITTER_URL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TWITTER_VIEW_YN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USER_ID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NTB_REPORTER_PROFILE" nillable="true" type="tns:NTB_REPORTER_PROFILE" />
+  <xs:complexType name="NTB_ARTICLE_SUBSCRIPTION">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EMAIL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MOD_DATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MOD_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="REG_DATE" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="REG_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="REPORTER_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SEQ" type="xs:int" />
+      <xs:element minOccurs="0" name="SUBSCRIPTION_YN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USER_ID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NTB_ARTICLE_SUBSCRIPTION" nillable="true" type="tns:NTB_ARTICLE_SUBSCRIPTION" />
+</xs:schema>

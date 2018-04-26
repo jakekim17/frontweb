@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Areas/TotalSearch/Views/Shared/_Layout.cshtml";
+
+    AppState["WowTvStyle"] = System.Configuration.ConfigurationManager.AppSettings["WowTvStyle"];
+    AppState["WowTvScript"] = System.Configuration.ConfigurationManager.AppSettings["WowTvScript"];
+
+    AppState["WowTvWebSiteUrl"] = System.Configuration.ConfigurationManager.AppSettings["WowTvWebSiteUrl"];
+    AppState["UserLoginUrl"] = System.Configuration.ConfigurationManager.AppSettings["UserLoginUrl"];
+    AppState["DomainUrlFront"] = System.Configuration.ConfigurationManager.AppSettings["DomainUrlFront"];
+    AppState["DomainUrlMember"] = System.Configuration.ConfigurationManager.AppSettings["DomainUrlMember"];
+    AppState["DomainUrlMyPage"] = System.Configuration.ConfigurationManager.AppSettings["DomainUrlMyPage"];
+
+    AppState["BodyClass"] = "search";
+    AppState["MainTitle"] = "통합검색";
+}

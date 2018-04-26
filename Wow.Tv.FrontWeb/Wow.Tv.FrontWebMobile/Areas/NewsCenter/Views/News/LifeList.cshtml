@@ -1,0 +1,61 @@
+﻿
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/News/LifeList.js"></script>
+}
+
+<form id="frmSearch">
+    <input type="hidden" name="menuSeq" id="menuSeq" value="@Request["menuSeq"]" />
+    <input type="hidden" name="SearchSection" id="SearchSection" value="@Request["subMenu"]" />
+
+    <input type="hidden" name="IsAppend" id="IsAppend" />
+    <input type="hidden" name="totalDataCount" id="totalDataCount" />
+    <input type="hidden" name="currentIndex" id="currentIndex" />
+    <input type="hidden" name="Page" id="Page" value="1" />
+    <input type="hidden" name="PageSize" id="PageSize" value="20" />
+    <input type="hidden" name="SearchTabGubun" id="SearchTabGubun" value="@Request["SearchGubun"]" />
+    <input type="hidden" name="SearchGubun" id="SearchGubun" value="@Request["SearchGubun"]" />
+</form>
+
+@* 탭 & 번역 *@
+<div class="reporter-select">
+    @* 탭 *@
+    <div class="tab-area">
+        <ul>
+            <li class="on" id="basic"><a href="#none" onclick="LifeList.ListGubun('basic');">생활문화 일반</a></li>
+            <li id="domestic"><a href="#none" onclick="LifeList.ListGubun('domestic');">국내여행</a></li>
+            <li id="abroard"><a href="#none" onclick="LifeList.ListGubun('abroard');">해외여행</a></li>
+        </ul>
+    </div>
+    @*구글 번연*@
+    <div class="bottom-select bdt-none">
+        @*<select>
+            <option>번역 : 언어선택</option>
+        </select>*@
+        <div id="google_translate_element"></div>
+    </div>
+</div>
+
+@* 리스트 *@
+<div class="news-list-box type02 pd0 mb10" id="divContents"></div>
+
+<!-- google translate script Start -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'ko'
+                , includedLanguages: 'ko,en,zh-CN,zh-TW,ja,id,th,vi,tl'
+                , layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                , autoDisplay: false
+            }
+            , 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- google translate script end -->

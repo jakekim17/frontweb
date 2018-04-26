@@ -1,0 +1,70 @@
+﻿@model IList<Wow.Tv.Middle.Model.Db49.wowtv.TAB_BOARD>
+
+@{
+    ViewBag.Title = "Index";
+    
+    string rootUrl = AppState["RootUrl"].ToString();
+}
+
+
+
+@section scripts{
+    <script src="@rootUrl/Scripts/Pilot/Index.js"></script>
+
+    <script>
+        var totalDataCount = "@ViewBag.TotalDataCount";
+    </script>
+}
+
+<h2>Index</h2>
+
+<div>
+    <form id="frmSearch">
+        <table>
+            <tr>
+                <td>
+                    제목 <input type="text" name="Title" value="@ViewBag.Condition.Title" />
+                </td>
+                <td>
+                    <a href="#" id="btnSearch">검색</a>
+                    <a href="#" id="btnCreate">등록</a>
+                </td>
+            </tr>
+        </table>
+
+        <input type="hidden" id="seq" name="seq" />
+        <input type="hidden" id="pageSize" name="pageSize" value="20" />
+        <input type="hidden" id="currentIndex" name="currentIndex" value="@ViewBag.CurrentIndex" />
+    </form>
+</div>
+
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    No
+                </td>
+                <td>
+                    제목
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.SEQ
+                </td>
+                <td>
+                    <a href="#" onclick="return PilotIndex.GoDetail(@item.SEQ);">@item.TITLE</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="divPaging"></div>
+

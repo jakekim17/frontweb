@@ -1,0 +1,34 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db90.DNRS
+
+@model  ListModel<tv_program>
+
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+}
+
+
+
+<script src="@wowTvScript/Broad/TvMain/BroadWatch.js?date=20171018170000"></script>
+
+
+
+
+@foreach (var item in Model.ListData)
+{
+    <li>
+        <a href="#" onclick="return TvMainIndex.GoBroadWatch('@item.Dep', '@item.Num');">
+            <img src="@item.RectangleImageUrl" alt="TV다시보기" width="570" height="321">
+            <span class="icon-play"></span>
+            <span class="box-broadcast bg-red">최신</span>
+            <strong>@item.Program_Name</strong>
+        </a>
+    </li>
+}
+
+

@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <li>
+            <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLE_ID')">
+                <em></em>
+                @item.TITLE
+            </a>
+        </li>
+    }
+}
+else
+{
+    <li>
+        등록된 내용이 없습니다.
+    </li>
+}

@@ -1,0 +1,76 @@
+﻿@using Wow
+
+@{
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+<li>
+    <h2><a href="javascript:NewsCommon.GoNewsStockList()">증권</a> · <a href="javascript:NewsCommon.GoNewsEconomyList()">경제</a></h2>
+    <ul class="lead-story">
+        @if (Model.StoEcoList != null)
+        {
+            foreach (var item in Model.StoEcoList)
+            {
+                <li>
+                    <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID')">
+                        @WowExtensionMethod.NewsGugunIcon(item.GUBUN_NAME)
+                        @Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</li>
+<li>
+    <h2><a href="javascript:NewsCommon.GoNewsIndustryList()">산업 · IT 과학</a></h2>
+    <ul class="lead-story">
+        @if (Model.IndITList != null)
+        {
+            foreach (var item in Model.IndITList)
+            {
+                <li>
+                    <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID')">
+                        @WowExtensionMethod.NewsGugunIcon(item.GUBUN_NAME)
+                        @Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</li>
+<li>
+    <h2><a href="javascript:NewsCommon.GoNewsLifeList()">생활문화</a></h2>
+    <ul class="lead-story">
+        @if (Model.LifeList != null)
+        {
+            foreach (var item in Model.LifeList)
+            {
+                <li>
+                    <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID')">
+                        @WowExtensionMethod.NewsGugunIcon(item.GUBUN_NAME)
+                        @Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</li>
+<li>
+    <h2><a href="javascript:NewsCommon.GoNewsJobList()">취업</a></h2>
+    <ul class="lead-story">
+        @if (Model.JobList != null)
+        {
+            foreach (var item in Model.JobList)
+            {
+                <li>
+                    <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID')">
+                        @WowExtensionMethod.NewsGugunIcon(item.GUBUN_NAME)
+                        @Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</li>
+<script src="@wowTvScript/NewsCenter/Common.js"></script>

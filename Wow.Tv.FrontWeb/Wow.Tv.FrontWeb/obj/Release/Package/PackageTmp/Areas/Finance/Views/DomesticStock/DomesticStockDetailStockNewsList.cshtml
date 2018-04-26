@@ -1,0 +1,61 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model ListModel<ArticleStock>
+@{
+    ViewBag.Title = "DomesticStockDetailStockNewsList";
+    Layout = null;
+    string wowScript = AppState["WowTvScript"].ToString();
+    string pageSize = Request["pageSize"].ToString();
+    string currentIndex = Request["currentIndex"].ToString();
+    string arjCode = Request["arjCode"];
+   
+    int idx = Model.TotalDataCount;
+
+    if (!String.IsNullOrEmpty(currentIndex))
+    {
+        idx = Model.TotalDataCount - Convert.ToInt32(currentIndex);
+    }
+
+}
+<script>
+    var totalDatacount_stockNews = "@Model.TotalDataCount";
+</script>
+<script src="@wowScript/Finance/DomesticStock/DSDNewsList.js"></script>
+
+<div class="table-type2">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col width="130">
+            <col width="600">
+            <col>
+        </colgroup>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일</th>
+        </tr>
+        @if (Model.ListData.Count > 0)
+        {
+            foreach (var item in Model.ListData)
+            {
+                <tr>
+                    <td>@idx</td>
+                    <td class="text"><a href="#none" onclick="return DomesticStockDetailNewsNotices.NewsGoDetail('@arjCode','@item.ArticleID.ToString().Trim()', '4', '1','@currentIndex')">@item.Title</a></td>
+                    <td>@item.ArticleDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+                idx = idx - 1;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">데이터가 없습니다.</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div id="divPaging_newsList" class="box-paginate"></div>
+

@@ -1,0 +1,63 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@model ListModel<usp_web_getStockGongsi_Result>
+@{
+    ViewBag.Title = "DomesticStockDetailStockNoticesList";
+    Layout = null;
+
+    string wowScript = AppState["WowTvScript"].ToString();
+    string pageSize = Request["pageSize"].ToString();
+    string currentIndex = Request["currentIndex"].ToString();
+    string arjCode = Request["arjCode"];
+
+    int idx = Model.TotalDataCount;
+
+    if (!String.IsNullOrEmpty(currentIndex))
+    {
+        idx = Model.TotalDataCount - Convert.ToInt32(currentIndex);
+    }
+
+}
+
+<script>
+    var totalDatacount_stockNotices = "@Model.TotalDataCount";
+</script>
+<script src="@wowScript/Finance/DomesticStock/DSDNoticeList.js"></script>
+
+<div class="table-type2">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col width="130">
+            <col width="600">
+            <col>
+        </colgroup>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일</th>
+        </tr>
+        @if (Model.ListData.Count > 0)
+        {
+            foreach (var item in Model.ListData)
+            {
+                <tr>
+                    <td>@idx</td>
+                    @*<td class="text"><a href="javascript:DomesticStockDetailNewsNotices.NewsGoDetail('@arjCode','@item.', '4', '1','@currentIndex')">@item.F_CONTENT</a></td>*@
+                    <td class="text"><a href="javascript:DomesticStockDetailNewsNotices.NoticeGoDetail('@item.F_SEQ', '@item.F_DATA_DAY', '@item.F_STOCK_CODE', '@item.F_CONTENT', '@currentIndex')">@item.F_CONTENT</a></td>
+                    <td>@item.F_DATA_DAY.Substring(0, 4)-@item.F_DATA_DAY.Substring(4,2)-@item.F_DATA_DAY.Substring(6,2)</td>
+                </tr>
+                idx = idx - 1;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">데이터가 없습니다.</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div id="divPaging_noticesList" class="box-paginate"></div>
+

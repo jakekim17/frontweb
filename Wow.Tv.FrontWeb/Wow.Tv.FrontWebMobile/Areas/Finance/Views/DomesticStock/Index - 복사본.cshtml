@@ -1,0 +1,1230 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Models
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Fx
+@model DomesticMainModel
+@{
+    ViewBag.Title = "국내증시";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string UserLoginUrl = AppState["UserLoginUrl"].ToString();
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+    string DomainUrlMember = AppState["DomainUrlMember"].ToString();
+    string DomainUrlMyPage = AppState["DomainUrlMyPage"].ToString();
+    int idx = 1;
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/raphael")
+    @Scripts.Render("~/bundles/webponentcommon")
+    @Scripts.Render("~/bundles/webponentvisual")
+    @Scripts.Render("~/bundles/chart")
+    @Scripts.Render("~/bundles/chartstyle")
+
+    <script src="@wowTvScript/Finance/webponent/webponent.comm.common.js"></script>
+    <script src="@wowTvScript/Finance/webponent/chart/webponent.chart.js"></script>
+    <script src="@wowTvScript/Finance/webponent/chart/webponent.chart.style.js"></script>
+
+    <script src="@wowTvScript/Finance/Charts/stockChart.js"></script>
+    <script src="@wowTvScript/Finance/DomesticStock/index.js"></script>
+    @*<script>
+        $(document).ready(function () {
+            $(".contain-aside").hide();
+            $(".contain-content").addClass("main");
+            DomesticStockIndex.KospiChart();
+
+            //실시간연동
+            //typeVal(단일/마켓), codeVal(마켓구분), sec, classElements, checkHoliday
+            MiddleData.CurrentMarket("INDEX", "1D0001", 10, $("#realKospi .middleStockData"), @Model.ChkStockHoliday.ToString().ToLower());
+            MiddleData.CurrentMarket("INDEX", "2E4001", 10, $("#realKosdaq .middleStockData"), @Model.ChkStockHoliday.ToString().ToLower());
+            MiddleData.CurrentMarket("INDEX", "1D2029", 10, $("#realKospi200 .middleStockData"), @Model.ChkStockHoliday.ToString().ToLower());
+
+
+        });
+
+    </script>*@
+}
+
+<section class="container">
+
+    <!-- tab start -->
+    <div class="tab-area tab-btn">
+        <ul>
+            <li class="on" style="width: 25%;"><a href="javascript:void(0)" name="Domestic" id="Domestic">국내</a></li>
+            <li style="width: 25%;"><a href="javascript:void(0)" name="Usa">미국</a></li>
+            <li style="width: 25%;"><a href="javascript:void(0)" name="Asia">아시아</a></li>
+            <li style="width: 25%;"><a href="javascript:void(0)" name="ExchangeRate">환율</a></li>
+        </ul>
+    </div>
+    <div class="tab-body" id="ChartArea">
+        <div class="tab-cont on" id="Domestic">
+            <!-- 국내 start -->
+            <p class="time-txt pr15 mt20">현지시각 @Html.MarketTimeStatus() 기준</p>
+            <div class="swiper-container chart-slider swiper-container-horizontal">
+                <div class="swiper-wrapper pb30" style="transition-duration: 0ms;">
+                    <div class="swiper-slide on">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div class="chart_Kospi">
+                                </div>
+                                <div class="chart-obj">
+                                    <strong>코스피</strong>
+                                   @Html.PublishPriceMiddleFormat2(Model.KospiInfo.ChgType, Model.KospiInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceMiddleFormat(Model.KospiInfo.ChgType, Model.KospiInfo.ChgPrice)</li>
+                                        <li>@Html.PublishUpDownSymbolPChangeMiddleFormat(Model.KospiInfo.ChgType, Model.KospiInfo.ChgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <div class="chart_Kosdaq">
+
+                                </div>
+                                <div class="chart-obj">
+                                    <strong>코스닥</strong>
+                                    @Html.PublishPriceMiddleFormat2(Model.KosdaqInfo.ChgType, Model.KosdaqInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceMiddleFormat(Model.KosdaqInfo.ChgType, Model.KosdaqInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateMiddleFormat(Model.KosdaqInfo.ChgType, Model.KosdaqInfo.ChgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div class="chart-Kospi200">
+
+                                </div>
+                                <div class="chart-obj">
+                                    <strong>다우존스</strong>
+                                    @Html.PublishPriceMiddleFormat2(Model.Kospi200Info.ChgType, Model.Kospi200Info.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceMiddleFormat(Model.Kospi200Info.ChgType, Model.Kospi200Info.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateMiddleFormat(Model.Kospi200Info.ChgType, Model.Kospi200Info.PChange)</li>
+                                    </ul>
+                                </div>
+                            </div>                                              
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                </div>
+                <!-- btn -->
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
+            </div>
+            <!--// 국내 end -->
+        </div>
+        <div class="tab-cont" id="Usa">
+            <!-- 미국 start -->
+            <p class="time-txt pr15 mt20">현지시각 @Html.MarketTimeStatus() 기준</p>
+            <div class="swiper-container chart-slider swiper-container-horizontal">
+                <div class="swiper-wrapper pb30" style="transition-duration: 0ms;">
+                    <div class="swiper-slide on">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div class="chart_Dowjones">
+                                    </div>
+                                <div class="chart-obj">
+                                    <strong>다우존스</strong>
+                                    @Html.PublishPriceFormat3(Model.DowJonesInfo.chgtype, Model.DowJonesInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.DowJonesInfo.chgtype, Model.DowJonesInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.DowJonesInfo.chgtype, Model.DowJonesInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <div class="chart_Nasdaq">
+
+                                </div>
+                                <div class="chart-obj">
+                                    <strong>나스닥</strong>
+                                    @Html.PublishPriceFormat3(Model.NasdaqInfo.chgtype, Model.NasdaqInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.NasdaqInfo.chgtype, Model.NasdaqInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.NasdaqInfo.chgtype, Model.NasdaqInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div class="chart_SAndP500">
+
+                                </div>
+                                <div class="chart-obj">
+                                    <strong>S&amp;P500</strong>
+                                    @Html.PublishPriceFormat3(Model.SANDP500Info.chgtype, Model.SANDP500Info.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.SANDP500Info.chgtype, Model.SANDP500Info.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.SANDP500Info.chgtype, Model.SANDP500Info.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>                            
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                </div>
+
+                <!-- btn -->
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
+            </div>
+            <!--// 미국 end -->
+        </div>
+        <div class="tab-cont" id="Asia">
+            <!-- 아시아 start -->
+            <p class="time-txt pr15 mt20">현지시각 @Html.MarketTimeStatus() 기준</p>
+            <div class="swiper-container chart-slider swiper-container-horizontal">
+                <div class="swiper-wrapper pb30" style="transition-duration: 0ms;">
+                    <div class="swiper-slide on">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div class="chart_SHC">
+                                </div>
+                                <div class="chart-obj">
+                                    <strong>상해종합</strong>
+                                   @Html.PublishPriceFormat3(Model.SHCInfo.chgtype, Model.SHCInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.SHCInfo.chgtype, Model.SHCInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.SHCInfo.chgtype, Model.SHCInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <div class="chart_HS">
+
+                                </div>
+                                <div class="chart-obj">
+                                    <strong>홍콩항생</strong>
+                                    @Html.PublishPriceFormat3(Model.HSInfo.chgtype, Model.HSInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.HSInfo.chgtype, Model.HSInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.HSInfo.chgtype, Model.HSInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div class="chart_Nikkei">
+
+                                </div>
+                                <div class="chart-obj">
+                                    <strong>니케이</strong>
+                                    @Html.PublishPriceFormat3(Model.NikkeiInfo.chgtype, Model.NikkeiInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.NikkeiInfo.chgtype, Model.NikkeiInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.NikkeiInfo.chgtype, Model.NikkeiInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                </div>
+
+                <!-- btn -->
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
+            </div>
+            <!--// 아시아 end -->
+        </div>
+        <div class="tab-cont" id="ExchangeRate">
+            <!-- 환율 start -->
+            <div class="section-area pb30 mt20">
+                <div class="table-type1 type02 line">
+                    <table>
+                        <caption>관심종목 상세</caption>
+                        <colgroup>
+                            <col style="width:*">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="txt-l">미국 USD</td>
+                                <td class="txt-r">@Html.DIndexExchangePriceFormat((Model.ExchangeUSDInfo.chgCode ?? 0).ToString(), Model.ExchangeUSDInfo.Price)</td>
+                                <td class="txt-r">@Html.DIndexExchangeChgPriceFormat((Model.ExchangeUSDInfo.chgCode ?? 0).ToString(), Model.ExchangeUSDInfo.chgPrice)</td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">일본 JPY(100엔)</td>
+                                <td class="txt-r">@Html.DIndexExchangePriceFormat((Model.ExchangeJPYInfo.chgCode ?? 0).ToString(), Model.ExchangeJPYInfo.Price)</td>
+                                <td class="txt-r">@Html.DIndexExchangeChgPriceFormat((Model.ExchangeJPYInfo.chgCode ?? 0).ToString(), Model.ExchangeJPYInfo.chgPrice)</td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">유럽연합 EUR</td>
+                                <td class="txt-r">@Html.DIndexExchangePriceFormat((Model.ExchangeEURInfo.chgCode ?? 0).ToString(), Model.ExchangeEURInfo.Price)</td>
+                                <td class="txt-r">@Html.DIndexExchangeChgPriceFormat((Model.ExchangeEURInfo.chgCode ?? 0).ToString(), Model.ExchangeEURInfo.chgPrice)</td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">중국CNY</td>
+                                <td class="txt-r">@Html.DIndexExchangePriceFormat((Model.ExchangeCNYInfo.chgCode ?? 0).ToString(), Model.ExchangeCNYInfo.Price)</td>
+                                <td class="txt-r">@Html.DIndexExchangeChgPriceFormat((Model.ExchangeCNYInfo.chgCode ?? 0).ToString(), Model.ExchangeCNYInfo.chgPrice)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--// 환율 end -->
+        </div>
+    </div>
+    <!--// tab end  -->
+    <!-- sub tab -->
+    <div class="swiper-container sub-gnb01 etc swiper-container-horizontal">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide on swiper-slide-active" style="width: 303px;"><span>오늘의 공개방송</span></div>
+            <div class="swiper-slide swiper-slide-next" style="width: 303px;"><span>베스트 파트너</span></div>
+        </div>
+    </div>
+    <!-- // sub tab -->
+    <!-- 오늘의 공개방송 / 베스트 파트너 tab start -->
+    <div class="tab-body">
+        <div class="tab-cont mlr15 on">
+            <!-- 오늘의 공개방송 start -->
+            <div class="swiper-container reporter-slider swiper-container-horizontal">
+                <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-94px, 0px, 0px);">
+                    <div class="swiper-slide swiper-slide-active" style="margin-right: 15px;">
+                        <!-- reporter 1 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 1 end -->
+                    </div>
+                    <div class="swiper-slide swiper-slide-next" style="margin-right: 15px;">
+                        <!-- reporter 2 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 2 end -->
+                    </div>
+                    <div class="swiper-slide" style="margin-right: 15px;">
+                        <!-- reporter 3 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 3 end -->
+                    </div>
+                    <div class="swiper-slide" style="margin-right: 15px;">
+                        <!-- reporter 4 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 4 end -->
+                    </div>
+                    <div class="swiper-slide" style="margin-right: 15px;">
+                        <!-- reporter 5 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 5 end -->
+                    </div>
+                    <div class="swiper-slide" style="margin-right: 15px;">
+                        <!-- reporter 5 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 5 end -->
+                    </div>
+                    <div class="swiper-slide" style="margin-right: 15px;">
+                        <!-- reporter 5 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 5 end -->
+                    </div>
+                </div>
+            </div>
+            <!-- 오늘의 공개방송 end -->
+        </div>
+        <div class="tab-cont mlr15">
+            <!-- 베스트 파트너 start -->
+            <div class="swiper-container reporter-slider swiper-container-horizontal">
+                <div class="swiper-wrapper" style="transition-duration: 0ms;">
+                    <div class="swiper-slide">
+                        <!-- reporter 1 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 1 end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- reporter 2 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 2 end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- reporter 3 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 3 end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- reporter 4 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 4 end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- reporter 5 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 5 end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- reporter 6 start -->
+                        <div class="box-public-broadcasting">
+                            <ul>
+                                <li><a href="javascript:void(0)"><img src="../../images/temp/temp_finance01.png" alt="photo"></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" class="tit-area">
+                                        <strong>장태웅대표 중가-주도주</strong>
+                                        <span>2017.10.27 (08:00~15:30)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="link-blue">녹색방송</a>
+                                    <a href="javascript:void(0)" class="link-blue">카페가기</a>
+                                    <a href="javascript:void(0)" class="link-blue">가입</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// reporter 6 end -->
+                    </div>
+                </div>
+            </div>
+            <!-- 베스트 파트너 end -->
+        </div>
+    </div>
+    <!-- 오늘의 공개방송 / 베스트 파트너 tab end -->
+    <!-- sub tab -->
+    <div class="swiper-container sub-gnb01 mt20 swiper-container-horizontal">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide on swiper-slide-active" style="width: 202px;"><span>관심종목</span></div>
+            <div class="swiper-slide swiper-slide-next" style="width: 202px;"><span>인기검색종목</span></div>
+            <div class="swiper-slide" style="width: 202px;"><span>최근검색종목</span></div>
+        </div>
+    </div>
+    <!-- // sub tab -->
+    <!--  tab view start -->
+    <div class="tab-body">
+        <div class="tab-cont on">
+            <!-- 관심종목 start -->
+            <div class="section-area pt0">
+
+                <!-- data 없을시 아래주석처리부분 사용 -->
+                <div class="box-no-data">
+                    <p class="txt-c">로그인 후 관심종목을 등록하시면<br>등록하신 종목의 시세를 쉽게 보실 수 있습니다.</p>
+                    <div class="btn-area mt10">
+                        <a href="javascript:void(0)" class="btn type01 w-typeAuto01">로그인</a>
+                        <a href="javascript:void(0)" class="btn type05 w-typeAuto01">회원가입</a>
+                    </div>
+                </div>
+
+                <!-- <div class="table-type1 type02 line">
+                    <table>
+                        <caption>관심종목 상세</caption>
+                        <colgroup>
+                            <col style="width:34%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="txt-l">한국경제TV</td>
+                                <td class="txt-r"><span class="font-color04">4,220</span></td>
+                                <td class="txt-r"><span class="stock up"> 20</span></td>
+                                <td class="txt-r"><span class="stock plus"> 0.48%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">아이마켓코리아</td>
+                                <td class="txt-r"><span class="font-color05">12,700</span></td>
+                                <td class="txt-r"><span class="stock down"> 50</span></td>
+                                <td class="txt-r"><span class="stock minus"> 0.40%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">SK하이닉스</td>
+                                <td class="txt-r"><span class="font-color04">68,500</span></td>
+                                <td class="txt-r"><span class="stock up"> 1,700</span></td>
+                                <td class="txt-r"><span class="stock plus"> 2.84%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">삼성전자</td>
+                                <td class="txt-r"><span class="font-color05">2,491,000</span></td>
+                                <td class="txt-r"><span class="stock down"> 1,000</span></td>
+                                <td class="txt-r"><span class="stock minus"> 0.40%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">한국경제TV</td>
+                                <td class="txt-r"><span class="font-color04">4,220</span></td>
+                                <td class="txt-r"><span class="stock up"> 20</span></td>
+                                <td class="txt-r"><span class="stock plus"> 0.48%</span> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> -->
+                <!-- btn start -->
+                <!-- <div class="btn-area">
+                    <a href="javscript:void(0)" class="btn type04"><span class="icon-arrow">나의 금융종목 더보기</span></a>
+                </div> -->
+                <!--// btn end -->
+            </div>
+            <!--// 관심종목 end -->
+
+        </div>
+        <div class="tab-cont">
+            <!-- 인기검색종목 start -->
+            <div class="section-area pt0">
+                <div class="table-type1 type02 line">
+                    <table>
+                        <caption>인기검색종목 상세</caption>
+                        <colgroup>
+                            <col style="width:34%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="txt-l">한국경제TV11</td>
+                                <td class="txt-r"><span class="font-color04">4,220</span></td>
+                                <td class="txt-r"><span class="stock up"> 20</span></td>
+                                <td class="txt-r"><span class="stock plus"> 0.48%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">아이마켓코리아</td>
+                                <td class="txt-r"><span class="font-color05">12,700</span></td>
+                                <td class="txt-r"><span class="stock down"> 50</span></td>
+                                <td class="txt-r"><span class="stock minus"> 0.40%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">SK하이닉스</td>
+                                <td class="txt-r"><span class="font-color04">68,500</span></td>
+                                <td class="txt-r"><span class="stock up"> 1,700</span></td>
+                                <td class="txt-r"><span class="stock plus"> 2.84%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">삼성전자</td>
+                                <td class="txt-r"><span class="font-color05">2,491,000</span></td>
+                                <td class="txt-r"><span class="stock down"> 1,000</span></td>
+                                <td class="txt-r"><span class="stock minus"> 0.40%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">한국경제TV</td>
+                                <td class="txt-r"><span class="font-color04">4,220</span></td>
+                                <td class="txt-r"><span class="stock up"> 20</span></td>
+                                <td class="txt-r"><span class="stock plus"> 0.48%</span> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--// 인기검색종목 end -->
+        </div>
+        <div class="tab-cont">
+            <!-- 최근검색종목 start -->
+            <div class="section-area pt0">
+
+                <!-- data 없을시 아래주석처리부분 사용 -->
+                <!-- <div class="box-no-data">
+                    <p class="txt-c mt30">최근 검색종목이 없습니다.</p>
+                </div> -->
+
+
+                <div class="table-type1 type02 line">
+                    <table>
+                        <caption>최근검색종목 상세</caption>
+                        <colgroup>
+                            <col style="width:34%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="txt-l">한국경제TV22</td>
+                                <td class="txt-r"><span class="font-color04">4,220</span></td>
+                                <td class="txt-r"><span class="stock up"> 20</span></td>
+                                <td class="txt-r"><span class="stock plus"> 0.48%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">아이마켓코리아</td>
+                                <td class="txt-r"><span class="font-color05">12,700</span></td>
+                                <td class="txt-r"><span class="stock down"> 50</span></td>
+                                <td class="txt-r"><span class="stock minus"> 0.40%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">SK하이닉스</td>
+                                <td class="txt-r"><span class="font-color04">68,500</span></td>
+                                <td class="txt-r"><span class="stock up"> 1,700</span></td>
+                                <td class="txt-r"><span class="stock plus"> 2.84%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">삼성전자</td>
+                                <td class="txt-r"><span class="font-color05">2,491,000</span></td>
+                                <td class="txt-r"><span class="stock down"> 1,000</span></td>
+                                <td class="txt-r"><span class="stock minus"> 0.40%</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">한국경제TV</td>
+                                <td class="txt-r"><span class="font-color04">4,220</span></td>
+                                <td class="txt-r"><span class="stock up"> 20</span></td>
+                                <td class="txt-r"><span class="stock plus"> 0.48%</span> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!--// 최근검색종목 end -->
+        </div>
+    </div>
+    <!-- // tab view end -->
+    <!-- sub tab -->
+    <div class="swiper-container sub-gnb01 mt20 mb0 hidd-m swiper-container-horizontal">
+        <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+            <div class="swiper-slide on swiper-slide-active" style="width: 303px;"><span>오늘의 주요뉴스</span></div>
+            <div class="swiper-slide swiper-slide-next" style="width: 303px;"><span>특징주뉴스</span></div>
+        </div>
+    </div>
+    <!-- // sub tab -->
+    <!--  tab view start -->
+    <div class="tab-body tem-view">
+        <div class="tab-cont on">
+            <!-- 오늘의 주요뉴스 start -->
+            <h3 class="tit-line plr15 hidd-t">오늘의 주요 뉴스</h3>
+            <div class="section-area pt0">
+                <ul class="list-type-todayNew">
+                    @if(Model.GetTodayStockNewsList.ListData.Count > 0)
+                    {
+                        foreach(var item in Model.GetTodayStockNewsList.ListData)
+                        {
+                            <li>
+                                <a href="#none" onclick="return DomesticStockIndex.GoNewsRead('@item.ARTICLEID')">@item.TITLE</a>
+                            </li>
+                        }
+                    }
+                    @*<li><a href="javascript:void(0)">일본 닛케이 오전장 1.00% 상승 마감 일본 닛케이 오전장 1.00% 상승 마감 일본 닛케이 오전장 1.00% 상승 마감</a></li>
+                    <li><a href="javascript:void(0)">큰 손들이 선택한 스탁론 브랜드 – 와우스탁론</a></li>
+                    <li><a href="javascript:void(0)">구글 “목표는 ‘AI 기술의 민주화’… 누구에게나 혜택”</a></li>
+                    <li><a href="javascript:void(0)">미래에셋생명, 변액보험 전담 콜센터 개설</a></li>
+                    <li><a href="javascript:void(0)">동북아 전략경쟁 구도 넘지 못한 안보리 대북제재</a></li>*@
+                </ul>
+            </div>
+            <!--// 오늘의 주요뉴스 end -->
+        </div>
+        <div class="tab-cont">
+            <!-- 특징주뉴스 start -->
+            <h3 class="tit-line plr15 hidd-t">특징주뉴스</h3>
+            <div class="section-area pd0">
+
+                <!-- stock start -->
+                <div class="stock-business type01">
+                    <dl class="stock-area">
+                        <dt>전기전자</dt>
+                        <dd>2,440.65</dd>
+                    </dl>
+                    <ul class="stock-box">
+                        <li><span class="stock up"> 1.54%</span></li>
+                        <li><span class="stock plus">1.54% </span></li>
+                    </ul>
+                </div>
+                <!--// stock end -->
+
+                <div class="stock-aside">
+                    <strong class="tit">롯데백화점에 CJ 콘텐츠 전문매장 생긴다.</strong>
+                    <div class="txt-info-stock">
+                        <strong>현재가 9,500</strong>
+                        <span>상승/하락</span>
+                    </div>
+                    <span class="txt-info-company">한국경제TV</span>
+                </div>
+
+
+            </div>
+            <!--// 특징주뉴스 end -->
+        </div>
+    </div>
+    <!-- // tab view end -->
+    <!-- 업종 · 테마별 상위 start -->
+    <div class="box-class-type">
+        <h3 class="tit-line plr15">업종 · 테마별 상위</h3>
+        <div>
+            <h4 class="tit-s"><a href="javascript:void(0)">업종별상위</a></h4>
+            <ul class="list-type-class">
+                <li>
+                    <span class="txt">통신</span>
+                    <span class="stock plus">1.98%</span>
+                </li>
+                <li>
+                    <span class="txt">전기전자</span>
+                    <span class="stock plus">1.39%</span>
+                </li>
+                <li>
+                    <span class="txt">기계</span>
+                    <span class="stock plus">0.93%</span>
+                </li>
+                <li>
+                    <span class="txt">화학</span>
+                    <span class="stock plus">0.32%</span>
+                </li>
+                <li>
+                    <span class="txt">종이목재</span>
+                    <span class="stock plus">0.28%</span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="tit-s"><a href="javascript:void(0)">테마별상위</a></h4>
+            <ul class="list-type-class">
+                <li>
+                    <span class="txt">풍력발전</span>
+                    <span class="stock plus">1.98%</span>
+                </li>
+                <li>
+                    <span class="txt">전자회로기판 전자회로기판</span>
+                    <span class="stock plus">1.39%</span>
+                </li>
+                <li>
+                    <span class="txt">수출주</span>
+                    <span class="stock plus">0.93%</span>
+                </li>
+                <li>
+                    <span class="txt">조선주</span>
+                    <span class="stock plus">0.32%</span>
+                </li>
+                <li>
+                    <span class="txt">현대계열사</span>
+                    <span class="stock plus">0.28%</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--// 업종 · 테마별 상위 end -->
+    <!-- 랭킹100 start -->
+    <div class="section-area rank-pd">
+        <h3 class="tit-line plr15"><a href="javascript:void(0)">랭킹100</a></h3>
+
+        <!-- sub tab -->
+        <div class="swiper-container sub-gnb01 mb0 swiper-container-horizontal">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide on swiper-slide-active" style="width: 202px;"><span>전체</span></div>
+                <div class="swiper-slide swiper-slide-next" style="width: 202px;"><span>코스피</span></div>
+                <div class="swiper-slide" style="width: 202px;"><span>코스닥</span></div>
+            </div>
+        </div>
+        <!-- // sub tab -->
+        <!-- tab view start -->
+        <div class="tab-body">
+            <div class="tab-cont on mlr15">
+                <!-- 전체 start -->
+                <div class="table-type1 bdt-none">
+                    <table>
+                        <caption>전체 상세</caption>
+                        <colgroup>
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td><span class="num">1</span></td>
+                                <td class="txt-l">닉스테크</td>
+                                <td><span class="text-icon type06 trade"><span class="icon buy"></span>매수</span></td>
+                                <td><span class="num">12,900</span></td>
+                                <td><span class="stock up"> 150</span></td>
+                                <td><span class="stock plus"> 1.18%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">2</span></td>
+                                <td class="txt-l">신라젠</td>
+                                <td><span class="text-icon type06 trade"><span class="icon owns"></span>보유</span></td>
+                                <td><span class="num">2,757</span></td>
+                                <td><span class="stock down"> 5</span></td>
+                                <td><span class="stock minus"> 0.19%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">3</span></td>
+                                <td class="txt-l">경동제약</td>
+                                <td><span class="text-icon type06 trade"><span class="icon sell"></span>매도</span></td>
+                                <td><span class="num">92,200</span></td>
+                                <td><span class="stock down"> 6,500</span></td>
+                                <td><span class="stock minus"> 6.59%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">4</span></td>
+                                <td class="txt-l">고려신용정보</td>
+                                <td><span class="text-icon type06 trade"><span class="icon prog"></span>진행</span></td>
+                                <td><span class="num">4,340</span></td>
+                                <td><span class="stock up"> 110</span></td>
+                                <td><span class="stock plus"> 2.47%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">5</span></td>
+                                <td class="txt-l">해덕파워웨이</td>
+                                <td><span class="text-icon type06 trade"><span class="font-color04">급 </span>급등</span></td>
+                                <td><span class="num">9,800</span></td>
+                                <td><span class="stock up"> 80</span></td>
+                                <td><span class="stock plus"> 0.82%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="txt-exp mt10 txt-r">&lt;랭키스코어 : <em class="num">1000</em>점&gt;</p>
+                </div>
+                <!--// 전체 end -->
+            </div>
+            <div class="tab-cont mlr15">
+                <!-- 코스피 start -->
+                <div class="table-type1 bdt-none">
+                    <table>
+                        <caption>코스피 상세</caption>
+                        <colgroup>
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td><span class="num">1</span></td>
+                                <td class="txt-l">닉스테크11</td>
+                                <td><span class="text-icon type06 trade"><span class="icon buy"></span>매수</span></td>
+                                <td><span class="num">12,900</span></td>
+                                <td><span class="stock up"> 150</span></td>
+                                <td><span class="stock plus"> 1.18%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">2</span></td>
+                                <td class="txt-l">신라젠</td>
+                                <td><span class="text-icon type06 trade"><span class="icon owns"></span>보유</span></td>
+                                <td><span class="num">2,757</span></td>
+                                <td><span class="stock down"> 5</span></td>
+                                <td><span class="stock minus"> 0.19%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">3</span></td>
+                                <td class="txt-l">경동제약</td>
+                                <td><span class="text-icon type06 trade"><span class="icon sell"></span>매도</span></td>
+                                <td><span class="num">92,200</span></td>
+                                <td><span class="stock down"> 6,500</span></td>
+                                <td><span class="stock minus"> 6.59%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">4</span></td>
+                                <td class="txt-l">고려신용정보</td>
+                                <td><span class="text-icon type06 trade"><span class="icon prog"></span>진행</span></td>
+                                <td><span class="num">4,340</span></td>
+                                <td><span class="stock up"> 110</span></td>
+                                <td><span class="stock plus"> 2.47%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">5</span></td>
+                                <td class="txt-l">해덕파워웨이</td>
+                                <td><span class="text-icon type06 trade"><span class="font-color04">급 </span>급등</span></td>
+                                <td><span class="num">9,800</span></td>
+                                <td><span class="stock up"> 80</span></td>
+                                <td><span class="stock plus"> 0.82%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="txt-exp mt10 txt-r">&lt;랭키스코어 : <em class="num">1000</em>점&gt;</p>
+                </div>
+                <!--// 코스피 end -->
+            </div>
+            <div class="tab-cont mlr15">
+                <!-- 코스닥 start -->
+                <div class="table-type1 bdt-none">
+                    <table>
+                        <caption>코스닥 상세</caption>
+                        <colgroup>
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                            <col style="width:;">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td><span class="num">1</span></td>
+                                <td class="txt-l">닉스테크22</td>
+                                <td><span class="text-icon type06 trade"><span class="icon buy"></span>매수</span></td>
+                                <td><span class="num">12,900</span></td>
+                                <td><span class="stock up"> 150</span></td>
+                                <td><span class="stock plus"> 1.18%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">2</span></td>
+                                <td class="txt-l">신라젠</td>
+                                <td><span class="text-icon type06 trade"><span class="icon owns"></span>보유</span></td>
+                                <td><span class="num">2,757</span></td>
+                                <td><span class="stock down"> 5</span></td>
+                                <td><span class="stock minus"> 0.19%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">3</span></td>
+                                <td class="txt-l">경동제약</td>
+                                <td><span class="text-icon type06 trade"><span class="icon sell"></span>매도</span></td>
+                                <td><span class="num">92,200</span></td>
+                                <td><span class="stock down"> 6,500</span></td>
+                                <td><span class="stock minus"> 6.59%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">4</span></td>
+                                <td class="txt-l">고려신용정보</td>
+                                <td><span class="text-icon type06 trade"><span class="icon prog"></span>진행</span></td>
+                                <td><span class="num">4,340</span></td>
+                                <td><span class="stock up"> 110</span></td>
+                                <td><span class="stock plus"> 2.47%</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="num">5</span></td>
+                                <td class="txt-l">해덕파워웨이</td>
+                                <td><span class="text-icon type06 trade"><span class="font-color04">급 </span>급등</span></td>
+                                <td><span class="num">9,800</span></td>
+                                <td><span class="stock up"> 80</span></td>
+                                <td><span class="stock plus"> 0.82%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="txt-exp mt10 txt-r">&lt;랭키스코어 : <em class="num">1000</em>점&gt;</p>
+                </div>
+                <!--// 코스닥 end -->
+            </div>
+        </div>
+        <!-- // tab view end -->
+    </div>
+    <!--// 랭킹100 end -->
+
+
+    <div class="box-todayNew-trend">
+        <!-- 오늘의 투자전략 start -->
+        <div class="section-area pd0">
+            <h3 class="tit-line plr15"><a href="javascript:void(0)">오늘의 투자전략</a></h3>
+            <ul class="list-type-todayNew">
+                <li><a href="javascript:void(0)">일본 닛케이 오전장 1.00% 상승 마감 일본 닛케이 오전장 1.00% 상승 마감 일본 닛케이 오전장 1.00% 상승 마감</a></li>
+                <li><a href="javascript:void(0)">큰 손들이 선택한 스탁론 브랜드 – 와우스탁론</a></li>
+                <li><a href="javascript:void(0)">구글 “목표는 ‘AI 기술의 민주화’… 누구에게나 혜택”</a></li>
+                <li><a href="javascript:void(0)">미래에셋생명, 변액보험 전담 콜센터 개설</a></li>
+                <li><a href="javascript:void(0)">동북아 전략경쟁 구도 넘지 못한 안보리 대북제재</a></li>
+            </ul>
+        </div>
+        <!--// 오늘의 투자전략 end -->
+        <!-- 주체별 동향 start -->
+        <div class="section-area pd0">
+            <h3 class="tit-line plr15 bdb-none line-t">
+                주체별 동향
+                <span class="txt-exp"><em class="num">2017.07-27 10:10</em> 장중(억원)</span>
+            </h3>
+            <div class="table-type1 bdt-col02 type03 mlr15">
+                <table>
+                    <caption>주체별 동향 상세</caption>
+                    <colgroup>
+                        <col style="width:;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">분류</th>
+                            <th scope="col">외국인</th>
+                            <th scope="col">기관</th>
+                            <th scope="col">개인</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>코스피</td>
+                            <td><span class="stock plus"> 541</span></td>
+                            <td><span class="stock plus"> 749</span></td>
+                            <td><span class="stock minus"> 220</span></td>
+                        </tr>
+                        <tr>
+                            <td>코스닥</td>
+                            <td><span class="stock minus"> 541</span></td>
+                            <td><span class="stock plus"> 749</span></td>
+                            <td><span class="stock minus"> 220</span></td>
+                        </tr>
+                        <tr>
+                            <td>선물</td>
+                            <td><span class="stock plus"> 541</span></td>
+                            <td><span class="stock plus"> 749</span></td>
+                            <td><span class="stock minus"> 220</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--// 주체별 동향 end -->
+    </div>
+
+
+    <div class="box-bann-teach">
+        <!-- ad start -->
+        <div class="section-area">
+            <div class="bann-img">
+                <a href="javascript:void(0)"><img src="../../images/temp/temp_finance02.png" alt="bannerImg"></a>
+            </div>
+        </div>
+        <!--// ad end -->
+        <!-- 주식 강연회 start -->
+        <div class="section-area">
+            <h3>
+                주식 강연회
+                <a href="javascript:void(0)" class="btn-more">more</a>
+            </h3>
+            <ul class="list-type-stock">
+                <li>
+                    <span class="addr">서울</span>
+                    <a href="javascript:void(0)">[1박2일] 한옥석 집중교육 한옥석 집중교육 한옥석 집중교육</a>
+                    <span class="num">2017-07-08</span>
+                </li>
+                <li>
+                    <span class="addr">서울</span>
+                    <a href="javascript:void(0)">[1박2일] 한옥석 집중교육 한옥석 집중교육 한옥석 집중교육</a>
+                    <span class="num">2017-07-08</span>
+                </li>
+                <li>
+                    <span class="addr">서울</span>
+                    <a href="javascript:void(0)">[1박2일] 한옥석 집중교육 한옥석 집중교육</a>
+                    <span class="num">2017-07-08</span>
+                </li>
+            </ul>
+        </div>
+        <!--// 주식 강연회 end -->
+    </div>
+
+
+    <div class="box-bann-service">
+        <!-- ad start -->
+        <div class="section-area">
+            <div class="bann-img">
+                <a href="javascript:void(0)"><img src="../../images/temp/temp_finance02.png" alt="bannerImg"></a>
+            </div>
+        </div>
+        <!--// ad end -->
+        <!-- 와우 금융 서비스 start -->
+        <div class="section-area box-finan-serv">
+            <h3>와우 금융 서비스</h3><div>
+                <div>
+                    <a href="javascript:void(0)">
+                        <span class="is-ico-service ico-01"></span>
+                        <span>실시간 방송</span>
+                    </a>
+                    <a href="javascript:void(0)">
+                        <span class="is-ico-service ico-02"></span>
+                        <span>파트너 방송</span>
+                    </a>
+                    <a href="javascript:void(0)">
+                        <span class="is-ico-service ico-03"></span>
+                        <span>증권교육</span>
+                    </a>
+                    <a href="javascript:void(0)">
+                        <span class="is-ico-service ico-04"></span>
+                        <span>P2P 투자</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="javascript:void(0)">
+                        <span class="is-ico-service ico-05"></span>
+                        <span>와우밴드</span>
+                    </a>
+                    <a href="javascript:void(0)">
+                        <span class="is-ico-service ico-06"></span>
+                        <span>주식창</span>
+                    </a>
+                    <a href="javascript:void(0)">
+                        <span class="is-ico-service ico-07"></span>
+                        <span>VOD</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--// 와우 금융 서비스 end -->
+        <!-- ad start -->
+        <div class="section-area">
+            <div class="bann-img">
+                <a href="javascript:void(0)"><img src="../../images/temp/temp_finance03.png" alt="bannerImg"></a>
+                <a href="javascript:void(0)"><img src="../../images/temp/temp_finance04.png" alt="bannerImg"></a>
+            </div>
+        </div>
+        <!--// ad end -->
+    </div>
+
+</section>

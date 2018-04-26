@@ -1,0 +1,53 @@
+﻿@model Wow.Tv.Middle.Model.Db49.wowtv.TAB_BOARD
+
+
+@{
+    string rootUrl = AppState["RootUrl"].ToString();
+}
+
+
+
+@section scripts{
+    <script src="@rootUrl/Scripts/Pilot/Edit.js"></script>
+    <script src="@rootUrl/Scripts/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
+    <script src="@rootUrl/Scripts/common/SmartEditor.js"></script>
+}
+
+
+<form id="frmSearch">
+    <input type="hidden" id="seq" name="seq" value="@Model.SEQ" />
+    <input type="hidden" id="title" name="title" value="@ViewBag.Condition.Title" />
+    <input type="hidden" id="pageSize" name="pageSize" value="@ViewBag.Condition.PageSize" />
+    <input type="hidden" id="currentIndex" name="currentIndex" value="@ViewBag.Condition.CurrentIndex" />
+</form>
+
+
+
+<form id="frmSave">
+    <input type="hidden" name="seq" value="@Model.SEQ" />
+    <table>
+        <tr>
+            <td>
+                제목
+            </td>
+            <td>
+                <input type="text" name="TITLE" value="@Model.TITLE" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                내용
+            </td>
+            <td style="width:850px;">
+                <textarea id="editor" name="CONTENT" style="width:800px; height:300px;">@Model.CONTENT</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="#" id="btnList">목록</a><a href="#" id="btnSave">저장</a>
+            </td>
+        </tr>
+    </table>
+</form>
+
+

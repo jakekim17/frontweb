@@ -1,0 +1,178 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db90.DNRS
+
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    ListModel<T_NEWS_PRG> procList = ViewBag.ProcList;
+    ListModel<T_NEWS_PRG> afterList = ViewBag.AfterList;
+    ListModel<T_NEWS_PRG> specList = ViewBag.SpecList;
+
+    ListModel<T_NEWS_PRG> stockList = ViewBag.StockList;
+    ListModel<T_NEWS_PRG> realEstateList = ViewBag.RealEstateList;
+    ListModel<T_NEWS_PRG> insuranceList = ViewBag.InsuranceList;
+    ListModel<T_NEWS_PRG> pinTechList = ViewBag.PinTechList;
+    ListModel<T_NEWS_PRG> lifeEconomyList = ViewBag.LifeEconomyList;
+
+    List<T_NEWS_PRG> stockOrderList = stockList.ListData.OrderBy(a => a.PRG_NM).ToList();
+}
+
+
+
+<div>
+    <h3 class="title03 font-color02">증권</h3>
+    <ul>
+        @for(int i = 0; i < stockOrderList.Count / 2; i++)      //foreach (var item in stockList.ListData.OrderBy(a => a.PRG_NM))
+        {
+            T_NEWS_PRG item = stockOrderList[i];
+
+            <li>
+                <a href="#" onclick="return TvMainProgramList.MoveBroad('@item.PRG_CD');">
+                    <em></em>@item.PRG_NM
+                    @if (item.PLAN_BROAD == "FIRST")
+                {
+                        <span class="box-icon">첫방송</span>
+                    }
+                    else if (item.PLAN_BROAD == "OPEN")
+                    {
+                        <span class="box-icon">개편</span>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+    <ul>
+        @for (int i = stockOrderList.Count / 2 ; i < stockOrderList.Count ; i++)      //foreach (var item in stockList.ListData.OrderBy(a => a.PRG_NM))
+        {
+            T_NEWS_PRG item = stockOrderList[i];
+
+            <li>
+                <a href="#" onclick="return TvMainProgramList.MoveBroad('@item.PRG_CD');">
+                    <em></em>@item.PRG_NM
+                    @if (item.PLAN_BROAD == "FIRST")
+                {
+                        <span class="box-icon">첫방송</span>
+                    }
+                    else if (item.PLAN_BROAD == "OPEN")
+                    {
+                        <span class="box-icon">개편</span>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+<div>
+    <!-- 경제 start -->
+    <h3 class="title03 font-color02">경제</h3>
+    <ul>
+        @foreach (var item in insuranceList.ListData.OrderBy(a => a.PRG_NM))
+        {
+            <li>
+                <a href="#" onclick="return TvMainProgramList.MoveBroad('@item.PRG_CD');">
+                    <em></em>@item.PRG_NM
+                    @if (item.PLAN_BROAD == "FIRST")
+                {
+                        <span class="box-icon">첫방송</span>
+                    }
+                    else if (item.PLAN_BROAD == "OPEN")
+                    {
+                        <span class="box-icon">개편</span>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+    <!--// 경제 end -->
+
+    <h3 class="title03 font-color02">부동산</h3>
+    <ul>
+        @foreach (var item in realEstateList.ListData.OrderBy(a => a.PRG_NM))
+        {
+            <li>
+                <a href="#" onclick="return TvMainProgramList.MoveBroad('@item.PRG_CD');">
+                    <em></em>@item.PRG_NM
+                    @if (item.PLAN_BROAD == "FIRST")
+                {
+                        <span class="box-icon">첫방송</span>
+                    }
+                    else if (item.PLAN_BROAD == "OPEN")
+                    {
+                        <span class="box-icon">개편</span>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+
+</div>
+<div>
+    <h3 class="title03 font-color02">핀테크</h3>
+    <ul>
+        @foreach (var item in pinTechList.ListData.OrderBy(a => a.PRG_NM))
+        {
+            <li>
+                <a href="#" onclick="return TvMainProgramList.MoveBroad('@item.PRG_CD');">
+                    <em></em>@item.PRG_NM
+                    @if (item.PLAN_BROAD == "FIRST")
+                {
+                        <span class="box-icon">첫방송</span>
+                    }
+                    else if (item.PLAN_BROAD == "OPEN")
+                    {
+                        <span class="box-icon">개편</span>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+
+    <h3 class="title03 font-color02">생활경제</h3>
+    <ul>
+        @foreach (var item in lifeEconomyList.ListData.OrderBy(a => a.PRG_NM))
+        {
+            <li>
+                <a href="#" onclick="return TvMainProgramList.MoveBroad('@item.PRG_CD');">
+                    <em></em>@item.PRG_NM
+                    @if (item.PLAN_BROAD == "FIRST")
+                {
+                        <span class="box-icon">첫방송</span>
+                    }
+                    else if (item.PLAN_BROAD == "OPEN")
+                    {
+                        <span class="box-icon">개편</span>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+
+</div>
+
+<div>
+    <h3 class="title03 font-color02">특집방송</h3>
+    <ul>
+        @foreach (var item in specList.ListData.OrderBy(a => a.PRG_NM))
+        {
+            <li>
+                <a href="#" onclick="return TvMainProgramList.MoveBroad('@item.PRG_CD');">
+                    <em></em>@item.PRG_NM
+                    @if (item.PLAN_BROAD == "FIRST")
+                {
+                        <span class="box-icon">첫방송</span>
+                    }
+                    else if (item.PLAN_BROAD == "OPEN")
+                    {
+                        <span class="box-icon">개편</span>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+<script src="@wowTvScript/Broad/TvMain/ProgramList.js?date=20171018170000"></script>

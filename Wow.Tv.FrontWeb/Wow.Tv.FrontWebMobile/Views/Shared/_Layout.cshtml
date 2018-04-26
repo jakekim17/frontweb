@@ -1,0 +1,354 @@
+﻿@using Wow.Tv.FrontWebMobile.MenuService
+@using System.Configuration
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string bodyClass = AppState["BodyClass"].ToString();
+
+    bool isMain = true;
+    string currentMenuSeq = Request["menuSeq"];
+
+    if (String.IsNullOrEmpty(currentMenuSeq) == false)
+    {
+        var currentMenu = new MenuServiceClient().GetAt(int.Parse(currentMenuSeq));
+        if (currentMenu != null && currentMenu.DEPTH > 1 && currentMenu.MENU_NAME != "홈")
+        {
+            isMain = false;
+        }
+    }
+}
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>한국경제TV</title>
+    <meta charset="UTF-8">
+    <!-- meta name="viewport" content="width=device-width, initial-scale=1.0"-->
+    <meta property="fb:app_id" content="@ConfigurationManager.AppSettings["FacebookAppId"]" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+    <meta name="google-site-verification" content="MvH75U9ZJFcxkx7VsyQUUPyLVgIRIIarSHLSAMJoAs0" />
+    <meta name="naver-site-verification" content="3078e060f9e05a27c5a50806d54b2fd8359ea8a1" />
+    @*<meta property="og:image" id="metaImg" content=""/>*@
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @RenderSection("metas", false)
+    <link rel="stylesheet" href="@wowTvStyle/css/fonts.css">
+    <link rel="stylesheet" href="@wowTvStyle/css/common.css?date=20180228143000">
+    <link rel="stylesheet" href="@wowTvStyle/css/swiper.min.css">
+    @*<link rel="stylesheet" href="@wowTvStyle/css/tv.css">*@
+
+    @if (AppState["BodyClass"].ToString().Contains("finance"))
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/finance.css">
+    }
+
+    @if (AppState["BodyClass"].ToString().Contains("news"))
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/news.css">
+    }
+    @if (AppState["BodyClass"].ToString().Contains("land"))
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/land.css">
+    }
+    @if (AppState["BodyClass"].ToString().Contains("entertain"))
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/entertain.css">
+    }
+    @if (AppState["BodyClass"].ToString().Contains("photo"))
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/photo.css">
+    }
+
+    @*<link rel="stylesheet" href="@wowTvStyle/css/main.css">*@
+
+
+    @RenderSection("styles", false)
+
+    <script type="text/javascript">
+        var FacebookUserToken = "@ConfigurationManager.AppSettings["FacebookUserToken"]";
+        var userLoginUrl = "@System.Configuration.ConfigurationManager.AppSettings["UserLoginUrl"]";
+    </script>
+
+    <script type="text/javascript" src="@wowTvScript/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="@wowTvScript/design.js"></script>
+
+    <script type="text/javascript" src="@wowTvScript/swiper.min.js"></script>
+    <script type="text/javascript" src="@wowTvScript/paging.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Common.js?date=20171226160500"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery.cookie.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Define.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Finance/finance_common.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Finance/middleStockData.js"></script>
+    <script type="text/javascript" src="@wowTvScript/SearchApi.js?date=20180103142000"></script>
+    <script type="text/javascript" src="@wowTvScript/Popup/SubScription.js"></script>
+    @RenderSection("scripts", false)
+
+
+    <script>
+        var TopMenu = {
+            MoveTvSchedule: function () {
+                location.href = "/Broad/TvSchedule/Index?menuSeq=" + MENU_SEQ_DEFINE.BROAD.SCHEDULE;
+                return false;
+            },
+            MoveTvOnAir: function () {
+                location.href = "/Broad/OnAir/Index?menuSeq=" + MENU_SEQ_DEFINE.BROAD.ONAIR;
+                return false;
+            }
+        };
+
+        function LayOutMain_OpenPopUp(url) {
+            window.open(url);
+
+            return false;
+        }
+
+        function LayOutMain_GoPage(url) {
+            location.href = url;
+
+            return false;
+        }
+
+        function KospiGo() {
+            location.href = "/Finance/DomesticStock/Kospi?menuSeq=" + MENU_SEQ_DEFINE.FINANCE.Kospi;
+        }
+
+        function KosdaqGo() {
+            location.href = "/Finance/DomesticStock/Kosdaq?menuSeq=" + MENU_SEQ_DEFINE.FINANCE.Kosdaq;
+        }
+    </script>
+
+
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M47P4NW');</script>
+    <!-- End Google Tag Manager -->
+
+    <!--END_CON 스크립트-->
+    <script src="http://ad89.z00.kr/catchback/hankyungtv.js"></script>
+
+</head>
+
+
+
+
+<body class="@bodyClass@(isMain == true ? " main" : "")">
+    <!-- 해당 메뉴의 class로 분기처리 -->
+
+    @* <body>바로 뒤에 넣어달라 *@
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M47P4NW"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+
+    <div class="wrap">
+        <!-- 전체 메뉴 -->
+        <div class="sitemap-area">
+
+            @Html.Action("SiteMap", "Home", new { Area = "" })
+
+        </div>
+        <!-- // 전체 메뉴 -->
+        <!-- Header -->
+        <header class="header">
+
+
+            @if (Request.Url.LocalPath == "/" || Request.Url.LocalPath == "/Home/Index")
+            {
+                <article class="header-top">
+                    <div class="menu-area">
+                        <a href="javascript:void(0);" class="menu-btn">메뉴</a>
+                    </div>
+                    <h1><img src="@wowTvStyle/images/common/img-header-ci01.png" alt="ci" class="ci-view"></h1>
+                    <div class="menu-area right">
+                        <a href="#none" class="search">검색</a> <!-- logout 클래스 추가시 아이콘 변경 -->
+                        <a href="/Broad/OnAir/Index?menuSeq=988" class="onair">온에어</a>
+                    </div>
+                </article>
+
+		        <!-- 검색 박스 드롭 -->
+                <div class="search-area">
+                    <!-- 인풋 박스 -->
+                    <div class="input-area">
+                        <form id="LayOut_totalSearchForm" action="/totalSearch/Mariner/Index" method="post">
+                            <input type="search" name="searchTerm">
+                            <a href="javascript:void(0)" onclick="$('#LayOut_totalSearchForm').submit();"><span class="search-btn"></span></a>
+                        </form>
+                        <!-- // 검색 버튼 -->
+                    </div>
+                    <!-- // 인풋 박스 -->
+                </div>
+		        <!-- // 검색 박스 드롭 -->
+
+
+                @Html.Action("TopMenuFromMain", "Home", new { Area = "" })
+}
+            else
+            {
+                @Html.Action("TopMenuBar", "Home", new { Area = "" })
+}
+        </header>
+        <!-- //Header -->
+        <!-- container -->
+        <section class="container">
+            @if (isMain == false)
+            {
+                @Html.Action("_PageLocation", "Home", new { Area = "" })
+}
+
+            @RenderBody()
+
+        </section>
+        <!-- // container -->
+        <!-- footer -->
+        <footer>
+
+            <h4 class="blind">푸터</h4>
+            <!-- icon start -->
+            <div class="box-footer-icon">
+                <a href="https://www.facebook.com/HKWOWTV" class="box-facebook">Facebook</a>
+                <a href="https://twitter.com/HKWOWTV" class="box-twitter">Twitter</a>
+                <a href="https://story.kakao.com/ch/hkwowtv" class="box-kakaostory">KakaoStory</a>
+                <a href="https://www.youtube.com/user/hkwowtv" class="box-youtube">YouTube</a>
+                <a href="http://post.naver.com/my.nhn?memberNo=11761424" class="box-writer">Writer</a>
+            </div>
+            <!--// icon end -->
+            <!-- btn start -->
+            <div class="box-footer-btn">
+                <a href="http://mprovision.wowtv.co.kr/Operation/Policy/TermsOfService">서비스이용약관</a>
+                <a href="http://mprovision.wowtv.co.kr/Operation/Policy/PrivacyPolicy">개인정보처리방침</a>
+                <a href="http://mprovision.wowtv.co.kr/Operation/Policy/ArticleBasicPolicy">기사배열 기본방침</a>
+                <a href="javascript:void(0)" class="view-comInfor"><span>사업자정보</span></a>
+                <a href="javascript:void(0)" class="view-site"><span>한국경제TV 패밀리 사이트</span></a>
+            </div>
+            <!--// btn end -->
+            <!-- 사업자정보 start -->
+            <div class="box-footer-comInfor">
+                <p class="txt-exmp">한국경제TV의 모든 콘텐츠는 저작권재법의 보호를 받습니다. <br>무단전재/복사/배포 등을 금지합니다.</p>
+                <div class="box-comInfor">
+                    <div>
+                        <p>㈜한국경제티브이</p>
+                        <span>사장 송재조 서울시 영등포구 버드나루로 </span>
+                    </div>
+                    <div>
+                        <p>84(우:150-988)</p>
+                        <span>Tel 02-6676-0000</span>
+                    </div>
+                    <div>
+                        <p>사업자등록번호 1107-81-70183</p>
+                        <span>통신판매업신고번호 영등포구 </span>
+                    </div>
+                    <div>
+                        <p>2000-00571호</p>
+                        <span>호스팅제공자 : ㈜한국경제티브이 </span>
+                    </div>
+                    <div>
+                        <span>기사배열 책임자 : 이성경</span>
+                    </div>
+                </div>
+                <div class="btn-footer-area">
+                    <a href="http://mcompany.wowtv.co.kr/WowTvGuide/WowTvInfo/Index?menuSeq=781">회사소개</a>
+                    <a href="http://mcompany.wowtv.co.kr/BusinessGuide/Business/Index?menuSeq=796">광고(인터넷·TV)</a>
+                    <a href="http://mcompany.wowtv.co.kr/BusinessGuide/Business/Index?menuSeq=796">제휴안내</a>
+                </div>
+            </div>
+            <!--// 사업자정보 end -->
+            <!-- 한국경제TV 패밀리 사이트 start -->
+            <div class="box-footer-site">
+                <div>
+                    <strong>한국경제 TV그룹</strong>
+                    <ul>
+                        <li><a href="http://m.wowtv.co.kr/" target="_blank">한국경제TV</a></li>
+                        <li><a href="http://www.wownet.co.kr" target="_blank">와우넷</a></li>
+                        <li><a href="http://www.wowfa.co.kr" target="_blank">와우파</a></li>
+                        <li><a href="http://www.wowstar.co.kr" target="_blank">WOW스타</a></li>
+                        <li><a href="http://www.tv10.co.kr" target="_blank">티비텐플러스</a></li>
+                        <li><a href="http://tesat.wowfa.co.kr/" target="_blank">TESAT</a></li>
+                        <li><a href="http://m.wowtv.co.kr" target="_blank">한국경제TV모바일</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>한경미디어그룹</strong>
+                    <ul>
+                        <li><a href="http://www.hankyung.com" target="_blank">한국경제신문</a></li>
+                        <li><a href="http://www.hankyung.com/" target="_blank">한국경제매거진</a></li>
+                        <li><a href="http://www.hankyung.com/" target="_blank">BOOK</a></li>
+                        <li><a href="http://ac.hankyung.com" target="_blank">한경아카데미</a></li>
+                        <li><a href="http://tenasia.hankyung.com/" target="_blank">텐아시아</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>모바일앱</strong>
+                    <ul>
+                        <li><a href="https://play.google.com/store/apps/details?id=kr.co.wowtv.wowtv" target="_blank">한국경제TV앱</a></li>
+                        <li><a href="https://play.google.com/store/apps/developer?id=%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9CTV." target="_blank">주식창앱</a></li>
+                        <li><a href="http://www.wownet.co.kr/daebakne/daebak/menu_info.asp?bcode=N74010400&&mseq=1954&tab=1&mseq=2772" target="_blank">와우넷앱</a></li>
+                        <li><a href="http://www.wownet.co.kr/wowband/sub_main.asp?bcode=S04020000&mseq=2936" target="_blank">와우밴드앱</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=kr.tvten.android.air" target="_blank">티비텐플러스앱</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--// 한국경제TV 패밀리 사이트 end -->
+            <!-- copyright start -->
+            <div class="box-footer-copy">
+                <ul class="footer-bottom">
+                    <li><a href="javascript:void(0)">고객센터</a></li>
+                    <li><a href="javascript:void(0)">1599-0700</a></li>
+                </ul>
+                <section class="coypright">Copyright &copy; 한국경제TV  All Right Reserved. 무단전재 및 재배포 금지</section>
+            </div>
+            <!--// copyright end -->
+            <!-- pc버전 보기 start -->
+            <div class="btn-footer-pcview">
+                <a href="http://www.wowtv.co.kr/Home/Index?fromMobile=Y"><span>PC버전 보기</span></a>
+            </div>
+            <!--// pc버전 보기 end -->
+
+
+        </footer>
+        <!-- // footer -->
+    </div>
+
+    @RenderSection("modalDiv", required: false)
+    <div id="divPopupCatagory" class="modal fade" role="dialog"></div>
+    <script type="text/javascript" src="@wowTvScript/design_in.js"></script>
+
+    @*한국경제TV-모바일버전 Google Analytics*@
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-51494055-2', 'auto');
+        ga('send', 'pageview');
+        @RenderSection("googleAnalyticsScript", required: false)
+    </script>
+    @RenderSection("adTraceIDAddArea", required: false)
+    @RenderSection("hardCodingAdArea", required: false)
+</body>
+</html>
+
+
+
+
+
+
+
+

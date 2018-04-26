@@ -1,0 +1,32 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model List<NUP_BROAD_MAIN_ARTICLE_SELECT_Result>
+
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+}
+
+
+@foreach (var item in Model)
+{
+    @*<div>
+        <img src="http://vodimg.wowtv.co.kr/@item.ROOTDIR/@item.IMG" alt="종목영상" width="285" height="160" style="cursor:pointer;" onclick="return TvMainIndex.OpenNews('@item.ARTIDX');">
+        <span class="icon-play medium"></span>
+        <strong onclick="return TvMainIndex.OpenNews('@item.ARTIDX');" style="cursor:pointer;">@item.ARTTITLE</strong>
+    </div>*@
+
+    <div>
+        <a href="#" onclick="return TvMainIndex.OpenNews('@item.ARTIDX');"><img src="http://vodimg.wowtv.co.kr/@item.ROOTDIR/@item.IMG" alt="" width="285" height="160"></a>
+        <span class="icon-play medium"></span>
+        <strong class="pdr_0" onclick="return TvMainIndex.OpenNews('@item.ARTIDX');" style="cursor:pointer;">@WowExtensionMethod.SubStringWidthPad(item.ARTTITLE, 50)</strong>
+    </div>
+}
+
+

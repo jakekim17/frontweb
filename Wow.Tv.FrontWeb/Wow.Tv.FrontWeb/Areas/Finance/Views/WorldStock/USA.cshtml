@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "다우지수";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+
+    string viewMode = "";
+
+    if (!String.IsNullOrEmpty(Request["viewMode"]))
+    {
+        viewMode = Request["viewMode"].ToString();
+    }
+
+    //Layout = null;
+}
+@section scripts{
+<script src="@wowTvScript/Finance/webponent/raphael.js"></script>
+<script src="@wowTvScript/Finance/webponent/webponent.comm.common.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.style.js"></script>
+<script src="@wowTvScript/Finance/Charts/stockChart.js"></script>
+
+<script src="@wowTvScript/Finance/WorldStock/USA.js"></script>
+
+@if (!String.IsNullOrEmpty(viewMode))
+{
+    if (viewMode == "usaAdr")
+    {
+        <script>
+            $(document).ready(function () {
+                $(".tab-type1 .col5 #usaAdr").parent("li").addClass("on").siblings().removeClass('on');
+                WorldStockUSA.USAADR();
+            });
+            
+        </script>
+    }
+    if (viewMode == "koreaAdr")
+    {
+        <script>
+            $(document).ready(function () {
+                $(".tab-type1 .col5 #koreaAdr").parent("li").addClass("on").siblings().removeClass('on');
+                WorldStockUSA.KoreaADR();
+            });
+            
+        </script>
+    }
+}
+}
+<h1 class="title">미국</h1>
+<!-- 2017-09-22 추가 -->
+<div class="tab-type1">
+    <ul class="col5">
+        <li class="btnMarketType on" id="999501"><a href="#none" id="dowJones">다우지수</a></li>
+        <li class="btnMarketType" id="999502"><a href="#none" id="nasdaq">나스닥지수</a></li>
+        <li class="btnMarketType" id="999509"><a href="#none" id="sandp500">S&P500</a></li>
+        <li><a href="#none" id="usaAdr">주요업종지수</a></li>
+        <li><a href="#none" id="koreaAdr">한국물ADR</a></li>
+    </ul>
+</div>
+
+<form id="frmList_USA">
+    <input type="hidden" id="currentMenuSeq" value="@currentMenuSeq"/>
+    <div id="divList">
+
+    </div>
+</form>
+

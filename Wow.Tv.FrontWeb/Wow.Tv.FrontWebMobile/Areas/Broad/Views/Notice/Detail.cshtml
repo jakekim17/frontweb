@@ -1,0 +1,54 @@
+﻿@using Wow.Tv.Middle.Model.Db49.wowtv
+
+@model NTB_BOARD_CONTENT
+
+@{
+    Layout = null;
+
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+
+<form id="frmSearch">
+    <input type="hidden" id="SearchType" name="SearchType" value="@ViewBag.Condition.SearchType" />
+    <input type="hidden" id="SearchText" name="SearchText" value="@ViewBag.Condition.SearchText" />
+    <input type="hidden" id="pageSize" name="pageSize" value="@ViewBag.Condition.PageSize" />
+    <input type="hidden" id="currentIndex" name="currentIndex" value="@ViewBag.Condition.CurrentIndex" />
+    <input type="hidden" name="CurrentMenuSeq" id="CurrentMenuSeq" value="@ViewBag.Condition.CurrentMenuSeq" />
+</form>
+
+<div class="section-area box-view">
+    <ul class="tit-area">
+        <li><span class="obj-tit">@Html.Raw(Model.TITLE)</span></li>
+    </ul>
+    <div class="table-type1">
+        <table>
+            <caption>내역 상세보기</caption>
+            <colgroup>
+                <col style="width:*;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col" class="number">
+                        <span class="txt-exer num">@Model.REG_DATE.ToString("yyyy-MM-dd")</span>
+                        <span class="txt-exer">조회수 <span class="num">@Model.READ_CNT</span></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.Raw(Model.CONTENT)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn-area">
+        <a href="#" id="btnList" class="btn type01 medium">목록으로</a>
+    </div>
+</div>
+
+
+<script src="@wowTvScript/Broad/Notice/Detail.js?date=20171018170000"></script>
+

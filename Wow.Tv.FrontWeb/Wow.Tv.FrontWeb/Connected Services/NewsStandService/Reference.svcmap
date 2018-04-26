@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e05a9f74-0265-4f49-82e7-71325513d635" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/NewsCenter/NewsStandService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="NewsStandService.xsd" MetadataType="Schema" ID="171a1967-2b7a-4ed1-9eaa-8a48276b4775" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsStandService.svc?xsd=xsd2" />
+    <MetadataFile FileName="NewsStandService.disco" MetadataType="Disco" ID="87971595-313b-47fa-8e1f-c346d61be6e9" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsStandService.svc?disco" />
+    <MetadataFile FileName="NewsStandService.wsdl" MetadataType="Wsdl" ID="433c6541-f40e-4b51-8d31-264932f977bd" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsStandService.svc?wsdl" />
+    <MetadataFile FileName="NewsStandService1.xsd" MetadataType="Schema" ID="0e247fb9-882f-4797-ada6-2927940eaeb4" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsStandService.svc?xsd=xsd1" />
+    <MetadataFile FileName="NewsStandService2.xsd" MetadataType="Schema" ID="72779479-7dfa-4ccc-8d64-5d5649b2035b" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsStandService.svc?xsd=xsd0" />
+    <MetadataFile FileName="NewsStandService3.xsd" MetadataType="Schema" ID="b7821f3d-9201-420d-9361-f9fc18cf3bcf" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsStandService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

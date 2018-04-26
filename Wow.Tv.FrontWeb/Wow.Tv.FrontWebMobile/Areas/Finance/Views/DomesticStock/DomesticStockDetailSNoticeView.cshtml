@@ -1,0 +1,45 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@{
+    ViewBag.Title = "DomesticStockDetailSNoticeView";
+    Layout = null;
+
+    NoticeStockCondition noticeCondition = ViewBag.NoticeCondition;
+
+    string fDataDate = noticeCondition.FDataDay.Substring(0, 4) + "." + noticeCondition.FDataDay.Substring(4, 2) + "." + noticeCondition.FDataDay.Substring(6, 2);
+}
+
+<!-- 공시 view start -->
+<div class="section-area mt10 mb50">
+
+
+    <div class="news-detail-area">
+        <!-- 메인 헤드라인 -->
+        <div class="box-news-title">
+            <strong class="main-head">@noticeCondition.FContent</strong>
+            <div class="num-expose">
+                
+                <div class="txt-exer num">@fDataDate</div>
+            </div>
+        </div>
+        <!--// 메인 헤드라인 -->
+        <!-- 뉴스 본문 영역 -->
+        <div class="box-news-body mt10">
+            @{
+                string iframe_src = "/Finance/DomesticStock/NoticeIframeView?fSeq=" + noticeCondition.FSeq + "&fDataDay=" + noticeCondition.FDataDay + "&stockCode=" + noticeCondition.StockCode;
+            }
+            <iframe style="width: 100%;height: auto;min-height: 300px;"  frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" id="ifrm" src="@iframe_src"></iframe>
+
+        </div>
+        <!-- //뉴스 본문 영역 -->
+    </div>
+
+    <!-- btn start -->
+    <div class="btn-area mt15">
+        <a href="javascript:void(0)" onclick="return DomesticStockDetailNewsNotices.NoticeGoBackList(@Request["currentIndex"]);" class="btn type01 w-typeAuto">목록으로</a>
+    </div>
+    <!--// btn end -->
+
+</div>
+<!--// 공시 view end -->
+
+

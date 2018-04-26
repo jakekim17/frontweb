@@ -1,0 +1,969 @@
+﻿@model Wow.Tv.FrontWeb.Areas.Component.Models.TvPlayerModel
+@using Wow.Tv.FrontWeb.Areas.Component.Models
+@{
+    string frontUrl = System.Configuration.ConfigurationManager.AppSettings["DomainUrlFront"];
+    string scriptUrl = System.Configuration.ConfigurationManager.AppSettings["WowTvScript"];
+    string styleUrl = System.Configuration.ConfigurationManager.AppSettings["WowTvStyle"];
+    string tvPlayADTerm = System.Configuration.ConfigurationManager.AppSettings["TvPlayADTerm"];
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    if (string.IsNullOrEmpty(Model.OnScriptPlayEnd) == true)
+    {
+        Model.OnScriptPlayEnd = "TvPlayerOnPlayEnd";
+    }
+    int videoBarHeightDiff = 45;
+}
+
+<script type="text/javascript">
+
+    var AdCate = "@Model.AdCat";
+    var AdTerm = @tvPlayADTerm;
+
+    function TvPlayerIsMobile() {
+        var machineFilter = "win16|win32|win64|mac|macintel";
+        if (navigator.platform) {
+            if (machineFilter.indexOf(navigator.platform.toLowerCase()) < 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+    function TvPlayerOnPlayEnd() { }
+
+    //광고 여부 체크
+    function isWithAD() {
+
+        var returnValue = true;
+
+        //익스플로러 IE8 이하(광고 안되게..)
+        if (navigator.appName == 'Microsoft Internet Explorer') {
+
+            //IE7.0 = null
+            //IE8.0 = Trident / 4.0
+            //IE9.0 = Trident / 5.0
+            //IE10.0 = Trident / 6.0
+            var trident = navigator.userAgent.match(/Trident\/(\d.\d)/i);
+
+            if (trident != null) {
+                if (Number(trident[1]) < 5) {
+                    returnValue = false;
+                }
+            }else {
+
+                returnValue = false;
+            }
+        }
+
+        return returnValue;
+    }
+</script>
+
+@if (Model.PlayType == TvPlayTypeModel.LiveTv || Model.PlayType == TvPlayTypeModel.LiveAudio || Model.PlayType == TvPlayTypeModel.ByScript)
+{
+    <script type="text/javascript" src="@scriptUrl/Component/KinxPlayer/js/swfobject.js"></script>
+}
+
+@if (Model.PlayType == TvPlayTypeModel.LiveTv || Model.PlayType == TvPlayTypeModel.ByScript)
+{
+    string tvPlayUrlRtmpLiveTv = System.Configuration.ConfigurationManager.AppSettings["TvPlayUrlRtmpLiveTv"];
+    string tvPlayUrlHlsLiveTv = System.Configuration.ConfigurationManager.AppSettings["TvPlayUrlHlsLiveTv"];
+    <div id="tvPlayerSwfContainerFrame">
+        @*<div id="tvPlayerSwfContainer" style="width:@(Model.Width)px; height:@(Model.Height)px; position:relative; bottom:0px; left:0px; background-color:black; display:none;"><a href="http://www.macromedia.com/go/getflashplayer" target="_blank" style="color: white;">Flash Player를 설치 하시기 바랍니다.(클릭)</a>.</div>*@
+    </div>
+    <div class="join-service-message" style="display:none;" id="tvPlayerSwfContainerCover">
+        <div class="inner">
+            <p class="cont">
+                Gold, Gold Plus 월정액 서비스를 이용하시면<br />
+                인터넷 실시간 한국경제TV를 시청하실 수 있습니다.
+            </p>
+            <span class="btn-type3"><a href="http://wownet.hankyung.com/center/06/charge_service_month.asp?bcode=N13070100&mseq=449" target="_blank">월정액 서비스 가입하기</a></span>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var LiveTvPlayer = {
+            Width: @Model.Width,
+            Height: @Model.Height,
+            OpenCover: false,
+            Play: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "/Component/TvPlayer/GetLiveTvInfo",
+                    success: function (data) {
+                        $("#tvPlayerSwfContainerFrame").html("<div id=\"tvPlayerSwfContainer\" style=\"width:@(Model.Width)px; height:@(Model.Height)px; position:relative; bottom:0px; left:0px; background-color:black; display:none;\"><a href=\"http://www.macromedia.com/go/getflashplayer\" target=\"_blank\" style=\"color: white;\">Flash Player를 설치 하시기 바랍니다.(클릭)</a>.</div>");
+
+                        $("#tvPlayerSwfContainer").css("display", "");
+                        $("#tvPlayerSwfContainerCover").css("display", "none");
+                        if (data.WithAD == true) {
+                            LiveTvPlayer.OpenCover = true;
+                            setTimeout(function () {
+                                var memberGrade = 2;
+
+                                if (IsLogin() == true) {
+                                    memberGrade  = ConfirmMemGrade();
+                                }
+
+                                if ( data.memberGrade != 0 && data.memberGrade != 1 && LiveTvPlayer.OpenCover == true) {
+                                    //$("#tvPlayerSwfContainerCover").css("display", "");
+                                    LiveTvPlayer.ChangeToCover();
+                                }
+
+                            }, AdTerm);
+                        }
+                        var swfPlayer = "@scriptUrl/Component/KinxPlayer/wowtv.swf";
+                        var idPlayer = "tvPlayerSwfContainer";
+	                    var swfVariables = {
+		                    urlStream: "@tvPlayUrlRtmpLiveTv",
+                            nameStream: "livestream",
+                            wmode: "transparent"
+	                    };
+                        var swfParameters = {
+                            allowscriptaccess: "always",
+                            allowfullscreen: "true",
+                            wmode: "transparent"
+                        };
+                        var swfAttributes = {
+                            wmode: "transparent"
+                        };
+                        swfobject.embedSWF(swfPlayer, idPlayer, LiveTvPlayer.Width, LiveTvPlayer.Height, "10.1.0", null, swfVariables, swfParameters, swfAttributes);
+                    }
+                });
+            },
+            Stop: function () {
+                $("#tvPlayerSwfContainer").remove();
+                LiveTvPlayer.OpenCover = false;
+                $("#tvPlayerSwfContainer").css("display", "none");
+                $("#tvPlayerSwfContainerCover").css("display", "none");
+            },
+            ChangeToCover: function () {
+                $("#tvPlayerSwfContainer").remove();
+                LiveTvPlayer.OpenCover = false;
+                $("#tvPlayerSwfContainer").css("display", "none");
+                $("#tvPlayerSwfContainerCover").css("display", "");
+            },
+            Resize: function (width, height) {
+                $("#tvPlayerSwfContainer").css("width", width);
+                $("#tvPlayerSwfContainer").css("height", height);
+                $("#tvPlayerSwfContainerCover").css("width", width);
+                $("#tvPlayerSwfContainerCover").css("height", height);
+                LiveTvPlayer.Width = width;
+                LiveTvPlayer.Height = height;
+                LiveTvPlayer.Play();
+            },
+            FullScreen: function () {
+                tvPlayerSwfContainer.webkitRequestFullScreen();
+            },
+            ConfirmMemGrade: function () {
+                var memberGrade = 2;
+                $.ajax({
+                    method: 'POST',
+                    url: "/Component/TvPlayer/ConfirmMemGrade",
+                    success: function (data) {
+                        memberGrade = data.memberGrade;
+                    }
+                });
+                return memberGrade;
+            }
+        }
+    </script>
+}
+@if (Model.PlayType == TvPlayTypeModel.LiveAudio || Model.PlayType == TvPlayTypeModel.ByScript)
+{
+    string tvPlayUrlRtmpLiveAudio = System.Configuration.ConfigurationManager.AppSettings["TvPlayUrlRtmpLiveAudio"];
+
+    <div id="audioPlayerSwfContainer" style="width:@(Model.Width)px; height:@(Model.Height)px; background-color:black; display:none; position:relative"><a href="http://www.macromedia.com/go/getflashplayer" target="_blank" style="color:white;">Flash Player를 설치 하시기 바랍니다.(클릭)</a>.</div>
+    <script type="text/javascript">
+        var LiveAudioPlayer = {
+            SwfPlayer: null,
+            Width: @Model.Width,
+            Height: @Model.Height,
+            Play: function () {
+                var swfPlayer = "@scriptUrl/Component/KinxPlayer/wowtv.swf";
+                var idPlayer = "audioPlayerSwfContainer";
+	            var swfVariables = {
+		            urlStream: "@tvPlayUrlRtmpLiveAudio",
+		            nameStream: "livestream"
+	            };
+                var swfParameters = {
+                    allowscriptaccess: "always",
+                    allowfullscreen: "true"
+                };
+	            var swfAttributes = {
+                };
+                swfobject.embedSWF(swfPlayer, idPlayer, LiveAudioPlayer.Width, LiveAudioPlayer.Height, "10.1.0", null, swfVariables, swfParameters, swfAttributes);
+            },
+            Stop: function () {
+                $("#audioPlayerSwfContainer").remove();
+                $("#audioPlayerSwfContainer").css("display", "none");
+            },
+            Resize: function (width, height) {
+                $("#audioPlayerSwfContainer").css("width", width);
+                $("#audioPlayerSwfContainer").css("height", height);
+                LiveAudioPlayer.Width = width;
+                LiveAudioPlayer.Height = height;
+                LiveAudioPlayer.Play();
+            },
+            FullScreen: function () {
+                audioPlayerSwfContainer.webkitRequestFullScreen();
+            }
+        }
+    </script>
+}
+@if (Model.PlayType == TvPlayTypeModel.TvReplay || Model.PlayType == TvPlayTypeModel.Vod || Model.PlayType == TvPlayTypeModel.ByScript)
+{
+    <link href="@scriptUrl/Component/skin/wowtv.css" rel="stylesheet" />
+    @*<link href="@styleUrl/vodplayer/wowtv.css" rel="stylesheet" />*@
+    <style rel="stylesheet" type="text/css">
+        .container {
+            position: relative;
+        }
+
+            .container video {
+                display: block;
+                width: 800px;
+                height: 450px;
+                background-color: #000000;
+            }
+
+        #floating {
+        }
+
+        .tween {
+            width: 335px;
+            height: 225px;
+            /*position: fixed;
+            bottom: 0;
+            right: 0;*/
+            z-index: 2147483647;
+        }
+
+            .tween video {
+                width: 322px;
+                height: 180px;
+                transition: all 1s;
+                left: 1px;
+                -webkit-transition: all 1s;
+                -ms-transition: all 1s;
+            }
+        /*h1, h2 {
+            padding: 1em 0;
+        }*/
+        p.arrow-down {
+            margin: 5em 0;
+            font-size: 22pt;
+            text-align: center;
+        }
+    </style>
+
+    <script src="@scriptUrl/Component/mediaplayer.min.js" type="text/javascript"></script>
+    @*<script src="@scriptUrl/Component/mediaplayer.min.ansi.js" type="text/javascript"></script>*@
+if (Model.IncludeVrixonScript == true)
+{
+    <script src="http://img.vrixon.com/adsdk/wowtv/vrixadsdk.js"></script>
+}
+    <script type="text/javascript">
+        var VodPlayer = {
+            Url: "@Model.Url",
+            Width: @Model.Width,
+            Height: @Model.Height,
+            PlayerCreated: false,
+            MiddleAD: false,
+            IsHtml5Player: false,
+            VodPlayerInstance: null,
+            PlayerReady: false,
+            Playing: false,
+            PlayEnded: true,
+            AdHandlerInitialized: false,
+            AdHandlerAdded: false,
+            PlayTvReplay: function (num) {
+                $.ajax({
+                    type: 'GET',
+                    url: "/Component/TvPlayer/GetTvReplayInfo",
+                    data: { num: num },
+                    success: function (data) {
+                        VodPlayer.Url = data.Url;
+                        if (data.IsSuccess == true) {
+                            AdCate = data.tvProgramGubunCode;
+                            VodPlayer.Play(VodPlayer.Url, data.WithAD);
+                        }
+                        else {
+                            if (data.ReturnCode == "LOGIN_ERROR") {
+                                alert("유료결재가 필요한 영상으로 로그인이 필요합니다.");
+                            }
+                            else if (data.ReturnCode == "NUM_ERROR") {
+                                alert("잘못된 접근입니다.");
+                            }
+                            else if (data.ReturnCode == "INFO_ERROR") {
+                                alert("방송정보가 없습니다.");
+                            }
+                            else if (data.ReturnCode == "USER_INFO_NOT_EXISTS") {
+                                alert("사용자 정보가 없습니다.");
+                            }
+                            else if (data.ReturnCode == "NO_AUTHORYT") {
+                                if (data.HasPoint == true) {
+                                    if (confirm("와우캐시 결제가 필요합니다. 결제하시겠습니까?") == true) {
+                                        var billingDomainUrl = "@System.Configuration.ConfigurationManager.AppSettings["DomainUrlBilling"]";
+                                        var billingPurchasePath = "/fillup/pop_purchase_select.asp";
+                                        var billingParameters = "?priceid=" + data.PriceId + "&itemorpack=1&price=" + data.TvProgramPoint + "&cpitemid=VOD_" + num;
+                                        var billUrl = billingDomainUrl + billingPurchasePath + billingParameters;
+                                        window.open(billUrl, "CashPayment", "status=no,toolbar=no,scrollbars=auto,resizable=no,width=600,height=535");
+                                    }
+                                }
+                                else {
+                                    if (confirm("와우캐시 결제가 필요합니다. 와우캐시 충전 페이지로 이동하시겠습니까?") == true) {
+                                        window.open("https://billing.wownet.co.kr/fillup/pop_payment_select.asp", "cash_add", "status=no,toolbar=no,scrollbars=auto,resizable=no,width=600,height=608");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            PlayVod: function (num) {
+                $.ajax({
+                    type: 'GET',
+                    data: { num: num },
+                    url: "/Component/TvPlayer/GetVodInfo",
+                    success: function (data) {
+                        if (data.IsSuccess == true) {
+                            VodPlayer.Play(data.Url, data.WithAD);
+                        }
+                        else {
+                            if (data.ReturnCode == "NUM_ERROR") {
+                                alert("잘못된 접근입니다.");
+                            }
+                        }
+                    }
+                });
+            },
+            PlayCustom: function (url) {
+                VodPlayer.Play(url, false);
+            },
+            Play: function (source, withAD) {
+                if (source == null || source == "") {
+                    return;
+                }
+                VodPlayer.Playing = false;
+                VodPlayer.AdHandlerAdded = false;
+                //withAD = false; // VOD적용 > 해당 라인 삭제
+                //광고여부 체크
+                withAD = isWithAD();
+
+                VodPlayer.IsHtml5Player = source.indexOf(".mp4") > -1;
+                VodPlayer.Source = source;
+
+                VodPlayer.Stop();
+                VodPlayer.MiddleAD = false;
+                if (VodPlayer.IsHtml5Player == true) {
+                    $("#wowtv_videoEmbed").css("display", "none");
+                    $("#wowtv_videoEmbed").html("");
+                    $("#wowtv_video").css("display", "");
+
+                    //VodPlayerConfig.useFlash = false;
+                    //var isWin7 = navigator.appVersion.toLowerCase().indexOf('windows nt 6.1') > 0;
+                    //if (isWin7 && mp.browser.isIE) {
+                    //    VodPlayerConfig.useFlash = true;
+                    //}
+
+                    if (withAD == true) {
+                        //console.log("AdCate : " + AdCate);
+                        if (VodPlayer.AdHandlerInitialized == true) {
+                            vrixadsdk.changeOptPlay(ADopt);
+                        }
+                        else {
+                            vrixadsdk.playerSet(ADopt, adHandler);
+                            VodPlayer.AdHandlerInitialized = true;
+                        }
+                    }
+                    else {
+                        VodPlayer._Run(source);
+                        VodPlayer._AddVodPlayerEvent();
+                    }
+                    VodPlayer.PlayEnded = false;
+                }
+                else {
+                    $("#wowtv_video").css("display", "none");
+                    $("#wowtv_videoEmbed").css("display", "relative");
+                    $("#wowtv_videoEmbed").html("<embed id=\"wowtv_playerEmbed\" style=\"width:" + VodPlayer.Width + "px; height:" + VodPlayer.Height + "px;\" align=\"center\" autostart=\"true\" src=\"" + source + "\" />");
+                }
+            },
+            Stop: function () {
+                VodPlayer.Playing = false;
+                VodPlayer.PlayEnded = true;
+                if (VodPlayer.IsHtml5Player == true) {
+                    if (VodPlayer.VodPlayerInstance != null) {
+                        VodPlayer.VodPlayerInstance.trigger(mp.vodEvent.STOP);
+                    }
+                    $("#wowtv_video").css("display", "none");
+                }
+                else {
+                    $("#wowtv_videoEmbed").remove();
+                }
+            },
+            Resize: function (width, height) {
+                VodPlayer.Width = width;
+                VodPlayer.Height = height;
+                VodPlayer._VodPlayerForceChangeScreenMode();
+            },
+            FullScreen: function () {
+                mp.vodPlayers.wowtv_player.trigger(mp.vodEvent.CHANGE_SCREEN_MODE);
+            },
+            _Run: function (videoSource) {
+                VodPlayer.Source = videoSource;
+                if (VodPlayer.PlayerCreated == false) {
+                    VodPlayerConfig.sources = [{ src: VodPlayer.Source }];
+                    VodPlayer.VodPlayerInstance = mp.createVODPlayer(mp.dom.getElement('#wowtv_player'), VodPlayerConfig, _OnPlayerReady);
+                    VodPlayer.PlayerCreated = true;
+                }
+                else {
+                    if (VodPlayer.Playing == false) {
+                        mp.vodPlayers.wowtv_player.sources = [{ src: VodPlayer.Source }];
+                        mp.vodPlayers.wowtv_player.applySource();
+                    }
+                    mp.vodPlayers.wowtv_player.trigger(mp.vodEvent.CHANGE_PLAY);
+                    setTimeout(function () {
+                        if (mp.vodPlayers.wowtv_player.state != "play") {
+                            mp.vodPlayers.wowtv_player.trigger(mp.vodEvent.CHANGE_PLAY);
+                        }
+                    }, 500);
+                }
+                VodPlayer.Playing = true;
+            },
+            _VodPlayerForceChangeScreenMode: function () {
+                if (typeof mp.vodPlayers.wowtv_player != "undefined" &&  mp.vodPlayers.wowtv_player.isFullScreenMode == true) {
+                    $("#wowtv_video").css("width", "100%");
+                    $("#wowtv_video").css("height", "100%");
+                    $("#wowtv_player").css("width", "100%");
+                    $("#wowtv_player").css("height", "100%");
+                }
+                else {
+                    $("#wowtv_video").css("width", VodPlayer.Width);
+                    $("#wowtv_video").css("height", VodPlayer.Height);
+                    $("#wowtv_player").css("width", VodPlayer.Width);
+                    $("#wowtv_player").css("height", VodPlayer.Height - @videoBarHeightDiff);
+                }
+            },
+            _AddVodPlayerEvent: function () {
+                if (vodPlayerEventAdded == false) {
+                    mp.vodPlayers.wowtv_player.on("resize", function () { setTimeout("VodPlayer._VodPlayerForceChangeScreenMode();", 300); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.BACKWARD, function () { console.log("PYJ > BACKWARD"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CAN_PLAY, function () { console.log("PYJ > CAN_PLAY"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_DURATION, function () { console.log("PYJ > CHANGE_DURATION"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_EXPAND_MODE, function () { console.log("PYJ > CHANGE_EXPAND_MODE"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_MUTE, function () { console.log("PYJ > CHANGE_MUTE"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_PLAY, function () { console.log("PYJ > CHANGE_PLAY"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_PLAY_STATE, function () { console.log("PYJ > CHANGE_PLAY_STATE"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_QUALITY, function () { console.log("PYJ > CHANGE_QUALITY"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_SCREEN_MODE, function () { console.log("PYJ > CHANGE_SCREEN_MODE"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_SUBTITLES_STATE, function () { console.log("PYJ > CHANGE_SUBTITLES_STATE"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_TRACK, function () { console.log("PYJ > CHANGE_TRACK"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGE_VOLUME, function () { console.log("PYJ > CHANGE_VOLUME"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.CHANGED_RESOURCE, function () { console.log("PYJ > CHANGED_RESOURCE"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.END, function () { console.log("PYJ > END"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.ERROR, function () { console.log("PYJ > ERROR"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.EXECUTE_API, function () { console.log("PYJ > EXECUTE_API"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.FORWARD, function () { console.log("PYJ > FORWARD"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.LOADED_SUBTITLES, function () { console.log("PYJ > LOADED_SUBTITLES"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.LOADING, function () { console.log("PYJ > LOADING"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.SEEK, function () { console.log("PYJ > SEEK"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.SEEKED, function () { console.log("PYJ > SEEKED"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.SEEKING, function () { console.log("PYJ > SEEKING"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.SPEED_DOWN, function () { console.log("PYJ > SPEED_DOWN"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.SPEED_RESET, function () { console.log("PYJ > SPEED_RESET"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.SPEED_UP, function () { console.log("PYJ > SPEED_UP"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.STOP, function () { console.log("PYJ > STOP"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.TASTING_TIME_END, function () { console.log("PYJ > TASTING_TIME_END"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.UPDATE_TIME, function () { console.log("PYJ > UPDATE_TIME"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.VOLUME_DOWN, function () { console.log("PYJ > VOLUME_DOWN"); });
+                    //mp.vodPlayers.wowtv_player.on(mp.vodEvent.VOLUME_UP, function () { console.log("PYJ > VOLUME_UP"); });
+                }
+
+                vodPlayerEventAdded = true;
+            }
+        };
+
+        function _OnPlayerReady() {
+            this.on(this.eventType.CHANGED_RESOURCE, _OnChangedResource);
+            this.on(this.eventType.END, _OnPlayEnd);
+            setTimeout(function () {
+                if (mp.vodPlayers.wowtv_player.state != "play") {
+                    mp.vodPlayers.wowtv_player.trigger(mp.vodEvent.CHANGE_PLAY);
+                }
+            }, 500);
+        }
+
+        function _OnChangedResource () {
+            var player = this;
+            setTimeout(function () {
+                if (player.state == 'pause') {
+                    player.trigger(mp.vodEvent.CHANGE_PLAY);
+                }
+            }, 1500);
+        }
+
+        function _OnPlayEnd() {
+            VodPlayer.PlayEnded = true;
+            mp.dom.show(this.osd.posterElement);
+            @(Model.OnScriptPlayEnd)();
+        }
+
+        function _ResetAd(recursiveCalled) {
+            if (VodPlayer.PlayEnded == false) {
+                setTimeout(function () {
+                    if (mp.vodPlayers.wowtv_player.state == "play") {
+                        mp.vodPlayers.wowtv_player.trigger(mp.vodEvent.CHANGE_PLAY);
+                        vrixadsdk.changeOptPlay(ADopt);
+                        VodPlayer.AdHandlerAdded = false;
+                    }
+                    else {
+                        if (recursiveCalled == false) {
+                            _ResetAd(true);
+                        }
+                    }
+                }, AdTerm);
+            }
+        }
+
+        var VodPlayerConfig = {
+            // 자동 재생
+            autoPlay: false,
+            // 버퍼시간 설정(기본값 : 1.5)
+            bufferTime: 1.5,
+            // 사용할 컨트롤러들 설정
+            controllers: {
+                // 타임 슬라이더
+                timeSlider: true,
+                // 재생/일시정지 버튼
+                playButton: true,
+                // 재생시간
+                currentTime: true,
+                // 총재생시간
+                durationTime: true,
+                // 전체화면 모드 전환 버튼
+                fullscreenButton: true,
+                // 볼륨 버튼과 볼륨 슬라이더
+                volumeButton: true,
+                volumeSlider: true,
+                // 리소스 품질 선택 버튼
+                qualityButton: true,
+                // 광고 영상의 기본 건너뛰기 노출 시간
+                //skipAdButton: 15,
+
+                speedDownButton: true, // 배속 감소 버튼
+                currentSpeed: true, // 현재 배속 라벨
+                speedUpButton: true, // 배속 증가 버튼
+
+                controllersAutoHide: true	// 컨트롤바 자동 숨김 사용 여부
+            },
+            // 디버그 모드
+            // 배포시에 false 지정 또는 제거
+            // 개발 및 디버그시 true로 지정
+            //debugMode           : false,
+            // 리소스
+            sources: null,
+            useFlash: false,
+            // 스킨 (eduwill.css)
+            skin: 'wowtv',
+            // 볼륨 슬라이더 유형
+            volumeSliderType: 1
+        };
+
+        var ADopt =
+            {
+                "container": "wowtv_video",  // 메인 컨테이너의 div id
+                "video": "wowtv_player",     // 메인 플레이어의 video id
+                "adInfo":
+                {
+                    "adTag": "http://ads.vrixon.com/vast/vast_wowtv.vrix?invenid=UNNRQ&cat=" + AdCate
+                    //"adTag": "http://devads.vrixon.com/vast/vast_wowtv.vrix?invenid=UNNRQ&cat=05010"
+                    //"adTag": "http://img.vrixon.com/adsdk/adsample/vast.php" // VMAP 또는 VAST 를 받아올 URL
+                }
+            };
+
+        function adHandler(event) {
+            switch (event.type) {
+                case "SDK_PLAYING":
+                    break;
+                case "AD_SKIP":
+                case "AD_COMPLETE":
+                case "SDK_ENDING":
+                case "AD_NO_ADS":
+                case "AD_ERROR":
+                    if (VodPlayer.AdHandlerAdded == false) {
+
+                        VodPlayer._Run(VodPlayer.Source);
+                        VodPlayer._AddVodPlayerEvent();
+
+                        _ResetAd(false);
+
+                        VodPlayer.AdHandlerAdded = true;
+                    }
+                    break;
+            }
+        }
+        var vodPlayerEventAdded = false;
+    </script>
+    if (Model.FloatingMode == true)
+    {
+        <script type="text/javascript">
+            window.onscroll = function () {
+                var scrollTop = document.documentElement.scrollTop;
+                // 1. 플레이어가 사라지는 높이를 적당히 지정 - 해당 페이지에 맞도록 수정
+                // 2. jQuery 등을 이용하여 플레이어 영역의 하단부로 계산한 값을 사용하여도 무관
+                //    계산된 값을 사용할 경우 값을 조절하여 플레이어의 최하단부까지 스크롤되기 전의 값을 사용하는 것을 권장
+                var floatingTop = $("#wowtv_video").offset().top + $("#wowtv_video").height();
+                var eleFloating = document.querySelector('#floating');
+                if (!eleFloating) return;
+
+                //console.log("PYJ> floatingTop: " + parseInt(floatingTop) + ", scrollTop: " + parseInt(scrollTop));
+
+
+                var vodContainerId = "wowtv_video";
+                var vodPlayerId = "wowtv_player";
+                var vodPlayerCloseId = "wowtv_close";
+                var vodFloatingWrap = "videoFloatingWrap";
+                var vodContent = "vodContent";
+                var vodTitle = "vodTitle";
+                if (VodPlayer.IsHtml5Player == false) {
+                    vodContainerId = "wowtv_videoEmbed";
+                    vodPlayerId = "wowtv_playerEmbed";
+                    vodPlayerCloseId = "wowtv_playerEmbed";
+                }
+
+                if (scrollTop < floatingTop) { // 일반모드
+                    eleFloating.className = '';
+                    $('#' + vodFloatingWrap).removeClass('box-bann-movie');
+                    $('#' + vodContent).removeClass('cont');
+                    $("#" + vodContainerId).css("display", "block");
+                    $("#" + vodPlayerId).css("display", "block");
+                    $("#" + vodContainerId).css("width", VodPlayer.Width);
+                    $("#" + vodContainerId).css("height", VodPlayer.Height);
+                    $("#" + vodPlayerId).css("width", VodPlayer.Width);
+                    $("#" + vodPlayerId).css("height", VodPlayer.Height - @videoBarHeightDiff);
+                    $("#" + vodPlayerCloseId).css("display", "none");
+                    $('#' + vodTitle).text('');
+                    floatingUsable = true;
+
+                    if ($("#tvPlayerMoveEndContents").hasClass("palyEnd") && $("#tvPlayerMoveEndContents").css("display") == "none") {
+                        $("#tvPlayerMoveEndContents").css("display", "");
+                    }
+
+                }
+                else { // 플로팅(트윈)모드
+                    if (floatingUsable == true) {
+                        eleFloating.className = "tween";
+                        $('#' + vodFloatingWrap).addClass('box-bann-movie');
+                        $('#' + vodContent).addClass('cont');
+                        $("#" + vodContainerId).css("width", 322);
+                        $("#" + vodContainerId).css("height", 225);
+                        $("#" + vodPlayerId).css("width", 335);
+                        $("#" + vodPlayerId).css("height", 233 - @videoBarHeightDiff);
+
+                        if ($("#tvPlayerMoveEndContents").hasClass("palyEnd") && $("#tvPlayerMoveEndContents").css("display") == "block") {
+                            $("#tvPlayerMoveEndContents").css("display", "none");
+                        }
+
+                        if (typeof $('#wowtv_player').attr('src') != "undefined") {
+                            $("#" + vodPlayerCloseId).css("display", "block");
+                            $('#' + vodFloatingWrap).css("display", "block");
+                        } else {
+                            $("#" + vodPlayerCloseId).css("display", "none");
+                            $('#' + vodFloatingWrap).css("display", "none");
+                        }
+
+                        if (typeof $('.title-news').text() != "undefined") {
+                            $('#' + vodTitle).text($('.title-news').text());
+                        }
+                    }
+                }
+            };
+
+            var floatingUsable = true;
+            function FloatingClose() {
+                var eleFloating = document.querySelector('#floating');
+                if (!eleFloating) return;
+
+                var vodContainerId = "wowtv_video";
+                var vodPlayerId = "wowtv_player";
+                var vodPlayerCloseId = "wowtv_close";
+                var vodFloatingWrap = "videoFloatingWrap";
+                var vodContent = "vodContent";
+                var vodTitle = "vodTitle";
+                if (VodPlayer.IsHtml5Player == false) {
+                    vodContainerId = "wowtv_videoEmbed";
+                    vodPlayerId = "wowtv_playerEmbed";
+                    vodPlayerCloseId = "wowtv_playerEmbed";
+                }
+
+                eleFloating.className = '';
+                $('#' + vodFloatingWrap).removeClass('box-bann-movie');
+                $('#' + vodContent).removeClass('cont');
+                $('#' + vodTitle).text('');
+                $("#" + vodContainerId).css("display", "block");
+                $("#" + vodPlayerId).css("display", "block");
+                $("#" + vodContainerId).css("width", VodPlayer.Width);
+                $("#" + vodContainerId).css("height", VodPlayer.Height);
+                $("#" + vodPlayerId).css("width", VodPlayer.Width);
+                $("#" + vodPlayerId).css("height", VodPlayer.Height - @videoBarHeightDiff);
+                $("#" + vodPlayerCloseId).css("display", "none");
+
+                floatingUsable = false;
+            }
+        </script>
+        
+        <div id="wowtv_video" @*ondblclick="VodPlayerDoubleClicked();"*@ class="trans_ease05 vrixadsdk" style="display:none;">
+            <div id="videoFloatingWrap">
+                <div id="vodContent">
+                    <div id="floating">
+                        <strong id="vodTitle"></strong>
+                        <div class="btn-movie-close" id="wowtv_close" onclick="FloatingClose(); return false;" style="display:none;"></div>
+                        <div class="play-program-area" style="display:none;" id="tvPlayerMoveEndContents">
+                            <div class="inner">
+                                <div class="list-play-program">
+                                    <ul>
+                                        <li id="liAddContent1"></li>
+                                        <li id="liAddContent2"></li>
+                                        @*<li>
+                                            <a href="#none">
+                                                <span class="box-icon type07">AD</span>
+                                                <img src="../../images/temp/temp_popup_tv1.png" alt="">
+                                                <span class="cont">4차 산업혁명 미래에 투자하라</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#none">
+                                                <span class="box-icon type07">AD</span>
+                                                <img src="../../images/temp/temp_popup_tv1.png" alt="">
+                                                <span class="cont">4차 산업혁명 미래에 투자하라</span>
+                                            </a>
+                                        </li>*@
+                                    </ul>
+                                </div>
+                                <a href="javascript:void(0)" class="play-btn" id="bntPlayVod"><img src="@wowTvStyle/images/temp/temp_tv_play_btn.png" alt="임시 플레이버튼 이미지"></a>
+                            </div>
+                        </div>
+                        <video id="wowtv_player" playsinline style="width:100%; height: @(Model.Height - videoBarHeightDiff)px;"></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="wowtv_videoEmbed" class="playerView" style="display:none;" align="center">
+            <div id="videoFloatingWrap">
+                <div id="vodContent">
+                    <div id="floating">
+                        <strong id="vodTitle"></strong>
+                        <div class="btn-movie-close" id="wowtv_close" onclick="FloatingClose(); return false;" style="display:none;"></div>
+                        <div class="play-program-area" style="display:none;" id="tvPlayerMoveEndContents">
+                            <div class="inner">
+                                <div class="list-play-program">
+                                    <ul>
+                                        <li id="liAddContent1"></li>
+                                        <li id="liAddContent2"></li>
+                                        <li>
+                                            <a href="#none">
+                                                <span class="box-icon type07">AD</span>
+                                                <img src="../../images/temp/temp_popup_tv1.png" alt="">
+                                                <span class="cont">4차 산업혁명 미래에 투자하라</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#none">
+                                                <span class="box-icon type07">AD</span>
+                                                <img src="../../images/temp/temp_popup_tv1.png" alt="">
+                                                <span class="cont">4차 산업혁명 미래에 투자하라</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a href="javascript:void(0)" class="play-btn" id="bntPlayVod"><img src="@wowTvStyle/images/temp/temp_tv_play_btn.png" alt="임시 플레이버튼 이미지"></a>
+                            </div>
+                        </div>
+                        <embed id="wowtv_playerEmbed" style="width:@(Model.Width)px; height:100%;" align="center" autostart="true" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div id="wowtv_video" @*ondblclick="VodPlayerDoubleClicked();"*@ class="trans_ease05 vrixadsdk" style="width:@(Model.Width)px;height:@(Model.Height)px;position:relative;background-color:#000000; display:none;">
+            <video id="wowtv_player" playsinline style="width:100%; height: @(Model.Height - videoBarHeightDiff)px;"></video>
+        </div>
+        <div id="wowtv_videoEmbed" class="playerView" style="width:@(Model.Width)px; height:@(Model.Height)px; display:none; padding-right:15px; display:block; color: white;" align="center">
+            <embed id="wowtv_playerEmbed" style="width:100%; height:100%;" align="center" autostart="true" />
+        </div>
+    }
+}
+
+@if (Model.PlayType == TvPlayTypeModel.ByScript)
+{
+    <script type="text/javascript">
+        TvPlayerLoadType = "";
+        var TvPlayer = {
+            PlayLiveTv: function () {
+                LiveAudioPlayer.Stop();
+                VodPlayer.Stop();
+                LiveTvPlayer.Play();
+                TvPlayerLoadType = "PlayLiveTv";
+            },
+            PlayLiveAudio: function () {
+                LiveTvPlayer.Stop();
+                VodPlayer.Stop();
+                LiveAudioPlayer.Play();
+                TvPlayerLoadType = "PlayLiveAudio";
+            },
+            PlayTvReplay: function (num) {
+                LiveTvPlayer.Stop();
+                LiveAudioPlayer.Stop();
+                VodPlayer.PlayTvReplay(num);
+                TvPlayerLoadType = "PlayTvReplay";
+            },
+            PlayVod: function (url) {
+                LiveTvPlayer.Stop();
+                LiveAudioPlayer.Stop();
+                VodPlayer.PlayVod(url);
+                TvPlayerLoadType = "PlayVod";
+            },
+            Resize: function (width, height) {
+                LiveTvPlayer.Width = width;
+                LiveTvPlayer.Height = height;
+                LiveAudioPlayer.Width = width;
+                LiveAudioPlayer.Height = height;
+                VodPlayer.Width = width;
+                VodPlayer.Height = height;
+
+                if (TvPlayerLoadType == "PlayLiveTv") {
+                    LiveTvPlayer.Resize(width, height);
+                }
+                else if (TvPlayerLoadType == "PlayLiveAudio") {
+                    LiveAudioPlayer.Resize(width, height);
+                }
+                else if (TvPlayerLoadType == "PlayTvReplay") {
+                    VodPlayer.Resize(width, height);
+                }
+                else if (TvPlayerLoadType == "PlayVod") {
+                    VodPlayer.Resize(width, height);
+                }
+            },
+            FullScreen: function () {
+                if (TvPlayerLoadType == "PlayLiveTv") {
+                    LiveTvPlayer.FullScreen();
+                }
+                else if (TvPlayerLoadType == "PlayLiveAudio") {
+                    LiveAudioPlayer.FullScreen();
+                }
+                else if (TvPlayerLoadType == "PlayTvReplay") {
+                    VodPlayer.FullScreen();
+                }
+                else if (TvPlayerLoadType == "PlayVod") {
+                    VodPlayer.FullScreen();
+                }
+            },
+            Stop: function () {
+                LiveTvPlayer.Stop();
+                LiveAudioPlayer.Stop();
+                VodPlayer.Stop();
+            }
+        }
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+        TvPlayerLoadType = "";
+        var TvPlayer = {
+            PlayLiveTv: function () {
+                LiveTvPlayer.Play();
+                TvPlayerLoadType = "PlayLiveTv";
+            },
+            PlayLiveAudio: function () {
+                LiveAudioPlayer.Play();
+                TvPlayerLoadType = "PlayLiveAudio";
+            },
+            PlayTvReplay: function (num) {
+                VodPlayer.PlayTvReplay(num);
+                TvPlayerLoadType = "PlayTvReplay";
+            },
+            PlayVod: function (num) {
+                VodPlayer.PlayVod(num);
+                TvPlayerLoadType = "PlayVod";
+            },
+            Resize: function (width, height) {
+                if (TvPlayerLoadType == "PlayLiveTv") {
+                    LiveTvPlayer.Resize(width, height);
+                }
+                else if (TvPlayerLoadType == "PlayLiveAudio") {
+                    LiveAudioPlayer.Resize(width, height);
+                }
+                else if (TvPlayerLoadType == "PlayTvReplay") {
+                    VodPlayer.Resize(width, height);
+                }
+                else if (TvPlayerLoadType == "PlayVod") {
+                    VodPlayer.Resize(width, height);
+                }
+            },
+            FullScreen: function () {
+                if (TvPlayerLoadType == "PlayLiveTv") {
+                    LiveTvPlayer.FullScreen();
+                }
+                else if (TvPlayerLoadType == "PlayLiveAudio") {
+                    LiveAudioPlayer.FullScreen();
+                }
+                else if (TvPlayerLoadType == "PlayTvReplay") {
+                    VodPlayer.FullScreen();
+                }
+                else if (TvPlayerLoadType == "PlayVod") {
+                    VodPlayer.FullScreen();
+                }
+            }
+        }
+    </script>
+}
+
+@if (Model.PlayType == TvPlayTypeModel.LiveTv)
+{
+    <script type="text/javascript">
+        TvPlayer.PlayLiveTv();
+        //$(document).ready(function () {
+        //    TvPlayer.PlayLiveTv();
+        //});
+    </script>
+}
+else if (Model.PlayType == TvPlayTypeModel.LiveAudio)
+{
+    <script type="text/javascript">
+        TvPlayer.PlayLiveAudio();
+        //$(document).ready(function () {
+        //    TvPlayer.PlayLiveAudio();
+        //});
+    </script>
+}
+else if (Model.PlayType == TvPlayTypeModel.TvReplay)
+{
+    <script type="text/javascript">
+        setTimeout(function () {
+            TvPlayer.PlayTvReplay(@Model.Num);
+        }, 200);
+        @*TvPlayer.PlayTvReplay(@Model.Num);*@
+        @*$(document).ready(function () {
+            TvPlayer.PlayTvReplay(@Model.Num);
+        });*@
+    </script>
+}
+else if (Model.PlayType == TvPlayTypeModel.Vod)
+{
+    <script type="text/javascript">
+        setTimeout(function () {
+            TvPlayer.PlayVod(@Model.Num);
+        }, 200);
+        @*TvPlayer.PlayVod(@Model.Num);*@
+        @*$(document).ready(function () {
+            TvPlayer.PlayVod(@Model.Num);
+        });*@
+    </script>
+} 

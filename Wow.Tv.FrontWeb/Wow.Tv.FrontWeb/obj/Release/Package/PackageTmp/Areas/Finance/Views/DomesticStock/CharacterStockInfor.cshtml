@@ -1,0 +1,14 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model CharacterStockCondition 
+@{
+    ViewBag.Title = "CharacterStockInfor";
+    Layout = null;
+}
+
+<p class="obj-name">@Model.StockName<span>@Model.ArjCode</span></p>
+<span class="price-stock">@Html.DomesticStockDetailPriceFormat(Model.ChgType, Convert.ToInt32(Model.Price))</span><!-- 주가 -->
+<span class="box">
+    @Html.DomesticStockDetailChgPriceFormat(Model.ChgType, Convert.ToInt32(Model.ChgPrice))<!-- 등락 -->
+    @Html.DomesticStockDetailChgRateFormat(Model.ChgType, Convert.ToInt32(Model.Price), Convert.ToInt32(Model.ChgPrice))<!-- 등락폭 -->
+</span>

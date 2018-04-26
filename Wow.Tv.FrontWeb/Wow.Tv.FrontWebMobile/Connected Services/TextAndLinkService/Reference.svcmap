@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ab329937-fa79-4f59-8a2c-8cbd6b64d2aa" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/NewsCenter/TextAndLinkService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TextAndLinkService.xsd" MetadataType="Schema" ID="1004f1ce-3f3d-4fd9-b43c-223cc78461fd" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/TextAndLinkService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TextAndLinkService.wsdl" MetadataType="Wsdl" ID="6be21498-3aed-42ce-9c52-ee41c8b3e90f" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/TextAndLinkService.svc?wsdl" />
+    <MetadataFile FileName="TextAndLinkService1.xsd" MetadataType="Schema" ID="b8ae2f1e-d8c0-4302-ada9-4881252a6cf4" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/TextAndLinkService.svc?xsd=xsd2" />
+    <MetadataFile FileName="TextAndLinkService2.xsd" MetadataType="Schema" ID="e16990be-4005-43bf-8f73-0914e427eac0" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/TextAndLinkService.svc?xsd=xsd5" />
+    <MetadataFile FileName="TextAndLinkService.disco" MetadataType="Disco" ID="4bf3f230-1fd2-4d78-8511-6a394fddff57" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/TextAndLinkService.svc?disco" />
+    <MetadataFile FileName="TextAndLinkService3.xsd" MetadataType="Schema" ID="ef713e1e-dd22-4352-84d3-43fb6ca89184" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/TextAndLinkService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TextAndLinkService4.xsd" MetadataType="Schema" ID="b5859ec2-aa62-4108-91f8-a65b3adaa7f8" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/TextAndLinkService.svc?xsd=xsd4" />
+    <MetadataFile FileName="TextAndLinkService5.xsd" MetadataType="Schema" ID="d424b2db-da98-46ba-b2f1-537305d2a375" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/TextAndLinkService.svc?xsd=xsd3" />
+    <MetadataFile FileName="TextAndLinkService6.xsd" MetadataType="Schema" ID="f0381a3f-c8c4-4716-a10f-6666af9f1f5d" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/TextAndLinkService.svc?xsd=xsd6" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

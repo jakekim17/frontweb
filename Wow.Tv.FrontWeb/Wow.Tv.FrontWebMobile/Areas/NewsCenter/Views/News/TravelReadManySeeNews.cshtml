@@ -1,0 +1,26 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model List<NUP_NEWS_MAIN_SECTION_SELECT_Result>
+
+@{
+    Layout = null;
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="thumbnail">
+            <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID');">
+                <div class="photo">
+                    <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, null, item.IMAGE_DIR, item.IMAGE_FILE, new DateTime())" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'" alt="">
+                </div>
+                <div class="txt-area">
+                    <p class="text">@item.TITLE</p>
+                </div>
+            </a>
+        </div>
+    }
+}

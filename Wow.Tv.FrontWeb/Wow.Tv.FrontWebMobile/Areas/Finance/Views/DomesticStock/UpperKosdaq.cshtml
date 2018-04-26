@@ -1,0 +1,48 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.FinanceService
+@model  ListModel<usp_web_getSiseUpper_Result>
+
+@{
+    ViewBag.Title = "UpperKosdaq";
+    Layout = null;
+
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+
+}
+
+<div class="section-area">
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+                @if (Model.ListData.Count == 0)
+            {
+                    <tr>
+                        <td colspan="4" class="empty">
+                            해당하는 종목이 없습니다.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model.ListData)
+                    {
+                        <tr>
+                            <td class="txt-l"><a href="#none" onclick="DomesticStockUpper.DomesticStockDetailGo('@DomainUrlFront','@item.ShortCode.Replace("A", "")');">@item.korName</a></td>
+                            <td>@Html.PublishPriceFormat(item.ChgType, String.Format("{0:#,##0}", item.TradePrice))</td>
+                            <td> @Html.PublishChgPriceFormat(item.ChgType, String.Format("{0:#,##0}", item.ChgPrice))</td>
+                            <td>@Html.PublishUpDownSymbolPChangeFormat(item.ChgType, item.PChange.Replace("%", "")) </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

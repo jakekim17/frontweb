@@ -1,0 +1,137 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@model ListModel<usp_GetIndustryState_Result>
+@{
+    ViewBag.Title = "IndustryPartList";
+    Layout = null;
+    int indexNum;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    IndustryCondition condition = (IndustryCondition)ViewBag.IndustryCondition;
+
+    condition.MenuSeq = Convert.ToInt32(Request["menuSeq"]);
+}
+
+<script src="@wowTvScript/Finance/DomesticStock/IndustryPartList.js"></script>
+<!-- section-area -->
+<div class="section-area">
+    <div class="table-type1">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:10%">
+                <col style="width:50%">
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+                
+                   @{ indexNum = 1;}
+                    @if (ViewBag.MenuTab == "Security")
+                    {
+                        foreach (var item in Model.ListData.OrderByDescending(m => m.Security).Select(m => new { m.PartName, m.PartCode, m.Security }))
+                        {
+                            if (item.Security != 0)
+                            {
+                                <tr>
+                                    <td><span class="font-color03">@indexNum </span></td>                                    
+                                    <td>
+                                      <a href="#none" onclick="IndustryStockList.Detail('@ViewBag.IndustryCondition.Market',
+                                                                                         '@ViewBag.IndustryCondition.TargetDT',
+                                                                                         '@item.PartName',
+                                                                                         '@item.PartCode',
+                                                                                          @ViewBag.IndustryCondition.MenuSeq,'Security');">@item.PartName
+                                          <span class="icon tbl-arrow"></span>
+                                        </a>
+                                    </td>
+                                    <td class="num">@Html.CommaFormat(item.Security)</td>
+                                </tr>
+                            }
+                            @*else
+                            {
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                            }*@
+                            indexNum += 1;
+
+                        }
+                    }
+                    else if (ViewBag.MenuTab == "Foreigner")
+                    {
+                        foreach (var item in Model.ListData.OrderByDescending(m => m.Foreigner).Select(m => new { m.PartName, m.PartCode, m.Foreigner }))
+                        {
+                            if (item.Foreigner != 0)
+                            {
+                                <tr>
+                                    <td><span class="font-color03">@indexNum </span></td>                                    
+                                    <td>
+                                        <a href="#none" onclick="IndustryStockList.Detail('@ViewBag.IndustryCondition.Market',
+                                                                                         '@ViewBag.IndustryCondition.TargetDT',
+                                                                                         '@item.PartName',
+                                                                                          '@item.PartCode',
+                                                                                          @ViewBag.IndustryCondition.MenuSeq,'Foreigner');">@item.PartName
+                                            <span class="icon tbl-arrow"></span>
+                                        </a>
+                                    </td>
+                                <td class="num">@Html.CommaFormat(item.Foreigner)</td>
+                            </tr>
+                            }
+                            @*else
+                            {
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                            }*@
+                            indexNum += 1;
+
+                        }
+                    }
+                    else if (ViewBag.MenuTab == "Personal")
+                    {
+                        foreach (var item in Model.ListData.OrderByDescending(m => m.Personal).Select(m => new { m.PartName, m.PartCode, m.Personal }))
+                        {
+                            if (item.Personal != 0)
+                            {
+                                <tr>
+                                    <td><span class="font-color03">@indexNum </span></td>                                    
+                                    <td>
+                                        <a href="#none" onclick="IndustryStockList.Detail('@ViewBag.IndustryCondition.Market',
+                                                                                         '@ViewBag.IndustryCondition.TargetDT',
+                                                                                         '@item.PartName',
+                                                                                          '@item.PartCode',
+                                                                                          @ViewBag.IndustryCondition.MenuSeq,'Personal');">@item.PartName
+                                            <span class="icon tbl-arrow"></span>
+                                        </a>
+                                    </td>
+                                    <td class="num">@Html.CommaFormat(item.Personal)</td>
+                                </tr>
+                            }
+                            @*else
+                            {
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                            }*@
+                            indexNum += 1;
+
+                        }
+                    }
+
+            </tbody>
+        </table>
+
+        <form id="frmPartDetail">
+            <input type="hidden" id="Market" name="Market"/>
+            <input type="hidden" id="OrderBy" name="OrderBy" />
+            <input type="hidden" id="TargetDt" name="TargetDt" />
+            <input type="hidden" id="PartName" name="PartName" />
+            <input type="hidden" id="PartCode" name="PartCode" />
+            <input type="hidden" id="MenuSeq" name="MenuSeq" />
+            <input type="hidden" id="MenuTab" name="MenuTab" />
+            <input type="hidden" id="currentMenuSeq" name="currentMenuSeq" value="@ViewBag.MenuSeq"/>
+        </form>
+    </div>
+</div>
+<!-- // section-area -->

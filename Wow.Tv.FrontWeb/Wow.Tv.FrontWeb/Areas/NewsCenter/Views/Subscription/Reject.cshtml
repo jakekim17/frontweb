@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = null;
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>한국경제TV - 대한민국 대표 경제방송</title>
+    <link rel="stylesheet" href="@wowTvStyle/css/fonts.css">
+    <link rel="stylesheet" href="@wowTvStyle/css/common.css">
+    <script type="text/javascript" src="@wowTvScript/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        function Reject(reporterId, rejectId) {
+
+            if (reporterId.length > 0 && rejectId.length > 0) {
+
+                if (confirm("수신거부 하시겠습니까?") == true) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/NewsCenter/Subscription/RejectSend",
+                        data: { reporterId: reporterId, rejectId: rejectId },
+                        success: function (data) {
+                            if (data.isSuccess == true) {
+                                alert('‘수신거부’ 되었습니다.');
+                            } else {
+                                alert('‘수신거부’ 처리가 정상적으로 이루어지지 않았습니다.');
+                            }
+                        }
+                        , error: function (jqXHR, textStatus, errorThrown) {
+
+                            alert('‘수신거부’ 처리가 정상적으로 이루어지지 않았습니다.');
+                        }
+                    });
+                }
+            }
+            else {
+                alert('필요한 정보가 없습니다.');
+            }
+        }
+    </script>
+</head>
+<body class="parking">
+    <div class="parking-area">
+        <div class="not-pound">
+            <div class="top-box">
+                <span class="logo">
+                    <a href="http://www.wowtv.co.kr"><img src="@wowTvStyle/images/common/pound_logo.png" alt="한국경제티브이"></a>
+                </span>
+                <div class="right-box">
+                    <ul>
+                        <li><a href="http://www.wownet.co.kr" target="_blank">와우넷</a></li>
+                        <li><a href="http://www.wowfa.co.kr" target="_blank">와우파</a></li>
+                        <li><a href="http://www.wowstar.co.kr" target="_blank">와우스타</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-box">
+                <p class="title">
+                    이메일을 수신거부 하시겠습니까?
+                </p>
+                <div class="text type02">
+                    이메일 수신거부를 하시면 그동안 제공되던 최신기사 정보를 <br />
+                    메일로 받아보실 수 없습니다.
+                </div>
+                <div class="box-button mb150">
+                    <span class="btn-type1"><a href="javascript:Reject('@ViewBag.reporterId','@ViewBag.rejectId')">수신거부</a></span>
+                    <span class="btn-type2"><a href="http://www.wowtv.co.kr" >취소</a></span>
+                </div>
+            </div>
+            <div class="foot">
+                Copyright©한국경제TV. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

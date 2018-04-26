@@ -1,0 +1,386 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.FrontWeb.Areas.Finance.Models
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model CurrentAnalysisModel
+@{
+    ViewBag.Title = "DomesticStockDetailCurPrice";
+    Layout = null;
+
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+
+    string searchStr = Request["searchStr"];
+    string arjCode = Request["arjCode"];
+    string stockCode = Request["stockCode"];
+
+    string boardType = Request["boardType"];
+
+    usp_LatestStockPrice_Result latestStockPrice = Model.LatestStockPrice;
+    usp_web_stock_hoga_Result stockHoga = Model.StockHoga;
+    ListModel<usp_web_getStockDealing5_Result> stockDealing5List = Model.StockDealing5List;
+}
+
+<script src="@wowTvScript/Finance/DomesticStock/StockDetailCurPrice.js"></script>
+@*<h2>DomesticStockDetailCurPrice</h2>
+<div>
+    searchStr : @searchStr <br/>
+    arjCode : @arjCode  <br/>
+    stockCode : @stockCode  <br/>
+    boardtype : @boardType
+</div>*@
+<!-- 현재가 -->
+<div class="section-content">
+    
+    <div class="col2">
+        <div class="contain-cols">
+            <h2 class="title">주요시세</h2>
+            <div class="col2">
+                <div class="box-data1">
+                    <dl>
+                        <dt>현재가</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.tradeprice)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>전일비</dt>
+                        <dd>@Html.DomesticStockDetailChgPriceFormat(latestStockPrice.chgtype, latestStockPrice.chgprice)</dd>
+                    </dl>
+                    <dl>
+                        <dt>등락률(%)</dt>
+                        <dd>@Html.DomesticStockDetailChgRateFormat(latestStockPrice.chgtype, latestStockPrice.tradeprice, latestStockPrice.chgprice)</dd>
+                    </dl>
+                    <dl>
+                        <dt>거래량(주)</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.deal)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>거래대금(백만)</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.trademoney)</span></dd>
+                    </dl>
+                </div>
+                <div class="box-data1">
+                    <dl>
+                        <dt>시가</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.openprice)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>고가</dt>
+                        <dd><span class="data-up">@Html.CommaFormat(latestStockPrice.highprice)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>저가</dt>
+                        <dd><span class="data-down">@Html.CommaFormat(latestStockPrice.lowprice)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>매수호가 5분지연</dt>
+                        <dd><span class="data-up">@Html.CommaFormat(latestStockPrice.askprice_1)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>매도호가 5분지연</dt>
+                        <dd><span class="data-down">@Html.CommaFormat(latestStockPrice.bidprice_1)</span></dd>
+                    </dl>
+                </div>
+                <div class="box-data1">
+                    <dl>
+                        <dt>전일가</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.baseprice)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>액면가</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(latestStockPrice.parprice))</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>시가총액(백만)</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.totalprice)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>상장주수(천주)</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.listcount)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>자본금(억)</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(latestStockPrice.capital))</span></dd>
+                    </dl>
+                </div>
+                <div class="box-data1">
+                    <dl>
+                        <dt>상한가</dt>
+                        <dd><span class="data-up">@Html.CommaFormat(latestStockPrice.limithigh)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>하한가</dt>
+                        <dd><span class="data-down">@Html.CommaFormat(latestStockPrice.limitlow)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>전일 거래량(주)</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.totalvol)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>외국인 보유(%)</dt>
+                        <dd><span class="data-normal">@(Math.Round(Convert.ToDouble(latestStockPrice.foriholdper) * 100) / 100)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>5일 이동평균선</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.mov5)</span></dd>
+                    </dl>
+                </div>
+                <div class="box-data1">
+                    <dl>
+                        <dt>결산월</dt>
+                        <dd><span class="data-normal">@latestStockPrice.settlementmon</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>PER</dt>
+                        <dd><span class="data-normal">@latestStockPrice.per</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>주당 수익률</dt>
+                        <dd><span class="data-normal">@String.Format("{0:F2}", latestStockPrice.pgaskdeal)%</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>시간 외 단일가</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.afterprice)</span>(@Html.DomesticStockDetailChgPriceFormat(latestStockPrice.afterChgType, Convert.ToInt32(latestStockPrice.afterChgPrice)))</dd>
+                    </dl>
+                </div>
+
+                <div class="box-data1">
+                    <dl>
+                        <dt>20일 이동평균선</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.mov20)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>EPS</dt>
+                        <dd>
+                        <span class="data-normal">
+                            @if (!String.IsNullOrEmpty(latestStockPrice.eps))
+                            {
+                                @Html.CommaFormat(latestStockPrice.eps)
+                            }
+                            
+                        </span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>장 개시 전 거래량</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.pgbiddeal)</span></dd>
+                    </dl>
+                    <dl>
+                        <dt>단일가 거래량</dt>
+                        <dd><span class="data-normal">@Html.CommaFormat(latestStockPrice.tradevol)</span></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="contain-cols">
+            <h2 class="title">호가(15분 지연)</h2>
+            <div class="table-type1">
+                <table id="tblHoga">
+                    <caption></caption>
+                    <thead>
+                        <tr>
+                            <th>매도잔량</th>
+                            <th>매도호가</th>
+                            <th>매수호가</th>
+                            <th>매수잔량</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    <td class="number"><span class="data-down" id="totalBidVol"></span></td>
+                    <th colspan="2">잔량합계</th>
+                    <td class="number"><span class="data-up" id="totalAskVol">@Html.CommaFormat(stockHoga.TotalAskVol)</span></td>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td class="number data-down hogaBid">@Html.CommaFormat(stockHoga.BidVol_5)</td>
+                            <td class="number data-down">@Html.CommaFormat(stockHoga.BidPrice_5)</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="number data-down hogaBid">@Html.CommaFormat(stockHoga.BidVol_4)</td>
+                            <td class="number data-down">@Html.CommaFormat(stockHoga.BidPrice_4)</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="number data-down hogaBid">@Html.CommaFormat(stockHoga.BidVol_3)</td>
+                            <td class="number data-down">@Html.CommaFormat(stockHoga.BidPrice_3)</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="number data-down hogaBid">@Html.CommaFormat(stockHoga.BidVol_2)</td>
+                            <td class="number data-down">@Html.CommaFormat(stockHoga.BidPrice_2)</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="number data-down hogaBid">@Html.CommaFormat(stockHoga.BidVol_1)</td>
+                            <td class="number data-down">@Html.CommaFormat(stockHoga.BidPrice_1)</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="number data-up">@Html.CommaFormat(stockHoga.AskPrice_1)</td>
+                            <td class="number data-up hogaAsk">@Html.CommaFormat(stockHoga.AskVol_1)</td>
+                        </tr>
+                        <tr>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="number data-up">@Html.CommaFormat(stockHoga.AskPrice_2)</td>
+                            <td class="number data-up hogaAsk">@Html.CommaFormat(stockHoga.AskVol_2)</td>
+                        </tr>
+                        <tr>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="number data-up">@Html.CommaFormat(stockHoga.AskPrice_3)</td>
+                            <td class="number data-up hogaAsk">@Html.CommaFormat(stockHoga.AskVol_3)</td>
+                        </tr>
+                        <tr>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="number data-up">@Html.CommaFormat(stockHoga.AskPrice_4)</td>
+                            <td class="number data-up hogaAsk">@Html.CommaFormat(stockHoga.AskVol_4)</td>
+                        </tr>
+                        <tr>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="number data-up">@Html.CommaFormat(stockHoga.AskPrice_5)</td>
+                            <td class="number data-up hogaAsk">@Html.CommaFormat(stockHoga.AskVol_5)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <hr class="division5 no-border">
+
+    <!--최근 주가 일별, 시간대별 Top10-->
+    <div class="tab-type2" style="margin-bottom:40px;" id="recentlyStockTDTab">
+        <ul class="col2">
+            <li class="on"><a href="#none" id="recentlyStockDayTop10">일자별</a></li>
+            <li><a href="#none" id="recentlyStockTimeTop10">시간대별</a></li>
+        </ul>
+    </div>
+
+    <form id="frmList_StockDayTimeTop10">
+        <input type="hidden" name="stockCode" value="@stockCode" />
+        <div id="divList">
+
+        </div>
+    </form>
+    <!--//최근 주가 일별, 시간대별 Top10-->
+
+    <hr class="division5 no-border">
+
+    <div class="col2">
+        <div class="contain-cols">
+            <h2 class="title">거래원 상위 5위</h2>
+            <div class="table-type1">
+                <table>
+                    <caption></caption>
+                    <colgroup>
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
+                    </colgroup>
+                    <tr>
+                        <th>매도거래원</th>
+                        <th>매도거래량</th>
+                        <th>매수거래원</th>
+                        <th>매수거래량</th>
+                    </tr>
+                    <tr>
+                        <td>@stockDealing5List.ListData[0].BUY_CORP_NAME</td>
+                        <td><span class="data-down">@Html.CommaFormat(stockDealing5List.ListData[0].BUY_VOL)</span></td>
+                        <td>@stockDealing5List.ListData[5].SELL_CORP_NAME</td>
+                        <td><span class="data-up">@Html.CommaFormat(stockDealing5List.ListData[5].SELL_VOL)</span></td>
+                    </tr>
+                    <tr>
+                        <td>@stockDealing5List.ListData[1].BUY_CORP_NAME</td>
+                        <td><span class="data-down">@Html.CommaFormat(stockDealing5List.ListData[1].BUY_VOL)</span></td>
+                        <td>@stockDealing5List.ListData[6].SELL_CORP_NAME</td>
+                        <td><span class="data-up">@Html.CommaFormat(stockDealing5List.ListData[6].SELL_VOL)</span></td>
+                    </tr>
+                    <tr>
+                        <td>@stockDealing5List.ListData[2].BUY_CORP_NAME</td>
+                        <td><span class="data-down">@Html.CommaFormat(stockDealing5List.ListData[2].BUY_VOL)</span></td>
+                        <td>@stockDealing5List.ListData[7].SELL_CORP_NAME</td>
+                        <td><span class="data-up">@Html.CommaFormat(stockDealing5List.ListData[7].SELL_VOL)</span></td>
+                    </tr>
+                    <tr>
+                        <td>@stockDealing5List.ListData[3].BUY_CORP_NAME</td>
+                        <td><span class="data-down">@Html.CommaFormat(stockDealing5List.ListData[3].BUY_VOL)</span></td>
+                        <td>@stockDealing5List.ListData[8].SELL_CORP_NAME</td>
+                        <td><span class="data-up">@Html.CommaFormat(stockDealing5List.ListData[8].SELL_VOL)</span></td>
+                    </tr>
+                    <tr>
+                        <td>@stockDealing5List.ListData[4].BUY_CORP_NAME</td>
+                        <td><span class="data-down">@Html.CommaFormat(stockDealing5List.ListData[4].BUY_VOL)</span></td>
+                        <td>@stockDealing5List.ListData[9].SELL_CORP_NAME</td>
+                        <td><span class="data-up">@Html.CommaFormat(stockDealing5List.ListData[9].SELL_VOL)</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="contain-cols">
+            <h2 class="title">당일 가격대별 매물 분포</h2>
+            <div class="table-type1">
+                <table>
+                    <caption></caption>
+                    <colgroup>
+                        <col width="40%">
+                        <col width="30%">
+                        <col width="30%">
+                    </colgroup>
+                    <tr>
+                        <th>가격대</th>
+                        <th>거래량</th>
+                        <th>분표율</th>
+                    </tr>
+                    @foreach (var item in Model.DayStockPriceBandList.ListData)
+                    {
+                        <tr>
+                            <td><span class="data-normal">@item.PRICE</span></td>
+                            <td class="number"><span class="data-normal">@Html.CommaFormat(item.VOL)</span></td>
+                            <td class="number"><span class="data-normal">@String.Format("{0:F2}", (((double)item.VOL / item.TOT) * 100))</span></td>
+                        </tr>
+
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <hr class="division5 no-border">
+
+    <form id="frmList_timeStockPrice">
+        <input type="hidden" name="pageSize" id="pageSize" value="10" />
+        <input type="hidden" name="currentIndex" id="currentIndex" />
+        <input type="hidden" name="stockCode" value="@stockCode" />
+        <div id="divList">
+
+        </div>
+    </form>
+
+    <hr class="division5 no-border">
+
+    <form id="frmList_dayStockPrice">
+        <input type="hidden" name="pageSize" id="pageSize" value="10" />
+        <input type="hidden" name="currentIndex" id="currentIndex" />
+        <input type="hidden" name="stockCode" value="@stockCode" />
+        <div id="divList">
+
+        </div>
+    </form>
+
+
+
+</div>
+<!-- //현재가 -->
+

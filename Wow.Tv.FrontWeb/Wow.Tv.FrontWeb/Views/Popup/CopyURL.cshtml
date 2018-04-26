@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+<script type="text/javascript" src="@wowTvScript/Popup/CopyURLPopup.js"></script>
+
+<div class="popup-type1" style="display:block;">
+    <div class="inner" id="divURL">
+        <!-- title -->
+        <h1 class="title">URL 공유</h1>
+        <!-- // title -->
+        <a href="javascript:void(0);" class="pop-close-btn">닫기</a>
+        <!-- content -->
+        <div class="content-box">
+            <input type="text" class="txt-url" id="txtURL">
+            <div class="box-button">
+                <span class="btn-type1"><button id="copyBtn">URL 복사하기</button></span>
+                <span class="btn-type3"><button class="btnCloase">취소하기</button></span>
+            </div>
+        </div>
+        <!-- content -->
+    </div>
+</div>

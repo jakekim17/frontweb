@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNone.cshtml";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Reporter/GetEmailForm.js"></script>
+}
+
+<div class="wrap full">
+    <!-- Header -->
+    <header class="header">
+        <a href="javascript:GetEmailForm.GoReporterDetail()" class="icon top-arrow"></a>
+        <h1>메일 보내기</h1>
+    </header>
+    <!-- //Header -->
+
+    <form id="frm">
+        <input type="hidden" name="SearchId" value="@ViewBag.Condition.SearchId" />
+        <input type="hidden" name="SearchName" value="@ViewBag.Condition.SearchName" />
+        <input type="hidden" id="CurrentMenuSeq" name="CurrentMenuSeq" value="@Request["menuSeq"]" />
+    </form>
+
+    <!-- container -->
+    <section class="container">
+        <form id="frmSendEmail">
+            <div class="reporter-info-input">
+                <h3>이름/아이디</h3>
+                @if (LoginHandler.IsLogin)
+                {
+                    <input type="text" name="UserName" disabled="disabled" value="@LoginHandler.CurrentLoginUser.UserName (@LoginHandler.CurrentLoginUser.UserId)">
+                }
+                else
+                {
+                    <input type="text" name="UserName">
+                }
+
+                <h3>이메일</h3>
+                @if (LoginHandler.IsLogin)
+                {
+                    <input type="text" name="UserEmail" disabled="disabled" value="@LoginHandler.CurrentLoginUser.Email">
+                }
+                else
+                {
+                    <input type="text" name="UserEmail">
+                }
+                <h3>제목</h3>
+                <input type="text" placeholder="제목을 입력하세요." name="Title"/>
+
+                <h3>내용</h3>
+                <textarea placeholder="입력하세요" id="contents"></textarea>
+                <div class="byte">0/<span>500</span></div>
+                <div class="btn-area">
+                    <ul class="btn-list">
+                        <li><a href="#none" class="btn type01" id="btnSendEmail">발송</a></li>
+                        <li><a href="#none" class="btn type05" id="btnCancle">취소</a></li>
+                    </ul>
+                </div>
+            </div>
+            <textarea name="Contents" id="hidContents" style="display:none;"></textarea>
+            <input type="hidden" name="ReporterEmail" value="@ViewBag.Email" />
+            <input type="hidden" name="ReporterName" value="@ViewBag.ReporterName" />
+        </form>
+    </section>
+    <!-- // container -->
+</div>

@@ -1,0 +1,53 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+
+@model ListModel<usp_GetStockPrice_Result>
+@{
+    Layout = null;
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+}
+
+<script src="@wowTvScript/NewsCenter/News/StockInfo.js"></script>
+
+@if (Model.ListData.Count > 0)
+{
+    <!-- 관련종목 차트 start -->
+    <div class="box-event-chart">
+        <!-- title start -->
+        <div class="title-area">
+            <h2 class="title02">관련종목 차트</h2>
+            @*기획요청 삭제 : 20180108*@
+            @*<span class="day">@ViewBag.StartDate ~ @ViewBag.EndDate</span>*@
+        </div>
+        <!-- //title end -->
+        <!-- list start -->
+        <ul class="list-chart-type">
+            @foreach (var item in Model.ListData)
+            {
+                <li>
+                    <p><a href="#none" onclick="StockInfo.DomesticStockDetailGo('@DomainUrlFront','@item.arj_code.Replace("A", "")');">@item.stock_nickname</a></p>
+                    <p>
+                        현재가
+                        <span>@Html.PublishCurrencyFormat(item.curr_price.ToString())</span>
+                    </p>
+                    <p>
+                        전일대비
+                        @Html.PublishChgPriceFormat(item.chg_type.ToString(), item.net_chg.ToString())
+                        @Html.DomesticStockDetailChgRateFormat(item.chg_type.ToString(), item.curr_price, item.net_chg)
+                    </p>
+                </li>
+            }
+
+        </ul>
+        <!-- //list end -->
+        <!-- chart start -->
+        <div class="chart-area">
+            <img src="@ViewBag.Chart" alt="주가예측차트" />
+        </div>
+        <!-- //chart end -->
+    </div>
+}
+

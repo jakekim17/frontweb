@@ -1,0 +1,331 @@
+﻿@using Wow
+@using Wow.Tv.FrontWebMobile.MenuService;
+@using Wow.Tv.Middle.Model.Db49.wowtv
+@using Wow.Tv.Middle.Model.Db49.wowtv.Menu
+@using Wow.Tv.Middle.Model.Db90.DNRS
+
+@model T_NEWS_PRG
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    string currentMenuSeq = Request["menuSeq"];
+    string programCode = Request["programCode"];
+
+
+    NTB_PROGRAM_TEMPLATE programTemplate = ViewBag.ProgramTemplate;
+    int broadWatchNumber = ViewBag.BroadWatchNumber;
+    List<T_NEWS_PRG> familyList = ViewBag.FamilyList;
+    List<T_NEWS_PRG> childList = ViewBag.ChildList;
+    string programType = ViewBag.ProgramType;
+    List<NTB_MENU> menuList1 = ViewBag.MenuList1;
+
+    bool isFirst = true;
+}
+
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/tv.css">
+}
+
+
+@section scripts{
+    <script src="@wowTvScript/Broad/ProgramMain/Index.js?date=20171018170000"></script>
+    <script src="http://img.vrixon.com/adsdk/wowtv/test/vrixadsdk.js"></script>
+}
+
+
+
+
+
+
+
+<!-- TV 상단 비주얼 영역 -->
+<div class="sub-visual-area">
+    <!-- 방송 썸네일 영역 -->
+    <div class="thumb-area">
+        <img src="@(String.IsNullOrEmpty(ViewBag.RectangleImage) == true ? "/Content/CgDefault/CG_3(570_321).jpg" : ViewBag.RectangleImage)" alt="@Model.PRG_NM" />
+    </div>
+    <!-- //방송 썸네일 영역 -->
+    <!-- sub lnb 메뉴 -->
+    <div class="sub-visual-lnb">
+        <div class="swiper-container tv-sub-visual sub-lnb01">
+            <div class="swiper-wrapper">
+
+                @if (programType == "Union")
+                    {
+                        if (childList.Count > 0)
+                        {
+                            foreach (var item in childList)
+                            {
+                                <div class="swiper-slide w-auto @(item.PRG_CD == Model.PRG_CD ? "on" : "")" onclick="return ProgramMainIndex.GoProgramMain('@item.PRG_CD');">
+                                    <span>@item.PRG_NM</span>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (familyList.Count > 0)
+                        {
+                            foreach (var item in familyList)
+                            {
+                                <div class="swiper-slide w-auto @(item.PRG_CD == Model.PRG_CD ? "on" : "")" onclick="return ProgramMainIndex.GoProgramMain('@item.PRG_CD');">
+                                    <span>@item.PRG_NM</span>
+                                </div>
+                            }
+                        }
+                    }
+
+                @*<div class="swiper-slide"><span>골든타임</span></div>
+                <div class="swiper-slide on"><span>민심방송</span></div>
+                <div class="swiper-slide"><span>마켓뷰 오늘과</span></div>
+                <div class="swiper-slide"><span>민심방송</span></div>
+                <div class="swiper-slide"><span>마켓뷰 오늘과</span></div>
+                <div class="swiper-slide"><span>민심방송</span></div>*@
+            </div>
+        </div>
+        <div class="swiper-container-rtl">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <!-- // sub lnb 메뉴 -->
+    <!-- 방송 정보 영역 -->
+    <div class="prog-info-area">
+        <div class="text-icon-area">
+            @if (Model.IsFirst == true)
+            {
+                <span class="text-icon">첫방송</span>
+            }
+            @if (Model.IsRenewal == true)
+            {
+                <span class="text-icon">개편</span>
+            }
+            
+        </div>
+        <strong class="tit">@Model.PRG_NM</strong>
+        <span class="info-detail">@(Model.DayOfWeekString == null ? "" : String.Join("·", Model.DayOfWeekString))<span class="num">@Model.BRO_START ~ @Model.BRO_END</span></span>
+        <span class="info-detail">@Model.GetPdTdNames(", ")</span>
+    </div>
+    <!-- //방송 정보 영역 -->
+    <!-- 네이버TV / 유튜브 start -->
+    <div class="box-aside">
+        @if (programTemplate.NAVER_READ_YN == "Y")
+        {
+            <a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('@programTemplate.NAVER_READ_URL');">
+                <span class="is-ico-tv ico-tv"></span> 네이버TV
+            </a>
+        }
+        @if (programTemplate.YOUTUBE_READ_YN == "Y")
+        {
+            <a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('@programTemplate.YOUTUBE_READ_URL');">
+                <span class="is-ico-tv ico-youtube"></span> 유튜브
+            </a>
+        }
+    </div>
+    <!-- 네이버TV / 유튜브 end -->
+    <!-- 와우스타/와우넷/와우카페/네이버카페 start -->
+    <div class="box-etc-menu-area">
+        @if (programTemplate.WOW_YN == "Y")
+        {
+            <a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('@programTemplate.WOW_URL');">와우스타</a>
+        }
+        else
+        {
+            @*<a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('');">와우스타</a>*@
+        }
+        @if (programTemplate.WOWNET_YN == "Y")
+        {
+            <a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('@programTemplate.WOWNET_URL');">와우넷</a>
+        }
+        else
+        {
+            @*<a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('');">와우넷</a>*@
+        }
+        @if (programTemplate.WOW_CAFE_YN == "Y")
+        {
+            <a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('@programTemplate.WOW_CAFE_URL');">와우카페</a>
+        }
+        else
+        {
+            @*<a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('');">와우카페</a>*@
+        }
+        @if (programTemplate.NAVER_CAFE_YN == "Y")
+        {
+            <a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('@programTemplate.NAVER_CAFE_URL');">네이버카페</a>
+        }
+        else
+        {
+            @*<a href="javascript:void(0)" onclick="return ProgramMainIndex.OpenPopup('');">네이버카페</a>*@
+        }
+    </div>
+    <!-- 와우스타/와우넷/와우카페/네이버카페 end -->
+</div>
+<!-- //TV 상단 비주얼 영역 -->
+<!-- btn start -->
+<div class="box-util-links">
+    <div class="box-btn-area">
+        <div class="btn-area news-util">
+            <a href="#none" id="btnProgramPin" class="btn type02"><span class="icon ico-pin"></span>핀하기</a>
+            <ul class="btn-list col2">
+                <li><a href="/Broad/TvMain/ProgramBuy1" target="_blank" class="btn type04">방송프로그램 구입</a></li>
+                <li><a href="https://mhelp.wowtv.co.kr/ServiceInfo/Hankyung/Index?menuSeq=4323" target="_blank" class="btn type04">유료서비스 안내</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- btn end -->
+
+
+
+@if (programType == "Union")
+{
+}
+else
+{
+    if (childList.Count > 0)
+    {
+        <!-- sub lnb02 메뉴 -->
+        <div class="sub-visual-lnb02">
+            <div class="swiper-container tv-sub-visual sub-lnb01">
+                <div class="swiper-wrapper">
+                    @foreach (var item in childList)
+                    {
+                        <div class="swiper-slide @(Model.PRG_CD == item.PRG_CD ? "on" : "")"  onclick="return ProgramMainIndex.GoProgramMain('@item.PRG_CD');"><span>@item.PRG_NM</span></div>
+                    }
+                </div>
+            </div>
+            <div class="swiper-container-rtl01">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+        <!-- // sub lnb 메뉴 -->
+    }
+
+
+    <!-- sub lnb 메뉴 -->
+    <div class="sub-visual-lnb01">
+        <div class="swiper-container tv-sub-visual sub-lnb01">
+            <div class="swiper-wrapper">
+
+                @foreach (var item in menuList1)
+                {
+                    string broadWatchYn = "N";
+                    string noticeYn = "N";
+                    string feedBackYn = "N";
+                    bool isGoLogin = false;
+                    string url = item.LINK_URL;
+
+                    MenuCondition menuCondition = new MenuCondition();
+                    menuCondition.ChannelCode = CommonCodeStatic.MENU_BROAD_FRONT_OR_DUAL_CHANNEL_CODE;
+                    menuCondition.SearchProgramCode = Model.PRG_CD;
+                    menuCondition.Depth = 1;
+                    menuCondition.ActiveYn = "Y";
+                    menuCondition.PageSize = -1;
+                    menuCondition.UpMenuSeq = item.MENU_SEQ;
+                    menuCondition.Depth = 2;
+                    var menuList_2 = new MenuServiceClient().SearchList(menuCondition);
+                    if (item.CONTENT_TYPE_CODE == "Corner" || menuList_2.ListData.Where(a => a.CONTENT_TYPE_CODE == "Corner").Count() > 0)
+                    {
+                        url = "/Broad/Corner/Index";
+                    }
+                    else if (item.CONTENT_TYPE_CODE == "Board" || menuList_2.ListData.Where(a => a.CONTENT_TYPE_CODE == "Board").Count() > 0)
+                    {
+                        switch (item.BoardTypeCode)
+                        {
+                            case "Notice":
+                                url = "/Broad/Notice/Index";
+                                noticeYn = "Y";
+                                break;
+                            case "Normal":
+                                url = "/Broad/Basic/Index";
+                                break;
+                            case "Official":
+                                url = "/Broad/Official/Index";
+                                break;
+                            case "FAQ":
+                                url = "/Broad/FAQ/Index";
+                                break;
+                            case "Inquiry":
+                                url = "/Broad/Inquiry/Index";
+                                break;
+                            case "FeedBack":
+                                url = "/Broad/FeedBack/Index";
+                                feedBackYn = "Y";
+                                if (LoginHandler.IsLogin == false)
+                                {
+                                    //isGoLogin = true;
+                                }
+                                break;
+                        }
+                    }
+                    else if (item.CONTENT_TYPE_CODE == "Trade" || menuList_2.ListData.Where(a => a.CONTENT_TYPE_CODE == "Trade").Count() > 0)
+                    {
+                        url = "/Broad/Trade/Index";
+                    }
+
+
+                    if (url == "/Broad/BroadWatch/Index")
+                    {
+                        broadWatchYn = "Y";
+                    }
+
+                    if (item.MENU_NAME == "시청자참여" && (item.PRG_CD == "P2668" || item.PRG_CD == "P2446" || item.PRG_CD == "P2447" || item.PRG_CD == "P2460" || item.PRG_CD == "P2652" || item.PRG_CD == "P2689" || item.PRG_CD == "P2690" || item.PRG_CD == "P2691" || item.PRG_CD == "P2692" || item.PRG_CD == "P2501"))
+                    {
+
+                    }
+                    else
+                    {
+                        if (isGoLogin == true)
+                        {
+                        <div class="swiper-slide w-auto @(isFirst == true ? "on devMenuItem" : "")" devProgramMenuSeq="@item.MENU_SEQ" devBroadWatchYn="@broadWatchYn" devNoticeYn="@noticeYn" devFeedBackYn="@feedBackYn" >
+                            <span onclick="return ProgramMainIndex.GoLogin('@item.CONTENT_SEQ', '@item.MENU_SEQ');">@item.MENU_NAME</span>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="swiper-slide w-auto @(isFirst == true ? "on devMenuItem" : "")" devProgramMenuSeq="@item.MENU_SEQ" devBroadWatchYn="@broadWatchYn" devNoticeYn="@noticeYn" devFeedBackYn="@feedBackYn">
+                            <span onclick="return ProgramMainIndex.BindContentPartial('@url', 0, 0, '@item.MENU_SEQ');">@item.MENU_NAME</span>
+                        </div>
+                        }
+                    }
+                    isFirst = false;
+                }
+
+                @*<div class="swiper-slide on"><span>공지사항</span></div>
+                <div class="swiper-slide"><span>공지사항2</span></div>
+                <div class="swiper-slide"><span>공지사항3</span></div>
+                <div class="swiper-slide"><span>공지사항4</span></div>*@
+            </div>
+        </div>
+        <div class="swiper-container-rtl01">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <!-- // sub lnb 메뉴 -->
+}
+
+
+<input type="hidden" id="hidProgramCode" value="@Model.PRG_CD" />
+<input type="hidden" id="hidProgramName" value="@Model.PRG_NM" />
+<input type="hidden" id="hidProgramType" value="@programType" />
+<input type="hidden" id="hidMenuSeq" value="@Request["menuSeq"]" />
+<input type="hidden" id="hidBroadWatchNumber" value="@broadWatchNumber" />
+<input type="hidden" id="hidLoginUrl" value="@System.Configuration.ConfigurationManager.AppSettings["UserLoginUrl"]" />
+<input type="hidden" id="hidIsFeedBack" value="@Request["isFeedBack"]" />
+<input type="hidden" id="hidFeedBackContentSeq" value="@Request["FeedBackContentSeq"]" />
+<input type="hidden" id="hidFeedBackMenuSeq" value="@Request["FeedBackMenuSeq"]" />
+<input type="hidden" id="hidIsNotice" value="@Request["isNotice"]" />
+<input type="hidden" id="hidNoticeContentSeq" value="@Request["noticeContentSeq"]" />
+<input type="hidden" id="hidNoticeMenuSeq" value="@Request["noticeMenuSeq"]" />
+
+<div id="divContent"></div>
+
+
+@Html.Action("Banner", "ProgramMain", new { Area = "Broad", programCode = programCode })
+
+

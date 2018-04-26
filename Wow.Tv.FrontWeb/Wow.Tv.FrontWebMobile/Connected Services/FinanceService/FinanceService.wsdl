@@ -1,0 +1,2083 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FinanceService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article.Finance" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wownet.Finance" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wownet" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wowcafe.Finance" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wowcafe" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.editVOD.Stock" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.editVOD" />
+      <xsd:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.broadcast" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IFinanceService_GetStockInvestorSumList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockInvestorSumList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockInvestorSumList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockInvestorSumListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockPartList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockPartList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockPartList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockPartListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockThemaList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockThemaList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockThemaList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockThemaListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetRelativeStockList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelativeStockList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetRelativeStockList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelativeStockListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetRecentNewsTop4List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecentNewsTop4List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetRecentNewsTop4List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecentNewsTop4ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetNoticeTop6List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNoticeTop6List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetNoticeTop6List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNoticeTop6ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetDiscussionTop9List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDiscussionTop9List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetDiscussionTop9List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDiscussionTop9ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetConsultTop9List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetConsultTop9List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetConsultTop9List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetConsultTop9ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockCafeTop3List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockCafeTop3List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockCafeTop3List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockCafeTop3ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetVodTop6List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVodTop6List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetVodTop6List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVodTop6ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetVodInvestTop6List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVodInvestTop6List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetVodInvestTop6List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVodInvestTop6ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAChartDataList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAChartDataList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAChartDataList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAChartDataListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetAsiaChartDataList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsiaChartDataList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetAsiaChartDataList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsiaChartDataListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetLatestStockPrice_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestStockPrice" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetLatestStockPrice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestStockPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockHoga_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockHoga" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockHoga_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockHogaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockDealing5List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockDealing5List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockDealing5List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockDealing5ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetDayStockPriceBandList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDayStockPriceBandList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetDayStockPriceBandList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDayStockPriceBandListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSelectStockRecentlyTimeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectStockRecentlyTimeList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSelectStockRecentlyTimeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectStockRecentlyTimeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSelectStockRecentlyDayList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectStockRecentlyDayList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSelectStockRecentlyDayList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectStockRecentlyDayListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockNowPriceTimeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockNowPriceTimeList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockNowPriceTimeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockNowPriceTimeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockNowPriceDayList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockNowPriceDayList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockNowPriceDayList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockNowPriceDayListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetTradeTrendList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTradeTrendList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetTradeTrendList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTradeTrendListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockNewsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockNewsList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockNewsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockNewsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockGongsiList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockGongsiList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockGongsiList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockGongsiListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetMyFavoriteJongMokList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyFavoriteJongMokList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetMyFavoriteJongMokList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyFavoriteJongMokListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockGongsiViewList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockGongsiViewList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockGongsiViewList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockGongsiViewListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetCheckStockHoliday_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckStockHoliday" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetCheckStockHoliday_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckStockHolidayResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetVodList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVodList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetVodList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVodListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetInvestVodList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvestVodList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetInvestVodList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvestVodListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetExchangeTimeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetExchangeTimeList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetExchangeTimeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetExchangeTimeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseMainmergecode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseMainmergecode" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseMainmergecode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseMainmergecodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetVirtualMoney_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualMoney" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetVirtualMoney_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualMoneyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetTodayStockNews_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTodayStockNews" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetTodayStockNews_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTodayStockNewsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetClfSelectOnlineIndex_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClfSelectOnlineIndex" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetClfSelectOnlineIndex_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClfSelectOnlineIndexResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetClfSelectOnlineItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClfSelectOnlineItem" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetClfSelectOnlineItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClfSelectOnlineItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetClfSelectHoliday_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClfSelectHoliday" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetClfSelectHoliday_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClfSelectHolidayResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetTodayInvests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTodayInvests" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetTodayInvests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTodayInvestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetKospiIndustryPartList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetKospiIndustryPartList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetKospiIndustryPartList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetKospiIndustryPartListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetKosdaqIndustryPartList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetKosdaqIndustryPartList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetKosdaqIndustryPartList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetKosdaqIndustryPartListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetThemaJisuTopList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetThemaJisuTopList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetThemaJisuTopList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetThemaJisuTopListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetWorldStockNews_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorldStockNews" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetWorldStockNews_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorldStockNewsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetBestProHintStockingList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBestProHintStockingList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetBestProHintStockingList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBestProHintStockingListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetWorldProHindtPartnerList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorldProHindtPartnerList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetWorldProHindtPartnerList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorldProHindtPartnerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetCurrentSearchStockList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentSearchStockList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetCurrentSearchStockList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentSearchStockListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseChartDataList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseChartDataList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseChartDataList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseChartDataListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKosdaqChartDataList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKosdaqChartDataList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKosdaqChartDataList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKosdaqChartDataListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeFutChartDataList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeFutChartDataList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeFutChartDataList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeFutChartDataListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKpi200ChartDataList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKpi200ChartDataList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKpi200ChartDataList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKpi200ChartDataListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKospiList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKospiList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKospiList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKospiListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseDayKospiList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseDayKospiList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseDayKospiList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseDayKospiListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseDayKosdaqList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseDayKosdaqList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseDayKosdaqList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseDayKosdaqListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKosdaqList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKosdaqList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKosdaqList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKosdaqListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKpi200List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKpi200List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeKpi200List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeKpi200ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseDayKpi200List_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseDayKpi200List" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseDayKpi200List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseDayKpi200ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseDayFutList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseDayFutList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseDayFutList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseDayFutListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeFutList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeFutList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseTimeFutList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseTimeFutListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetWowNetKPI200StockGroupList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWowNetKPI200StockGroupList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetWowNetKPI200StockGroupList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWowNetKPI200StockGroupListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseKospiInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseKospiInfo" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseKospiInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseKospiInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseKosdaqInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseKosdaqInfo" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseKosdaqInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseKosdaqInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseFutInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseFutInfo" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseFutInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseFutInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseKPIInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseKPIInfo" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseKPIInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseKPIInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetWowNetETFStockGroupList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWowNetETFStockGroupList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetWowNetETFStockGroupList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWowNetETFStockGroupListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetIndustryStateList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustryStateList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetIndustryStateList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustryStateListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetIndustryInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustryInfo" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetIndustryInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustryInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetIndustryMarketResearchListTop3_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustryMarketResearchListTop3" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetIndustryMarketResearchListTop3_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustryMarketResearchListTop3Response" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetIndustryStockList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustryStockList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetIndustryStockList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustryStockListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetThemaJisuList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetThemaJisuList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetThemaJisuList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetThemaJisuListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetThemaOnlineList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetThemaOnlineList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetThemaOnlineList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetThemaOnlineListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseUpperList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseUpperList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseUpperList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseUpperListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseLowerList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseLowerList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseLowerList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseLowerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseStockPlusList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseStockPlusList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseStockPlusList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseStockPlusListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseStockPlusKList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseStockPlusKList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseStockPlusKList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseStockPlusKListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseMarketSumList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseMarketSumList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseMarketSumList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseMarketSumListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseForeignHoldList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseForeignHoldList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSiseForeignHoldList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiseForeignHoldListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUsaIndexOnline_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsaIndexOnline" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUsaIndexOnline_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsaIndexOnlineResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUsaIndexHourList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsaIndexHourList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUsaIndexHourList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsaIndexHourListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUsaIndexHistoryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsaIndexHistoryList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUsaIndexHistoryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsaIndexHistoryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUsaStockGroupList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsaStockGroupList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUsaStockGroupList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsaStockGroupListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetAsiaIndexOnline_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsiaIndexOnline" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetAsiaIndexOnline_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsiaIndexOnlineResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetAsiaIndexHourList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsiaIndexHourList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetAsiaIndexHourList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsiaIndexHourListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetAsiaIndexHistoryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsiaIndexHistoryList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetAsiaIndexHistoryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsiaIndexHistoryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetKoreaAdrList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetKoreaAdrList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetKoreaAdrList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetKoreaAdrListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetEuropeIndexOnline_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEuropeIndexOnline" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetEuropeIndexOnline_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEuropeIndexOnlineResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetEuropeIndexHistoryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEuropeIndexHistoryList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetEuropeIndexHistoryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEuropeIndexHistoryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetInvestOnlineList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvestOnlineList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetInvestOnlineList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvestOnlineListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetInvestTotalList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvestTotalList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetInvestTotalList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvestTotalListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAAdrTotalList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAAdrTotalList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAAdrTotalList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAAdrTotalListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAAdrDetailList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAAdrDetailList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAAdrDetailList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAAdrDetailListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoSemiconductorList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoSemiconductorList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoSemiconductorList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoSemiconductorListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoMediaList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoMediaList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoMediaList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoMediaListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoInsuranceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoInsuranceList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoInsuranceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoInsuranceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoRetailList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoRetailList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoRetailList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoRetailListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoEnergyList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoEnergyList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoEnergyList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoEnergyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoPharmacyList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoPharmacyList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRDawoPharmacyList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRDawoPharmacyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqInternetList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqInternetList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqInternetList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqInternetListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqNetworkList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqNetworkList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqNetworkList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqNetworkListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqComunicationsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqComunicationsList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqComunicationsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqComunicationsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqComputerList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqComputerList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqComputerList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqComputerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqSemiconductorList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqSemiconductorList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqSemiconductorList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqSemiconductorListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqBioList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqBioList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRNasdaqBioList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRNasdaqBioListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRSANDP500InternetList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRSANDP500InternetList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetUSAADRSANDP500InternetList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUSAADRSANDP500InternetListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetMarketIndexBankExchangeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMarketIndexBankExchangeList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetMarketIndexBankExchangeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMarketIndexBankExchangeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetMarketIndexWorldExchangeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMarketIndexWorldExchangeList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetMarketIndexWorldExchangeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMarketIndexWorldExchangeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockPrice_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockPrice" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockPrice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetHpFinderChart_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHpFinderChart" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetHpFinderChart_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHpFinderChartResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetRankData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRankData" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetRankData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRankDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSabuScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSabuScore" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetSabuScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSabuScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockInvestorList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockInvestorList" />
+  </wsdl:message>
+  <wsdl:message name="IFinanceService_GetStockInvestorList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockInvestorListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IFinanceService">
+    <wsdl:operation name="GetStockInvestorSumList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockInvestorSumList" message="tns:IFinanceService_GetStockInvestorSumList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockInvestorSumListResponse" message="tns:IFinanceService_GetStockInvestorSumList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockPartList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockPartList" message="tns:IFinanceService_GetStockPartList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockPartListResponse" message="tns:IFinanceService_GetStockPartList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockThemaList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockThemaList" message="tns:IFinanceService_GetStockThemaList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockThemaListResponse" message="tns:IFinanceService_GetStockThemaList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelativeStockList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetRelativeStockList" message="tns:IFinanceService_GetRelativeStockList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetRelativeStockListResponse" message="tns:IFinanceService_GetRelativeStockList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentNewsTop4List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetRecentNewsTop4List" message="tns:IFinanceService_GetRecentNewsTop4List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetRecentNewsTop4ListResponse" message="tns:IFinanceService_GetRecentNewsTop4List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNoticeTop6List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetNoticeTop6List" message="tns:IFinanceService_GetNoticeTop6List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetNoticeTop6ListResponse" message="tns:IFinanceService_GetNoticeTop6List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDiscussionTop9List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetDiscussionTop9List" message="tns:IFinanceService_GetDiscussionTop9List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetDiscussionTop9ListResponse" message="tns:IFinanceService_GetDiscussionTop9List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsultTop9List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetConsultTop9List" message="tns:IFinanceService_GetConsultTop9List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetConsultTop9ListResponse" message="tns:IFinanceService_GetConsultTop9List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockCafeTop3List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockCafeTop3List" message="tns:IFinanceService_GetStockCafeTop3List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockCafeTop3ListResponse" message="tns:IFinanceService_GetStockCafeTop3List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVodTop6List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetVodTop6List" message="tns:IFinanceService_GetVodTop6List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetVodTop6ListResponse" message="tns:IFinanceService_GetVodTop6List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVodInvestTop6List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetVodInvestTop6List" message="tns:IFinanceService_GetVodInvestTop6List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetVodInvestTop6ListResponse" message="tns:IFinanceService_GetVodInvestTop6List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAChartDataList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAChartDataList" message="tns:IFinanceService_GetUSAChartDataList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAChartDataListResponse" message="tns:IFinanceService_GetUSAChartDataList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAsiaChartDataList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetAsiaChartDataList" message="tns:IFinanceService_GetAsiaChartDataList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetAsiaChartDataListResponse" message="tns:IFinanceService_GetAsiaChartDataList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLatestStockPrice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetLatestStockPrice" message="tns:IFinanceService_GetLatestStockPrice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetLatestStockPriceResponse" message="tns:IFinanceService_GetLatestStockPrice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockHoga">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockHoga" message="tns:IFinanceService_GetStockHoga_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockHogaResponse" message="tns:IFinanceService_GetStockHoga_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockDealing5List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockDealing5List" message="tns:IFinanceService_GetStockDealing5List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockDealing5ListResponse" message="tns:IFinanceService_GetStockDealing5List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDayStockPriceBandList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetDayStockPriceBandList" message="tns:IFinanceService_GetDayStockPriceBandList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetDayStockPriceBandListResponse" message="tns:IFinanceService_GetDayStockPriceBandList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectStockRecentlyTimeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSelectStockRecentlyTimeList" message="tns:IFinanceService_GetSelectStockRecentlyTimeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSelectStockRecentlyTimeListResponse" message="tns:IFinanceService_GetSelectStockRecentlyTimeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectStockRecentlyDayList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSelectStockRecentlyDayList" message="tns:IFinanceService_GetSelectStockRecentlyDayList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSelectStockRecentlyDayListResponse" message="tns:IFinanceService_GetSelectStockRecentlyDayList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockNowPriceTimeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockNowPriceTimeList" message="tns:IFinanceService_GetStockNowPriceTimeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockNowPriceTimeListResponse" message="tns:IFinanceService_GetStockNowPriceTimeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockNowPriceDayList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockNowPriceDayList" message="tns:IFinanceService_GetStockNowPriceDayList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockNowPriceDayListResponse" message="tns:IFinanceService_GetStockNowPriceDayList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTradeTrendList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetTradeTrendList" message="tns:IFinanceService_GetTradeTrendList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetTradeTrendListResponse" message="tns:IFinanceService_GetTradeTrendList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockNewsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockNewsList" message="tns:IFinanceService_GetStockNewsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockNewsListResponse" message="tns:IFinanceService_GetStockNewsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockGongsiList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockGongsiList" message="tns:IFinanceService_GetStockGongsiList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockGongsiListResponse" message="tns:IFinanceService_GetStockGongsiList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyFavoriteJongMokList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetMyFavoriteJongMokList" message="tns:IFinanceService_GetMyFavoriteJongMokList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetMyFavoriteJongMokListResponse" message="tns:IFinanceService_GetMyFavoriteJongMokList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockGongsiViewList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockGongsiViewList" message="tns:IFinanceService_GetStockGongsiViewList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockGongsiViewListResponse" message="tns:IFinanceService_GetStockGongsiViewList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckStockHoliday">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetCheckStockHoliday" message="tns:IFinanceService_GetCheckStockHoliday_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetCheckStockHolidayResponse" message="tns:IFinanceService_GetCheckStockHoliday_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVodList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetVodList" message="tns:IFinanceService_GetVodList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetVodListResponse" message="tns:IFinanceService_GetVodList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvestVodList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetInvestVodList" message="tns:IFinanceService_GetInvestVodList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetInvestVodListResponse" message="tns:IFinanceService_GetInvestVodList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExchangeTimeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetExchangeTimeList" message="tns:IFinanceService_GetExchangeTimeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetExchangeTimeListResponse" message="tns:IFinanceService_GetExchangeTimeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseMainmergecode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseMainmergecode" message="tns:IFinanceService_GetSiseMainmergecode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseMainmergecodeResponse" message="tns:IFinanceService_GetSiseMainmergecode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualMoney">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetVirtualMoney" message="tns:IFinanceService_GetVirtualMoney_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetVirtualMoneyResponse" message="tns:IFinanceService_GetVirtualMoney_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTodayStockNews">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetTodayStockNews" message="tns:IFinanceService_GetTodayStockNews_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetTodayStockNewsResponse" message="tns:IFinanceService_GetTodayStockNews_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClfSelectOnlineIndex">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetClfSelectOnlineIndex" message="tns:IFinanceService_GetClfSelectOnlineIndex_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetClfSelectOnlineIndexResponse" message="tns:IFinanceService_GetClfSelectOnlineIndex_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClfSelectOnlineItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetClfSelectOnlineItem" message="tns:IFinanceService_GetClfSelectOnlineItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetClfSelectOnlineItemResponse" message="tns:IFinanceService_GetClfSelectOnlineItem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClfSelectHoliday">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetClfSelectHoliday" message="tns:IFinanceService_GetClfSelectHoliday_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetClfSelectHolidayResponse" message="tns:IFinanceService_GetClfSelectHoliday_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTodayInvests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetTodayInvests" message="tns:IFinanceService_GetTodayInvests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetTodayInvestsResponse" message="tns:IFinanceService_GetTodayInvests_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKospiIndustryPartList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetKospiIndustryPartList" message="tns:IFinanceService_GetKospiIndustryPartList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetKospiIndustryPartListResponse" message="tns:IFinanceService_GetKospiIndustryPartList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKosdaqIndustryPartList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetKosdaqIndustryPartList" message="tns:IFinanceService_GetKosdaqIndustryPartList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetKosdaqIndustryPartListResponse" message="tns:IFinanceService_GetKosdaqIndustryPartList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetThemaJisuTopList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetThemaJisuTopList" message="tns:IFinanceService_GetThemaJisuTopList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetThemaJisuTopListResponse" message="tns:IFinanceService_GetThemaJisuTopList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorldStockNews">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetWorldStockNews" message="tns:IFinanceService_GetWorldStockNews_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetWorldStockNewsResponse" message="tns:IFinanceService_GetWorldStockNews_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBestProHintStockingList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetBestProHintStockingList" message="tns:IFinanceService_GetBestProHintStockingList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetBestProHintStockingListResponse" message="tns:IFinanceService_GetBestProHintStockingList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorldProHindtPartnerList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetWorldProHindtPartnerList" message="tns:IFinanceService_GetWorldProHindtPartnerList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetWorldProHindtPartnerListResponse" message="tns:IFinanceService_GetWorldProHindtPartnerList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSearchStockList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetCurrentSearchStockList" message="tns:IFinanceService_GetCurrentSearchStockList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetCurrentSearchStockListResponse" message="tns:IFinanceService_GetCurrentSearchStockList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseChartDataList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseChartDataList" message="tns:IFinanceService_GetSiseChartDataList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseChartDataListResponse" message="tns:IFinanceService_GetSiseChartDataList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKosdaqChartDataList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKosdaqChartDataList" message="tns:IFinanceService_GetSiseTimeKosdaqChartDataList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKosdaqChartDataListResponse" message="tns:IFinanceService_GetSiseTimeKosdaqChartDataList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeFutChartDataList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeFutChartDataList" message="tns:IFinanceService_GetSiseTimeFutChartDataList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeFutChartDataListResponse" message="tns:IFinanceService_GetSiseTimeFutChartDataList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKpi200ChartDataList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKpi200ChartDataList" message="tns:IFinanceService_GetSiseTimeKpi200ChartDataList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKpi200ChartDataListResponse" message="tns:IFinanceService_GetSiseTimeKpi200ChartDataList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKospiList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKospiList" message="tns:IFinanceService_GetSiseTimeKospiList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKospiListResponse" message="tns:IFinanceService_GetSiseTimeKospiList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseDayKospiList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseDayKospiList" message="tns:IFinanceService_GetSiseDayKospiList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseDayKospiListResponse" message="tns:IFinanceService_GetSiseDayKospiList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseDayKosdaqList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseDayKosdaqList" message="tns:IFinanceService_GetSiseDayKosdaqList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseDayKosdaqListResponse" message="tns:IFinanceService_GetSiseDayKosdaqList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKosdaqList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKosdaqList" message="tns:IFinanceService_GetSiseTimeKosdaqList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKosdaqListResponse" message="tns:IFinanceService_GetSiseTimeKosdaqList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKpi200List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKpi200List" message="tns:IFinanceService_GetSiseTimeKpi200List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeKpi200ListResponse" message="tns:IFinanceService_GetSiseTimeKpi200List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseDayKpi200List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseDayKpi200List" message="tns:IFinanceService_GetSiseDayKpi200List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseDayKpi200ListResponse" message="tns:IFinanceService_GetSiseDayKpi200List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseDayFutList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseDayFutList" message="tns:IFinanceService_GetSiseDayFutList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseDayFutListResponse" message="tns:IFinanceService_GetSiseDayFutList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeFutList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeFutList" message="tns:IFinanceService_GetSiseTimeFutList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseTimeFutListResponse" message="tns:IFinanceService_GetSiseTimeFutList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWowNetKPI200StockGroupList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetWowNetKPI200StockGroupList" message="tns:IFinanceService_GetWowNetKPI200StockGroupList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetWowNetKPI200StockGroupListResponse" message="tns:IFinanceService_GetWowNetKPI200StockGroupList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseKospiInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseKospiInfo" message="tns:IFinanceService_GetSiseKospiInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseKospiInfoResponse" message="tns:IFinanceService_GetSiseKospiInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseKosdaqInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseKosdaqInfo" message="tns:IFinanceService_GetSiseKosdaqInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseKosdaqInfoResponse" message="tns:IFinanceService_GetSiseKosdaqInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseFutInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseFutInfo" message="tns:IFinanceService_GetSiseFutInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseFutInfoResponse" message="tns:IFinanceService_GetSiseFutInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseKPIInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseKPIInfo" message="tns:IFinanceService_GetSiseKPIInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseKPIInfoResponse" message="tns:IFinanceService_GetSiseKPIInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWowNetETFStockGroupList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetWowNetETFStockGroupList" message="tns:IFinanceService_GetWowNetETFStockGroupList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetWowNetETFStockGroupListResponse" message="tns:IFinanceService_GetWowNetETFStockGroupList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryStateList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetIndustryStateList" message="tns:IFinanceService_GetIndustryStateList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetIndustryStateListResponse" message="tns:IFinanceService_GetIndustryStateList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetIndustryInfo" message="tns:IFinanceService_GetIndustryInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetIndustryInfoResponse" message="tns:IFinanceService_GetIndustryInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryMarketResearchListTop3">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetIndustryMarketResearchListTop3" message="tns:IFinanceService_GetIndustryMarketResearchListTop3_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetIndustryMarketResearchListTop3Response" message="tns:IFinanceService_GetIndustryMarketResearchListTop3_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryStockList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetIndustryStockList" message="tns:IFinanceService_GetIndustryStockList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetIndustryStockListResponse" message="tns:IFinanceService_GetIndustryStockList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetThemaJisuList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetThemaJisuList" message="tns:IFinanceService_GetThemaJisuList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetThemaJisuListResponse" message="tns:IFinanceService_GetThemaJisuList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetThemaOnlineList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetThemaOnlineList" message="tns:IFinanceService_GetThemaOnlineList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetThemaOnlineListResponse" message="tns:IFinanceService_GetThemaOnlineList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseUpperList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseUpperList" message="tns:IFinanceService_GetSiseUpperList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseUpperListResponse" message="tns:IFinanceService_GetSiseUpperList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseLowerList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseLowerList" message="tns:IFinanceService_GetSiseLowerList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseLowerListResponse" message="tns:IFinanceService_GetSiseLowerList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseStockPlusList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseStockPlusList" message="tns:IFinanceService_GetSiseStockPlusList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseStockPlusListResponse" message="tns:IFinanceService_GetSiseStockPlusList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseStockPlusKList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseStockPlusKList" message="tns:IFinanceService_GetSiseStockPlusKList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseStockPlusKListResponse" message="tns:IFinanceService_GetSiseStockPlusKList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseMarketSumList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseMarketSumList" message="tns:IFinanceService_GetSiseMarketSumList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseMarketSumListResponse" message="tns:IFinanceService_GetSiseMarketSumList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseForeignHoldList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSiseForeignHoldList" message="tns:IFinanceService_GetSiseForeignHoldList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSiseForeignHoldListResponse" message="tns:IFinanceService_GetSiseForeignHoldList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsaIndexOnline">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUsaIndexOnline" message="tns:IFinanceService_GetUsaIndexOnline_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUsaIndexOnlineResponse" message="tns:IFinanceService_GetUsaIndexOnline_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsaIndexHourList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUsaIndexHourList" message="tns:IFinanceService_GetUsaIndexHourList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUsaIndexHourListResponse" message="tns:IFinanceService_GetUsaIndexHourList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsaIndexHistoryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUsaIndexHistoryList" message="tns:IFinanceService_GetUsaIndexHistoryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUsaIndexHistoryListResponse" message="tns:IFinanceService_GetUsaIndexHistoryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsaStockGroupList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUsaStockGroupList" message="tns:IFinanceService_GetUsaStockGroupList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUsaStockGroupListResponse" message="tns:IFinanceService_GetUsaStockGroupList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAsiaIndexOnline">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetAsiaIndexOnline" message="tns:IFinanceService_GetAsiaIndexOnline_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetAsiaIndexOnlineResponse" message="tns:IFinanceService_GetAsiaIndexOnline_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAsiaIndexHourList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetAsiaIndexHourList" message="tns:IFinanceService_GetAsiaIndexHourList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetAsiaIndexHourListResponse" message="tns:IFinanceService_GetAsiaIndexHourList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAsiaIndexHistoryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetAsiaIndexHistoryList" message="tns:IFinanceService_GetAsiaIndexHistoryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetAsiaIndexHistoryListResponse" message="tns:IFinanceService_GetAsiaIndexHistoryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKoreaAdrList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetKoreaAdrList" message="tns:IFinanceService_GetKoreaAdrList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetKoreaAdrListResponse" message="tns:IFinanceService_GetKoreaAdrList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEuropeIndexOnline">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetEuropeIndexOnline" message="tns:IFinanceService_GetEuropeIndexOnline_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetEuropeIndexOnlineResponse" message="tns:IFinanceService_GetEuropeIndexOnline_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEuropeIndexHistoryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetEuropeIndexHistoryList" message="tns:IFinanceService_GetEuropeIndexHistoryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetEuropeIndexHistoryListResponse" message="tns:IFinanceService_GetEuropeIndexHistoryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvestOnlineList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetInvestOnlineList" message="tns:IFinanceService_GetInvestOnlineList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetInvestOnlineListResponse" message="tns:IFinanceService_GetInvestOnlineList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvestTotalList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetInvestTotalList" message="tns:IFinanceService_GetInvestTotalList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetInvestTotalListResponse" message="tns:IFinanceService_GetInvestTotalList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAAdrTotalList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAAdrTotalList" message="tns:IFinanceService_GetUSAAdrTotalList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAAdrTotalListResponse" message="tns:IFinanceService_GetUSAAdrTotalList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAAdrDetailList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAAdrDetailList" message="tns:IFinanceService_GetUSAAdrDetailList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAAdrDetailListResponse" message="tns:IFinanceService_GetUSAAdrDetailList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoSemiconductorList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoSemiconductorList" message="tns:IFinanceService_GetUSAADRDawoSemiconductorList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoSemiconductorListResponse" message="tns:IFinanceService_GetUSAADRDawoSemiconductorList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoMediaList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoMediaList" message="tns:IFinanceService_GetUSAADRDawoMediaList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoMediaListResponse" message="tns:IFinanceService_GetUSAADRDawoMediaList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoInsuranceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoInsuranceList" message="tns:IFinanceService_GetUSAADRDawoInsuranceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoInsuranceListResponse" message="tns:IFinanceService_GetUSAADRDawoInsuranceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoRetailList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoRetailList" message="tns:IFinanceService_GetUSAADRDawoRetailList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoRetailListResponse" message="tns:IFinanceService_GetUSAADRDawoRetailList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoEnergyList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoEnergyList" message="tns:IFinanceService_GetUSAADRDawoEnergyList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoEnergyListResponse" message="tns:IFinanceService_GetUSAADRDawoEnergyList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoPharmacyList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoPharmacyList" message="tns:IFinanceService_GetUSAADRDawoPharmacyList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRDawoPharmacyListResponse" message="tns:IFinanceService_GetUSAADRDawoPharmacyList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqInternetList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqInternetList" message="tns:IFinanceService_GetUSAADRNasdaqInternetList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqInternetListResponse" message="tns:IFinanceService_GetUSAADRNasdaqInternetList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqNetworkList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqNetworkList" message="tns:IFinanceService_GetUSAADRNasdaqNetworkList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqNetworkListResponse" message="tns:IFinanceService_GetUSAADRNasdaqNetworkList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqComunicationsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqComunicationsList" message="tns:IFinanceService_GetUSAADRNasdaqComunicationsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqComunicationsListResponse" message="tns:IFinanceService_GetUSAADRNasdaqComunicationsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqComputerList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqComputerList" message="tns:IFinanceService_GetUSAADRNasdaqComputerList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqComputerListResponse" message="tns:IFinanceService_GetUSAADRNasdaqComputerList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqSemiconductorList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqSemiconductorList" message="tns:IFinanceService_GetUSAADRNasdaqSemiconductorList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqSemiconductorListResponse" message="tns:IFinanceService_GetUSAADRNasdaqSemiconductorList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqBioList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqBioList" message="tns:IFinanceService_GetUSAADRNasdaqBioList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRNasdaqBioListResponse" message="tns:IFinanceService_GetUSAADRNasdaqBioList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRSANDP500InternetList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRSANDP500InternetList" message="tns:IFinanceService_GetUSAADRSANDP500InternetList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetUSAADRSANDP500InternetListResponse" message="tns:IFinanceService_GetUSAADRSANDP500InternetList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMarketIndexBankExchangeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetMarketIndexBankExchangeList" message="tns:IFinanceService_GetMarketIndexBankExchangeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetMarketIndexBankExchangeListResponse" message="tns:IFinanceService_GetMarketIndexBankExchangeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMarketIndexWorldExchangeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetMarketIndexWorldExchangeList" message="tns:IFinanceService_GetMarketIndexWorldExchangeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetMarketIndexWorldExchangeListResponse" message="tns:IFinanceService_GetMarketIndexWorldExchangeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockPrice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockPrice" message="tns:IFinanceService_GetStockPrice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockPriceResponse" message="tns:IFinanceService_GetStockPrice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHpFinderChart">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetHpFinderChart" message="tns:IFinanceService_GetHpFinderChart_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetHpFinderChartResponse" message="tns:IFinanceService_GetHpFinderChart_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRankData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetRankData" message="tns:IFinanceService_GetRankData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetRankDataResponse" message="tns:IFinanceService_GetRankData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSabuScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetSabuScore" message="tns:IFinanceService_GetSabuScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetSabuScoreResponse" message="tns:IFinanceService_GetSabuScore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockInvestorList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceService/GetStockInvestorList" message="tns:IFinanceService_GetStockInvestorList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceService/GetStockInvestorListResponse" message="tns:IFinanceService_GetStockInvestorList_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IFinanceService" type="tns:IFinanceService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetStockInvestorSumList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockInvestorSumList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockPartList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockPartList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockThemaList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockThemaList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelativeStockList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetRelativeStockList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentNewsTop4List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetRecentNewsTop4List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNoticeTop6List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetNoticeTop6List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDiscussionTop9List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetDiscussionTop9List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsultTop9List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetConsultTop9List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockCafeTop3List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockCafeTop3List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVodTop6List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetVodTop6List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVodInvestTop6List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetVodInvestTop6List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAChartDataList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAChartDataList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAsiaChartDataList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetAsiaChartDataList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLatestStockPrice">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetLatestStockPrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockHoga">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockHoga" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockDealing5List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockDealing5List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDayStockPriceBandList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetDayStockPriceBandList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectStockRecentlyTimeList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSelectStockRecentlyTimeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectStockRecentlyDayList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSelectStockRecentlyDayList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockNowPriceTimeList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockNowPriceTimeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockNowPriceDayList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockNowPriceDayList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTradeTrendList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetTradeTrendList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockNewsList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockNewsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockGongsiList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockGongsiList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyFavoriteJongMokList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetMyFavoriteJongMokList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockGongsiViewList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockGongsiViewList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckStockHoliday">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetCheckStockHoliday" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVodList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetVodList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvestVodList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetInvestVodList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExchangeTimeList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetExchangeTimeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseMainmergecode">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseMainmergecode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualMoney">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetVirtualMoney" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTodayStockNews">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetTodayStockNews" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClfSelectOnlineIndex">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetClfSelectOnlineIndex" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClfSelectOnlineItem">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetClfSelectOnlineItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClfSelectHoliday">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetClfSelectHoliday" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTodayInvests">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetTodayInvests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKospiIndustryPartList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetKospiIndustryPartList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKosdaqIndustryPartList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetKosdaqIndustryPartList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThemaJisuTopList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetThemaJisuTopList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorldStockNews">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetWorldStockNews" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBestProHintStockingList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetBestProHintStockingList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorldProHindtPartnerList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetWorldProHindtPartnerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSearchStockList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetCurrentSearchStockList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseChartDataList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseChartDataList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKosdaqChartDataList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseTimeKosdaqChartDataList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeFutChartDataList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseTimeFutChartDataList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKpi200ChartDataList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseTimeKpi200ChartDataList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKospiList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseTimeKospiList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseDayKospiList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseDayKospiList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseDayKosdaqList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseDayKosdaqList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKosdaqList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseTimeKosdaqList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeKpi200List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseTimeKpi200List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseDayKpi200List">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseDayKpi200List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseDayFutList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseDayFutList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseTimeFutList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseTimeFutList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWowNetKPI200StockGroupList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetWowNetKPI200StockGroupList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseKospiInfo">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseKospiInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseKosdaqInfo">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseKosdaqInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseFutInfo">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseFutInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseKPIInfo">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseKPIInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWowNetETFStockGroupList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetWowNetETFStockGroupList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryStateList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetIndustryStateList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryInfo">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetIndustryInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryMarketResearchListTop3">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetIndustryMarketResearchListTop3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryStockList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetIndustryStockList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThemaJisuList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetThemaJisuList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThemaOnlineList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetThemaOnlineList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseUpperList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseUpperList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseLowerList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseLowerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseStockPlusList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseStockPlusList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseStockPlusKList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseStockPlusKList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseMarketSumList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseMarketSumList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiseForeignHoldList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSiseForeignHoldList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsaIndexOnline">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUsaIndexOnline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsaIndexHourList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUsaIndexHourList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsaIndexHistoryList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUsaIndexHistoryList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsaStockGroupList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUsaStockGroupList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAsiaIndexOnline">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetAsiaIndexOnline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAsiaIndexHourList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetAsiaIndexHourList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAsiaIndexHistoryList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetAsiaIndexHistoryList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKoreaAdrList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetKoreaAdrList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEuropeIndexOnline">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetEuropeIndexOnline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEuropeIndexHistoryList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetEuropeIndexHistoryList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvestOnlineList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetInvestOnlineList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvestTotalList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetInvestTotalList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAAdrTotalList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAAdrTotalList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAAdrDetailList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAAdrDetailList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoSemiconductorList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRDawoSemiconductorList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoMediaList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRDawoMediaList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoInsuranceList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRDawoInsuranceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoRetailList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRDawoRetailList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoEnergyList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRDawoEnergyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRDawoPharmacyList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRDawoPharmacyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqInternetList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRNasdaqInternetList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqNetworkList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRNasdaqNetworkList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqComunicationsList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRNasdaqComunicationsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqComputerList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRNasdaqComputerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqSemiconductorList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRNasdaqSemiconductorList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRNasdaqBioList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRNasdaqBioList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUSAADRSANDP500InternetList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetUSAADRSANDP500InternetList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMarketIndexBankExchangeList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetMarketIndexBankExchangeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMarketIndexWorldExchangeList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetMarketIndexWorldExchangeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockPrice">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockPrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHpFinderChart">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetHpFinderChart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRankData">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetRankData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSabuScore">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetSabuScore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockInvestorList">
+      <soap:operation soapAction="http://tempuri.org/IFinanceService/GetStockInvestorList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FinanceService">
+    <wsdl:port name="BasicHttpBinding_IFinanceService" binding="tns:BasicHttpBinding_IFinanceService">
+      <soap:address location="http://localhost:8088/Finance/FinanceService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,31 @@
+@charset "utf-8"; 
+
+/* 신규 가이드 관련 CSS 추후 이곳에 적용된 CSS는 공통 으로 사용됩니다. */
+
+
+/* NEW 테이블 타입 리스트 01 */
+.tbl-type01 {margin-bottom:50px; border-top:1px solid #333;}
+.tbl-type01 table tr th:first-child {border-left:0;}
+.tbl-type01 table tr th {height:52px; background:#f7f7f7; font-size:14px; font-weight:400; border-bottom:1px solid #ebe9ea; border-left:1px solid #ebe9ea; text-align:center; padding:0 10px 0; box-sizing:border-box}
+.tbl-type01 table tbody tr td:first-child {border-left:0;}
+.tbl-type01 table tbody tr td {height:52px; background:#fff; font-size:14px; font-weight:400; border-bottom:1px solid #ebe9ea; border-left:1px solid #ebe9ea; text-align:center; padding:0 10px 0; box-sizing:border-box}
+.tbl-type01 table tbody th {text-align:left;}
+.tbl-type01 table th.text,
+.tbl-type01 table tbody tr td.text {text-align:left;}
+.tbl-type01 table th.number {text-align:right;}
+.tbl-type01 table tbody tr td.number {text-align:right;}
+
+/* NEW 테이블 타입 리스트 02 */
+.tbl-type01.list td,
+.tbl-type01.list th{border-left:0}
+
+/* NEW 테이블 타입 리스트 03 */
+.tbl-type01.list02 td,
+.tbl-type01.list02 th{border-left:0; background:#fff; font-size:16px}
+
+/* NEW 테이블 타입 리스트 04 */
+
+.tbl-type01.list03 th{border-left:0; background:#fff; font-size:16px}
+
+
+

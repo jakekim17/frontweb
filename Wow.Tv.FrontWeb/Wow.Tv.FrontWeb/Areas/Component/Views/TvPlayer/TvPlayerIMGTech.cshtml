@@ -1,0 +1,202 @@
+﻿@using Wow.Tv.FrontWeb.Areas.Component.Models
+@{
+    string frontUrl = System.Configuration.ConfigurationManager.AppSettings["DomainUrlFront"];
+    string scriptUrl = System.Configuration.ConfigurationManager.AppSettings["WowTvScript"];
+    string styleUrl = System.Configuration.ConfigurationManager.AppSettings["WowTvStyle"];
+}
+
+<link href="@styleUrl/vodplayer/wowtv.css" rel="stylesheet" />
+<style rel="stylesheet" type="text/css">
+    .container {
+        position: relative;
+    }
+
+        .container video {
+            display: block;
+            width: 800px;
+            height: 450px;
+            background-color: #000000;
+        }
+
+    #floating {
+    }
+
+    .tween {
+        width: 400px;
+        height: 300px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: 2147483647;
+    }
+
+        .tween video {
+            width: 320px;
+            height: 180px;
+            transition: all 1s;
+            -webkit-transition: all 1s;
+            -ms-transition: all 1s;
+        }
+
+    h1, h2 {
+        padding: 1em 0;
+    }
+
+    p.arrow-down {
+        margin: 5em 0;
+        font-size: 22pt;
+        text-align: center;
+    }
+</style>
+
+<script src="@scriptUrl/Component/mediaplayer.min.ansi.js" type="text/javascript"></script>
+<script src="http://img.vrixon.com/adsdk/wowtv/test/vrixadsdk.js"></script>
+<script type="text/javascript">
+    var mpCreated = false;
+    var VodPlayer = {
+        SwfPlayer: null,
+        Source: "",
+            Width: 600,
+            Height: 400,
+            Play: function (source) {
+                VodPlayer.Source = source;
+
+                //vrixadsdk.playerSet(ADopt, adHandler);
+
+                var srcs = {};
+                cfg.sources = [srcs];
+
+                if (!mp.browser.isMobile) {
+                    cfg.sources = [{ src: VodPlayer.Source }];
+                }
+                else {
+                    cfg.sources = [{ src: VodPlayer.Source }];
+                }
+
+                var isWin7 = navigator.appVersion.toLowerCase().indexOf('windows nt 6.1') > 0;
+                if (isWin7 && mp.browser.isIE) {
+                    cfg.useFlash = true;
+                }
+
+                if (mpCreated == true) {
+                    //document.getElementById("wowtv_player").pause();
+                    //document.getElementById("wowtv_player").currentSrc = VodPlayer.Source;
+                    document.getElementById("wowtv_player").src = VodPlayer.Source;
+                    document.getElementById("wowtv_player").play();
+                    //document.getElementById("wowtv_player").stop();
+                    //document.getElementById("wowtv_player").player.sources = [{ src: VodPlayer.Source }];
+                    //document.getElementById("wowtv_player").player.trigger(mp.vodEvent.CHANGE_PLAY);
+                    //document.getElementById("wowtv_player").play();
+                    //document.getElementById("wowtv_player").player.nextSource();
+                }
+                else {
+                    mpCreated = true;
+                    mp.createVODPlayer(mp.dom.getElement('#wowtv_player'), cfg, onPlayerReady);
+                    document.getElementById("wowtv_player").play();
+                }
+            }
+        };
+
+        var cfg = {
+            // 자동 재생
+            autoPlay: false,
+            // 버퍼시간 설정(기본값 : 1.5)
+            bufferTime: 1.5,
+            // 사용할 컨트롤러들 설정
+            controllers: {
+                // 타임 슬라이더
+                timeSlider: true,
+                // 재생/일시정지 버튼
+                playButton: true,
+                // 재생시간
+                currentTime: true,
+                // 총재생시간
+                durationTime: true,
+                // 전체화면 모드 전환 버튼
+                fullscreenButton: true,
+                // 볼륨 버튼과 볼륨 슬라이더
+                volumeButton: true,
+                volumeSlider: true,
+                // 리소스 품질 선택 버튼
+                qualityButton: true,
+                // 광고 영상의 기본 건너뛰기 노출 시간
+                skipAdButton: 15,
+
+                speedDownButton: true, // 배속 감소 버튼
+                currentSpeed: true, // 현재 배속 라벨
+                speedUpButton: true, // 배속 증가 버튼
+
+                controllersAutoHide: true	// 컨트롤바 자동 숨김 사용 여부
+            },
+            // 디버그 모드
+            // 배포시에 false 지정 또는 제거
+            // 개발 및 디버그시 true로 지정
+            //debugMode           : false,
+            // 리소스
+            sources: null,
+            // 스킨 (eduwill.css)
+            skin: 'wowtv',
+            // 볼륨 슬라이더 유형
+            volumeSliderType: 1
+        };
+
+        function onPlayerReady() {
+            this.on(this.eventType.CHANGED_RESOURCE, onChangedResource);
+            this.on(this.eventType.END, onPlayEnd);
+        }
+
+        function onChangedResource() {
+            var player = this;
+            setTimeout(function () {
+                if (player.state == 'pause') {
+                    player.trigger(mp.vodEvent.CHANGE_PLAY);
+                }
+            }, 1500);
+        }
+
+        function onPlayEnd() {
+            mp.dom.show(this.osd.posterElement);
+        }
+
+        /**
+ * 스크롤 이벤트가 발생할 경우(스크롤될 경우) 실행할 이벤트 리스너
+ *
+ * jQuery 사용시 scroll()을 사용하여도 무관
+ */
+        window.onscroll = function () {
+            var scrollTop = document.documentElement.scrollTop;
+            // 1. 플레이어가 사라지는 높이를 적당히 지정 - 해당 페이지에 맞도록 수정
+            // 2. jQuery 등을 이용하여 플레이어 영역의 하단부로 계산한 값을 사용하여도 무관
+            //    계산된 값을 사용할 경우 값을 조절하여 플레이어의 최하단부까지 스크롤되기 전의 값을 사용하는 것을 권장
+            var floatingTop = $("#wowtv_video").offset().top + $("#wowtv_video").height();
+            var eleFloating = document.querySelector('#floating');
+            if (!eleFloating) return;
+
+            // 일반모드
+            if (scrollTop < floatingTop) {
+                eleFloating.className = '';
+            }
+            // 플로팅(트윈)모드
+            else {
+                eleFloating.className = 'tween';
+            }
+        };
+
+        $(document).ready(function () {
+        });
+</script>
+<br /><br />
+<input type="text" id="txtUrl1" style="width:100%;" value="http://cdnvod.wowtv.co.kr:8080/Program/4revolution/4revolution020170626.mp4" />
+<button onclick="VodPlayer.Play(document.getElementById('txtUrl1').value);">플레이</button>
+<br /><br />
+<input type="text" id="txtUrl2" style="width:100%;" value="http://cdnvod.wowtv.co.kr:8080/Program/4revolution/4revolution020171127.mp4" />
+<button onclick="VodPlayer.Play(document.getElementById('txtUrl2').value);">플레이</button>
+<br /><br />
+
+
+<div id="wowtv_video" class="trans_ease05 vrixadsdk" style="width:600px;height:400px;position:relative;background-color:#000000;">
+    @*<div id="floating">*@
+    <video id="wowtv_player" playsinline></video>
+    @*</div>*@
+</div>
+

@@ -1,0 +1,1439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article.Finance" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wownet.Finance" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wowcafe.Finance" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.editVOD.Stock" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wownet" />
+  <xs:element name="GetStockInvestorSumList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q1:StockInvestorCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockInvestorSumListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockInvestorSumListResult" nillable="true" type="q2:ListModelOfusp_web_getStockInvestorSum_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockPartList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q3:StockInvestorCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockPartListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockPartListResult" nillable="true" type="q4:ListModelOfusp_web_getStockPart_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockThemaList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q5:StockInvestorCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockThemaListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockThemaListResult" nillable="true" type="q6:ListModelOfusp_web_getStockThema_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRelativeStockList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q7:StockInvestorCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRelativeStockListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetRelativeStockListResult" nillable="true" type="q8:ListModelOfusp_web_getRelativeStock_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRecentNewsTop4List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article.Finance" minOccurs="0" name="condition" nillable="true" type="q9:ArticleStockCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRecentNewsTop4ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetRecentNewsTop4ListResult" nillable="true" type="q10:ListModelOfArticleStockp95ZFpkp" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNoticeTop6List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q11:NoticeStockCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNoticeTop6ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetNoticeTop6ListResult" nillable="true" type="q12:ListModelOfusp_web_getNoticeTop6List_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDiscussionTop9List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wownet.Finance" minOccurs="0" name="condiition" nillable="true" type="q13:DiscurssionCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDiscussionTop9ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetDiscussionTop9ListResult" nillable="true" type="q14:ListModelOfusp_web_getStockDiscussionTop9List_ResulttpbJ901r" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetConsultTop9List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wownet.Finance" minOccurs="0" name="condition" nillable="true" type="q15:ConsultCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetConsultTop9ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetConsultTop9ListResult" nillable="true" type="q16:ListModelOfusp_web_getStockConsultTop9List_ResulttpbJ901r" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockCafeTop3List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wowcafe.Finance" minOccurs="0" name="condition" nillable="true" type="q17:StockCafeCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockCafeTop3ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockCafeTop3ListResult" nillable="true" type="q18:ListModelOfusp_web_select_stock_cafe_list_ResultE5mqUFrT" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVodTop6List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.editVOD.Stock" minOccurs="0" name="condition" nillable="true" type="q19:VodCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVodTop6ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetVodTop6ListResult" nillable="true" type="q20:ListModelOfusp_web_vodTop6List_ResultgZrpW2fe" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVodInvestTop6List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.editVOD.Stock" minOccurs="0" name="condition" nillable="true" type="q21:VodInvestCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVodInvestTop6ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetVodInvestTop6ListResult" nillable="true" type="q22:ListModelOfusp_web_listSubTopvod6_ResultgZrpW2fe" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAChartDataList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q23:ChartCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAChartDataListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAChartDataListResult" nillable="true" type="q24:ListModelOfusp_web_getUSAIndex_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAsiaChartDataList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q25:ChartCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAsiaChartDataListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetAsiaChartDataListResult" nillable="true" type="q26:ListModelOfusp_web_getAsiaIndex_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestStockPrice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q27:CurrentAnalysisCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestStockPriceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetLatestStockPriceResult" nillable="true" type="q28:usp_LatestStockPrice_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockHoga">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q29:CurrentAnalysisCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockHogaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetStockHogaResult" nillable="true" type="q30:usp_web_stock_hoga_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockDealing5List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q31:CurrentAnalysisCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockDealing5ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockDealing5ListResult" nillable="true" type="q32:ListModelOfusp_web_getStockDealing5_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDayStockPriceBandList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q33:CurrentAnalysisCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDayStockPriceBandListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetDayStockPriceBandListResult" nillable="true" type="q34:ListModelOfusp_getDayStockPriceBand_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectStockRecentlyTimeList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q35:CurrentAnalysisCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectStockRecentlyTimeListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSelectStockRecentlyTimeListResult" nillable="true" type="q36:ListModelOfusp_SelectStockRecentlyTime_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectStockRecentlyDayList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q37:CurrentAnalysisCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectStockRecentlyDayListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSelectStockRecentlyDayListResult" nillable="true" type="q38:ListModelOfusp_SelectStockRecentlyDay_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockNowPriceTimeList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q39:CurrentAnalysisCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockNowPriceTimeListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockNowPriceTimeListResult" nillable="true" type="q40:ListModelOfusp_web_getNowPriceTime_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockNowPriceDayList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q41:CurrentAnalysisCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockNowPriceDayListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockNowPriceDayListResult" nillable="true" type="q42:ListModelOfusp_getDailyStockPricePop_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTradeTrendList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q43:CurrentAnalysisCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTradeTrendListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetTradeTrendListResult" nillable="true" type="q44:ListModelOfusp_web_getTradeTrend_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockNewsList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article.Finance" minOccurs="0" name="condition" nillable="true" type="q45:ArticleStockCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockNewsListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockNewsListResult" nillable="true" type="q46:ListModelOfArticleStockp95ZFpkp" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockGongsiList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q47:NoticeStockCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockGongsiListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockGongsiListResult" nillable="true" type="q48:ListModelOfusp_web_getStockGongsi_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMyFavoriteJongMokList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q49:MyFavoriteStockCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMyFavoriteJongMokListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetMyFavoriteJongMokListResult" nillable="true" type="q50:ListModelOftblMyFavoriteJongMokG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockGongsiViewList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q51:NoticeStockCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockGongsiViewListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockGongsiViewListResult" nillable="true" type="q52:ListModelOfusp_web_getStockGongsiView_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCheckStockHoliday">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q53:HolidayCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCheckStockHolidayResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCheckStockHolidayResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVodList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.editVOD.Stock" minOccurs="0" name="condition" nillable="true" type="q54:VodCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVodListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetVodListResult" nillable="true" type="q55:ListModelOfusp_web_vodList_ResultgZrpW2fe" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInvestVodList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.editVOD.Stock" minOccurs="0" name="condition" nillable="true" type="q56:VodInvestCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInvestVodListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetInvestVodListResult" nillable="true" type="q57:ListModelOfusp_web_getInvestVodList_ResultgZrpW2fe" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetExchangeTimeList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q58:ExchangeCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetExchangeTimeListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetExchangeTimeListResult" nillable="true" type="q59:ListModelOfusp_web_getExchangeTimeList_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseMainmergecode">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseMainmergecodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseMainmergecodeResult" nillable="true" type="q60:ListModelOfusp_getSiseMainmergecode_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVirtualMoney">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVirtualMoneyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetVirtualMoneyResult" nillable="true" type="q61:ArrayOfusp_web_getVirtualMoney_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTodayStockNews">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTodayStockNewsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetTodayStockNewsResult" nillable="true" type="q62:ListModelOfNUP_NEWS_SECTION_SELECT_Resultp95ZFpkp" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClfSelectOnlineIndex">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClfSelectOnlineIndexResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetClfSelectOnlineIndexResult" nillable="true" type="q63:ArrayOfusp_web_clfSelectOnlineIndex_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClfSelectOnlineItem">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClfSelectOnlineItemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetClfSelectOnlineItemResult" nillable="true" type="q64:ArrayOfusp_web_clfSelectOnlineItem_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClfSelectHoliday">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q65:SiseHolyCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClfSelectHolidayResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetClfSelectHolidayResult" nillable="true" type="q66:ArrayOfusp_web_clfSelectHoliday_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTodayInvests">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTodayInvestsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wownet" minOccurs="0" name="GetTodayInvestsResult" nillable="true" type="q67:ArrayOfTAB_STRATEGY_APPLICATION" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetKospiIndustryPartList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetKospiIndustryPartListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetKospiIndustryPartListResult" nillable="true" type="q68:ArrayOft_part" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetKosdaqIndustryPartList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetKosdaqIndustryPartListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetKosdaqIndustryPartListResult" nillable="true" type="q69:ArrayOft_kosdaq_part" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetThemaJisuTopList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetThemaJisuTopListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetThemaJisuTopListResult" nillable="true" type="q70:ArrayOfFNC_GetThemaJisuTop_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorldStockNews">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorldStockNewsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetWorldStockNewsResult" nillable="true" type="q71:ListModelOfNUP_NEWS_SECTION_SELECT_Resultp95ZFpkp" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBestProHintStockingList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBestProHintStockingListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetBestProHintStockingListResult" nillable="true" type="q72:ListModelOfusp_web_getBestProHintStocking_Result3NfObsem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorldProHindtPartnerList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorldProHindtPartnerListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetWorldProHindtPartnerListResult" nillable="true" type="q73:ListModelOfusp_web_getWorldProHintPartner_Result3NfObsem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentSearchStockList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentSearchStockListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetCurrentSearchStockListResult" nillable="true" type="q74:ListModelOfusp_web_getCurrentSearchStockList_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseChartDataList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q75:ChartCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseChartDataListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseChartDataListResult" nillable="true" type="q76:ListModelOfusp_web_getDomesticIndex_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKosdaqChartDataList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKosdaqChartDataListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseTimeKosdaqChartDataListResult" nillable="true" type="q77:ListModelOfusp_getSiseTimeKosdaqChartData_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeFutChartDataList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeFutChartDataListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseTimeFutChartDataListResult" nillable="true" type="q78:ListModelOfusp_getSiseTimeFutChartData_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKpi200ChartDataList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKpi200ChartDataListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseTimeKpi200ChartDataListResult" nillable="true" type="q79:ListModelOfusp_getSiseTimeKpi200ChartData_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKospiList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q80:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKospiListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseTimeKospiListResult" nillable="true" type="q81:ListModelOfusp_getSiseTimeKospi_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseDayKospiList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q82:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseDayKospiListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseDayKospiListResult" nillable="true" type="q83:ListModelOfusp_getSiseDayKospi_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseDayKosdaqList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q84:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseDayKosdaqListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseDayKosdaqListResult" nillable="true" type="q85:ListModelOfusp_getSiseDayKosdaq_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKosdaqList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q86:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKosdaqListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseTimeKosdaqListResult" nillable="true" type="q87:ListModelOfusp_getSiseTimeKosdaq_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKpi200List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q88:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeKpi200ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseTimeKpi200ListResult" nillable="true" type="q89:ListModelOfusp_getSiseTimeKpi200_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseDayKpi200List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q90:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseDayKpi200ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseDayKpi200ListResult" nillable="true" type="q91:ListModelOfusp_getSiseDayKpi200_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseDayFutList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q92:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseDayFutListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q93="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseDayFutListResult" nillable="true" type="q93:ListModelOfusp_getSiseDayFut_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeFutList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q94="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q94:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseTimeFutListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseTimeFutListResult" nillable="true" type="q95:ListModelOfusp_getSiseTimeFut_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWowNetKPI200StockGroupList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q96="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q96:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWowNetKPI200StockGroupListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q97="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetWowNetKPI200StockGroupListResult" nillable="true" type="q97:ListModelOfusp_wownet_kpi200_stock_group_new_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseKospiInfo">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseKospiInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q98="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="GetSiseKospiInfoResult" nillable="true" type="q98:StockInfoModelOfusp_GetSiseCurrentKospi_Resultusp_getSiseMainmergecode_ResultYgN18lpt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseKosdaqInfo">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseKosdaqInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q99="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="GetSiseKosdaqInfoResult" nillable="true" type="q99:StockInfoModelOfusp_GetSiseCurrentKosdaq_Resultusp_getSiseMainmergecode_ResultYgN18lpt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseFutInfo">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseFutInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q100="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="GetSiseFutInfoResult" nillable="true" type="q100:StockInfoModelOfusp_GetSiseCurrent_Resultusp_getSiseMainmergecode_ResultYgN18lpt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseKPIInfo">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseKPIInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="GetSiseKPIInfoResult" nillable="true" type="q101:StockInfoModelOfusp_GetSiseCurrentKPI_Resultusp_getSiseMainmergecode_ResultYgN18lpt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWowNetETFStockGroupList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWowNetETFStockGroupListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q102="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetWowNetETFStockGroupListResult" nillable="true" type="q102:ListModelOfusp_wownet_ETF_stock_group_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryStateList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q103="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q103:IndustryCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryStateListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q104="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetIndustryStateListResult" nillable="true" type="q104:ListModelOfusp_GetIndustryState_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q105="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q105:IndustryCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q106="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="GetIndustryInfoResult" nillable="true" type="q106:IndustryInfoModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryMarketResearchListTop3">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q107="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q107:IndustryCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryMarketResearchListTop3Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q108="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetIndustryMarketResearchListTop3Result" nillable="true" type="q108:ListModelOfMarketResearchModelV5IvmxGQ" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryStockList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q109="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q109:IndustryCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryStockListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q110="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetIndustryStockListResult" nillable="true" type="q110:ListModelOfusp_web_getDomesticIndustryStock_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetThemaJisuList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetThemaJisuListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q111="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetThemaJisuListResult" nillable="true" type="q111:ListModelOfusp_GetThemaJisu_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetThemaOnlineList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q112="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q112:ThemaCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetThemaOnlineListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q113="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetThemaOnlineListResult" nillable="true" type="q113:ListModelOfusp_GetThemaOnline_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseUpperList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q114="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q114:UpperCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseUpperListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q115="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseUpperListResult" nillable="true" type="q115:ListModelOfusp_web_getSiseUpper_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseLowerList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q116="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q116:LowerCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseLowerListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q117="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseLowerListResult" nillable="true" type="q117:ListModelOfusp_web_getSiseLower_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseStockPlusList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseStockPlusListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q118="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseStockPlusListResult" nillable="true" type="q118:ListModelOfusp_web_GetSiseStockPlus_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseStockPlusKList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseStockPlusKListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q119="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseStockPlusKListResult" nillable="true" type="q119:ListModelOfusp_web_GetSiseStockPlusK_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseMarketSumList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q120="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q120:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseMarketSumListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q121="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseMarketSumListResult" nillable="true" type="q121:ListModelOfusp_web_getSiseMarketSum_Result1G0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseForeignHoldList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q122="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q122:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSiseForeignHoldListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q123="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetSiseForeignHoldListResult" nillable="true" type="q123:ListModelOfusp_web_getSiseForeignHold_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsaIndexOnline">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q124="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q124:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsaIndexOnlineResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q125="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetUsaIndexOnlineResult" nillable="true" type="q125:usp_wownet_usa_index_online_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsaIndexHourList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q126="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q126:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsaIndexHourListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q127="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUsaIndexHourListResult" nillable="true" type="q127:ListModelOfusp_wownet_usa_index_hour_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsaIndexHistoryList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q128="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q128:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsaIndexHistoryListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q129="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUsaIndexHistoryListResult" nillable="true" type="q129:ListModelOfusp_wownet_usa_index_history_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsaStockGroupList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q130="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q130:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsaStockGroupListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q131="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUsaStockGroupListResult" nillable="true" type="q131:ListModelOfusp_web_usa_stock_group_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAsiaIndexOnline">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q132="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q132:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAsiaIndexOnlineResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q133="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetAsiaIndexOnlineResult" nillable="true" type="q133:usp_wownet_Asia_Index_online_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAsiaIndexHourList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q134="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q134:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAsiaIndexHourListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q135="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetAsiaIndexHourListResult" nillable="true" type="q135:ListModelOfusp_wownet_Asia_Index_hour_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAsiaIndexHistoryList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q136="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q136:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAsiaIndexHistoryListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q137="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetAsiaIndexHistoryListResult" nillable="true" type="q137:ListModelOfusp_wownet_Asia_Index_history_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetKoreaAdrList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetKoreaAdrListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q138="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetKoreaAdrListResult" nillable="true" type="q138:ListModelOfusp_web_korea_adr_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEuropeIndexOnline">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q139="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q139:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEuropeIndexOnlineResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q140="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetEuropeIndexOnlineResult" nillable="true" type="q140:usp_wownet_Europe_Index_online_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEuropeIndexHistoryList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q141="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q141:MarketCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEuropeIndexHistoryListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q142="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetEuropeIndexHistoryListResult" nillable="true" type="q142:ListModelOfusp_wownet_Europe_Index_history_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInvestOnlineList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInvestOnlineListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q143="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetInvestOnlineListResult" nillable="true" type="q143:ListModelOfusp_GetInvestOnline_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInvestTotalList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q144="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q144:InvestCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInvestTotalListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q145="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetInvestTotalListResult" nillable="true" type="q145:ListModelOfusp_GetInvestTotal_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAAdrTotalList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAAdrTotalListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q146="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAAdrTotalListResult" nillable="true" type="q146:ListModelOfusp_web_usa_adr_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAAdrDetailList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q147="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q147:UsaIndustryCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAAdrDetailListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q148="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAAdrDetailListResult" nillable="true" type="q148:ListModelOfUSP_WOWNET_USA_DETAIL_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoSemiconductorList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoSemiconductorListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q149="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRDawoSemiconductorListResult" nillable="true" type="q149:ListModelOfusp_web_usa_adr_dawo_semiconductor_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoMediaList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoMediaListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q150="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRDawoMediaListResult" nillable="true" type="q150:ListModelOfusp_web_usa_adr_dawo_media_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoInsuranceList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoInsuranceListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q151="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRDawoInsuranceListResult" nillable="true" type="q151:ListModelOfusp_web_usa_adr_dawo_insurance_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoRetailList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoRetailListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q152="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRDawoRetailListResult" nillable="true" type="q152:ListModelOfusp_web_usa_adr_dawo_retail_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoEnergyList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoEnergyListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q153="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRDawoEnergyListResult" nillable="true" type="q153:ListModelOfusp_web_usa_adr_dawo_energy_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoPharmacyList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRDawoPharmacyListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q154="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRDawoPharmacyListResult" nillable="true" type="q154:ListModelOfusp_web_usa_adr_dawo_pharmacy_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqInternetList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqInternetListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q155="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRNasdaqInternetListResult" nillable="true" type="q155:ListModelOfusp_web_usa_adr_nasdaq_internet_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqNetworkList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqNetworkListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q156="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRNasdaqNetworkListResult" nillable="true" type="q156:ListModelOfusp_web_usa_adr_nasdaq_network_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqComunicationsList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqComunicationsListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q157="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRNasdaqComunicationsListResult" nillable="true" type="q157:ListModelOfusp_web_usa_adr_nasdaq_comunications_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqComputerList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqComputerListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q158="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRNasdaqComputerListResult" nillable="true" type="q158:ListModelOfusp_web_usa_adr_nasdaq_computer_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqSemiconductorList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqSemiconductorListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q159="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRNasdaqSemiconductorListResult" nillable="true" type="q159:ListModelOfusp_web_usa_adr_nasdaq_semiconductor_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqBioList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRNasdaqBioListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q160="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRNasdaqBioListResult" nillable="true" type="q160:ListModelOfusp_web_usa_adr_nasdaq_bio_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRSANDP500InternetList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUSAADRSANDP500InternetListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q161="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetUSAADRSANDP500InternetListResult" nillable="true" type="q161:ListModelOfusp_web_usa_adr_sandp500_internet_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMarketIndexBankExchangeList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMarketIndexBankExchangeListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q162="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetMarketIndexBankExchangeListResult" nillable="true" type="q162:ListModelOfusp_wownet_Marketindex_BankExchange_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMarketIndexWorldExchangeList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMarketIndexWorldExchangeListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q163="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetMarketIndexWorldExchangeListResult" nillable="true" type="q163:ListModelOfusp_wownet_Marketindex_worldExchange_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockPrice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q164="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q164:FinanceCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockPriceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q165="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetStockPriceResult" nillable="true" type="q165:usp_GetStockPrice_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetHpFinderChart">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q166="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q166:HpCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetHpFinderChartResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetHpFinderChartResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRankData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q167="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q167:RankingCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRankDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetRankDataResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSabuScore">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q168="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q168:HpCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSabuScoreResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSabuScoreResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockInvestorList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q169="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.Finance" minOccurs="0" name="condition" nillable="true" type="q169:StockInvestorCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockInvestorListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q170="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetStockInvestorListResult" nillable="true" type="q170:ListModelOfusp_web_getStockInvestorList_ResultG0lwexyN" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

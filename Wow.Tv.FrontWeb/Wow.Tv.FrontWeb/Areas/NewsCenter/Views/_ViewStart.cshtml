@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+    AppState["WowTvStyle"] = System.Configuration.ConfigurationManager.AppSettings["WowTvStyle"];
+    AppState["WowTvScript"] = System.Configuration.ConfigurationManager.AppSettings["WowTvScript"];
+    AppState["UploadWebPath"] = System.Configuration.ConfigurationManager.AppSettings["UploadWebPath"];
+    AppState["UploadWebPathRoot"] = System.Configuration.ConfigurationManager.AppSettings["UploadWebPathRoot"];
+    AppState["UploadPlanArticlePath"] = System.Configuration.ConfigurationManager.AppSettings["UploadPlanArticlePath"];
+    AppState["NaverClientId"] = System.Configuration.ConfigurationManager.AppSettings["NaverClientId"];
+
+    AppState["BodyClass"] = "news";
+
+    AppState["MainTitle"] = "뉴스";
+
+    if (!string.IsNullOrEmpty(Request["subMenu"]))
+    {
+        if (Request["subMenu"].Equals("entstar") || Request["subMenu"].Equals("sports"))
+        {
+            AppState["MainTitle"] = "연예.스포츠";
+        }
+        else if (Request["subMenu"].Equals("land"))
+        {
+            AppState["MainTitle"] = "부동산";
+        }
+        else if (Request["subMenu"].Equals("photo") || Request["subMenu"].Equals("vod"))
+        {
+            AppState["MainTitle"] = "포토.영상";
+        }
+        else if (Request["subMenu"].Equals("tvtenplus"))
+        {
+            AppState["MainTitle"] = "티비텐플러스";
+        }
+    }
+
+}

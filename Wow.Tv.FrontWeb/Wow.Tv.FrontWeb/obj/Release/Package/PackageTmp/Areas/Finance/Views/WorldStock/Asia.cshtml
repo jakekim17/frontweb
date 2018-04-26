@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "아시아";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+}
+@section scripts{
+    <script src="@wowTvScript/Finance/webponent/raphael.js"></script>
+    <script src="@wowTvScript/Finance/webponent/webponent.comm.common.js"></script>
+    <script src="@wowTvScript/Finance/webponent/chart/webponent.chart.js"></script>
+    <script src="@wowTvScript/Finance/webponent/chart/webponent.chart.style.js"></script>
+    <script src="@wowTvScript/Finance/Charts/stockChart.js"></script>
+
+    <script src="@wowTvScript/Finance/WorldStock/ASIA.js"></script>
+
+}
+@*<div style="color: white; height: 200px; background: red; font-size: 20px; text-align: center; padding-top: 50px;" id="jobNeed">
+    차트 작업필요
+</div>*@
+<h1 class="title">아시아</h1>
+<!-- 2017-09-22 추가 -->
+<div class="tab-type1">
+    <ul class="col4">
+        <li class="btnMarketType on" id="999503"><a href="#none" id="nikkei">일본</a></li>
+        <li class="btnMarketType" id="999614"><a href="#none" id="shc">중국</a></li>
+        <li class="btnMarketType" id="999504"><a href="#none" id="hs">홍콩</a></li>
+        <li class="btnMarketType" id="999505"><a href="#none" id="wt">대만</a></li>
+    </ul>
+
+</div>
+<!-- // 2017-09-22 추가 -->
+<form id="frmList_ASIA">
+    <div id="divList">
+
+    </div>
+</form>
+
+<!-- Tab -->
+<div class="tab-type1">
+    <ul class="col3">
+        <li class="btnChart" id="7551"><a href="#none">일간</a></li>
+        <li class="btnChart" id="7552"><a href="#none">주간</a></li>
+        <li class="btnChart" id="7553"><a href="#none">월간</a></li>
+    </ul>
+</div>
+<!-- //Tab -->
+<!-- Top Information box -->
+<div class="box-top-type1">
+    <div class="inner-left">
+        <p class="text-normal" id="txtChart"></p>
+    </div>
+</div>
+<!-- Top Information box -->
+
+<div style="height:400px;">
+    <!-- Chart -->
+    <img id="ImgChart" />
+</div>
+
+

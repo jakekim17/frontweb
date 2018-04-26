@@ -1,0 +1,89 @@
+﻿@using Wow.Fx
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.FrontWeb.Areas.NewsCenter.Models
+
+@model  NewsReadModel
+
+@{
+    Layout = null;
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string uploadWebPath = AppState["UploadWebPath"].ToString();
+    string uploadWebPathRoot = AppState["UploadWebPathRoot"].ToString();
+}
+
+@if (ViewBag.ReporterId == "NET01" && ViewBag.Tag == "$")
+{
+
+    var item = Model.reporterPartnerInfo;
+
+    <div>
+        <div class="box-photo-reporter">
+            @if (item.ProWowList.NEWphoto_service != null)
+            {
+                <img src="http://image.wownet.co.kr/@item.ProWowList.NEWphoto_service" alt="파트너 이미지" onerror="this.src='@Wow.WowExtensionMethod.NoImageProfile("82")'" />
+            }
+            else
+            {
+                <img src="@Wow.WowExtensionMethod.NoImageProfile("82")" alt="" />
+            }
+        </div>
+        <div class="repoter-aside line2">
+            <p class="reporter"><span class="part">@BroadcastFunction.GetInvestClass(item.ProWowList.InvestKind)</span> @item.ProWowList.NickName</p>
+            <a class="link-home" href="http://www.wownet.co.kr/pro/pro_main_new/sub_main.asp?proID=@item.ProWowList.Pro_id" target="_blank">홈</a>
+            <a class="link-news" onclick="javascript:NewsCommon.GoCafe('@item.ProWowList.NickName');">카페가기</a>
+        </div>
+        <div class="list-news-type">
+            <div class="icon-area">
+            @if (ViewBag.broadState.STATE == 0)
+            {
+                <span class="box-icon type04">방송예정</span>
+            }
+            else
+            {
+                <span class="box-icon">방송중</span>
+            }
+
+            </div>
+            <p class="txt">@item.BroadCastTime</p>
+            <p class="txt">@item.BroadState.BTITLE</p>
+        </div>
+    </div>
+}
+else
+{
+    if (Model.reporterInfo.Count > 0)
+    {
+        <div>
+            <div class="box-photo-reporter">
+                @if (!string.IsNullOrEmpty( Model.reporterInfo[0].IMAGE_URL))
+                {
+                    <img src="@uploadWebPathRoot@(Model.reporterInfo[0].IMAGE_URL)" alt="기자 이미지" onerror="this.src='@Wow.WowExtensionMethod.NoImageProfile("82")'" />
+                }
+                else
+                {
+                    <img src="@Wow.WowExtensionMethod.NoImageProfile("82")" alt="" />
+                }
+            </div>
+            <div class="repoter-aside">
+                <p class="reporter"><span class="part">@Model.reporterInfo[0].DEPT_NM</span> @Model.reporterInfo[0].USER_NM @Model.reporterInfo[0].POSITION</p>
+                <a class="link-mail" href="mailto:@Model.reporterInfo[0].EMAIL">@Model.reporterInfo[0].EMAIL</a>
+                <a class="link-news" href="/NewsCenter/Reporter/ReporterDetail?menuSeq=555&searchId=@Model.reporterInfo[0].REPORTER_ID">최신기사 보기</a>
+            </div>
+            <div class="list-news-type">
+                <ul>
+                    @foreach (var item in Model.reporterNewsList)
+                    {
+                        <li><a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID')">@item.TITLE</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+
+}
+
+
+
+
+
+

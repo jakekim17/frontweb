@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+    AppState["WowTvStyle"] = System.Configuration.ConfigurationManager.AppSettings["WowTvStyle"];
+    AppState["WowTvScript"] = System.Configuration.ConfigurationManager.AppSettings["WowTvScript"];
+    AppState["UploadWebPath"] = System.Configuration.ConfigurationManager.AppSettings["UploadWebPath"];
+
+    AppState["BodyClass"] = "tv";
+    AppState["MainTitle"] = "TV";
+}

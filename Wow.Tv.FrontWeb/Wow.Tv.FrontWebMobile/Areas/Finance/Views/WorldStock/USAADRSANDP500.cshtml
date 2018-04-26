@@ -1,0 +1,44 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Models
+@model USAADRSANDP500Model
+@{
+    ViewBag.Title = "USAADRSANDP500";
+    Layout = null;
+}
+
+<div class="section-area">
+    <h3>나스닥 인터넷</h3>
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+                @if (Model.Internet.ListData.Count != 0)
+                {
+                    foreach (var item in Model.Internet.ListData)
+                    {
+                            <tr>
+                                <td class="text">@item.PART_NAME</td>
+                                <td class="number">@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                                <td class="number">@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                                <td class="number">@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                            </tr>
+                        }
+                    }
+                else
+                {
+                    <tr>
+                        <td colspan="4">검색된 데이터가 없습니다.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1ee71f71-7ada-444a-b784-8f8ddc3611d1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/MyProgram/CastService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CastService.wsdl" MetadataType="Wsdl" ID="49e2f49c-50cc-40e9-9c37-1be8db1cf874" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?wsdl" />
+    <MetadataFile FileName="CastService.disco" MetadataType="Disco" ID="0b47d58f-eaa7-4a0a-8acb-9f66c49596ee" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?disco" />
+    <MetadataFile FileName="CastService.xsd" MetadataType="Schema" ID="e841850d-0e73-4527-92a4-bef0b27c5658" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?xsd=xsd5" />
+    <MetadataFile FileName="CastService1.xsd" MetadataType="Schema" ID="22c2cde7-9dc6-4c15-93af-fd16458cb15a" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CastService2.xsd" MetadataType="Schema" ID="da6f6950-f537-4b74-930e-fdb1bb05086c" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?xsd=xsd7" />
+    <MetadataFile FileName="CastService3.xsd" MetadataType="Schema" ID="e1712756-34fe-40be-bcb0-1914270c327a" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CastService4.xsd" MetadataType="Schema" ID="e526c39b-3f44-42ed-912b-04492c6b8f3b" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CastService5.xsd" MetadataType="Schema" ID="3862b280-62c2-4b57-99e3-693797b1fb13" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?xsd=xsd3" />
+    <MetadataFile FileName="CastService6.xsd" MetadataType="Schema" ID="0fe0a4d2-3d4b-4612-9b48-63587e020e2a" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?xsd=xsd4" />
+    <MetadataFile FileName="CastService7.xsd" MetadataType="Schema" ID="963478f9-5903-4ce6-a925-456f5d30db1d" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/CastService.svc?xsd=xsd6" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

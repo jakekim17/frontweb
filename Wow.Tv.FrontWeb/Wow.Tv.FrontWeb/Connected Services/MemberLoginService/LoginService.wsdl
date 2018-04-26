@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="LoginService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill" />
+      <xsd:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.Member" />
+      <xsd:import schemaLocation="http://localhost:8088/Member/LoginService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Biz.Member" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ILoginService_EncryptCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptCheck" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_EncryptCheck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheck" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckEncrypt_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckEncrypt" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckEncrypt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckEncryptResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckTest_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckTest" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckTest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckByKakao_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckByKakao" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckByKakao_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckByKakaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckByFacebook_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckByFacebook" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckByFacebook_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckByFacebookResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckByNaver_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckByNaver" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginCheckByNaver_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginCheckByNaverResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancyCheckMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancyCheckMember" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancyCheckMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancyCheckMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancyIpinInit_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancyIpinInit" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancyIpinInit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancyIpinInitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancyIpinCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancyIpinCheck" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancyIpinCheck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancyIpinCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancySmsInit_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancySmsInit" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancySmsInit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancySmsInitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancySmsCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancySmsCheck" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_AuthDormancySmsCheck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthDormancySmsCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_MobileSendSms_InputMessage">
+    <wsdl:part name="parameters" element="tns:MobileSendSms" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_MobileSendSms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MobileSendSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdSmsInit_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdSmsInit" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdSmsInit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdSmsInitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdCheckSms_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdCheckSms" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdCheckSms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdCheckSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdIpinInit_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdIpinInit" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdIpinInit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdIpinInitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdCheckIpin_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdCheckIpin" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdCheckIpin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdCheckIpinResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdCheckByMobileInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdCheckByMobileInfo" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdCheckByMobileInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdCheckByMobileInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdCheckBySSNoInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdCheckBySSNoInfo" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindIdCheckBySSNoInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindIdCheckBySSNoInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordSmsInit_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordSmsInit" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordSmsInit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordSmsInitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordCheckSms_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordCheckSms" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordCheckSms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordCheckSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordIpinInit_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordIpinInit" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordIpinInit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordIpinInitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordCheckIpin_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordCheckIpin" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordCheckIpin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordCheckIpinResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordCheckByMobileInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordCheckByMobileInfo" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_FindPasswordCheckByMobileInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindPasswordCheckByMobileInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_PasswordInitialize_InputMessage">
+    <wsdl:part name="parameters" element="tns:PasswordInitialize" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_PasswordInitialize_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PasswordInitializeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_SendTempPasswordToEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendTempPasswordToEmail" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_SendTempPasswordToEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendTempPasswordToEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_ModifyPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyPassword" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_ModifyPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginLog_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginLog" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_LoginLog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_DomainLoginLog_InputMessage">
+    <wsdl:part name="parameters" element="tns:DomainLoginLog" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_DomainLoginLog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DomainLoginLogResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ILoginService">
+    <wsdl:operation name="EncryptCheck">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/EncryptCheck" message="tns:ILoginService_EncryptCheck_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/EncryptCheckResponse" message="tns:ILoginService_EncryptCheck_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheck">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginCheck" message="tns:ILoginService_LoginCheck_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginCheckResponse" message="tns:ILoginService_LoginCheck_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckEncrypt">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginCheckEncrypt" message="tns:ILoginService_LoginCheckEncrypt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginCheckEncryptResponse" message="tns:ILoginService_LoginCheckEncrypt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckTest">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginCheckTest" message="tns:ILoginService_LoginCheckTest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginCheckTestResponse" message="tns:ILoginService_LoginCheckTest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckByKakao">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginCheckByKakao" message="tns:ILoginService_LoginCheckByKakao_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginCheckByKakaoResponse" message="tns:ILoginService_LoginCheckByKakao_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckByFacebook">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginCheckByFacebook" message="tns:ILoginService_LoginCheckByFacebook_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginCheckByFacebookResponse" message="tns:ILoginService_LoginCheckByFacebook_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckByNaver">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginCheckByNaver" message="tns:ILoginService_LoginCheckByNaver_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginCheckByNaverResponse" message="tns:ILoginService_LoginCheckByNaver_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancyCheckMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/AuthDormancyCheckMember" message="tns:ILoginService_AuthDormancyCheckMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/AuthDormancyCheckMemberResponse" message="tns:ILoginService_AuthDormancyCheckMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancyIpinInit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/AuthDormancyIpinInit" message="tns:ILoginService_AuthDormancyIpinInit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/AuthDormancyIpinInitResponse" message="tns:ILoginService_AuthDormancyIpinInit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancyIpinCheck">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/AuthDormancyIpinCheck" message="tns:ILoginService_AuthDormancyIpinCheck_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/AuthDormancyIpinCheckResponse" message="tns:ILoginService_AuthDormancyIpinCheck_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancySmsInit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/AuthDormancySmsInit" message="tns:ILoginService_AuthDormancySmsInit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/AuthDormancySmsInitResponse" message="tns:ILoginService_AuthDormancySmsInit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancySmsCheck">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/AuthDormancySmsCheck" message="tns:ILoginService_AuthDormancySmsCheck_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/AuthDormancySmsCheckResponse" message="tns:ILoginService_AuthDormancySmsCheck_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MobileSendSms">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/MobileSendSms" message="tns:ILoginService_MobileSendSms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/MobileSendSmsResponse" message="tns:ILoginService_MobileSendSms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindIdSmsInit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindIdSmsInit" message="tns:ILoginService_FindIdSmsInit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindIdSmsInitResponse" message="tns:ILoginService_FindIdSmsInit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindIdCheckSms">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindIdCheckSms" message="tns:ILoginService_FindIdCheckSms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindIdCheckSmsResponse" message="tns:ILoginService_FindIdCheckSms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindIdIpinInit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindIdIpinInit" message="tns:ILoginService_FindIdIpinInit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindIdIpinInitResponse" message="tns:ILoginService_FindIdIpinInit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindIdCheckIpin">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindIdCheckIpin" message="tns:ILoginService_FindIdCheckIpin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindIdCheckIpinResponse" message="tns:ILoginService_FindIdCheckIpin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindIdCheckByMobileInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindIdCheckByMobileInfo" message="tns:ILoginService_FindIdCheckByMobileInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindIdCheckByMobileInfoResponse" message="tns:ILoginService_FindIdCheckByMobileInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindIdCheckBySSNoInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindIdCheckBySSNoInfo" message="tns:ILoginService_FindIdCheckBySSNoInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindIdCheckBySSNoInfoResponse" message="tns:ILoginService_FindIdCheckBySSNoInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordSmsInit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindPasswordSmsInit" message="tns:ILoginService_FindPasswordSmsInit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindPasswordSmsInitResponse" message="tns:ILoginService_FindPasswordSmsInit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordCheckSms">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindPasswordCheckSms" message="tns:ILoginService_FindPasswordCheckSms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindPasswordCheckSmsResponse" message="tns:ILoginService_FindPasswordCheckSms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordIpinInit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindPasswordIpinInit" message="tns:ILoginService_FindPasswordIpinInit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindPasswordIpinInitResponse" message="tns:ILoginService_FindPasswordIpinInit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordCheckIpin">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindPasswordCheckIpin" message="tns:ILoginService_FindPasswordCheckIpin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindPasswordCheckIpinResponse" message="tns:ILoginService_FindPasswordCheckIpin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordCheckByMobileInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/FindPasswordCheckByMobileInfo" message="tns:ILoginService_FindPasswordCheckByMobileInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/FindPasswordCheckByMobileInfoResponse" message="tns:ILoginService_FindPasswordCheckByMobileInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PasswordInitialize">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/PasswordInitialize" message="tns:ILoginService_PasswordInitialize_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/PasswordInitializeResponse" message="tns:ILoginService_PasswordInitialize_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTempPasswordToEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/SendTempPasswordToEmail" message="tns:ILoginService_SendTempPasswordToEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/SendTempPasswordToEmailResponse" message="tns:ILoginService_SendTempPasswordToEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/ModifyPassword" message="tns:ILoginService_ModifyPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/ModifyPasswordResponse" message="tns:ILoginService_ModifyPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginLog">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginLog" message="tns:ILoginService_LoginLog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginLogResponse" message="tns:ILoginService_LoginLog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainLoginLog">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/DomainLoginLog" message="tns:ILoginService_DomainLoginLog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/DomainLoginLogResponse" message="tns:ILoginService_DomainLoginLog_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ILoginService" type="tns:ILoginService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EncryptCheck">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/EncryptCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheck">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/LoginCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckEncrypt">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/LoginCheckEncrypt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckTest">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/LoginCheckTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckByKakao">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/LoginCheckByKakao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckByFacebook">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/LoginCheckByFacebook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginCheckByNaver">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/LoginCheckByNaver" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancyCheckMember">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/AuthDormancyCheckMember" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancyIpinInit">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/AuthDormancyIpinInit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancyIpinCheck">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/AuthDormancyIpinCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancySmsInit">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/AuthDormancySmsInit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthDormancySmsCheck">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/AuthDormancySmsCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MobileSendSms">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/MobileSendSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindIdSmsInit">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindIdSmsInit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindIdCheckSms">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindIdCheckSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindIdIpinInit">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindIdIpinInit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindIdCheckIpin">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindIdCheckIpin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindIdCheckByMobileInfo">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindIdCheckByMobileInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindIdCheckBySSNoInfo">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindIdCheckBySSNoInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordSmsInit">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindPasswordSmsInit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordCheckSms">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindPasswordCheckSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordIpinInit">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindPasswordIpinInit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordCheckIpin">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindPasswordCheckIpin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPasswordCheckByMobileInfo">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/FindPasswordCheckByMobileInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PasswordInitialize">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/PasswordInitialize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTempPasswordToEmail">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/SendTempPasswordToEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/ModifyPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginLog">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/LoginLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainLoginLog">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/DomainLoginLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LoginService">
+    <wsdl:port name="BasicHttpBinding_ILoginService" binding="tns:BasicHttpBinding_ILoginService">
+      <soap:address location="http://localhost:8088/Member/LoginService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

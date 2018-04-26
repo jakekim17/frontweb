@@ -1,0 +1,521 @@
+﻿@using Wow
+@{
+    Layout = null;
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string domainUrlHelp = AppState["DomainUrlHelp"].ToString();
+    string domainUrlMyPage = AppState["DomainUrlMyPage"].ToString();
+    string domainUrlFront = AppState["DomainUrlFront"].ToString();
+}
+
+<script>
+    var isLogin = "@LoginHandler.IsLogin";
+    var domainUrlFront = "@domainUrlFront";
+    var domainUrlHelp = "@domainUrlHelp";
+    var domainUrlMyPage = "@domainUrlMyPage";
+</script>
+<script src="@wowTvScript/Home/QuickMenu.js"></script>
+
+
+<!-- quick start -->
+<div class="quickMenu">
+    <a herf="javascript:void(0)" class="btn-top"><img src="@wowTvStyle/images/common/btn_quick_top.png" alt="top"></a>
+    <div>
+        <ul>
+            <li><a href="javascript:void(0)"><img src="@wowTvStyle/images/common/btn_quick_01.png" alt="마이핀"></a></li>
+            <li><a href="javascript:void(0)"><img src="@wowTvStyle/images/common/btn_quick_02.png" alt="와우캐시"></a></li>
+            <li><a href="javascript:void(0)"><img src="@wowTvStyle/images/common/btn_quick_03.png" alt="고객센터"></a></li>
+            <li><a href="javascript:void(0)" onclick="QuickMenu.FacebookLink();"><img src="@wowTvStyle/images/common/btn_quick_04.png" alt="페이스 북"></a></li>
+            <li><a href="javascript:void(0)" onclick="QuickMenu.YouTubeLink();"><img src="@wowTvStyle/images/common/btn_quick_05.png" alt="유튜브"></a></li>
+            <li><a href="javascript:void(0)" onclick="QuickMenu.TwitterLink();"><img src="@wowTvStyle/images/common/btn_quick_06.png" alt="카카오페이지"></a></li>
+        </ul>
+       
+        <div>
+            <div>
+                <!-- 마이핀 start -->
+                <h4 class="tit-quick"><span>마이핀</span></h4>
+                <div class="quick-cont">
+                    <!-- tager start -->
+                    <div class="box-keyword">
+                        @if (ViewBag.HashTag != null)
+                        {
+                            if (ViewBag.HashTag.Count > 0)
+                            {
+                                var keyword = "";
+                                for (var i = 0; i < ViewBag.HashTag.Count; i++)
+                                {
+                                    keyword += WowExtensionMethod.QuickMenuHashTag(ViewBag.HashTag[i].KEYWORD.ToString(), i);
+                                }
+                                @Html.Raw(keyword);
+                            }
+                        }
+                    </div>
+                    <!--// tager end -->
+                    <!-- tab start -->
+                    <div class="tab-listType1">
+                        <h3 class="blind">tab area</h3>
+                        <div class="box">
+                            <ul>
+                                <li class="on"><a href="javascript:void(0)"><em></em>뉴스</a></li>
+                                <li><a href="javascript:void(0)"><em></em>기자</a></li>
+                                <li><a href="javascript:void(0)"><em></em>방송</a></li>
+                                <li><a href="javascript:void(0)"><em></em>파트너</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--// tab end -->
+                    <!-- tab view start -->
+                    <div class="tab-body">
+                        <div class="tab-cont on">
+                            <!-- 뉴스 start -->
+                            @if (ViewBag.MyPinNewsList.Length > 0)
+                            {
+                                foreach(var item in ViewBag.MyPinNewsList) { 
+                                    <a href="javascript:void(0);" class="img-cont" onclick="NewsCommon.GoNewsRead('@item.ARTICLEID')">
+                                        <div class="img-area">
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, DateTime.Now)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'" alt="">
+                                            <span class="box-icon type04">@item.SECTION_NAME</span>
+                                        </div>
+                                        <p class="txt">@item.TITLE</p>
+                                    </a>
+                                }
+
+                            }
+                            <!--// 뉴스 end -->
+                        </div>
+                        <div class="tab-cont">
+                            <!-- 기자 start -->
+                            @if (ViewBag.MyPinReporterList.Length > 0)
+                            {
+                                foreach (var item in ViewBag.MyPinReporterList)
+                                {
+                                    <a href="javascript:void(0)" class="img-cont" onclick="NewsCommon.GoNewsRead('@item.ARTICLEID')">
+                                        <div class="img-area">
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, DateTime.Now)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'" alt="">
+                                            <span class="box-icon type04">@item.REPORTER_NAME @item.POSITION</span>
+                                        </div>
+                                        <p class="txt">@item.TITLE</p>
+                                    </a>
+                                }
+                            }
+                            
+                            <!--// 기자 end -->
+                        </div>
+                        @if (LoginHandler.IsLogin)
+                        {//로그인 했을경우 핀 노출
+                            <div class="tab-cont">
+                                @if (ViewBag.MyProgramList.Count > 0)
+                                {
+                                    foreach (var item in ViewBag.MyProgramList)
+                                    {
+                                        <!-- 방송 start -->
+                                        <a href="javascript:void(0)" class="img-cont" onclick="QuickMenu.ProgramLink('@item.PRG_CD');">
+                                            <div class="img-area">
+                                                @if (item.SUB_IMG != null)
+                                                {
+                                                    <img src="@($"{item.SUB_IMG}")" alt="@item.PRG_NM" style="width:152px;height:85px;">
+                                                }
+                                                else
+                                                {
+                                                    <img src="@wowTvStyle/images/common/no_image_16m.jpg" alt="@item.PRG_NM" style="width:152px;height:85px;">
+                                                }
+                                                <span class="icon-play medium"></span>
+                                            </div>
+                                            <p class="txt">@item.PRG_NM</p>
+                                        </a>
+                                    }
+
+                                }
+                                else
+                                {
+                                    var item = ViewBag.ProgramList[0];
+                                    <!-- 방송 start -->
+                                    <a href="javascript:void(0)" class="img-cont" onclick="QuickMenu.ProgramLink('@item.PRG_CD');">
+                                        <div class="img-area">
+                                            @if (item.ThumImageUrl != null)
+                                            {
+                                                <img src="@($"{item.ThumImageUrl}")" alt="@item.PRG_NM" style="width:152px;height:85px;">
+                                            }
+                                            else
+                                            {
+                                                <img src="@wowTvStyle/images/common/no_image_16m.jpg" alt="@item.PRG_NM" style="width:152px;height:85px;">
+                                            }
+                                            <span class="icon-play medium"></span>
+                                        </div>
+                                        <p class="txt">@item.PRG_NM</p>
+                                    </a>
+                                }
+                            </div>
+                            <div class="tab-cont">
+                                @if (ViewBag.myPartnerPinList.Count > 0)
+                                {
+                                    foreach (var item in ViewBag.myPartnerPinList)
+                                    {
+                                        <a href="javascript:void(0)" class="img-cont" onclick="QuickMenu.PartnerLink('@item.PAY_NO');">
+                                            <div class="img-area">
+                                                <img src="http://image.wownet.co.kr/@item.NEWphoto_small" alt="@item.FullName">
+                                            </div>
+                                            <p class="txt">@item.FullName</p>
+                                        </a>
+                                    }
+                                }
+                                else
+                                {
+                                    var item = ViewBag.PartnerList[0];
+                                    <a href="javascript:void(0)" class="img-cont" onclick="QuickMenu.PartnerLink('@item.Pro_id');">
+                                        <div class="img-area">
+                                            <img src="http://image.wownet.co.kr/@item.NEWphoto_small" alt="@item.FullName">
+                                        </div>
+                                        <p class="txt">@item.NickName</p>
+                                    </a>
+                                }
+                            </div>
+                        }
+                        else
+                        { //로그인 안됐을경우 프로그램, 파트너 랜덤 노출
+                            <div class="tab-cont">
+                                @foreach (var item in ViewBag.ProgramList)
+                                {
+                                    <a href="javascript:void(0)" class="img-cont" onclick="QuickMenu.ProgramLink('@item.PRG_CD');">
+                                        <div class="img-area">
+                                            @if (item.ThumImageUrl != null)
+                                            {
+                                                <img src="@($"{item.ThumImageUrl}")" alt="@item.PRG_NM" style="width:152px;height:85px;">
+                                            }
+                                            else
+                                            {
+                                                <img src="@wowTvStyle/images/common/no_image_16m.jpg" alt="@item.PRG_NM" style="width:152px;height:85px;">
+                                            }
+                                            <span class="icon-play medium"></span>
+                                        </div>
+                                        <p class="txt">@item.PRG_NM</p>
+                                    </a>
+                                }
+                            </div>
+                            <div class="tab-cont">
+                                @foreach (var item in ViewBag.PartnerList)
+                                {
+                                    <a href="javascript:void(0)" class="img-cont" onclick="QuickMenu.PartnerLink('@item.Pro_id');"> 
+                                        <div class="img-area">
+                                            <img src="http://image.wownet.co.kr/@item.NEWphoto_small" alt="@item.NickName">
+                                        </div>
+                                        <p class="txt">@item.NickName</p>
+                                    </a>
+                                }
+                            </div>
+                        }
+                    </div>
+                    <!--// tab view end -->
+
+                </div>
+                <!--// 마이핀 end -->
+            </div>
+            <div>
+                <!-- 와우캐시 start -->
+                <h4 class="tit-quick type01"><span>와우캐시</span></h4>
+                <div class="quick-cont type01">
+                    @if (LoginHandler.IsLogin)
+                    {
+                        var myClass = ViewBag.MyClass;
+                        
+
+                            string classType = "family";
+                            string className = "패밀리";
+
+                            if (myClass.UserClass.Equals(1))
+                            {
+                                classType = "vip";
+                                className = "우수";
+                            }
+                            else if (myClass.UserClass.Equals(2))
+                            {
+
+                                classType = "vvip";
+                                className = "최우수";
+                            }
+
+
+                        <div class="quick-login" style="display:;">
+                            <div class="box-blue">
+                                <!-- 패밀리회원 class="grade-area family" / VIP회원 class="grade-area vip" / VVIP회원 class="grade-area vvip" -->
+                                <span class="grade-area @classType">@classType</span>
+                                <p class="txt"><strong>@LoginHandler.CurrentLoginUser.UserName</strong>님의 <br>등급은 <span class="font-color04">@className</span>입니다.</p>
+                            </div>
+
+                            <ul class="list-type-quick">
+                                <li>
+                                    <div class="txt-area">
+                                        <span class="aside">보유캐시</span>
+                                        <a href="javascript:void(0)"><strong>@ViewBag.MyCash</strong> 원</a>
+                                    </div>
+                                    <div class="btn-area fr">
+                                        <a href="javascript:void(0)" class="btn-type1 small" onclick="QuickMenu.BillingLink();">캐시충전</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="txt-area">
+                                        <span class="aside">보유쿠폰</span>
+                                    </div>
+                                    <div class="fr">
+                                        <a href="javascript:void(0)"><strong>@ViewBag.HaveCouponCount</strong> 장</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="quick-logout">
+                            <div class="box01">
+                                <strong>서비스 상품</strong>
+                                <div class="btn-area">
+                                    <span class="btn-type2"><a href="http://www.wownet.co.kr/center/06/charge_service_month.asp?bcode=N13070100&mseq=449" target="_blank">월정액 서비스 보기</a></span>
+                                    <span class="btn-type2"><a href="http://www.wownet.co.kr/center/06/charge_service_pers.asp?bcode=N13070100" target="_blank">유료 서비스 보기</a></span>
+                                    <span class="btn-type2"><a href="http://www.wownet.co.kr/center/06/free_service.asp?bcode=N13070200&mseq=450" target="_blank">무료 서비스 보기</a></span>
+                                    <span class="btn-type2"><a href="http://www.wownet.co.kr/academy/goods/list_books.asp?bcode=N04230200&mseq=2059&mode=%B5%B5%BC%AD&ord=cate1" target="_blank">교재 및 상품보기</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="box01">
+                        <strong>월정액 서비스</strong>
+                        <div class="tab-type1">
+                            <ul class="col3">
+                                <!-- 길이에 따른 클래스를 변경 -->
+                                <li class="on"><a href="javascript:void(0);">GOLD</a></li>
+                                <li><a href="javascript:void(0);">GOLD PLUS</a></li>
+                                <li><a href="javascript:void(0);">파트너 방송</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-body tab_script">
+                            <div class="tab-box on">
+                                <div class="txt-area">
+                                    <strong>GOLD</strong>
+                                    <span>한국경제 TV 실시간 방송</span>
+                                </div>
+                                <div class="btn-area">
+                                    <span class="btn-type2"><a href="javascript:void(0)" onclick="QuickMenu.Join(1);">가입하기</a></span>
+                                    <span class="btn-type4"><a href="https://help.wowtv.co.kr/ServiceInfo/Hankyung/BroadInfo?menuSeq=562" target="_blank">이용안내</a></span>
+                                </div>
+                            </div>
+                            <div class="tab-box">
+                                <div class="txt-area">
+                                    <strong>GOLD PLUS</strong>
+                                    <span>골드서비스 + VOD 주식강좌</span>
+                                </div>
+                                <div class="btn-area">
+                                    <span class="btn-type2"><a href="javascript:void(0)" onclick="QuickMenu.Join(2);">가입하기</a></span>
+                                    <span class="btn-type4"><a href="https://help.wowtv.co.kr/ServiceInfo/Hankyung/BroadInfo?menuSeq=562" target="_blank">이용안내</a></span>
+                                </div>
+                            </div>
+                            <div class="tab-box">
+                                <div class="txt-area">
+                                    <strong>파트너 방송</strong>
+                                    <span>파트너방송 + 녹화방송 + 회원전용게시판<br>+SMS증권정보 + 골드플러스 서비스</span>
+                                </div>
+                                <div class="btn-area">
+                                    <span class="btn-type2"><a href="javascript:void(0)" onclick="QuickMenu.Join(3);">가입하기</a></span>
+                                    <span class="btn-type4"><a href="https://help.wowtv.co.kr/ServiceInfo/Hankyung/BroadInfo?menuSeq=562" target="_blank">이용안내</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                                        
+                    @*<div class="box01">
+                        <strong>월정액 서비스</strong>
+                        <ul>
+                            <li>
+                                <div class="txt-area">
+                                    <strong>GOLD</strong>
+                                    <span>한국경제 TV 실시간 방송</span>
+                                </div>
+                                <div class="btn-area">
+                                    <span class="btn-type2"><a href="javascript:void(0)" onclick="QuickMenu.Join(1);">가입하기</a></span>
+                                    <span class="btn-type4"><a href="https://help.wowtv.co.kr/ServiceInfo/Hankyung/BroadInfo?menuSeq=562" target="_blank">이용안내</a></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="txt-area">
+                                    <strong>GOLD PLUS</strong>
+                                    <span>골드서비스 + VOD 주식강좌</span>
+                                </div>
+                                <div class="btn-area">
+                                    <span class="btn-type2"><a href="javascript:void(0)" onclick="QuickMenu.Join(2);">가입하기</a></span>
+                                    <span class="btn-type4"><a href="https://help.wowtv.co.kr/ServiceInfo/Hankyung/BroadInfo?menuSeq=562" target="_blank">이용안내</a></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="txt-area">
+                                    <strong>파트너 방송</strong>
+                                    <span>파트너방송 + 녹화방송 + 회원전용게시판<br>+SMS증권정보 + 골드플러스 서비스</span>
+                                </div>
+                                <div class="btn-area">
+                                    <span class="btn-type2"><a href="javascript:void(0)" onclick="QuickMenu.Join(3);">가입하기</a></span>
+                                    <span class="btn-type4"><a href="http://www.wownet.co.kr/center/13/tv_guide.asp?bcode=N13140000&mseq=533" target="_blank">이용안내</a></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>*@
+                </div>
+                <!--// 와우캐시 end -->
+            </div>
+            <div>
+                <!-- 고객센터 start -->
+                <h4 class="tit-quick type02"><span>고객센터</span></h4>
+                <div class="quick-cont">
+                    <!-- 강연회·행사 start -->
+                    <h3 class="title04">
+                        강연회·행사
+                        <a href="@domainUrlHelp/LecturesAndEvent/Lecture/Index?menuSeq=508"><span>더보기</span></a>
+                    </h3>
+                    <div class="list-type-quick01">
+                        @if (ViewBag.LectureList.Count > 0)
+                        {
+                            foreach (var item in ViewBag.LectureList)
+                            {
+                                <a href="javascript:void(0);" onclick="QuickMenu.LectureLink('@item.SEQ','@item.MSEQ');">
+                                    <span class="tit">@item.TITLE</span>
+                                    <span class="day">@item.LECTURES_DATE</span>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <span class="tit">7일간 등록된 일정이 없습니다.</span>
+                        }
+                    </div>
+                    <!--// 강연회·행사 end -->
+                    <!-- 이벤트 start -->
+                    <h3 class="title04">이벤트</h3>
+                    @if (ViewBag.EventList.Count > 0)
+                    {
+                        DateTime today = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                        <div class="quick-silder bxslider">
+                            <div>
+                                @foreach (var item in ViewBag.EventList)
+                                {
+                                    var status = "";
+                                    if (item.StartDate <= today && item.EndDate >= today)
+                                    {
+                                        status = "진행중";
+                                    }
+                                    else if (item.EndDate < today && item.WIN_VIEW_FLAG == null)
+                                    {
+                                        status = "마감";
+                                    }
+                                    if (item.linkUrl != null && item.linkUrl != "")
+                                    {
+                                        <div class="img-cont">
+                                            <a href="javascript:window.open('http://www.wownet.co.kr@(item.linkUrl)')">
+                                                @*<div class="img-area">
+                                                    @if (item.BannerImage == null || item.BannerImage == "")
+                                                    {
+                                                        <img src="http://image.wownet.co.kr@(item.NEWphoto_small2)" alt="" onerror="this.src='@wowTvStyle/images/customer/no_image_16m.jpg'">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="http://img.wowtv.co.kr@(item.BannerImage)" alt="" onerror="this.src='@wowTvStyle/images/customer/no_image_16m.jpg'">
+                                                    }
+                                                    <span class="box-icon type08">@status</span>
+                                                </div>
+                                                <div class="txt-area">
+                                                    <p class="title-txt">
+                                                        <strong class="title">@item.NickName</strong>
+                                                        @item.Title
+                                                    </p>
+                                                    <p>기간 : <span class="day">@item.StartDate.ToString("yyyy.MM.dd") ~@item.EndDate.ToString("yyyy.MM.dd")</span></p>
+                                                </div>*@
+                                                <div class="img-area">
+                                                    @if (item.bannerImage == null || item.bannerImage == "")
+                                                    {
+                                                        <img src="http://image.wownet.co.kr@(item.NEWphoto_small2)" alt="" onerror="this.src='@wowTvStyle/images/customer/no_image_16m.jpg'">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="http://img.wowtv.co.kr@(item.bannerImage)" alt="" onerror="this.src='@wowTvStyle/images/customer/no_image_16m.jpg'">
+                                                    }
+                                                    <span class="box-icon type08">@status</span>
+                                                </div>
+                                                <div class="txt-area">
+                                                    <p class="title-txt">
+                                                        <strong class="title">@item.Nickname</strong>
+                                                    </p>
+                                                    <p>
+                                                        @item.title
+                                                    </p>
+                                                    <p>기간 : <span class="day">@item.StartDate.ToString("yyyy.MM.dd") ~@item.EndDate.ToString("yyyy.MM.dd")</span></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="img-cont">
+                                            <a href="javascript:void(0);" onclick="QuickMenu.EventLink('@item.seq')">
+                                                <div class="img-area">
+                                                    @if (item.bannerImage == null || item.bannerImage == "")
+                                                    {
+                                                        <img src="http://image.wownet.co.kr@(item.NEWphoto_small2)" alt="" onerror="this.src='@wowTvStyle/images/customer/no_image_16m.jpg'">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="http://img.wowtv.co.kr@(item.bannerImage)" alt="" onerror="this.src='@wowTvStyle/images/customer/no_image_16m.jpg'">
+                                                    }
+                                                    <span class="box-icon type08">@status</span>
+                                                </div>
+                                                <div class="txt-area">
+                                                    <p class="title-txt">
+                                                        <strong class="title">@item.Nickname</strong>
+                                                    </p>
+                                                    <p>
+                                                        @item.title
+                                                    </p>
+                                                    <p>기간 : <span class="day">@item.StartDate.ToString("yyyy.MM.dd") ~@item.EndDate.ToString("yyyy.MM.dd")</span></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                }                            
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="no-data">7일간 등록된 일정이 없습니다.</div>
+                    }
+                    <!--// 이벤트 end -->
+                    <!-- 공지사항 start -->
+                    <h3 class="title04">
+                        공지사항
+                        <a href="@domainUrlHelp/IntegratedBoard/Notice/Index?menuSeq=506"><span>더보기</span></a>
+                    </h3>
+                    <div class="list-type-quick01 type01">
+                        @if (ViewBag.NoticeList.Length > 0)
+                        {
+                            foreach (var item in ViewBag.noticeList)
+                            {
+                                <a href="javascript:void(0)" onclick="QuickMenu.NoticeLink('@item.BOARD_CONTENT_SEQ')">
+                                    <span class="tit">[@item.CommonName] @item.TITLE</span>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <span class="tit">게시물이 존재하지 않습니다.</span>
+                        }
+                    </div>
+                    <!--// 공지사항 end -->
+                    <div class="btn-area">
+                        <span class="btn-type2"><a href="javascript:void(0)" onclick="QuickMenu.Inquiry1();">1:1문의하기</a></span>
+                        <span class="btn-type2"><a href="javascript:void(0)" onclick="QuickMenu.Inquiry2();">시민제보하기</a></span>
+                    </div>
+                </div>
+                <!--// 고객센터 end -->
+            </div>
+        </div>        
+    </div>
+    <a href="javascript:void(0)" class="btn-open">open</a>
+</div>
+<!--// quick end -->
+

@@ -1,0 +1,79 @@
+﻿
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/News/Index.js"></script>
+}
+
+<form id="frmSearch">
+    <input type="hidden" name="SearchSection" id="SearchSection" value="@Request["subMenu"]" />
+    <input type="hidden" name="SearchWowCode" id="SearchWowCode" value="@Request["wowcode"]" />
+    <input type="hidden" name="SearchComp" id="SearchComp" value="@(string.IsNullOrEmpty(Request["SearchComp"]) ? "" : Request["SearchComp"])" />
+    <input type="hidden" name="menuSeq" id="menuSeq" value="@Request["menuSeq"]" />
+
+    <input type="hidden" name="IsAppend" id="IsAppend" />
+    <input type="hidden" name="totalDataCount" id="totalDataCount" />
+    <input type="hidden" name="currentIndex" id="currentIndex" />
+    <input type="hidden" name="Page" id="Page" value="1" />
+    <input type="hidden" name="PageSize" id="PageSize" value="20" />
+
+</form>
+
+@if (Request["subMenu"] == "tvtenplus")
+{
+    <div class="banner-area type2">
+        @*<img src="@wowTvStyle/images/news/banner_tv10_plus1.jpg" alt="티비텐 플러스 광고배너 이미지1">*@
+        <iframe width="100%" height="229" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_24" title="AD Tag"></iframe>
+    </div>
+    <div class="section-area">
+        <div class="btn-area pd15">
+            <a href="https://www.tv10.co.kr/default_typeA.asp" class="btn type04" target="_blank"><span class="icon-home"></span>티비텐플러스</a>
+        </div>
+    </div>
+    <div class="banner-area type2 pb15">
+        @*<img src="@wowTvStyle/images/news/banner_tv10_plus2.jpg" alt="티비텐 플러스 MCN, UCC 창작 공모전 광고배너 이미지">*@
+        <iframe width="640" height="100px;"  marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_26" title="AD Tag"></iframe>
+    </div>
+}
+else
+{
+    <!-- 선택영역 -->
+    <div class="reporter-select">
+        <div class="top-select">
+            <select id="selSearchComp">
+                <option value="">전체</option>
+                <option value="WO">한국경제TV</option>
+            </select>
+        </div>
+        <!-- 언어선택 -->
+        <div class="bottom-select">
+            @*<select>
+                    <option>번역 : 언어선택</option>
+                </select>*@
+            <div id="google_translate_element"></div>
+        </div>
+        <!-- // 언어선택 -->
+    </div>
+}
+
+<div class="news-list-box type02" id="divContents"></div>
+
+<!-- google translate script Start -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'ko'
+                , includedLanguages: 'ko,en,zh-CN,zh-TW,ja,id,th,vi,tl'
+                , layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                , autoDisplay: false
+            }
+            , 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- google translate script end -->

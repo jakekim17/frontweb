@@ -1,0 +1,23 @@
+﻿@using Wow
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <a href="javascript:NewsCommon.GoNewsDetailView('card','','','@item.ARTICLEID')">
+            <span class="box-wrap">
+                @if (item.SECTION_NAME != null)
+                {
+                    <span class="box-icon01 type2">@item.SECTION_NAME</span>
+                }
+                <img src="@WowExtensionMethod.NewsThumbnailPath("11M", item.THUMBNAIL_FILENM, null, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11M")'" alt="">
+                <span class="title">
+                    @item.TITLE
+                </span>
+            </span>
+        </a>
+    }
+}

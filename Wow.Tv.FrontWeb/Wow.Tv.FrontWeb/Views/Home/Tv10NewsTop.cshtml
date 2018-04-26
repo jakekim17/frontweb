@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Tv10NewsTop";
+}
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+
+<div class="tvten_banner">
+    
+    @*<img src="@wowTvStyle/images/news/TVTEN_Banner01.jpg" alt="티비텐 플러스">
+    <img src="@wowTvStyle/images/news/TVTEN_Banner02.jpg" alt="티비텐 플러스">*@
+    @*//이미지노출에서 스크립트방식으로 변경.*@
+    <iframe width="870" height="500" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_19" title="AD Tag"></iframe>
+    
+</div>

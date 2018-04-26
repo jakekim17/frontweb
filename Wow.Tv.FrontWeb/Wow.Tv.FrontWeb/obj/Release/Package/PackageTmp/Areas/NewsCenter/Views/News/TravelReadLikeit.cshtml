@@ -1,0 +1,28 @@
+﻿
+@using Wow
+@using Wow.Fx;
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model NTB_ARTICLE_LIKEIT_HANATOUR
+
+@{
+    Layout = null;
+
+    int goodCount = 0;
+    int hateCount = 0;
+    int wantCount = 0;
+    string cookieLikeitGubun = "";
+
+    if (Model != null)
+    {
+        goodCount = Model.GOOD_COUNT;
+        hateCount = Model.HATE_COUNT;
+        wantCount = Model.WANT_COUNT;
+        cookieLikeitGubun = CookieMgr.GetCookie("LikeitTravel_" + Model.ARTICLE_ID, "likeitGubun", false, new EncryptTypeEnum());
+    }
+
+}
+<span class="btn-emotion1 @(cookieLikeitGubun.Equals("GOOD") ? "on" : "")"><button onclick="TravelRead.Likeit('GOOD');">좋아요 <i>@goodCount.ToString("#,##0")</i></button></span>
+<span class="btn-emotion2 @(cookieLikeitGubun.Equals("HATE") ? "on" : "")"><button onclick="TravelRead.Likeit('HATE');">싫어요 <i>@hateCount.ToString("#,##0")</i></button></span>
+<span class="btn-emotion3 @(cookieLikeitGubun.Equals("WANT") ? "on" : "")"><button onclick="TravelRead.Likeit('WANT');">후속기사 원해요 <i>@wantCount.ToString("#,##0")</i></button></span>
+

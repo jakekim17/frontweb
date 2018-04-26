@@ -1,0 +1,944 @@
+﻿@charset "utf-8";
+/**
+ * /js/skin/eduwill.css
+ *
+ * WOW한국경제TV 플레이어 스킨을 위한 스타일시트.
+ *
+ * Created By WebPDP on 2015. 7. 31.
+ * Copyright (c) 2015 IMGTech. All right reserved.
+ */
+
+/* VODPlayer - Container
+ ---------------------------------------------------------------------------- */
+.skin_wowtv {
+}
+
+.skin_wowtv * {
+    outline: none;
+}
+
+.mpv_container {
+}
+
+.mpv_paused {
+}
+
+.mpv_playing {
+}
+
+/* VODPlayer - Media Element
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpv_video {
+}
+
+/* VODPlayer - OSD - On-Screen Display
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpv_osd {
+}
+
+.skin_wowtv .mpv_subtitles {
+}
+
+    .skin_wowtv .mpv_subtitles p {
+    }
+
+.skin_wowtv .mpv_title {
+}
+
+.skin_wowtv .mpv_poster {
+}
+
+.skin_wowtv .mpv_poster img {
+}
+
+.skin_wowtv .mpv_time_thumblist {
+}
+
+.skin_wowtv .mpv_time_thumblist img.large {
+}
+
+.skin_wowtv .mpv_time_thumblist div.overlay {
+}
+
+.skin_wowtv .mpv_time_thumblist div.list {
+}
+
+.skin_wowtv .mpv_time_thumblist div.list img {
+}
+
+.skin_wowtv .mpv_loading {
+}
+
+.skin_wowtv .mpv_osd_play_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/osd_play.png);
+    height: 100px;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    top: 50%;
+    width: 100px;
+}
+
+.skin_wowtv .mpv_osd_pause_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/osd_pause.png);
+    height: 100px;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    top: 50%;
+    width: 100px;
+}
+
+/* VODPlayer - Controller - Container
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpv_controller {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/cont_bg2.png);
+    height: 45px;
+}
+
+/* VODPlayer - Controller - TimeSlider
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpv_time_slider {
+    height: 7px;
+}
+
+.skin_wowtv .mpv_time_slider_area {
+    height: 18px;
+    top: -10px;
+}
+
+.skin_wowtv .mpv_time_slider_track {
+    background: #797979;
+    top: -2px;
+}
+
+.skin_wowtv .mpv_time_slider_buffer {
+    background: #9a9a9a;
+}
+
+.skin_wowtv .mpv_time_slider_value {
+    background: #6ea8e5;
+}
+
+.skin_wowtv .mpv_time_slider_handler {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/time_handler.png);
+    background-size: 20px 20px;
+    height: 20px;
+    left: -10px;
+    top: -9px;
+    width: 20px;
+}
+
+.skin_wowtv .mpv_time_repeat_start {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/repeat_marker.png);
+    height: 20px;
+    margin-left: -10px;
+    top: -20px;
+    width: 20px;
+}
+
+.skin_wowtv .mpv_time_repeat_end {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/repeat_marker.png);
+    height: 20px;
+    margin-left: -10px;
+    top: -20px;
+    width: 20px;
+}
+
+.skin_wowtv .mpv_time_thumb {
+}
+
+    .skin_wowtv .mpv_time_thumb img {
+    }
+
+/* VODPlayer - Controller - ButtonGroup
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpv_button_group {
+    padding: 4px 0 3px 5px;
+    width: 330px
+}
+
+/* IE 7 Only */
+* + html .skin_wowtv .mpv_button_group {
+    padding: 4px 0 3px 0;
+}
+
+.skin_wowtv .mpv_button {
+    height: 30px;
+    margin: 0 1px;
+    width: 30px;
+}
+
+.skin_wowtv .mpv_prev_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/prev.png);
+    float: left;
+}
+
+.skin_wowtv .mpv_next_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/next.png);
+    float: left;
+}
+
+.skin_wowtv .mpv_play_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/play.png);
+    float: left;
+}
+
+.skin_wowtv .mpv_pause_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/pause.png);
+    float: left;
+}
+
+.skin_wowtv .mpv_stop_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/stop.png);
+    float: left;
+}
+
+.skin_wowtv .mpv_current_time {
+    color: #989898;
+    float: left;
+    padding-top: 6px;
+}
+
+.skin_wowtv .mpv_duration_time {
+    color: #ffffff;
+    float: left;
+    padding-top: 6px;
+}
+
+.skin_wowtv .mpv_backward_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/speed_down.png);
+    float: left;
+    width: 20px;
+}
+
+.skin_wowtv .mpv_skip_input {
+    float: left;
+    margin-top: 2px;
+}
+
+.skin_wowtv .mpv_forward_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/speed_up.png);
+    float: left;
+    width: 20px;
+}
+
+.skin_wowtv .mpv_speed_down_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/speed_down.png);
+    float: left;
+    width: 20px;
+}
+
+.skin_wowtv .mpv_current_speed {
+    float: left;
+    padding-top: 6px;
+}
+
+.skin_wowtv .mpv_speed_up_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/speed_up.png);
+    float: left;
+    width: 20px;
+}
+
+.skin_wowtv .mpv_volume_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume.png);
+    float: right;
+}
+
+.skin_wowtv .mpv_mute_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/mute.png);
+    float: right;
+}
+
+.skin_wowtv .mpv_bookmark_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/bookmark.png);
+    float: right;
+    width: 50px;
+}
+
+.skin_wowtv .mpv_favorite_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/favorite.png);
+    float: left;
+    width: 50px;
+}
+
+.skin_wowtv .mpv_repeat_on_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/repeat_on.png);
+    float: left;
+    width: 80px;
+}
+
+.skin_wowtv .mpv_repeat_off_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/repeat_off.png);
+    float: left;
+    width: 80px;
+}
+
+.skin_wowtv .mpv_subtitles_off_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/subtitles_off.png);
+    float: right;
+    width: 60px;
+}
+
+.skin_wowtv .mpv_subtitles_on_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/subtitles_on.png);
+    float: right;
+    width: 60px;
+}
+
+.skin_wowtv .mpv_language_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/language.png);
+    float: right;
+    width: 40px;
+}
+
+.skin_wowtv .mpv_language_layer {
+}
+
+    .skin_wowtv .mpv_language_layer .option_language {
+    }
+
+    .skin_wowtv .mpv_language_layer .selected {
+        background-image: url(http://img.wowtv.co.kr/PcStyle/vodplayer/option_selected.png);
+    }
+
+.skin_wowtv .mpv_quality_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/quality.png);
+    float: right;
+    width: 40px;
+}
+
+.skin_wowtv .mpv_quality_button2 {
+    background: 75px 8px url(http://img.wowtv.co.kr/PcStyle/vodplayer/arrow_up.png) no-repeat;
+    float: right;
+    padding-top: 6px;
+    padding-left: 10px;
+    width: 90px !important;
+}
+
+.skin_wowtv .mpv_quality_layer {
+}
+
+    .skin_wowtv .mpv_quality_layer .option_quality {
+    }
+
+    .skin_wowtv .mpv_quality_layer .selected {
+        background-image: url(http://img.wowtv.co.kr/PcStyle/vodplayer/option_selected.png);
+    }
+
+.skin_wowtv .mpv_expand_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/expand.png);
+    float: right;
+}
+
+.skin_wowtv .mpv_collapse_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/collapse.png);
+    float: right;
+}
+
+.skin_wowtv .mpv_fullscreen_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/fullscreen.png);
+    float: right;
+}
+
+.skin_wowtv .mpv_normalscreen_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/normalscreen.png);
+    float: right;
+}
+
+.skin_wowtv .mpv_playlist_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/playlist.png);
+    float: right;
+    width: 60px;
+}
+
+.skin_wowtv .mpv_popup_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/popup.png);
+    float: left;
+    width: 60px;
+}
+
+/* VODPlayer - Controller - VolumeSlider
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpv_volume_slider {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_slider.png);
+    height: 80px;
+    top: -83px;
+    width: 32px;
+}
+
+.skin_wowtv .mpv_volume_slider_area {
+    height: 55px;
+    left: 6px;
+    top: 10px;
+    width: 20px;
+}
+
+.skin_wowtv .mpv_volume_slider_track {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_track.png);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    height: 55px;
+    left: 13px;
+    top: 10px;
+    width: 6px;
+}
+
+.skin_wowtv .mpv_volume_slider_value {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_value.png);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    height: 100%;
+    width: 100%;
+}
+
+.skin_wowtv .mpv_volume_slider_handler {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_handler.png);
+    height: 16px;
+    margin: 5px 8px 11px 8px;
+    width: 16px;
+}
+
+.skin_wowtv .mpv_volume_slider_hor {
+    height: 30px;
+    left: 30px;
+    width: 70px;
+}
+
+.skin_wowtv .mpv_volume_slider_area_hor {
+    height: 20px;
+    left: 8px;
+    top: 5px;
+    width: 55px;
+}
+
+.skin_wowtv .mpv_volume_slider_track_hor {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_track_hor.png);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    height: 6px;
+    left: 8px;
+    top: 12px;
+    width: 55px;
+}
+
+.skin_wowtv .mpv_volume_slider_value_hor {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_value_hor.png);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    height: 100%;
+    width: 100%;
+}
+
+.skin_wowtv .mpv_volume_slider_handler_hor {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_handler.png);
+    height: 16px;
+    margin: 7px 2px 7px 3px;
+    width: 16px;
+}
+
+/* VODPlayer - Bookmark
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpv_bookmark {
+    bottom: -3px;
+}
+
+.skin_wowtv .mpv_bookmark_layer {
+    background-color: #2c2c2c;
+}
+
+.skin_wowtv .mpv_bookmark_title {
+}
+
+.skin_wowtv .mpv_bookmark_time {
+}
+
+.skin_wowtv .mpv_bookmark_save {
+}
+
+.skin_wowtv .mpv_bookmark_current {
+}
+
+.skin_wowtv .mpv_bookmark_bottom {
+    background-image: url(http://img.wowtv.co.kr/PcStyle/vodplayer/layer_bottom.png);
+}
+
+/* VODPlayer - Message
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpv_message {
+}
+
+.skin_wowtv .mpv_message_layer {
+}
+
+.skin_wowtv .mpv_message_label {
+}
+
+.skin_wowtv .mpv_message_button {
+}
+
+/* VODPlayer - FullScreen Mode
+ ---------------------------------------------------------------------------- */
+.mpv_fullscreen_mode {
+}
+
+    .mpv_fullscreen_mode .mpv_controller {
+    }
+
+    .mpv_fullscreen_mode .mpv_time_thumblist {
+    }
+
+/* AODPlayer - Container
+ ---------------------------------------------------------------------------- */
+.mpa_container {
+    background-color: #565656;
+}
+
+.mpa_paused {
+}
+
+.mpa_playing {
+}
+
+/* AODPlayer - Media Element
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpa_audio {
+    position: absolute;
+}
+
+/* AODPlayer - OSD - On-Screen Display
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpa_osd {
+    position: relative;
+}
+
+.skin_wowtv .mpa_subtitles {
+}
+
+    .skin_wowtv .mpa_subtitles p {
+    }
+
+.skin_wowtv .mpa_title {
+}
+
+.skin_wowtv .mpa_poster {
+}
+
+    .skin_wowtv .mpa_poster img {
+    }
+
+.skin_wowtv .mpa_loading {
+}
+
+.skin_wowtv .mpa_osd_play_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/osd_play.png);
+    height: 100px;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    top: 50%;
+    width: 100px;
+}
+
+.skin_wowtv .mpa_osd_pause_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/osd_pause.png);
+    height: 100px;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    top: 50%;
+    width: 100px;
+}
+
+/* AODPlayer - Controller - Container
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpa_controller {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/cont_bg2.png);
+    height: 40px;
+}
+
+/* AODPlayer - Controller - TimeSlider
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpa_time_slider {
+    height: 3px;
+}
+
+.skin_wowtv .mpa_time_slider_area {
+    height: 18px;
+    top: -10px;
+}
+
+.skin_wowtv .mpa_time_slider_track {
+    background: #797979;
+}
+
+.skin_wowtv .mpa_time_slider_buffer {
+    background: #9a9a9a;
+}
+
+.skin_wowtv .mpa_time_slider_value {
+    background: #6ea8e5;
+}
+
+.skin_wowtv .mpa_time_slider_handler {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/time_handler.png);
+    height: 20px;
+    left: -10px;
+    top: -9px;
+    width: 20px;
+}
+
+.skin_wowtv .mpa_time_repeat_start {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/repeat_marker.png);
+    height: 20px;
+    margin-left: -10px;
+    top: -20px;
+    width: 20px;
+}
+
+.skin_wowtv .mpa_time_repeat_end {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/repeat_marker.png);
+    height: 20px;
+    margin-left: -10px;
+    top: -20px;
+    width: 20px;
+}
+
+/* AODPlayer - Controller - ButtonGroup
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpa_button_group {
+    padding: 4px 0 3px 10px;
+}
+
+/* IE 7 Only */
+* + html .skin_wowtv .mpa_button_group {
+    padding: 4px 0 3px 0;
+}
+
+.skin_wowtv .mpa_button {
+    height: 30px;
+    margin: 0 1px;
+    width: 30px;
+}
+
+.skin_wowtv .mpa_prev_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/prev.png);
+    float: left;
+}
+
+.skin_wowtv .mpa_next_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/next.png);
+    float: left;
+}
+
+.skin_wowtv .mpa_play_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/play.png);
+    float: left;
+}
+
+.skin_wowtv .mpa_pause_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/pause.png);
+    float: left;
+}
+
+.skin_wowtv .mpa_stop_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/stop.png);
+    float: left;
+}
+
+.skin_wowtv .mpa_current_time {
+    color: #989898;
+    float: left;
+    padding-top: 6px;
+}
+
+.skin_wowtv .mpa_duration_time {
+    color: #ffffff;
+    float: left;
+    padding-top: 6px;
+}
+
+.skin_wowtv .mpa_backward_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/speed_down.png);
+    float: left;
+    width: 20px;
+}
+
+.skin_wowtv .mpa_skip_input {
+    float: left;
+    margin-top: 2px;
+}
+
+.skin_wowtv .mpa_forward_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/speed_up.png);
+    float: left;
+    width: 20px;
+}
+
+.skin_wowtv .mpa_speed_down_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/speed_down.png);
+    float: left;
+    width: 20px;
+}
+
+.skin_wowtv .mpa_current_speed {
+    float: left;
+    padding-top: 6px;
+}
+
+.skin_wowtv .mpa_speed_up_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/speed_up.png);
+    float: left;
+    width: 20px;
+}
+
+.skin_wowtv .mpa_volume_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume.png);
+    float: right;
+}
+
+.skin_wowtv .mpa_mute_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/mute.png);
+    float: right;
+}
+
+.skin_wowtv .mpa_bookmark_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/bookmark.png);
+    float: left;
+    width: 50px;
+}
+
+.skin_wowtv .mpa_favorite_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/favorite.png);
+    float: left;
+    width: 50px;
+}
+
+.skin_wowtv .mpa_repeat_on_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/repeat_on.png);
+    float: left;
+    width: 80px;
+}
+
+.skin_wowtv .mpa_repeat_off_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/repeat_off.png);
+    float: left;
+    width: 80px;
+}
+
+.skin_wowtv .mpa_subtitles_off_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/subtitles_off.png);
+    float: right;
+    width: 60px;
+}
+
+.skin_wowtv .mpa_subtitles_on_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/subtitles_on.png);
+    float: right;
+    width: 60px;
+}
+
+.skin_wowtv .mpa_language_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/language.png);
+    float: right;
+    width: 40px;
+}
+
+.skin_wowtv .mpa_language_layer {
+}
+
+    .skin_wowtv .mpa_language_layer .option_language {
+    }
+
+    .skin_wowtv .mpa_language_layer .selected {
+        background-image: url(http://img.wowtv.co.kr/PcStyle/vodplayer/option_selected.png);
+    }
+
+.skin_wowtv .mpa_quality_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/quality.png);
+    float: right;
+    width: 40px;
+}
+
+.skin_wowtv .mpa_quality_button2 {
+    background: 75px 8px url(http://img.wowtv.co.kr/PcStyle/vodplayer/arrow_up.png) no-repeat;
+    float: right;
+    padding-top: 6px;
+    padding-left: 10px;
+    width: 90px !important;
+}
+
+.skin_wowtv .mpa_quality_layer {
+}
+
+    .skin_wowtv .mpa_quality_layer .option_quality {
+    }
+
+    .skin_wowtv .mpa_quality_layer .selected {
+        background-image: url(http://img.wowtv.co.kr/PcStyle/vodplayer/option_selected.png);
+    }
+
+.skin_wowtv .mpa_expand_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/expand.png);
+    float: right;
+}
+
+.skin_wowtv .mpa_collapse_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/collapse.png);
+    float: right;
+}
+
+.skin_wowtv .mpa_fullscreen_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/fullscreen.png);
+    float: right;
+}
+
+.skin_wowtv .mpa_normalscreen_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/normalscreen.png);
+    float: right;
+}
+
+.skin_wowtv .mpa_playlist_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/playlist.png);
+    float: right;
+    width: 60px;
+}
+
+.skin_wowtv .mpa_popup_button {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/popup.png);
+    float: left;
+    width: 60px;
+}
+
+/* AODPlayer - Controller - VolumeSlider
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpa_volume_slider {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_slider.png);
+    height: 80px;
+    top: -83px;
+    width: 32px;
+}
+
+.skin_wowtv .mpa_volume_slider_area {
+    height: 55px;
+    left: 6px;
+    top: 10px;
+    width: 20px;
+}
+
+.skin_wowtv .mpa_volume_slider_track {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_track.png);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    height: 55px;
+    left: 13px;
+    top: 10px;
+    width: 6px;
+}
+
+.skin_wowtv .mpa_volume_slider_value {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_value.png);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    height: 100%;
+    width: 100%;
+}
+
+.skin_wowtv .mpa_volume_slider_handler {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_handler.png);
+    height: 16px;
+    margin: 5px 8px 11px 8px;
+    width: 16px;
+}
+
+.skin_wowtv .mpa_volume_slider_hor {
+    height: 30px;
+    width: 70px;
+}
+
+.skin_wowtv .mpa_volume_slider_area_hor {
+    height: 20px;
+    left: 8px;
+    top: 5px;
+    width: 55px;
+}
+
+.skin_wowtv .mpa_volume_slider_track_hor {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_track_hor.png);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    height: 6px;
+    left: 8px;
+    top: 12px;
+    width: 55px;
+}
+
+.skin_wowtv .mpa_volume_slider_value_hor {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_value_hor.png);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    height: 100%;
+    width: 100%;
+}
+
+.skin_wowtv .mpa_volume_slider_handler_hor {
+    background: url(http://img.wowtv.co.kr/PcStyle/vodplayer/volume_handler.png);
+    height: 16px;
+    margin: 7px 2px 7px 3px;
+    width: 16px;
+}
+
+/* AODPlayer - Bookmark
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpa_bookmark {
+    bottom: -3px;
+}
+
+.skin_wowtv .mpa_bookmark_layer {
+    background-color: #2c2c2c;
+}
+
+.skin_wowtv .mpa_bookmark_title {
+}
+
+.skin_wowtv .mpa_bookmark_time {
+}
+
+.skin_wowtv .mpa_bookmark_save {
+}
+
+.skin_wowtv .mpa_bookmark_current {
+}
+
+.skin_wowtv .mpa_bookmark_bottom {
+    background-image: url(http://img.wowtv.co.kr/PcStyle/vodplayer/layer_bottom.png);
+}
+
+/* AODPlayer - Message
+ ---------------------------------------------------------------------------- */
+.skin_wowtv .mpa_message {
+}
+
+.skin_wowtv .mpa_message_layer {
+}
+
+.skin_wowtv .mpa_message_label {
+}
+
+.skin_wowtv .mpa_message_button {
+}
+
+/* AODPlayer - FullScreen Mode
+ ---------------------------------------------------------------------------- */
+.mpa_fullscreen_mode {
+}
+
+    .mpa_fullscreen_mode .mpa_controller {
+    }
+
+    .mpa_fullscreen_mode .mpa_time_thumblist {
+    }

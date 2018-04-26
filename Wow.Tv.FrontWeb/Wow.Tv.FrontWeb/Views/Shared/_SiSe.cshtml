@@ -1,0 +1,106 @@
+﻿@using Wow.Tv.FrontWeb.FinanceService
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@{ 
+    var DomesticInfo = new {
+        KospiInfo = new FinanceServiceClient().GetSiseKospiInfo(),
+        KosdaqInfo = new FinanceServiceClient().GetSiseKosdaqInfo()
+    };
+
+    bool chkStockHoliday = new FinanceServiceClient().GetCheckStockHoliday(new HolidayCondition { CheckDt = String.Format("{0:yyyyMMdd}", DateTime.Now) });
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        MiddleData.BoxAreakospiStock("INDEX", "1D0001", 10, $(".box-stock .kospi .middleStockData"), @chkStockHoliday.ToString().ToLower());
+        MiddleData.BoxAreaKosdaqStock("INDEX", "2E4001", 10, $(".box-stock .kosdaq .middleStockData"), @chkStockHoliday.ToString().ToLower());
+
+        @*MiddleData.BoxAreakospiStock("INDEX", "1D0001", 5, $(".box-stock .kospi .middleStockData"), @chkStockHoliday.ToString().ToLower());
+        MiddleData.BoxAreaKosdaqStock("INDEX", "2E4001", 5, $(".box-stock .kosdaq .middleStockData"), @chkStockHoliday.ToString().ToLower());*@
+    });
+</script>
+<div class="inner">
+    <div class="box-breaknews list-slick">
+        @Html.Action("_Hot", "Home", new { Area = "" })
+    </div>    
+    <div class="box-stock">
+        <dl class="kospi">
+            <dt><a href="#none" onclick="Share.KospiGo();">코스피</a></dt>
+            <dd>@Html.PublishPriceMiddleFormat(DomesticInfo.KospiInfo.StockInfo.ChgType, DomesticInfo.KospiInfo.StockInfo.Price)</dd>
+            <dd>(@Html.PublishChgPriceMiddleFormat(DomesticInfo.KospiInfo.StockInfo.ChgType, DomesticInfo.KospiInfo.StockInfo.ChgPrice)</dd>
+            <dd>@Html.PublishUpDownSymbolPChangeMiddleFormat(DomesticInfo.KospiInfo.StockInfo.ChgType, DomesticInfo.KospiInfo.StockInfo.ChgRate))</dd>
+        </dl>
+        <dl class="kosdaq">
+            <dt><a href="#none" onclick="Share.KosdaqGo();">코스닥</a></dt>
+            <dd>@Html.PublishPriceMiddleFormat(DomesticInfo.KosdaqInfo.StockInfo.ChgType, DomesticInfo.KosdaqInfo.StockInfo.Price) <!--주가--></dd>
+            <dd>(@Html.PublishChgPriceMiddleFormat(DomesticInfo.KosdaqInfo.StockInfo.ChgType, DomesticInfo.KosdaqInfo.StockInfo.ChgPrice)</dd>
+            <dd>@Html.PublishUpDownSymbolPChangeMiddleFormat(DomesticInfo.KosdaqInfo.StockInfo.ChgType, DomesticInfo.KosdaqInfo.StockInfo.ChgRate))</dd>
+        </dl>
+        
+        @* @Html.Action("_VirtualMoney", "Home", new { Area = "" }) *@
+        
+        <div class="bitcoin-area">
+            <!--가상화폐 롤링 -->
+            <div class="bitcoin-box">
+                <div class="box">
+                    <ul class="bit-list">
+
+                    </ul>
+                </div>
+            </div>
+            <!-- 가상화폐 상세 -->
+            <a href="javascript:void(0)" class="bitcoin-btn" title="비트코인 상세보기">버튼</a>
+            <div class="bitcoin-detail">
+                <div class="title"><strong>가상화폐 시세</strong><a href="javascript:GoVirtualCurrencyNews()"> 관련기사 보기 </a></div>
+                <div class="bitcoin-list">
+                    <ul id="ulBitcoinList">
+
+                    </ul>
+                </div>
+                <div class="btn-box">
+                    <span>정보제공 : 빗썸</span>
+                    <a href="javascript:void(0)" class="close-btn">닫기</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>    
+</div>
+
+<script language="javascript">
+
+    //가상화폐 리스트
+    var virtualMoneyRolling = "";
+    var virtualMoneyList = "";
+
+    $.getJSON("/html/VirtualMoney.txt", function (json) {
+
+        $.each(json.VirtualMoneyList, function (index, entry) {
+
+            var korName = entry["korName"];
+            var TradePrice = entry["TradePrice"];
+            var chgRate = entry["chgRate"];
+            var stockCode = entry["stockCode"];
+            var upDown = "";
+
+            if (entry["chgType"] == "1" || entry["chgType"] == "2") {
+                upDown = "up";
+            }
+            else if (entry["chgType"] == "4" || entry["chgType"] == "5") {
+                upDown = "down";
+            }
+
+            virtualMoneyRolling += "<li class='" + upDown + "'><strong class='tit'>" + korName + "</strong><p class='text'><span>" + comma(TradePrice)+"</span>(<span>"+ chgRate+"%</span>)</p></li>";
+            virtualMoneyList += "<li class='" + upDown + "'><strong class='tit'><span class='icon " + stockCode.toLowerCase() + "'></span>" + korName + "</strong> <p class='text'> <span>" + comma(TradePrice)+ "</span>(<span>"+ chgRate + "%</span>)</p></li>";
+        });
+
+        $(".bit-list").append(virtualMoneyRolling);
+        $("#ulBitcoinList").append(virtualMoneyList);
+    });
+
+    $(document).ready(function () {
+        if ($('.box-stock .price-stock').hasClass('data-up')) {
+            $('.box-stock .price-stock').css('color', '#333');
+        }
+        
+    });
+</script>

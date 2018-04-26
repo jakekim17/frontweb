@@ -1,0 +1,88 @@
+﻿@using Wow
+@{
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+}
+<!-- 내용 1 -->
+<div class="box on">
+    <div class="box-scroll">
+        <ul class="thumbnail-list">
+            @if (Model.BestTotalList != null)
+            {
+                foreach (var item in Model.BestTotalList)
+                {
+                    <li>
+                        <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID')">
+                            @if (!String.IsNullOrEmpty(item.IMAGE_FILE))
+                            {
+                                <span class="img">
+                                    @if (@item.VOD_NUM > 0)
+                                    {
+                                        <span class="icon-play small"></span>
+                                    }
+                                    @if (!String.IsNullOrEmpty(item.IMAGE_FILE))
+                                    {
+                                        <img src="@WowExtensionMethod.NewsThumbnailPath("16S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16S")'" alt="">
+                                    }
+                                </span>
+                            }
+                            <span class="text">
+                                @WowExtensionMethod.SubStringWidthPad(item.TITLE, 60)
+                                <span class="time">@item.ARTDATE.ToString("yyyy-MM-dd")</span>
+                            </span>
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<!-- // 내용 1 -->
+<!-- 내용 2 -->
+<div class="box">
+    <div class="box-scroll">
+        <ul class="thumbnail-list">
+            @if (Model.BestEntSpoList != null)
+            {
+                foreach (var item in Model.BestEntSpoList)
+                {
+                    <li>
+                        <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@item.ARTICLEID')">
+                            @if (!String.IsNullOrEmpty(item.IMAGE_FILE))
+                            {
+                                <span class="img">
+                                    @if (@item.VOD_NUM > 0)
+                                    {
+                                        <span class="icon-play small"></span>
+                                    }
+                                    @if (!String.IsNullOrEmpty(item.IMAGE_FILE))
+                                    {
+                                        <img src="@WowExtensionMethod.NewsThumbnailPath("16S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16S")'" alt="">
+                                    }
+                                </span>
+                            }
+                            <span class="text">
+                                @WowExtensionMethod.SubStringWidthPad(item.TITLE, 60)
+                                <span class="time">@item.ARTDATE.ToString("yyyy-MM-dd")</span>
+                            </span>
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<!-- // 내용 2 -->
+<!-- 내용 3 -->
+<div class="box">
+    <div class="box-scroll">
+        <ul class="thumbnail-list" id="ulFaceBookPosts"></ul>
+    </div>
+</div>
+<!-- // 내용 3 -->
+
+<script src="@wowTvScript/NewsCenter/EntSpo/ManySeeNews.js"></script>

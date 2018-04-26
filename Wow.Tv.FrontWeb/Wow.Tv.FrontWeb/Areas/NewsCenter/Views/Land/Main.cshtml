@@ -1,0 +1,486 @@
+﻿@using Wow
+@{
+    Layout = "/Views/Shared/_MainLayOut2.cshtml";
+    AppState["BodyClass"] = "land";
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string naverClientId = AppState["NaverClientId"].ToString();
+
+    int newsDataCnt = 0;
+}
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/land.css">
+}
+
+@section scripts{
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=@naverClientId&submodules=geocoder"></script>
+    <script src="@wowTvScript/jquery.timeago/jquery.timeago.js"></script>
+    <script src="@wowTvScript/jquery.timeago/jquery.timeago.ko.js"></script>
+
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/Land/Main.js"></script>
+
+    <script>
+        var searchAddress = '@ViewBag.SearchAddress';
+    </script>
+}
+
+<form id="frmSearch">
+    <input type="hidden" name="SearchText" id="SearchText"/>
+</form>
+
+<div class="wrap">
+    <!-- Content Area -->
+    <div class="contain-land main">
+        <!-- 지도 API 뉴스 / 분양 핫이슈 -->
+        <div class="section-land">
+            <!-- 지도 API 뉴스 -->
+            <div class="left-box">
+                <div class="land-map">
+                    <div class="map-location-area">
+                        <span class="path">
+                            <select id="sido">
+                                <option value="">도/시</option>
+                            </select>
+                        </span>
+                        <span class="path">
+                            <select id="gugun">
+                                <option value="">구/시/군</option>
+                            </select>
+                        </span>
+                        <span class="path">
+                            <select id="dong">
+                                <option value="">읍/면/동</option>
+                            </select>
+                        </span>
+                        <span class="btn-type4" id="btnSearch"><a href="#none">조회</a></span>
+                    </div>
+                    <div class="map-area" id="map"></div>
+                    <div class="map-cont">
+                        @foreach (var item in Model)
+                        {
+                            if (item.SHOW_NUM == 10)
+                            {
+                                <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                    <strong class="tit">@item.TITLE</strong>
+                                    <span class="cont">@WowExtensionMethod.RemoveTag(WowExtensionMethod.RemoveTagAndReplace(item.CONTENTS_CUT, 0, true))</span>
+                                </a>
+                                newsDataCnt++;
+                            }
+                        }
+                        
+                        @if (newsDataCnt == 0)
+                        {
+                            <a href="javascript:void(0)">등록된 내용이 없습니다.</a>    
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- 지도 API 뉴스 -->
+            <!-- 분양 핫이슈 -->
+            <div class="right-box">
+                <h2>부동산 뉴스<a href="javascript:LandMain.LandList('W010')" class="more">더보기</a></h2>
+                <div class="list-land issue">
+                    @{
+                        newsDataCnt = 0;
+                        foreach (var item in Model)
+                        {
+                            if (item.SHOW_NUM == 20)
+                            {
+                                <div class="img-area">
+
+                                    <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                        @if (@item.VOD_NUM > 0)
+                                        {
+                                            <span class="icon-play medium"></span>
+                                        }
+                                        @if (item.GUBUN_NAME != "")
+                                        {
+                                            <span class="box-icon">@item.GUBUN_NAME</span>
+                                        }
+                                        <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" alt="" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'">
+                                        <span class="tit">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                    </a>
+
+                                </div>
+                                newsDataCnt++;
+                            }
+                        }
+
+                        if (newsDataCnt == 0)
+                        {
+                            <a href="javascript:void(0)">등록된 내용이 없습니다.</a>
+                        }
+                    }
+                    <ul>
+                        @{
+                            newsDataCnt = 0;
+                            foreach (var item in Model)
+                            {
+                                if (item.SHOW_NUM == 21)
+                                {
+                                    <li>
+                                        <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                            @if (item.GUBUN_NAME != "")
+                                            {
+                                                <span class="box-icon">@item.GUBUN_NAME</span>
+                                            }
+                                            <span class="tit">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                        </a>
+                                    </li>
+                                    newsDataCnt++;
+                                }
+                            }
+
+                            if (newsDataCnt == 0)
+                            {
+                                <li>등록된 내용이 없습니다.</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!-- //분양 핫이슈 -->
+        </div>
+        <!-- //지도 API 뉴스 / 분양 핫이슈 -->
+        <!-- 부동산 클로즈업 / 배너박스 -->
+        <div class="section-land">
+            <!-- 부동산 클로즈업 -->
+            <div class="left-box">
+                <h2>지자체 뉴스(전국N)<a href="javascript:LandMain.LandList('W065')" class="more">더보기</a></h2>
+                <div class="thumb-land">
+                    @{
+                        newsDataCnt = 0;
+                        foreach (var item in Model)
+                        {
+                            if (item.SHOW_NUM == 30)
+                            {
+                                <div class="left-box">
+                                    <div class="img-area">
+                                        <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                            @if (@item.VOD_NUM > 0)
+                                            {
+                                                <span class="icon-play medium"></span>
+                                            }
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("34M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" alt="" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("34M")'">
+                                            <span class="tit">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                newsDataCnt++;
+                            }
+                        }
+                        if (newsDataCnt == 0)
+                        {
+                            <div class="left-box">등록된 내용이 없습니다.</div>
+                        }
+                        newsDataCnt = 0;
+
+                        <div class="right-box">
+                            @foreach (var item in Model) {
+                                if (item.SHOW_NUM == 31)
+                                {
+
+                                    <div class="img-area">
+                                        <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                            @if (@item.VOD_NUM > 0)
+                                            {
+                                                <span class="icon-play medium"></span>
+                                            }
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" alt="" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'">
+                                            <span class="tit">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                        </a>
+                                    </div>
+
+                                    newsDataCnt++;
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- //부동산 클로즈업 -->
+            <!-- 부동산 배너박스 -->
+            <div class="right-box">
+                <div class="land-banner">
+                    <a href="#none">
+                        <img src="@wowTvStyle/images/land/img_temp_banner.png" alt="배너 이미지">
+                    </a>
+                </div>
+            </div>
+            <!-- //부동산 배너박스 -->
+        </div>
+        <!-- //부동산 클로즈업 / 배너박스 -->
+        <div class="main-banner" id="divBanner">
+        </div>
+        <!-- 부동산 일반 / 부동산 영상 / 분양뉴스 &amp; 분석전략 -->
+        <div class="section-land">
+            <div class="left-box col2">
+                <!-- 부동산 일반 -->
+                <div class="left-sub">
+                    <h2>분양클로즈업<a href="javascript:LandMain.LandList('W025')" class="more">더보기</a></h2>
+                    <div class="list-land common">
+                        @{
+                            newsDataCnt = 0;
+                            foreach (var item in Model)
+                            {
+                                if (item.SHOW_NUM == 40)
+                                {
+                                    <div class="img-area">
+                                        <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                            @if (@item.VOD_NUM > 0)
+                                            {
+                                                <span class="icon-play medium"></span>
+                                            }
+                                            @if (item.GUBUN_NAME != "")
+                                            {
+                                                <span class="box-icon">@item.GUBUN_NAME</span>
+                                            }
+
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" alt="" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'">
+                                            <span class="tit">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                        </a>
+                                    </div>
+                                    newsDataCnt++;
+                                }
+                            }
+
+                            if (newsDataCnt == 0)
+                            {
+                                <a href="javascript:void(0)">등록된 내용이 없습니다.</a>
+                            }
+                        }
+                        <ul>
+                            @{
+                                newsDataCnt = 0;
+                                foreach (var item in Model)
+                                {
+                                    if (item.SHOW_NUM == 41)
+                                    {
+                                        <li>
+                                            <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                                @if (item.GUBUN_NAME != "")
+                                                {
+                                                    <span class="box-icon">@item.GUBUN_NAME</span>
+                                                }
+                                                <span class="tit">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                            </a>
+                                        </li>
+                                        newsDataCnt++;
+                                    }
+                                }
+
+                                if (newsDataCnt == 0)
+                                {
+                                    <li>등록된 내용이 없습니다.</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <!-- //부동산 일반 -->
+                <!-- 부동산 영상 -->
+                <div class="right-sub">
+                    <h2>부동산 투자의 맥<a href="javascript:LandMain.LandList('W066')" class="more">더보기</a></h2>
+                    <div class="list-video">
+                        <ul>
+                            @{
+                                newsDataCnt = 0;
+                                foreach (var item in Model)
+                                {
+                                    if (item.SHOW_NUM / 10 == 5)
+                                    {
+                                        <li>
+                                            <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                                <span class="img-area">
+                                                    <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" alt="" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'">
+                                                    @if (@item.VOD_NUM > 0)
+                                                    {
+                                                        <span class="icon-play medium"></span>
+                                                    }
+                                                </span>
+                                                <span class="cont">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                            </a>
+                                        </li>
+                                        newsDataCnt++;
+                                    }
+                                    @*if (item.SHOW_NUM == 51)
+                                    {
+                                        <li>
+                                            <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                                <span class="img-area">
+                                                    <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" alt="" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'">
+                                                    @if (@item.VOD_NUM > 0)
+                                                    {
+                                                        <span class="icon-play medium"></span>
+                                                    }
+                                                </span>
+                                                <span class="cont">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                            </a>
+                                        </li>
+                                        newsDataCnt++;
+                                    }*@
+                                }
+
+                                if (newsDataCnt == 0)
+                                {
+                                    <li>등록된 내용이 없습니다.</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <!-- //부동산 영상 -->
+            </div>
+            <!-- 분양뉴스 &amp; 분석전략 -->
+            <div class="right-box">
+                <h2>부동산컨설팅<a href="javascript:LandMain.LandList('W067')" class="more">더보기</a></h2>
+                <div class="list-land video">
+                    <div class="img-area">
+                        @{
+                            newsDataCnt = 0;
+                            foreach (var item in Model)
+                            {
+                                if (item.SHOW_NUM == 60)
+                                {
+                                    <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                        @if (@item.VOD_NUM > 0)
+                                        {
+                                            <span class="icon-play medium"></span>
+                                        }
+                                        @if (item.GUBUN_NAME != "")
+                                        {
+                                            <span class="box-icon">@item.GUBUN_NAME</span>
+                                        }
+                                        <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" alt="" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'">
+                                        <span class="tit">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                    </a>
+                                    newsDataCnt++;
+                                }
+                            }
+
+                            if (newsDataCnt == 0)
+                            {
+                                <a href="javascript:void(0)">등록된 내용이 없습니다.</a>
+                            }
+                        }
+                        
+                    </div>
+                    <ul>
+                        @{
+                            newsDataCnt = 0;
+                            foreach (var item in Model)
+                            {
+                                if (item.SHOW_NUM == 61)
+                                {
+                                    <li>
+                                        <a href="javascript:NewsCommon.GoNewsDetailView('land', '@item.WOWCODE', '', '@item.ARTICLE_ID')">
+                                            @if (item.GUBUN_NAME != "")
+                                            {
+                                                <span class="box-icon">@item.GUBUN_NAME</span>
+                                            }
+                                            <span class="tit">@Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                        </a>
+                                    </li>
+                                    newsDataCnt++;
+                                }
+                            }
+
+                            if (newsDataCnt == 0)
+                            {
+                                <li>등록된 내용이 없습니다.</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!-- //분양뉴스 &amp; 분석전략 -->
+        </div>
+        <!-- much-section-area -->
+        <div class="much-section-area">
+            <!-- left much -->
+            <div class="much-left">
+                <h2>카드뉴스<a href="#" class="more">더보기</a></h2>
+                <div class="card-news-area" id="divCardNews"></div>
+                <!-- // 카드 뉴스 -->
+            </div>
+            <!-- // left much -->
+            <!-- right much -->
+            <div class="much-right">
+                <h2>많이 본 뉴스<a href="#" class="more">더보기</a></h2>
+                <!-- 텝 영역 -->
+                <div class="main-tab-area type2">
+                    <ul class="tab">
+                        <li class="on"><a href="#none">뉴스</a></li>
+                        <li><a href="#none">연예·스포츠</a></li>
+                        <li><a href="#none">SNS</a></li>
+                    </ul>
+                    <div class="box-area" id="divManySeeNews"></div>
+                </div>
+                <!-- 텝 영역 -->
+            </div>
+            <!-- // right much -->
+        </div>
+        <!-- // much-section-area -->
+    </div>
+    <!-- //Content Area -->
+</div>
+<!-- 이슈 갤러리 start -->
+<div class="box-img-slider">
+    <h2 class="title01">
+        이슈 갤러리
+        @*<a href="javascript:NewsCommon.GoPhotoList();" class="btn-ico plus">more</a>*@
+    </h2>
+    <div class="box-img-slider">
+        <div class="main_hot_sale">
+            <div class="new-slider type02">
+                <div class="bn" id="photoNewsSlider">
+                    <ul class="swiper-wrapper" id="divPhotoNews"></ul>
+                </div>
+            </div>
+            <a href="#" class="swiper-bn-left">이전 배너 보기</a>
+            <a href="#" class="swiper-bn-right">다음 배너 보기</a>
+        </div>
+    </div>
+</div>
+<!--// 이슈 갤러리 end -->
+<div class="wrap">
+    <!-- Content Area -->
+    <div class="contain-content">
+    <!-- 3단 start -->
+    <div class="box-3dabth">
+        <!-- 핫한 뉴우스 start -->
+        <div class="box-type-new">
+            <h2 class="title01" id="h2HotNews">핫한 뉴우스</h2>
+        </div>
+        <!--// 핫한 뉴우스 end -->
+        <div class="box-sns-channel">
+            <strong class="tit">
+                한국경제TV의 SNS채널에서 더욱<br>
+                다채로운 소식을 받아보실 수 있습니다
+            </strong>
+            <span class="sub-tit">친구신청 하러 가기</span>
+            <div class="btn-sns-channel-area">
+                <a href="https://www.facebook.com/HKWOWTV" class="btn-sns-channel facebook" target="_blank">페이스북</a>
+                <a href="https://story.kakao.com/ch/hkwowtv" class="btn-sns-channel kakaostory" target="_blank">카카오스토리</a>
+                <a href="http://post.naver.com/my.nhn?memberNo=11761424" class="btn-sns-channel naver-post" target="_blank">네이버 포스트</a>
+                <a href="https://www.youtube.com/user/hkwowtv" class="btn-sns-channel youtube" target="_blank">유투브</a>
+            </div>
+        </div>
+        @* 섹션메인면 우측하단 배너 *@
+        <div class="box-event">
+            <h2 class="blind">AD Area</h2>
+            <div>
+                <iframe width="300" height="300" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_14" title="AD Tag"></iframe>
+            </div>
+        </div>
+        <!--// 광고 이미지  end -->
+    </div>
+    <!--// 3단 end -->
+    @*와우넷,와우파,와우스타 탭 컨텐츠*@
+    @Html.Partial("~/Views/Home/WowNetFaStar.cshtml")
+    </div>
+    <!-- //Content Area -->
+</div>

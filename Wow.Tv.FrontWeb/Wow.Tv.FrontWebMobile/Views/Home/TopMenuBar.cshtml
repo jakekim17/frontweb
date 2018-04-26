@@ -1,0 +1,176 @@
+﻿@using Wow.Tv.FrontWebMobile.MenuService
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.wowtv
+@using Wow.Tv.Middle.Model.Db49.wowtv.Menu
+
+@{
+    Layout = null;
+}
+
+@{
+    string masterMenuName = "";
+    NTB_MENU currentMenu = new NTB_MENU();
+    NTB_MENU menuDepth1 = new NTB_MENU();
+    NTB_MENU menuDepth2 = new NTB_MENU();
+    ListModel<NTB_MENU> masterMenuList = new ListModel<NTB_MENU>();
+    ListModel<NTB_MENU> menuList_2 = new ListModel<NTB_MENU>();
+    menuList_2.ListData = new List<NTB_MENU>();
+    MenuServiceClient menuServiceClient = new MenuServiceClient();
+    string currentMenuSeq = Request["menuSeq"];
+
+    if (String.IsNullOrEmpty(currentMenuSeq) == true && String.IsNullOrEmpty(Request["articleId"]) == false)
+    {
+        currentMenuSeq = "4324";
+    }
+
+    if (String.IsNullOrEmpty(currentMenuSeq) == false)
+    {
+        currentMenu = menuServiceClient.GetAt(int.Parse(currentMenuSeq));
+
+        if (currentMenu != null)
+        {
+            MenuCondition menuCondition = new MenuCondition();
+            menuCondition.ChannelCode = "WowTv_Mobile";
+            menuCondition.Depth = 2;
+            menuCondition.ActiveYn = "Y";
+            menuCondition.PageSize = -1;
+            menuCondition.UpMenuSeq = currentMenu.UP_MENU_SEQ;
+            if (currentMenu.DEPTH == 2)
+            {
+                if (menuCondition.UpMenuSeq == 788) // 증권
+                {
+                    menuCondition.UpMenuSeq = currentMenu.MENU_SEQ;
+                    masterMenuName = currentMenu.MENU_NAME;
+                }
+                else
+                {
+                    menuCondition.UpMenuSeq = currentMenu.UP_MENU_SEQ;
+
+                    var parentMenu = menuServiceClient.GetAt(currentMenu.UP_MENU_SEQ);
+                    menuDepth1 = parentMenu;
+                    menuDepth2 = currentMenu;
+                    masterMenuName = menuDepth1.MENU_NAME;
+                }
+            }
+            else if (currentMenu.DEPTH == 3)
+            {
+                var parentMenu = menuServiceClient.GetAt(currentMenu.UP_MENU_SEQ);
+                //menuCondition.UpMenuSeq = parentMenu.UP_MENU_SEQ;
+                menuCondition.Depth = 3;
+                menuCondition.UpMenuSeq = currentMenu.UP_MENU_SEQ;
+
+                var parentParentMenu = menuServiceClient.GetAt(parentMenu.UP_MENU_SEQ);
+                menuDepth1 = parentParentMenu;
+                menuDepth2 = parentMenu;
+                masterMenuName = menuDepth2.MENU_NAME;
+            }
+            menuList_2 = menuServiceClient.SearchList(menuCondition);
+        }
+    }
+}
+
+
+
+<article class="header-top">
+    <div class="menu-area">
+        <a href="javascript:void(0);" class="menu-btn">메뉴</a>
+    </div>
+    <h1>@masterMenuName</h1>
+    <div class="menu-area right">
+        <a href="#none" class="search">검색</a> <!-- logout 클래스 추가시 아이콘 변경 -->
+        <a href="#" class="onair" onclick="return TopMenu.MoveTvOnAir();">온에어</a>
+    </div>
+</article>
+
+<!-- 검색 박스 드롭 -->
+<div class="search-area">
+    <!-- 인풋 박스 -->
+    <div class="input-area">
+        <form id="LayOut_totalSearchForm" action="/totalSearch/Mariner/Index" method="post">
+            <input type="search" name="searchTerm">
+            <a href="javascript:void(0)" onclick="$('#LayOut_totalSearchForm').submit();"><span class="search-btn"></span></a>
+        </form>
+        <!-- // 검색 버튼 -->
+        @*<!-- 자동 완성 -->
+            <div class="auto-search ">
+                <!-- on 추가 / 제거시 display:none / block -->
+                <ul>
+                    <li><a href="javascript:void(0)"><span>한국</span>경제TV</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>경제 신문</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>4호 스펙</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>가구</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>가스공사</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>공항</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>검색지주</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>검색지주우</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>기업평가</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>내화</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>ㅇㅇㅇㅇ</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>ㅇㅇㅇㅇ</a></li>
+                    <li><a href="javascript:void(0)"><span>한국</span>ㅇㅇㅇㅇ</a></li>
+                </ul>
+                <p class="title">
+                    인기검색어
+                </p>
+                <ul>
+                    <li>
+                        <a href="javascript:void(0)">한국 경제TV</a>
+                        <span class="hits"> 169회 </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">한국 경제 신문</a>
+                        <span class="hits"> 169회 </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">한국 4호 스펙</a>
+                        <span class="hits"> 169회 </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">한국 가구</a>
+                        <span class="hits"> 169회 </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">한국 가스공사</a>
+                        <span class="hits"> 169회 </span>
+                    </li>
+                </ul>
+                <p class="title">
+                    자동완성
+                    <!-- 스위치 버튼  -->
+                    <label class="switch-btn">
+                        <input class="switch-input" type="checkbox">
+                        <span class="switch-label" data-on="ON" data-off="OFF"></span>
+                        <span class="switch-handle"></span>
+                    </label>
+                    <!-- // 스위치 버튼  -->
+                </p>
+            </div>
+            <!-- // 자동 완성 -->*@
+    </div>
+    <!-- // 인풋 박스 -->
+</div>
+<!-- // 검색 박스 드롭 -->
+
+
+
+<!-- 상단 탑 메뉴 -->
+<div class="gnb">
+    <!-- gnb-container -->
+    <div class="gnb-container">
+        <!-- 상단 탑 메뉴 -->
+        <div class="swiper-container tv-gnb header-gnb">
+            <div class="swiper-wrapper">
+            @foreach (var item2 in menuList_2.ListData)
+            {
+                <div class="swiper-slide @(item2.MENU_SEQ.ToString() == currentMenuSeq ? "on" : "")"><a href="@item2.Href" target="@item2.LINK_TYPE_CODE"><span>@item2.MENU_NAME</span></a></div>
+            }
+            </div>
+        </div>
+        <!-- // 상단 탑 메뉴 -->
+    </div>
+    <!-- gnb-container -->
+</div>
+<!-- // 상단 탑 메뉴 -->
+
+
+

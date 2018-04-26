@@ -1,0 +1,68 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.editVOD
+@using Wow.Tv.Middle.Model.Db49.wowtv
+
+@model ListModel<usp_GetCornerVODList_WEB_Result>
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    string programCode = ViewBag.ProgramCode;
+    string contentSeq = ViewBag.ContentSeq;
+
+    List<NTB_MENU> innerMenuList = ViewBag.InnerMenuList;
+    NTB_MENU currentInnerMenu = ViewBag.CurrentInnerMenu;
+}
+
+
+
+<script src="@wowTvScript/Broad/Corner/Index.js?date=20171018170000"></script>
+
+
+<form id="frmSearch">
+    <input type="hidden" id="Corner_hidProgramCode" name="programCode" value="@programCode" />
+    <input type="hidden" id="Corner_hidScCode" name="scCode" value="@currentInnerMenu.CONTENT_SEQ" />
+
+    <input type="hidden" name="currentIndex" value="0" />
+    <input type="hidden" name="pageSize" value="16" />
+</form>
+
+<!-- 좌측 영역 -->
+<div class="left-section">
+
+    <div class="box-list-arr">
+        <ul>
+            @foreach (var item in innerMenuList.Where(a => a.DEPTH > 1).OrderBy(a => a.SORD_ORDER))
+            {
+            <li @(item.MENU_SEQ == currentInnerMenu.MENU_SEQ ? "class=on" : "")><a href="#" onclick="return ProgramMainIndex.BindContentPartial('/Broad/Corner/Index', '@item.CONTENT_SEQ');">@item.MENU_NAME</a></li>
+            }
+
+        </ul>
+    </div>
+
+    <div class="desc-corner">
+        <h2 class="title">@currentInnerMenu.MENU_NAME</h2>
+        <p class="cont">
+            @MvcHtmlString.Create(currentInnerMenu.REMARK)
+        </p>
+    </div>
+
+    <div id="divList"></div>
+</div>
+<!-- // 좌측 영역 -->
+<!-- 우측 영역 -->
+<div class="right-section">
+    @*<div class="box-img-gray">
+        <img src="../../images/temp/temp_news5.png" alt="bannerImg">
+    </div>
+    <div class="box-img-gray">
+        <img src="../../images/temp/temp_news5.png" alt="bannerImg">
+    </div>
+    <div class="box-img-gray">
+        <img src="../../images/temp/temp_news5.png" alt="bannerImg">
+    </div>*@
+</div>
+<!-- // 우측 영역 -->

@@ -1,0 +1,1463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MyActiveService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db51.ARSConsult" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db51.WOWMMS" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wownet" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wowtv" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db90.DNRS" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd9" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.broadcast" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.WOWTV_BILL_DB" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.wowbill.MyInfo" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db89.WOWTV_BILL_DB.MyPage" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd15" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wowtv.Board" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd16" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wowcafe" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd17" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wownet.MyPage" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd18" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock.MyPage" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd19" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" />
+      <xsd:import schemaLocation="http://localhost:8088/MyPage/MyActiveService.svc?xsd=xsd20" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.wowtv.MyPage" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMyActiveService_GetSmsSearchList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSmsSearchList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetSmsSearchList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSmsSearchListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetLmsSearchList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLmsSearchList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetLmsSearchList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLmsSearchListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetScrapCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScrapCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetScrapCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetScrapCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_ScrapCategoryDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:ScrapCategoryDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_ScrapCategoryDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ScrapCategoryDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_UpdateScrapCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateScrapCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_UpdateScrapCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateScrapCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetScrapMenu_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScrapMenu" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetScrapMenu_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetScrapMenuResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_ScrapMenuDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:ScrapMenuDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_ScrapMenuDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ScrapMenuDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_UpdateScrapMenu_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateScrapMenu" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_UpdateScrapMenu_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateScrapMenuResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveScrapMenu_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveScrapMenu" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveScrapMenu_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveScrapMenuResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetNewsPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNewsPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetNewsPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNewsPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_NewsPinDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsPinDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_NewsPinDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsPinDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetReporterPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReporterPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetReporterPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReporterPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_ReporterPinDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReporterPinDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_ReporterPinDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReporterPinDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetProgramPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProgramPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetProgramPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProgramPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_ProgramPinDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProgramPinDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_ProgramPinDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProgramPinDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetPartnerPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPartnerPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetPartnerPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPartnerPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_PartnerPinDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:PartnerPinDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_PartnerPinDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PartnerPinDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetRecommendProgram_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecommendProgram" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetRecommendProgram_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecommendProgramResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetRecommendPartner_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecommendPartner" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetRecommendPartner_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecommendPartnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockRecommendPartner_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockRecommendPartner" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockRecommendPartner_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockRecommendPartnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockConsultList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockConsultList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockConsultList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockConsultListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockDebateList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockDebateList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockDebateList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockDebateListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetDealList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDealList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetDealList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDealListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockInfoList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockInfoList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockInfoList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockInfoListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SavePartner_InputMessage">
+    <wsdl:part name="parameters" element="tns:SavePartner" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SavePartner_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SavePartnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveProgram_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveProgram" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveProgram_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveProgramResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveReporter_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveReporter" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveReporter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveReporterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveNews_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveNews" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveNews_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveNewsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyCashInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyCashInfo" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyCashInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyCashInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetCouponList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCouponList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetCouponList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCouponListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetCashList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetCashList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetRefundList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRefundList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetRefundList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRefundListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_CouponChceck_InputMessage">
+    <wsdl:part name="parameters" element="tns:CouponChceck" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_CouponChceck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CouponChceckResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_RegisterCoupon_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCoupon" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_RegisterCoupon_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCouponResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetOrderList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetOrderList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetCouponCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCouponCount" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetCouponCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCouponCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_MyMainIntegratedSearchCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:MyMainIntegratedSearchCount" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_MyMainIntegratedSearchCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MyMainIntegratedSearchCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyPartnerAt_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyPartnerAt" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyPartnerAt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyPartnerAtResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyCashAt_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyCashAt" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyCashAt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyCashAtResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainNewsPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainNewsPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainNewsPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainNewsPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainPartnerPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainPartnerPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainPartnerPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainPartnerPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainProgramPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainProgramPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainProgramPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainProgramPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainReporterPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainReporterPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainReporterPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainReporterPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetFAQList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFAQList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetFAQList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFAQListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetJoinCafeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJoinCafeList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetJoinCafeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJoinCafeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SingleNewsPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:SingleNewsPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SingleNewsPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SingleNewsPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetInvestmentPartnerList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvestmentPartnerList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetInvestmentPartnerList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvestmentPartnerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetLecturesList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLecturesList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetLecturesList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLecturesListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveMyFavoriteJongMok_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMyFavoriteJongMok" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveMyFavoriteJongMok_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMyFavoriteJongMokResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_RemoveMyFavoriteJongMok_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveMyFavoriteJongMok" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_RemoveMyFavoriteJongMok_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveMyFavoriteJongMokResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyFavoriteJongMokList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyFavoriteJongMokList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyFavoriteJongMokList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyFavoriteJongMokListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyChangePercent_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyChangePercent" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyChangePercent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyChangePercentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetStockList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetPopupMyFavoriteJongMokList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPopupMyFavoriteJongMokList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetPopupMyFavoriteJongMokList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPopupMyFavoriteJongMokListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyStock" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_RemoveMyStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveMyStock" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_RemoveMyStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveMyStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveMyStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMyStock" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveMyStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMyStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveMyFavoriteJongMokRange_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMyFavoriteJongMokRange" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_SaveMyFavoriteJongMokRange_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMyFavoriteJongMokRangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainServiceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainServiceList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMainServiceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMainServiceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyServiceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyServiceList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyServiceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyServiceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_IsMyFavoriteJongMok_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsMyFavoriteJongMok" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_IsMyFavoriteJongMok_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsMyFavoriteJongMokResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetGiftDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGiftDelivery" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetGiftDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGiftDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetVodDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVodDelivery" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetVodDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVodDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetReport119_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReport119" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetReport119_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReport119Response" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetReport119Detail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReport119Detail" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetReport119Detail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReport119DetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_TestGetBillBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:TestGetBillBalance" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_TestGetBillBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TestGetBillBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyClass" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMyClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetWowTvBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWowTvBalance" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetWowTvBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWowTvBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetBillBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBillBalance" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetBillBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBillBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetUsedServiceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsedServiceList" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetUsedServiceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsedServiceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMemberInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberInfo" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetMemberInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetCPNAME_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCPNAME" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetCPNAME_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCPNAMEResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetQuickProgramPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuickProgramPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetQuickProgramPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuickProgramPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetQuickPartnerPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuickPartnerPin" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetQuickPartnerPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuickPartnerPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetPartnerCafeDomain_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPartnerCafeDomain" />
+  </wsdl:message>
+  <wsdl:message name="IMyActiveService_GetPartnerCafeDomain_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPartnerCafeDomainResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMyActiveService">
+    <wsdl:operation name="GetSmsSearchList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetSmsSearchList" message="tns:IMyActiveService_GetSmsSearchList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetSmsSearchListResponse" message="tns:IMyActiveService_GetSmsSearchList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLmsSearchList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetLmsSearchList" message="tns:IMyActiveService_GetLmsSearchList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetLmsSearchListResponse" message="tns:IMyActiveService_GetLmsSearchList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScrapCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetScrapCategory" message="tns:IMyActiveService_GetScrapCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetScrapCategoryResponse" message="tns:IMyActiveService_GetScrapCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ScrapCategoryDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/ScrapCategoryDelete" message="tns:IMyActiveService_ScrapCategoryDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/ScrapCategoryDeleteResponse" message="tns:IMyActiveService_ScrapCategoryDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateScrapCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/UpdateScrapCategory" message="tns:IMyActiveService_UpdateScrapCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/UpdateScrapCategoryResponse" message="tns:IMyActiveService_UpdateScrapCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScrapMenu">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetScrapMenu" message="tns:IMyActiveService_GetScrapMenu_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetScrapMenuResponse" message="tns:IMyActiveService_GetScrapMenu_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ScrapMenuDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/ScrapMenuDelete" message="tns:IMyActiveService_ScrapMenuDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/ScrapMenuDeleteResponse" message="tns:IMyActiveService_ScrapMenuDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateScrapMenu">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/UpdateScrapMenu" message="tns:IMyActiveService_UpdateScrapMenu_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/UpdateScrapMenuResponse" message="tns:IMyActiveService_UpdateScrapMenu_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveScrapMenu">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/SaveScrapMenu" message="tns:IMyActiveService_SaveScrapMenu_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/SaveScrapMenuResponse" message="tns:IMyActiveService_SaveScrapMenu_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetNewsPin" message="tns:IMyActiveService_GetNewsPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetNewsPinResponse" message="tns:IMyActiveService_GetNewsPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NewsPinDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/NewsPinDelete" message="tns:IMyActiveService_NewsPinDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/NewsPinDeleteResponse" message="tns:IMyActiveService_NewsPinDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReporterPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetReporterPin" message="tns:IMyActiveService_GetReporterPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetReporterPinResponse" message="tns:IMyActiveService_GetReporterPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReporterPinDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/ReporterPinDelete" message="tns:IMyActiveService_ReporterPinDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/ReporterPinDeleteResponse" message="tns:IMyActiveService_ReporterPinDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProgramPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetProgramPin" message="tns:IMyActiveService_GetProgramPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetProgramPinResponse" message="tns:IMyActiveService_GetProgramPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProgramPinDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/ProgramPinDelete" message="tns:IMyActiveService_ProgramPinDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/ProgramPinDeleteResponse" message="tns:IMyActiveService_ProgramPinDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPartnerPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetPartnerPin" message="tns:IMyActiveService_GetPartnerPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetPartnerPinResponse" message="tns:IMyActiveService_GetPartnerPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PartnerPinDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/PartnerPinDelete" message="tns:IMyActiveService_PartnerPinDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/PartnerPinDeleteResponse" message="tns:IMyActiveService_PartnerPinDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecommendProgram">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetRecommendProgram" message="tns:IMyActiveService_GetRecommendProgram_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetRecommendProgramResponse" message="tns:IMyActiveService_GetRecommendProgram_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecommendPartner">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetRecommendPartner" message="tns:IMyActiveService_GetRecommendPartner_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetRecommendPartnerResponse" message="tns:IMyActiveService_GetRecommendPartner_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockRecommendPartner">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetStockRecommendPartner" message="tns:IMyActiveService_GetStockRecommendPartner_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetStockRecommendPartnerResponse" message="tns:IMyActiveService_GetStockRecommendPartner_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockConsultList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetStockConsultList" message="tns:IMyActiveService_GetStockConsultList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetStockConsultListResponse" message="tns:IMyActiveService_GetStockConsultList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockDebateList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetStockDebateList" message="tns:IMyActiveService_GetStockDebateList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetStockDebateListResponse" message="tns:IMyActiveService_GetStockDebateList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDealList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetDealList" message="tns:IMyActiveService_GetDealList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetDealListResponse" message="tns:IMyActiveService_GetDealList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockInfoList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetStockInfoList" message="tns:IMyActiveService_GetStockInfoList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetStockInfoListResponse" message="tns:IMyActiveService_GetStockInfoList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePartner">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/SavePartner" message="tns:IMyActiveService_SavePartner_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/SavePartnerResponse" message="tns:IMyActiveService_SavePartner_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveProgram">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/SaveProgram" message="tns:IMyActiveService_SaveProgram_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/SaveProgramResponse" message="tns:IMyActiveService_SaveProgram_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveReporter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/SaveReporter" message="tns:IMyActiveService_SaveReporter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/SaveReporterResponse" message="tns:IMyActiveService_SaveReporter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveNews">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/SaveNews" message="tns:IMyActiveService_SaveNews_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/SaveNewsResponse" message="tns:IMyActiveService_SaveNews_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyCashInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMyCashInfo" message="tns:IMyActiveService_GetMyCashInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMyCashInfoResponse" message="tns:IMyActiveService_GetMyCashInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetCouponList" message="tns:IMyActiveService_GetCouponList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetCouponListResponse" message="tns:IMyActiveService_GetCouponList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetCashList" message="tns:IMyActiveService_GetCashList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetCashListResponse" message="tns:IMyActiveService_GetCashList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetRefundList" message="tns:IMyActiveService_GetRefundList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetRefundListResponse" message="tns:IMyActiveService_GetRefundList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CouponChceck">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/CouponChceck" message="tns:IMyActiveService_CouponChceck_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/CouponChceckResponse" message="tns:IMyActiveService_CouponChceck_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCoupon">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/RegisterCoupon" message="tns:IMyActiveService_RegisterCoupon_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/RegisterCouponResponse" message="tns:IMyActiveService_RegisterCoupon_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetOrderList" message="tns:IMyActiveService_GetOrderList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetOrderListResponse" message="tns:IMyActiveService_GetOrderList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetCouponCount" message="tns:IMyActiveService_GetCouponCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetCouponCountResponse" message="tns:IMyActiveService_GetCouponCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MyMainIntegratedSearchCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/MyMainIntegratedSearchCount" message="tns:IMyActiveService_MyMainIntegratedSearchCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/MyMainIntegratedSearchCountResponse" message="tns:IMyActiveService_MyMainIntegratedSearchCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyPartnerAt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMyPartnerAt" message="tns:IMyActiveService_GetMyPartnerAt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMyPartnerAtResponse" message="tns:IMyActiveService_GetMyPartnerAt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyCashAt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMyCashAt" message="tns:IMyActiveService_GetMyCashAt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMyCashAtResponse" message="tns:IMyActiveService_GetMyCashAt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMainNewsPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMainNewsPin" message="tns:IMyActiveService_GetMainNewsPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMainNewsPinResponse" message="tns:IMyActiveService_GetMainNewsPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMainPartnerPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMainPartnerPin" message="tns:IMyActiveService_GetMainPartnerPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMainPartnerPinResponse" message="tns:IMyActiveService_GetMainPartnerPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMainProgramPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMainProgramPin" message="tns:IMyActiveService_GetMainProgramPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMainProgramPinResponse" message="tns:IMyActiveService_GetMainProgramPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMainReporterPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMainReporterPin" message="tns:IMyActiveService_GetMainReporterPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMainReporterPinResponse" message="tns:IMyActiveService_GetMainReporterPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFAQList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetFAQList" message="tns:IMyActiveService_GetFAQList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetFAQListResponse" message="tns:IMyActiveService_GetFAQList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJoinCafeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetJoinCafeList" message="tns:IMyActiveService_GetJoinCafeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetJoinCafeListResponse" message="tns:IMyActiveService_GetJoinCafeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SingleNewsPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/SingleNewsPin" message="tns:IMyActiveService_SingleNewsPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/SingleNewsPinResponse" message="tns:IMyActiveService_SingleNewsPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvestmentPartnerList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetInvestmentPartnerList" message="tns:IMyActiveService_GetInvestmentPartnerList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetInvestmentPartnerListResponse" message="tns:IMyActiveService_GetInvestmentPartnerList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLecturesList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetLecturesList" message="tns:IMyActiveService_GetLecturesList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetLecturesListResponse" message="tns:IMyActiveService_GetLecturesList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveMyFavoriteJongMok">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/SaveMyFavoriteJongMok" message="tns:IMyActiveService_SaveMyFavoriteJongMok_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/SaveMyFavoriteJongMokResponse" message="tns:IMyActiveService_SaveMyFavoriteJongMok_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMyFavoriteJongMok">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/RemoveMyFavoriteJongMok" message="tns:IMyActiveService_RemoveMyFavoriteJongMok_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/RemoveMyFavoriteJongMokResponse" message="tns:IMyActiveService_RemoveMyFavoriteJongMok_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyFavoriteJongMokList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMyFavoriteJongMokList" message="tns:IMyActiveService_GetMyFavoriteJongMokList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMyFavoriteJongMokListResponse" message="tns:IMyActiveService_GetMyFavoriteJongMokList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyChangePercent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMyChangePercent" message="tns:IMyActiveService_GetMyChangePercent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMyChangePercentResponse" message="tns:IMyActiveService_GetMyChangePercent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetStockList" message="tns:IMyActiveService_GetStockList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetStockListResponse" message="tns:IMyActiveService_GetStockList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPopupMyFavoriteJongMokList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetPopupMyFavoriteJongMokList" message="tns:IMyActiveService_GetPopupMyFavoriteJongMokList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetPopupMyFavoriteJongMokListResponse" message="tns:IMyActiveService_GetPopupMyFavoriteJongMokList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMyStock" message="tns:IMyActiveService_GetMyStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMyStockResponse" message="tns:IMyActiveService_GetMyStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMyStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/RemoveMyStock" message="tns:IMyActiveService_RemoveMyStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/RemoveMyStockResponse" message="tns:IMyActiveService_RemoveMyStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveMyStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/SaveMyStock" message="tns:IMyActiveService_SaveMyStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/SaveMyStockResponse" message="tns:IMyActiveService_SaveMyStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveMyFavoriteJongMokRange">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/SaveMyFavoriteJongMokRange" message="tns:IMyActiveService_SaveMyFavoriteJongMokRange_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/SaveMyFavoriteJongMokRangeResponse" message="tns:IMyActiveService_SaveMyFavoriteJongMokRange_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMainServiceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMainServiceList" message="tns:IMyActiveService_GetMainServiceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMainServiceListResponse" message="tns:IMyActiveService_GetMainServiceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyServiceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMyServiceList" message="tns:IMyActiveService_GetMyServiceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMyServiceListResponse" message="tns:IMyActiveService_GetMyServiceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsMyFavoriteJongMok">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/IsMyFavoriteJongMok" message="tns:IMyActiveService_IsMyFavoriteJongMok_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/IsMyFavoriteJongMokResponse" message="tns:IMyActiveService_IsMyFavoriteJongMok_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGiftDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetGiftDelivery" message="tns:IMyActiveService_GetGiftDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetGiftDeliveryResponse" message="tns:IMyActiveService_GetGiftDelivery_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVodDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetVodDelivery" message="tns:IMyActiveService_GetVodDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetVodDeliveryResponse" message="tns:IMyActiveService_GetVodDelivery_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReport119">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetReport119" message="tns:IMyActiveService_GetReport119_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetReport119Response" message="tns:IMyActiveService_GetReport119_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReport119Detail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetReport119Detail" message="tns:IMyActiveService_GetReport119Detail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetReport119DetailResponse" message="tns:IMyActiveService_GetReport119Detail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TestGetBillBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/TestGetBillBalance" message="tns:IMyActiveService_TestGetBillBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/TestGetBillBalanceResponse" message="tns:IMyActiveService_TestGetBillBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMyClass" message="tns:IMyActiveService_GetMyClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMyClassResponse" message="tns:IMyActiveService_GetMyClass_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWowTvBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetWowTvBalance" message="tns:IMyActiveService_GetWowTvBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetWowTvBalanceResponse" message="tns:IMyActiveService_GetWowTvBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBillBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetBillBalance" message="tns:IMyActiveService_GetBillBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetBillBalanceResponse" message="tns:IMyActiveService_GetBillBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsedServiceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetUsedServiceList" message="tns:IMyActiveService_GetUsedServiceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetUsedServiceListResponse" message="tns:IMyActiveService_GetUsedServiceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetMemberInfo" message="tns:IMyActiveService_GetMemberInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetMemberInfoResponse" message="tns:IMyActiveService_GetMemberInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCPNAME">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetCPNAME" message="tns:IMyActiveService_GetCPNAME_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetCPNAMEResponse" message="tns:IMyActiveService_GetCPNAME_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickProgramPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetQuickProgramPin" message="tns:IMyActiveService_GetQuickProgramPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetQuickProgramPinResponse" message="tns:IMyActiveService_GetQuickProgramPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickPartnerPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetQuickPartnerPin" message="tns:IMyActiveService_GetQuickPartnerPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetQuickPartnerPinResponse" message="tns:IMyActiveService_GetQuickPartnerPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPartnerCafeDomain">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMyActiveService/GetPartnerCafeDomain" message="tns:IMyActiveService_GetPartnerCafeDomain_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMyActiveService/GetPartnerCafeDomainResponse" message="tns:IMyActiveService_GetPartnerCafeDomain_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMyActiveService" type="tns:IMyActiveService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSmsSearchList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetSmsSearchList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLmsSearchList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetLmsSearchList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScrapCategory">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetScrapCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScrapCategoryDelete">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/ScrapCategoryDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateScrapCategory">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/UpdateScrapCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScrapMenu">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetScrapMenu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScrapMenuDelete">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/ScrapMenuDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateScrapMenu">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/UpdateScrapMenu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveScrapMenu">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/SaveScrapMenu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetNewsPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsPinDelete">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/NewsPinDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReporterPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetReporterPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReporterPinDelete">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/ReporterPinDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProgramPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetProgramPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProgramPinDelete">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/ProgramPinDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPartnerPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetPartnerPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PartnerPinDelete">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/PartnerPinDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecommendProgram">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetRecommendProgram" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecommendPartner">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetRecommendPartner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockRecommendPartner">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetStockRecommendPartner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockConsultList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetStockConsultList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockDebateList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetStockDebateList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDealList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetDealList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockInfoList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetStockInfoList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePartner">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/SavePartner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveProgram">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/SaveProgram" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveReporter">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/SaveReporter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNews">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/SaveNews" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyCashInfo">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMyCashInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetCouponList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetCashList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetRefundList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CouponChceck">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/CouponChceck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCoupon">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/RegisterCoupon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetOrderList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponCount">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetCouponCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MyMainIntegratedSearchCount">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/MyMainIntegratedSearchCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyPartnerAt">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMyPartnerAt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyCashAt">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMyCashAt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMainNewsPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMainNewsPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMainPartnerPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMainPartnerPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMainProgramPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMainProgramPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMainReporterPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMainReporterPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFAQList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetFAQList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJoinCafeList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetJoinCafeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SingleNewsPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/SingleNewsPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvestmentPartnerList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetInvestmentPartnerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLecturesList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetLecturesList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveMyFavoriteJongMok">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/SaveMyFavoriteJongMok" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMyFavoriteJongMok">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/RemoveMyFavoriteJongMok" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyFavoriteJongMokList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMyFavoriteJongMokList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyChangePercent">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMyChangePercent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetStockList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPopupMyFavoriteJongMokList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetPopupMyFavoriteJongMokList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyStock">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMyStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMyStock">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/RemoveMyStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveMyStock">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/SaveMyStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveMyFavoriteJongMokRange">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/SaveMyFavoriteJongMokRange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMainServiceList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMainServiceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyServiceList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMyServiceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsMyFavoriteJongMok">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/IsMyFavoriteJongMok" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGiftDelivery">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetGiftDelivery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVodDelivery">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetVodDelivery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReport119">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetReport119" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReport119Detail">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetReport119Detail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestGetBillBalance">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/TestGetBillBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyClass">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMyClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWowTvBalance">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetWowTvBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBillBalance">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetBillBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsedServiceList">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetUsedServiceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfo">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetMemberInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCPNAME">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetCPNAME" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickProgramPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetQuickProgramPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickPartnerPin">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetQuickPartnerPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPartnerCafeDomain">
+      <soap:operation soapAction="http://tempuri.org/IMyActiveService/GetPartnerCafeDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MyActiveService">
+    <wsdl:port name="BasicHttpBinding_IMyActiveService" binding="tns:BasicHttpBinding_IMyActiveService">
+      <soap:address location="http://localhost:8088/MyPage/MyActiveService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

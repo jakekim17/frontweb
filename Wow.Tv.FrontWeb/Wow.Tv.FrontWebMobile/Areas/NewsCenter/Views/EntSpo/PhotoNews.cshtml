@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+@if (Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="swiper-slide photoNewsList" id="@item.ARTICLEID">
+            <!-- gallery 1 start -->
+            <div class="img-cont">
+                <div class="img-area">
+                    <img src="@Wow.WowExtensionMethod.NewsThumbnailPath("34S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("34S")'" alt="">
+                </div>
+                <p class="txt">@item.TITLE</p>
+            </div>
+            <!--// gallery 1 end -->
+        </div>
+    }
+}
+else
+{
+    <div>등록된 내용이 없습니다.</div>
+}

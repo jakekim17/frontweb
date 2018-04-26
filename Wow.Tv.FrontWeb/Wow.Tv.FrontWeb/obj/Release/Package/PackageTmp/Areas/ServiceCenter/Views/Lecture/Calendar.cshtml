@@ -1,0 +1,110 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <link href='/WowTvScript/FullCalendar/fullcalendar.css' rel='stylesheet' />
+    <link href='/WowTvScript/FullCalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <script src='/WowTvScript/FullCalendar/lib/moment.min.js'></script>
+    <script src='/WowTvScript/jquery-1.10.2.js'></script>
+    <script src='/WowTvScript/FullCalendar/fullcalendar.min.js'></script>
+    <script src='/WowTvScript/FullCalendar/ko.js'></script>
+    <script>
+        $(document).ready(function () {
+            var today = new Date();
+            var tMonth;
+            if (today.getMonth() + 1 < 10) {
+                tMonth = "0" + (today.getMonth() + 1);
+            } else {
+                tMonth = (today.getMonth() + 1);
+            }
+
+            GetData(today.getFullYear(), tMonth);
+
+            $(document).on('click','.fc-prev-button',function () {
+                var date = $('#calendar').fullCalendar('getDate');
+                var calDate = date.format('YYYY-MM');
+                var split = calDate.split('-');
+
+                GetData(split[0], split[1]);
+            });
+
+            $(document).on('click', '.fc-next-button', function () {
+                var date = $('#calendar').fullCalendar('getDate');
+                var calDate = date.format('YYYY-MM');
+                var split = calDate.split('-');
+
+                GetData(split[0], split[1]);
+            });
+
+            $(document).on('click', '.fc-today-button', function () {
+                var date = $('#calendar').fullCalendar('getDate');
+                var calDate = date.format('YYYY-MM');
+                var split = calDate.split('-');
+
+                GetData(split[0], split[1]);
+            });
+
+            $('#calendar').fullCalendar({eventLimit: true});
+        });
+
+        function GetData(year, month) {
+            $.ajax({
+                type: "POST",
+                url: "/ServiceCenter/Lecture/GetCalendarData",
+                data: { Year: year, Month: month },
+                success: function (data) {
+                    if (data.isSuccess == true) {
+                        ViewFullCalendar(data.resultData);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+
+        function ViewFullCalendar(data) {
+            var aArray = new Array();
+            for (var i in data) {
+                var object = new Object();
+
+                var title = data[i].TITLE;
+                if (data[i].LECTURER_TYPE == "P") {
+                    title += " " + data[i].NickName;
+                } else if (data[i].LECTURER_TYPE == "G") {
+                    title += " " + data.LECTURER;
+                }
+                object.title = title;
+                object.start = data[i].LECTURES_DATE;
+                aArray.push(object);
+            }
+
+            $('#calendar').fullCalendar('removeEvents');
+            $('#calendar').fullCalendar('addEventSource', aArray);
+            $('#calendar').fullCalendar('rerenderEvents');
+        }
+
+    </script>
+    <style>
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+            font-size: 14px;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div id='calendar'></div>
+
+</body>
+</html>

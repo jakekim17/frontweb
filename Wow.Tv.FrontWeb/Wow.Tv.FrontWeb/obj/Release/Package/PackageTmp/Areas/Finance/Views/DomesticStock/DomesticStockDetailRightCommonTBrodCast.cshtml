@@ -1,0 +1,36 @@
+﻿@using Wow.Tv.Middle.Model.Db49.broadcast
+@using Wow.Fx
+@model IList<USP_GetRecommendPro3_Result>
+@{
+    ViewBag.Title = "DomesticStockDetailRightCommonTBrodCast";
+    Layout = null;
+}
+
+<div class="contain-block">
+    <h3 class="title">오늘의 공개방송</h3>
+    <div class="list-type-thumnail small row">
+        <ul>
+            @foreach (var item in Model.ToList())
+            {
+                string imgSrc = item.NEWPHOTO_SMALL.Replace("\\", "/");
+                @*<li>
+                    <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/pro_record_broadcast.asp?currPage=1&bcode=N04070000&proId=@item.PRO_ID&mseq=226&pro_search=@item.PRO_ID&skey=nickname">
+                        <img src="@imgSrc" alt="" width="250" height="161">
+                        <span class="title">@item.NICKNAME @BroadcastFunction.GetInvestClass(item.INVESTKIND)</span>
+                        <span class="date">@item.BTITLE</span>
+                    </a>
+                </li>*@
+                <li>
+                    <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/sub_main.asp?proID=@item.PRO_ID" target="_blank">
+                        <img src="@imgSrc" alt="" width="250" height="161">
+                        <span class="title">@item.NICKNAME @BroadcastFunction.GetInvestClass(item.INVESTKIND)</span>
+                        <span class="date">@item.BTITLE</span>
+                    </a>
+                </li>
+            }
+            
+        </ul>
+    </div>
+    <span class="btn-moreview"><a href="http://wowpro.wownet.co.kr/pro/intro.asp?bcode=N04000000&mseq=177" target="_blank">더 보기</a></span>
+</div>
+

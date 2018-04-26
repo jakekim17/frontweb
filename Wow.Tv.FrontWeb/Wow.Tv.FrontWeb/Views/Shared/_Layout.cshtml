@@ -1,0 +1,81 @@
+﻿@{ 
+    string rootUrl = AppState["RootUrl"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="MvH75U9ZJFcxkx7VsyQUUPyLVgIRIIarSHLSAMJoAs0" />
+    <title>한경TV 프로젝트</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <link href="@rootUrl/Content/css/jqueryui/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript">
+        var userLoginUrl = "@System.Configuration.ConfigurationManager.AppSettings["UserLoginUrl"]";
+    </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    <script src="@rootUrl/Scripts/jquery-ui.js"></script>
+    <script src="@rootUrl/Scripts/jquery.blockUI.js"></script>
+    <script src="@rootUrl/Scripts/paging.js?date=20170706102000"></script>
+    <script src="@rootUrl/Scripts/common.js"></script>
+    <script src="@wowTvScript/Common.js"></script>
+
+    @RenderSection("chartStyles", required: false)
+    @RenderSection("scripts", required: false)
+
+    @if (IsSectionDefined("ScriptImport"))
+    { 
+        @RenderSection("ScriptImport", false)
+    }
+    else
+    {
+    }
+
+    @if (IsSectionDefined("styles"))
+    {
+        @RenderSection("styles", false)
+    }
+    else
+    {
+
+    }
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span calss="icon-bar"></span>
+                </button>
+                <a href="/Pilot/Index" class="navbar-brand">Pilot</a>
+                <a href="/Pilot2/Index" class="navbar-brand">Pilot2</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Example/LazyLoad/Index">Example</a></li>
+                    <li><a href="/Finance/DomesticStock/Kospi">금융</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p></p>
+        </footer>
+    </div>
+
+
+</body>
+</html>

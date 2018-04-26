@@ -1,0 +1,77 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+
+@model  ListModel<CharacterStockModel>
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string menuSeq = Request["menuSeq"].ToString();
+
+    Layout = null;
+}
+<!-- News Block -->
+@if (Model.TotalDataCount > 0)
+{
+    foreach (var item in Model.ListData)
+    {
+        <div class="article-news-list">
+            <div class="contian-news photo-right">                
+                <div class="photo-news type02">
+                    @if (!string.IsNullOrEmpty(item.NewsData.IMAGE_FILE))
+                    {
+                        <img src="@WowExtensionMethod.NewsThumbnailPath("11S", item.NewsData.THUMBNAIL_FILENM, item.NewsData.VOD_NUM, item.NewsData.IMAGE_DIR, item.NewsData.IMAGE_FILE, item.NewsData.ARTDATE.Value)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11S")'">
+                        if (item.NewsData.VOD_NUM != null && item.NewsData.VOD_NUM > 0)
+                        {
+                            <span class="icon-play medium"></span>
+                        }
+                    }
+                                    
+                </div>
+                <a href="javascript:CharacterStock.GoDetail('@item.NewsData.ARTICLEID');">
+                    <p class="title-text">@item.NewsData.TITLE <span class="date">@item.NewsData.ARTDATE.Value.ToString("yyyy-MM-dd HH:mm")</span></p>
+                    <p class="main-text">@WowExtensionMethod.NewsListContentCut(MvcHtmlString.Create(item.NewsData.CONTENTS_CUT).ToString(), true)</p>
+                </a>
+                <div class="footer-text">
+                    @if (item.StockData != null)
+                    {
+                        <div class="stock-info">
+                            <strong>@item.StockData.stock_nickname (@item.StockData.arj_code.Replace("A", "")) @String.Format("{0:#,##0}", item.StockData.curr_price)</strong>
+                            @Html.CharacterStockFormat((string)item.StockData.chg_type)
+                        </div>
+                    }   
+                    <p class="category-text">뉴스 @item.NewsData.SECTION_NAME</p>
+                    @if (!string.IsNullOrEmpty(item.NewsData.COMP_NAME) )
+                    {
+                        <span class="division-bar"></span>
+                        <p class="reporter">
+                            @item.NewsData.COMP_NAME
+                        </p>
+                    }                   
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="article-news-list">
+        <div class="contian-news">
+            <div class="contian-news" style="vertical-align:middle;text-align:center;">
+                결과가 없습니다.
+            </div>
+        </div>
+    </div>
+}
+<form id="articleForm">
+    <input type="hidden" name="menuSeq" value="@menuSeq" />
+    <input type="hidden" id="articleId" name="articleId"/>
+</form>
+<!-- //News Block -->
+<script>
+    $("#totalDataCount").val("@Model.TotalDataCount");
+</script>
+@*<script src="@wowTvScript/Finance/CharacterStock/List.js"></script>*@

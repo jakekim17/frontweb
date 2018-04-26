@@ -1,0 +1,232 @@
+﻿@{
+    ViewBag.Title = "ProgramBuy1";
+    Layout = "~/Views/Shared/_LayoutNone.cshtml";
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+}
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/common.css">
+    <link rel="stylesheet" href="@wowTvStyle/css/tv.css">
+}
+
+@section scripts{
+    <script src="@wowTvScript/Broad/TvMain/ProgramBuy2.js?date=20171018170000"></script>
+}
+
+
+
+<form id="frmSave">
+    <!-- POPUP Layer -->
+    <div class="window-pop" style="display:block;"><!-- window 팝업으로 2018-01-08 window-pop 클래스명 변경 -->
+        <div class="inner">
+            @*<!-- title -->
+            <h1 class="title">TV프로그램 구매하기</h1>
+            <!-- // title -->
+            <a href="#" id="btnCloseTop" class="pop-close-btn">닫기</a>
+            <!-- content -->*@
+            <div class="content-box">
+                <div class="box-desc">
+                    <strong class="sub-tit">구매요청서 작성하기</strong>
+                    <p class="cont-info">기업으로 구매를 원하시는 분은 하단에 맞게 작성해 주시고 사업자 사본은 스캔받은 사본을 첨부파일로 넣어주시기 바랍니다.<p>
+                </div>
+                <div class="list-type1">
+                    <ul>
+                        <li>
+                            <strong>프로그램 <span class="astar">*</span></strong>
+                            <div class="inp-area">
+                                @*<select name="선택" style="width:140px" id="cboIngYn">
+                                    <option value="Y">방영</option>
+                                    <option value="N">종영</option>
+                                </select>*@
+                                <!-- 2017-11-06 HTML 변경 -->
+                                <div class="selector" style="width:135px">
+                                    <!-- width 100%일때 class="selector full" -->
+                                    <label for="cboIngYn">분류선택</label>
+                                    <select id="cboIngYn">
+                                        <option value="Y">방영</option>
+                                        <option value="N">종영</option>
+                                    </select>
+                                </div>
+                                <!-- 2017-11-06 HTML 변경 -->
+
+                                @*<select style="width:182px" id="cboProgram" name="PGM_ID"></select>*@
+                                <!-- 2017-11-06 HTML 변경 -->
+                                <div class="selector" style="width:186px">
+                                    <!-- width 100%일때 class="selector full" -->
+                                    <label for="cboProgram">프로그램 선택</label>
+                                    <select id="cboProgram" name="PGM_ID">
+                                        <option>프로그램 선택</option>
+                                    </select>
+                                </div>
+                                <!-- 2017-11-06 HTML 변경 -->
+
+                                <input type="hidden" id="hidProgramName" name="programName" />
+                                @*<select style="width:138px" name="PGM_GUBUN">
+                                    <option value="VOD">VOD</option>
+                                    <option value="DVD">DVD</option>
+                                </select>*@
+                                <!-- 2017-11-06 HTML 변경 -->
+                                <div class="selector" style="width:133px">
+                                    <!-- width 100%일때 class="selector full" -->
+                                    <label for="selector03">VOD</label>
+                                    <select id="selector03" name="PGM_GUBUN">
+                                        <option value="VOD">VOD</option>
+                                        <option value="DVD">DVD</option>
+                                    </select>
+                                </div>
+                                <!-- 2017-11-06 HTML 변경 -->
+                            </div>
+                        </li>
+                        <li>
+                            <strong>방송일자</strong>
+                            <div class="search-local date" style="width:100%">
+                                <input type="text" name="BROAD_DATE">
+                                <span class="btn-calendar"><button>달력</button></span>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>구매수량 <span class="astar">*</span></strong>
+                            <div class="inp-area">
+                                <input type="text" style="width:187px" id="txtQuantity" name="ORDER_CNT">
+                            </div>
+                        </li>
+                        <li class="type-radio">
+                            <strong>세금계산서 발행</strong>
+                            <div class="inp-area">
+                                <label class="radio">
+                                    <input type="radio" name="RECEIPT" value="Y"><span>예</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="RECEIPT" value="N" checked><span>아니오</span>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>기업명 <span class="astar">*</span></strong>
+                            <input type="text" style="width:100%" id="txtCompanyName" name="CMP_NAME">
+                        </li>
+                        <li>
+                            <strong>대표자명 <span class="astar">*</span></strong>
+                            <input type="text" style="width:100%" id="txtCeoName" name="CMP_CEO">
+                        </li>
+                        <li>
+                            <strong>사업자번호 <span class="astar">*</span></strong>
+                            <div class="inp-area">
+                                <input type="hidden" id="hidCompanyNumber" name="CMP_LIC_NO" />
+                                <input type="text" style="width:144px;" id="txtCompanyNumber1" class="devNumber">
+                                <span class="hyphen">-</span>
+                                <input type="text" style="width:144px;" id="txtCompanyNumber2" class="devNumber">
+                                <span class="hyphen">-</span>
+                                <input type="text" style="width:144px;" id="txtCompanyNumber3" class="devNumber">
+                            </div>
+                        </li>
+                        <li>
+                            <strong>사업자주소 <span class="astar">*</span></strong>
+                            <input type="text" style="width:100%" id="txtCompanyAddress" name="CMP_ADDR">
+                        </li>
+                        <li>
+                            <strong>업태 <span class="astar">*</span></strong>
+                            <input type="text" style="width:100%" id="txtCompanyType" name="CMP_BUSINESS">
+                        </li>
+                        <li>
+                            <strong>업종 <span class="astar">*</span></strong>
+                            <input type="text" style="width:100%" id="txtCompanySection" name="CMP_INDUSTRY">
+                        </li>
+                        <li>
+                            <strong>받을주소 <span class="astar">*</span></strong>
+                            <div class="inp-area post">
+
+                                <input type="text" style="width:116px" id="txtPostNumber" name="ZIPCODE">
+                                <span class="btn-type4"><a href="#" id="btnSearchAddress">우편번호 검색</a></span>
+                                <input type="text" style="width:100%" class="post-detail" id="txtAddress1">
+                                <input type="text" style="width:100%" class="post-detail" id="txtAddress2">
+                                <input type="hidden" id="hidAddress" name="ADDRESS" />
+                            </div>
+                        </li>
+                        <li>
+                            <strong>부서명 <span class="astar">*</span></strong>
+                            <input type="text" style="width:100%" id="txtCompanyPartName" name="DPT_NAME">
+                        </li>
+                        <li>
+                            <strong>담당자명</strong>
+                            <input type="text" style="width:100%" name="CHARGE_NAME">
+                        </li>
+                        <li>
+                            <strong>직통번호 <span class="astar">*</span></strong>
+                            <div class="inp-area">
+                                <input type="text" style="width:360px" placeholder="직통번호" id="txtACallNumber" name="TEL_NO">
+                            </div>
+                        </li>
+                        <li>
+                            <strong>핸드폰번호 <span class="astar">*</span></strong>
+                            <div class="inp-area">
+                                <input type="text" style="width:360px" placeholder="핸드폰번호" id="txtMobileNumber" name="MOBILE_NO">
+                            </div>
+                        </li>
+                        <li>
+                            <strong>팩스번호 <span class="astar">*</span></strong>
+                            <div class="inp-area">
+                                <input type="text" style="width:360px" placeholder="팩스번호" id="txtFaxNUmber" name="FAX_NO">
+                            </div>
+                        </li>
+                        <li>
+                            <strong>E-mail <span class="astar">*</span></strong>
+                            <div class="inp-area email">
+                                <input type="text" style="width:360px" placeholder="이메일 주소 입력" id="txtEmail" name="EMAIL">
+                            </div>
+                        </li>
+                        <li>
+                            <strong>요구사항</strong>
+                            <div class="inp-area text-area">
+                                <textarea style="height:125px;" name="CONTENT"></textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>첨부파일</strong>
+                            <!-- input file -->
+                            <div class="inp-area file-box">
+                                <input type="text" id="txtFileName" readonly="readonly" style="width:376px;" placeholder="선택된 파일 없음">
+                                <label for="uploadBtn" class="btn-type4 file"><span>파일선택</span></label>
+                                <input type="file" id="uploadBtn" name="uploadFile" class="upload-btn">
+                            </div>
+                            <!-- // input file -->
+                        </li>
+                        <li>
+                            <strong>VOD 사용처</strong>
+                            @*<select class="kor" style="width:100%" name="USE_VOD">
+                                <option value="홍보용">홍보용</option>
+                                <option value="소장용">소장용</option>
+                                <option value="교육용">교육용</option>
+                                <option value="기타">기타</option>
+                            </select>*@
+                            <!-- 2017-11-06 HTML 변경 -->
+                            <div class="selector full">
+                                <!-- width 100%일때 class="selector full" -->
+                                <label for="selector09">홍보용</label>
+                                <select id="selector09" name="USE_VOD">
+                                    <option value="홍보용">홍보용</option>
+                                    <option value="소장용">소장용</option>
+                                    <option value="교육용">교육용</option>
+                                    <option value="기타">기타</option>
+                                </select>
+                            </div>
+                            <!-- 2017-11-06 HTML 변경 -->
+                        </li>
+                    </ul>
+                </div>
+                <p class="text-notice-type1">한국경제TV 동의없이 위 사용처 외의 사용은 도용으로 간주되어 경우에 따라 법적 제제를 받을 수 있으므로 주의 바랍니다.</p>
+                <div class="box-button">
+                    <span class="btn-type1"><a href="#" id="btnSave">등록</a></span>
+                    <span class="btn-type3"><a href="#" id="btnClose">취소</a></span>
+                </div>
+            </div>
+            <!-- content -->
+        </div>
+
+    </div>
+    <!-- POPUP Layer -->
+</form>
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="10528219-e74e-4dc0-8b6d-6ed37b5d3ce9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/Finance/FinanceService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FinanceService.xsd" MetadataType="Schema" ID="e3ac7285-e620-4bb7-a1c7-afc3432f4177" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd9" />
+    <MetadataFile FileName="FinanceService1.xsd" MetadataType="Schema" ID="23d5ee73-f70f-4dac-8b78-562903512837" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd8" />
+    <MetadataFile FileName="FinanceService2.xsd" MetadataType="Schema" ID="853db07b-7280-4797-a09c-0dc276ab0426" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd12" />
+    <MetadataFile FileName="FinanceService.wsdl" MetadataType="Wsdl" ID="05ceae1c-7847-461a-9bc0-4cc9668ae9a0" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?wsdl" />
+    <MetadataFile FileName="FinanceService.disco" MetadataType="Disco" ID="941ec2cd-bb85-46bf-a4f5-faa4a1580220" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?disco" />
+    <MetadataFile FileName="FinanceService3.xsd" MetadataType="Schema" ID="23657a5a-8e00-4eca-a211-367b05b4c0c4" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd11" />
+    <MetadataFile FileName="FinanceService4.xsd" MetadataType="Schema" ID="ddec0ffe-84d9-4de7-a1ba-4745b324fd4a" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd0" />
+    <MetadataFile FileName="FinanceService5.xsd" MetadataType="Schema" ID="611f1bf8-d531-438b-b10b-d6683c2a3d90" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd5" />
+    <MetadataFile FileName="FinanceService6.xsd" MetadataType="Schema" ID="3d934088-a728-4a4d-a99d-8d7d85e4240b" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd4" />
+    <MetadataFile FileName="FinanceService7.xsd" MetadataType="Schema" ID="dc3f3666-1d84-40db-a239-ca8c8a5f3924" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd7" />
+    <MetadataFile FileName="FinanceService8.xsd" MetadataType="Schema" ID="a150cdf6-9e0c-46b8-921c-8c6f89a61acf" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd6" />
+    <MetadataFile FileName="FinanceService9.xsd" MetadataType="Schema" ID="12015710-bcbd-472e-ac8a-b9d18bb3d77c" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd1" />
+    <MetadataFile FileName="FinanceService10.xsd" MetadataType="Schema" ID="4ccebba8-f4ce-4c14-b6cb-f648a6bfbd4b" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd10" />
+    <MetadataFile FileName="FinanceService11.xsd" MetadataType="Schema" ID="b0e5325b-6b6d-4581-8396-8f6d4d98765a" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd3" />
+    <MetadataFile FileName="FinanceService12.xsd" MetadataType="Schema" ID="c88b9b90-8f2b-4859-ae97-3073e7f04f0e" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd2" />
+    <MetadataFile FileName="FinanceService13.xsd" MetadataType="Schema" ID="7c0b0f69-2d19-419d-b7e7-54433c93342e" SourceId="1" SourceUrl="http://localhost:8088/Finance/FinanceService.svc?xsd=xsd13" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

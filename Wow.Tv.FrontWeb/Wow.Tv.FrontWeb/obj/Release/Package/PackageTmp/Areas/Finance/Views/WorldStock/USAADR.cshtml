@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "주요업종지수";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+    Layout = null;
+}
+<script src="@wowTvScript/Finance/WorldStock/USAADR.js"></script>
+<div class="sub-type1">
+    <div class="box on">
+        <ul>
+            <li class="on"><a href="#none" id="usaadr_total">전체</a></li>
+            <li><a href="#none" id="usaadr_dowjones">다우지수</a></li>
+            <li><a href="#none" id="usaadr_nasdaq">나스닥</a></li>
+            <li><a href="#none" id="usaadr_sandp500">S&P500</a></li>
+        </ul>
+    </div>
+</div>
+
+<form id="frmList_USAADR">
+    <input type="hidden" id="currentMenuSeq" value="@currentMenuSeq"/>
+    <div id="divList">
+
+    </div>
+</form>
+
+
+

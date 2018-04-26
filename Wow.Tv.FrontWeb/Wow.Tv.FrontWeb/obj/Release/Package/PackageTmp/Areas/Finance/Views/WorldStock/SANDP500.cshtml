@@ -1,0 +1,127 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+
+@model usp_wownet_usa_index_online_Result
+@{
+    ViewBag.Title = "S&P500 지수";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+    Layout = null;
+}
+<script src="@wowTvScript/Finance/webponent/raphael.js"></script>
+<script src="@wowTvScript/Finance/webponent/webponent.comm.common.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.style.js"></script>
+<script src="@wowTvScript/Finance/Charts/stockChart.js"></script>
+<script src="@wowTvScript/Finance/WorldStock/SANDP500.js"></script>
+<script>
+    $(document).ready(function () {
+        FinanceChartJs.UsaTimeChartData("S", "D", $(".contain-chart"));
+    });
+</script>
+<!-- Top Information box -->
+<div class="box-top-type1">
+    <div class="inner-left">
+        <p class="text-realtime-reload"><span class="title">현지시간</span> @Html.CurrentTimeFormat(Model.LocalTime.ToString()) 기준</p>
+    </div>
+</div>
+<!-- Top Information box -->
+<!-- Stock Detail -->
+<div class="article-detail-stock1">
+    <div class="contain-chart" style="height:400px;">
+        <!-- Chart -->
+    </div>
+    <div class="contain-detail">
+        <div class="box-detail-stock">
+            @Html.PublishPriceFormat(Model.chgtype, Model.Price)<!-- 주가 -->
+            <span class="box">
+                @Html.PublishChgPriceFormat(Model.chgtype, Model.ChgPrice)<!-- 등락 -->
+                @Html.PublishUpDownSymbolPChangeFormat(Model.chgtype, Model.chgRate)<!-- 등락폭 -->
+            </span>
+            
+        </div>
+        <div class="box-detail-price1 alone">
+            <dl>
+                <dt>전일종가</dt>
+                <dd>@Model.HistoryClose</dd><!-- 거래량 -->
+            </dl>
+            <dl>
+                <dt>고가</dt>
+                <dd><span class="data-normal">@Model.MaxPrice</span></dd><!-- 거래 금액 -->
+            </dl>
+            <dl>
+                <dt>시가</dt>
+                <dd><span class="data-normal">@Model.OpenPrice</span></dd><!-- 거래량 -->
+            </dl>
+            <dl>
+                <dt>저가</dt>
+                <dd><span class="data-normal">@Model.MinPrice</span></dd><!-- 거래 금액 -->
+            </dl>
+            <dl>
+                <dt>거래량</dt>
+                <dd><span class="data-normal">@Model.Vol</span></dd><!-- 거래량 -->
+            </dl>
+        </div>
+    </div>
+</div>
+<!-- //Stock Detail -->
+
+<h2 class="title">시간대별 체결</h2>
+<form id="frmList_timeSANDP500">
+    <input type="hidden" id="pageSize" name="pageSize" value="7" />
+    <input type="hidden" id="currentIndex" name="currentIndex" />
+    <div id="divList">
+
+    </div>
+</form>
+
+<hr class="division5 no-border">
+
+<h2 class="title">일별 체결</h2>
+<form id="frmList_daySANDP500">
+    <input type="hidden" id="pageSize" name="pageSize" value="7" />
+    <input type="hidden" id="currentIndex" name="currentIndex" />
+    <div id="divList">
+
+    </div>
+</form>
+
+<hr class="division5 no-border">
+
+<h2 class="title">편입종목 체결</h2>
+<form id="frmList_enrollmentSANDP500">
+    <input type="hidden" id="pageSize" name="pageSize" value="7" />
+    <input type="hidden" id="currentIndex" name="currentIndex" />
+    <div id="divList">
+
+    </div>
+</form>
+
+<hr class="division5 no-border">
+
+<!-- Tab -->
+<div class="tab-type1">
+    <ul class="col3">
+        <li class="btnChart" id="7551"><a href="#">일간</a></li>
+        <li class="btnChart" id="7552"><a href="#">주간</a></li>
+        <li class="btnChart" id="7553"><a href="#">월간</a></li>
+    </ul>
+</div>
+<!-- //Tab -->
+<!-- Top Information box -->
+<div class="box-top-type1">
+    <div class="inner-left">
+        <p class="text-normal" id="txtChart"></p>
+    </div>
+</div>
+<!-- Top Information box -->
+
+<div style="height:400px;">
+    <!-- Chart -->
+    <img id="ImgChart" />
+</div>
+
+
+
+

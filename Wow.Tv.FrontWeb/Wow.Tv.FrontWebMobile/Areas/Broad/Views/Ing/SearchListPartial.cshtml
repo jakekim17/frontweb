@@ -1,0 +1,76 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db90.DNRS
+@using Wow.Tv.Middle.Model.Db90.DNRS.NewsProgram
+
+
+@model ListModel<tv_program>
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+
+@{
+    Layout = null;
+}
+
+<input type="hidden" id="hidTotalCount" value="@Model.TotalDataCount" />
+
+<!-- 결과리스트 start -->
+<div class="section-area pb0">
+    <div class="list-info-area">
+        <div class="inner-right">
+            <p class="total">프로그램 수 : <strong>@Model.TotalDataCount.ToString("N0") 개</strong></p>
+        </div>
+    </div>
+    <!-- list-media -->
+    @if (Model.ListData.Count == 0)
+    {
+        <div class="nodata">
+            <p>
+                <strong class="tit">검색 결과가 없습니다.</strong>
+                <span class="cont">- 검색어가 맞는지 확인해 주세요.</span>
+                <span class="cont">- 띄어쓰기가 맞는지 확인해 주세요.</span>
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="list-media">
+            <ul>
+                @foreach (var item in Model.ListData)
+                {
+                    <li class="program-list">
+                        <div class="img-area">
+                            <a href="#" onclick="return IngSearchListPartial.GoBroadWatch('@item.Dep', '@item.Num');">
+                                <span class="notice-area">
+                                    @if (item.IsOneDayInner == true)
+                                    {
+                                        <!-- 알림표시할 경우 a태그에 span.notice-area 추가 -->
+                                        <span class="text-icon type07">최신</span>
+                                    }
+                                </span>
+                                <img src="@item.ThumImageUrl" alt="">
+                            </a>
+                        </div>
+                        <div class="cont-area">
+                            <p class="tit">@item.Program_Name</p>
+                            <div class="info-area">
+                                <span class="txt-exer">@(item.DayOfWeekString == null ? "" : String.Join("·", item.DayOfWeekString))<span class="num">@item.broadStart</span></span>
+                                <span class="txt-exer"><span class="num">@item.frontTimeString</span></span>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+<!--// 결과리스트 end -->
+<div id="divPaging"></div>
+@*<!-- paging start -->
+<div class="txt-paging pb40" id="divPaging"></div>
+<!--// paging end -->*@
+
+<script src="@wowTvScript/Broad/Ing/SearchListPartial.js?date=20171018170000"></script>

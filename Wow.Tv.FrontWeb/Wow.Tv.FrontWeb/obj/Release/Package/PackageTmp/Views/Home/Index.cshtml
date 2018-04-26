@@ -1,0 +1,318 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db90.DNRS
+@using Wow.Tv.FrontWeb.Areas.Component.Models
+
+@model List<T_RUNDOWN>
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    DateTime nowDate = DateTime.Now;
+
+    TvPlayerModel tvPlayerParameter = new TvPlayerModel();
+    tvPlayerParameter.PlayType = TvPlayTypeModel.ByScript;
+    tvPlayerParameter.Width = 731;
+    tvPlayerParameter.Height = 409;
+
+    bool isFirst = true;
+}
+
+
+
+@if (Request["fromMobile"] == "Y")
+{
+    Session["HomeIndex_FromMobile"] = "Y";
+}
+else
+{
+    if (Session["HomeIndex_FromMobile"] != null && Session["HomeIndex_FromMobile"].ToString() == "Y")
+    {
+    }
+    else
+    {
+        <script>
+            @*var isClientMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+            if (isClientMobile == true) {
+                location.href = "@System.Configuration.ConfigurationManager.AppSettings["MobileUrl"]";
+            }
+            else {
+                //
+            }*@
+
+            var HomeIndex_filter = "win16|win32|win64|mac|macintel";
+            if (navigator.platform) {
+                //alert(navigator.platform);
+                if (0 > HomeIndex_filter.indexOf(navigator.platform.toLowerCase())) {
+                    //alert("Mobile");
+                    location.href = "@System.Configuration.ConfigurationManager.AppSettings["MobileUrl"]";
+                } else {
+                    //alert("PC");
+                }
+            }
+
+        </script>
+    }
+}
+
+
+
+
+@section scripts{
+    <script src="@wowTvScript/Home/Index.js?date=20171222174001"></script>
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/Home/Main.js"></script>
+}
+
+
+@section WrapOutTop{
+    <!-- visual start -->
+    <div class="visual">
+        <h2 class="blind">visual area</h2>
+
+
+
+
+        <div class="hide-visual-area">
+            <!-- 2017-12-01 클래스 추가 -->
+            <!-- 2017-12-01 HTML 추가 -->
+            <div class="hide-visual ">
+                @Html.Action("VodPartner", "Home", new { Area = "" })
+            </div>
+            <!-- // 2017-12-01 HTML 추가 -->
+
+
+            <div class="movie-view">
+                @*<img src="@wowTvStyle/images/temp/temp_main_01.png" alt="movie" width="731" height="409">*@
+
+                @Html.Partial("~/Areas/Component/Views/TvPlayer/TvPlayer.cshtml", tvPlayerParameter)
+
+                @*<p class="icon-play"></p>
+                    <div>
+                        <span class="day-broadcast">월·화·수 <em>13:00</em></span>
+                        <strong>실전매매 ‘예병군의 주식만사성’</strong>
+                        <p>선물투자 어렵지 않아요! 이숙영의 선물투자 강의 30분이면 누구나 <br>선물투자 전문가가 될수있습니다!</p>
+                    </div>*@
+            </div>
+            <div class="schedule-broadcast">
+                <h3 class="title03">
+                    방송 스케줄
+                    <span class="day">@nowDate.ToDate() (@nowDate.ToString("ddd"))</span>
+                </h3>
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        if (isFirst == true)
+                        {
+                            <li onclick="return HomeIndex.ChangeTv(2, 0);" style="cursor:pointer;">
+                                <span class="time">@item.RUN_START</span>
+                                <span class="obj">@item.PRG_NM</span>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <span class="time">@item.RUN_START</span>
+                                <span class="obj" onclick="return HomeIndex.MoveBroad('@item.PRG_CD');" style="cursor:pointer;">@item.PRG_NM</span>
+                            </li>
+                        }
+
+                        isFirst = false;
+                    }
+                </ul>
+                <div class="movie-list">
+                    @Html.Action("Vod", "Home", new { Area = "" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- visual end -->
+}
+
+<div class="wrap">
+    <!-- Content Area -->
+    <div class="contain-entertain main">
+        <!-- 뉴스썸 start -->
+        <div class="box-type-t">
+            <h2 class="title01">
+                뉴스
+                <span class="txt-grad">썸</span>
+            </h2>
+
+            <!-- tab start -->
+            <div class="tab-listType1">
+                <h3 class="blind">tab area</h3>
+                <div class="box">
+                    <ul>
+                        <li class="on"><a href="#" onclick="return HomeIndex.ChangeSome(this, 'LATEST');"><em></em>최신뉴스</a></li>
+                        <li><a href="#" onclick="return HomeIndex.ChangeSome(this, 'STO_ECO');"><em></em>증권·경제</a></li>
+                        <li><a href="#" onclick="return HomeIndex.ChangeSome(this, 'IND_IT');"><em></em>산업·IT·과학</a></li>
+                        <li><a href="#" onclick="return HomeIndex.ChangeSome(this, 'LIFE');"><em></em>생활문화</a></li>
+                        <li><a href="#" onclick="return HomeIndex.ChangeSome(this, 'JOB');"><em></em>취업</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--// tab end -->
+
+            <div class="box-img-news on" id="divSome"></div>
+        </div>
+        <!--// 뉴스썸 end -->
+        <!-- 뉴스 img start -->
+        <div class="news-list-img" id="divSome2"></div>
+        <!--// img end -->
+        <!-- box-3dabth start -->
+        <div class="box-3dabth">
+            <!-- 마켓&amp;이슈 start -->
+            <div class="box-type-grown" id="divMarketIssue">
+            </div>
+            <!--// 마켓&amp;이슈 end -->
+            <!-- 오피니언 start -->
+            <div class="box-type-white" id="divOpinion">
+            </div>
+            <!--// 오피니언 end -->
+            @*<!-- 추천키워드 start -->
+                <div class="box-keyword">
+                    <h2 class="title01">추천 키워드</h2>
+                    <div id="divRecommendationKeyWord">
+                        @ *<a href="javascript:NewsCommon.NewsHashTag('두산베어스');"><span class="">두산베어스</span></a>
+                        <a href="javascript:NewsCommon.NewsHashTag('괌');"><span class="bg_blue">괌</span></a>
+                        <a href="javascript:NewsCommon.NewsHashTag('맨홀');"><span class="bg_red">맨홀</span></a>
+                        <a href="javascript:NewsCommon.NewsHashTag('소녀시대');"><span class="bg_green">소녀시대</span></a>* @
+                    </div>
+                </div>
+                <!--// 추천키워드 end -->*@
+            <!-- 이시각 특징주 start -->
+            <div class="box-stockNews">
+                <h2 class="title01">이시각 특징주</h2>
+
+                <div class="chart-cont">
+                    <div class="obj">
+                        <p class="obj-name">제일홀딩스<span>003380</span></p>
+                        <span class="price-stock"><span class="data-up">15,900</span></span><!-- 주가 -->
+                        <span class="box">
+                            <span class="data-up icon">1,000</span><!-- 등락 -->
+                            <span class="data-up symbol">6.71%</span><!-- 등락폭 -->
+                        </span>
+                    </div>
+                    <ul class="list-type6">
+                        <li><a href="" onmouseover="DomesticStockIndex.CharacterNewsMouseOver('102210', '해덕파워웨이', '1', '17550', '4050');" onclick="return DomesticStockIndex.CharactorStockDetialGo('http://www.wowtv.co.kr','X20180405093619')">해덕파워웨이, 최대주주 변경 기대로 '급등'</a></li>
+                        <li><a href="" onmouseover="DomesticStockIndex.CharacterNewsMouseOver('003380', '제일홀딩스', '2', '15900', '1000');" onclick="return DomesticStockIndex.CharactorStockDetialGo('http://www.wowtv.co.kr','X20180405092233')">흡수합병 소식에 제일홀딩스↑ 하림홀딩스↓</a></li>
+                        <li><a href="" onmouseover="DomesticStockIndex.CharacterNewsMouseOver('031430', '신세계인터내셔날', '3', '113000', '0');" onclick="return DomesticStockIndex.CharactorStockDetialGo('http://www.wowtv.co.kr','X20180405092230')">신세계인터내셔날, 8일째 상승…신고가 또 경신</a></li>
+                        <li><a href="" onmouseover="DomesticStockIndex.CharacterNewsMouseOver('003380', '제일홀딩스', '2', '15900', '1000');" onclick="return DomesticStockIndex.CharactorStockDetialGo('http://www.wowtv.co.kr','X20180405092233')">흡수합병 소식에 제일홀딩스↑ 하림홀딩스↓</a></li>
+                        <li><a href="" onmouseover="DomesticStockIndex.CharacterNewsMouseOver('031430', '신세계인터내셔날', '3', '113000', '0');" onclick="return DomesticStockIndex.CharactorStockDetialGo('http://www.wowtv.co.kr','X20180405092230')">신세계인터내셔날, 8일째 상승…신고가 또 경신</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--// 이시각 특징주 end -->
+        </div>
+        <!--// box-3dabth end -->
+    </div>
+    <!-- //Content Area -->
+</div>
+
+@section WrapOutBottom{
+
+    <!-- tab start -->
+    <h2 class="blind">탭</h2>
+    <div class="tab-type1 mgb_0 main-font">
+        <ul class="tabs col3 w-1280">
+            <li><a href="javascript:void(0);" onclick="return HomeIndex.ChangePhoto(this, 'Issue');">인기 갤러리</a></li>
+            <li class="on"><a href="javascript:void(0);" onclick="return HomeIndex.ChangePhoto(this, 'See');">쉽게보는 뉴스</a></li>
+            <li><a href="javascript:void(0);" onclick="return HomeIndex.ChangePhoto(this, 'TvLive');">SNS 현장 라이브</a></li>
+        </ul>
+    </div>
+    <div class="tab-body tab_script">
+        <div class="tab-box" id="divIssueNews" style="display:none;">
+            <!-- 이슈갤러리 start -->
+            <div class="main_hot_sale">
+                <div class="new-slider type02">
+                    <div class="bn" id="IssueNewsSlider">
+                        <ul class="swiper-wrapper"></ul>
+                    </div>
+                </div>
+                <a href="#" class="swiper-bn-left">이전 배너 보기</a>
+                <a href="#" class="swiper-bn-right">다음 배너 보기</a>
+            </div>
+            <!-- 이슈갤러리 end -->
+        </div>
+        <div class="tab-box" id="divSeeNews">
+            <!-- 이슈갤러리 start -->
+            <div class="main_hot_sale">
+                <div class="new-slider">
+                    <div class="bn" id="SeeNewsSlider">
+                        <ul class="swiper-wrapper"></ul>
+                    </div>
+                </div>
+                <a href="#" class="swiper-bn-left">이전 배너 보기</a>
+                <a href="#" class="swiper-bn-right">다음 배너 보기</a>
+            </div>
+            <!-- 이슈갤러리 end -->
+        </div>
+        <div class="tab-box" id="divTvLive"></div>
+    </div>
+    <!--// tab end -->
+
+
+    <div class="wrap">
+
+        <!-- Content Area -->
+        <div class="contain-content">
+
+            <!-- 3단 start -->
+            <div class="box-3dabth mgt_0">
+
+                <!-- 핫한 뉴우스 start -->
+                <div class="box-type-new" id="divHotNews">
+                </div>
+                <!--// 핫한 뉴우스 end -->
+                <div class="box-sns-channel">
+                    <strong class="tit">
+                        한국경제TV의 SNS채널에서 더욱<br>
+                        다채로운 소식을 받아보실 수 있습니다
+                    </strong>
+                    <span class="sub-tit">친구신청 하러 가기</span>
+                    <div class="btn-sns-channel-area">
+                        <a href="https://www.facebook.com/HKWOWTV" class="btn-sns-channel facebook" target="_blank">페이스북</a>
+                        <a href="https://story.kakao.com/ch/hkwowtv" class="btn-sns-channel kakaostory" target="_blank">카카오스토리</a>
+                        <a href="http://post.naver.com/my.nhn?memberNo=11761424" class="btn-sns-channel naver-post" target="_blank">네이버 포스트</a>
+                        <a href="https://www.youtube.com/user/hkwowtv" class="btn-sns-channel youtube" target="_blank">유투브</a>
+                    </div>
+                </div>
+                <!-- 광고 이미지 start -->
+                <div class="box-event">
+                    <h2 class="blind">TV광고 이미지</h2>
+                    <div>
+                        @*메인면 우측 배너 *@
+                        <iframe width="300" height="300" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_1" title="AD Tag"></iframe>
+                    </div>
+                </div>
+                <!--// 광고 이미지  end -->
+            </div>
+            <!--// 3단 end -->
+
+
+            @Html.Partial("~/Views/Home/WowNetFaStar.cshtml")
+
+            @*<!-- tab start -->
+                <h2 class="blind">탭</h2>
+                <div class="tab-type1 mgb_0">
+                    <ul class="col3">
+                        <li class="on"><a href="javascript:void(0);">와우넷</a></li>
+                        <li><a href="javascript:void(0);">와우파</a></li>
+                        <li><a href="javascript:void(0);">와우스타</a></li>
+                    </ul>
+                </div>
+                <!--// tab end -->
+                <!-- tab body start -->
+                <div class="tab-body">
+                        TODO
+                </div>
+                <!--// tab body end -->*@
+
+
+
+        </div>
+        <!-- //Content Area -->
+    </div>
+}

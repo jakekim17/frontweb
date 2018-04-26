@@ -1,0 +1,49 @@
+﻿@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.Middle.Model.Common
+
+@model ListModel<ArticleStock>
+@{
+    ViewBag.Title = "DomesticStockDetailRecentNews";
+    Layout = null;
+    string arjCode = "";
+    if (!String.IsNullOrEmpty(Request["arjCode"]))
+    {
+        arjCode = Request["ArjCode"].ToString();
+    }
+}
+
+@if (Model.ListData != null && Model.ListData.Count > 0)
+{
+    <p class="text-headline-topic"><a href="#none" onclick="return DomesticStockDetail.NewsGoDetail('@arjCode','@Model.ListData[0].ArticleID', '4', '1','')">@Model.ListData[0].Title</a></p>
+    <!-- 게시물 목록 -->
+    <div class="list-type-topic1">
+        <ul style="border-top:1px solid #ebe9ea;">
+            @for (int i = 1; i < Model.ListData.Count; i++)
+            {
+                <li>
+                    <a href="#none" onclick="return DomesticStockDetail.NewsGoDetail('@arjCode', '@Model.ListData[i].ArticleID', '4', '1', '')">@Model.ListData[i].Title</a>
+                    <span class="date">@Model.ListData[i].ArticleDate.ToString("MM.dd")</span>
+                </li>
+            }
+
+
+        </ul>
+    </div>
+    <!-- //게시물 목록 -->
+    <span class="btn-moreview" style="right:25px">@Html.ActionLink("더 보기", "DomesticStockDetail", "DomesticStock", new { searchStr = arjCode.Replace("A", ""), tabSeq = "4" }, null)</span>
+
+}
+else
+{
+    <p class="text-headline-topic"><a href="#none"></a></p>
+    <!-- 게시물 목록 -->
+    <div class="list-type-topic1">
+        <ul style="border-top:1px solid #ebe9ea;">
+            <li>해당 게시글이 없습니다.</li>
+        </ul>
+    </div>
+    <!-- //게시물 목록 -->
+    <span class="btn-moreview" style="right:25px"><a href="#none">더 보기</a></span>
+
+}
+

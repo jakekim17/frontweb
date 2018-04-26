@@ -1,0 +1,45 @@
+﻿@using Wow.Tv.Middle.Model.Db90.DNRS
+@using Wow.Tv.FrontWebMobile.Areas.Component.Models
+
+@model tv_program
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    Model.FilePath = Model.FilePath.Replace("rtmp://cdnvod.wowtv.co.kr/wowtvvod/_definst_/mp4:", "http://cdnvod.wowtv.co.kr:8080/");
+
+    TvPlayerModel tvPlayerParameter = new TvPlayerModel();
+    tvPlayerParameter.IncludeVrixonScript = false;
+    tvPlayerParameter.PlayType = TvPlayTypeModel.TvReplay;
+    tvPlayerParameter.Num = Model.Num;
+    //tvPlayerParameter.Url = Model.FilePath;
+    tvPlayerParameter.AutoSize = true;
+}
+
+<div class="img-area">
+    @*<a href="javascript:void();" class="no-play" onclick="return BroadWatchPlayInfo.OpenVod(@Model.Num);">*@
+        <span class="notice-area">
+            <!-- 알림표시할 경우 a태그에 span.notice-area 추가 -->
+            <span class="text-icon type07">최신</span>
+        </span>
+        @*<img src="@wowTvStyle/Images/temp/temp_img_media2.jpg" alt="">*@
+        @Html.Partial("~/Areas/Component/Views/TvPlayer/TvPlayer.cshtml", tvPlayerParameter)
+    @*</a>*@
+</div>
+<div class="cont-area">
+    <p class="tit">@Model.Title</p>
+    <div class="info-area">
+        <span class="txt-exer">방영일 : <span class="num">@Model.BroadDate</span></span>
+        <p>
+            @MvcHtmlString.Create(Model.Contents)
+        </p>
+    </div>
+</div>
+
+
+
+<script src="@wowTvScript/Broad/BroadWatch/PlayInfo.js?date=20171018170000"></script>
+

@@ -1,0 +1,86 @@
+﻿@using Wow
+@{
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+@section scripts{
+
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+}
+<div class="box on">
+    <div class="box-scroll">
+        <ul class="thumbnail-list">
+            @if (Model.newsTotalCountList != null && Model.newsTotalCountList.Count > 0)
+            {
+                foreach (var item in Model.newsTotalCountList)
+                {
+                    <li>
+                        <a href="javascript:NewsCommon.GoNewsRead('@item.ARTICLEID')">
+                           @if (!String.IsNullOrEmpty(WowExtensionMethod.NewsListImage(item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)))
+                           {
+                                <span class="img">
+                                    @if (@item.VOD_NUM > 0)
+                                    {
+                                        <span class="icon-play small"></span>
+                                    }
+                                    @if (!String.IsNullOrEmpty(item.IMAGE_FILE))
+                                    {
+                                        <img src="@WowExtensionMethod.NewsThumbnailPath("16S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16S")'" alt="">
+                                    }
+                                </span>
+                           }
+                            <span class="text">
+                                @WowExtensionMethod.SubStringWidthPad(item.TITLE, 60)
+                                <span class="time"><span class="time-icon"></span> @item.ARTDATE.ToString("yyyy-MM-dd")</span>
+                            </span>
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<!-- // 종합 -->
+<!-- 연예.스포츠 -->
+<div class="box">
+    <div class="box-scroll">
+        <ul class="thumbnail-list">
+            @if (Model.newsEntSpoCountList != null && Model.newsEntSpoCountList.Count > 0)
+            {
+                foreach (var item in Model.newsEntSpoCountList)
+                {
+                    <li>
+                        <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@item.ARTICLEID')">
+                            @if (!String.IsNullOrEmpty(WowExtensionMethod.NewsListImage(item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)))
+                            {
+                                <span class="img">
+                                    @if (@item.VOD_NUM > 0)
+                                    {
+                                        <span class="icon-play small"></span>
+                                    }
+                                    @if (!String.IsNullOrEmpty(item.IMAGE_FILE))
+                                    {
+                                        <img src="@WowExtensionMethod.NewsThumbnailPath("16S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16S")'">
+                                    }
+                                </span>
+                            }
+                            <span class="text">
+                                @WowExtensionMethod.SubStringWidthPad(item.TITLE, 60)
+                                <span class="time"><span class="time-icon"></span> @item.ARTDATE.ToString("yyyy-MM-dd")</span>
+                            </span>
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<!-- // 연예.스포츠 -->
+<!-- 페이스북 게시글 -->
+<div class="box">
+    <div class="box-scroll">
+        <ul class="thumbnail-list" id="ulFaceBookPosts"><li></li></ul>
+    </div>
+</div>
+<!-- // 페이스북 게시글 -->
+<script src="@wowTvScript/NewsCenter/Land/ManySeeNews.js"></script>

@@ -1,0 +1,29 @@
+﻿@using XdbNet
+
+@{
+    ViewBag.Title = "Xecure 예제 설명 페이지";
+
+    string rootUrl = AppState["RootUrl"].ToString();
+}
+
+@section ScriptImport
+{
+    <script type="text/javascript" src="@Url.Content($"{rootUrl}/Scripts/example/xecure-example.js")"></script>
+}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Xecure 암/복호화 예제</div>
+        <div class="panel-body">
+            <form  id="frmXecure">
+                <div class="input-group">
+                    <input id="value" type="text" class="form-control" name="value" placeholder="아무거나 입력"><button type="button" class="btn btn-success" id="btnEncrypt">암호화</button>
+                    <br />
+                    <input id="txtEncrypt" type="text" class="form-control" name="txtEncrypt" readonly="readonly">
+                    <br />
+                    <input id="decrypt" type="text" class="form-control" name="decrypt" placeholder=""><button type="button" class="btn btn-success" id="btnDecrypt">복호화</button>
+                    <br />
+                    <input id="txtDecrypt" type="text" class="form-control" name="txtDecrypt" readonly="readonly">
+                </div>
+            </form>
+        </div>
+    </div>

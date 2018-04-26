@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "CharacterStock";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+}
+@section scripts{
+    <script src="@wowTvScript/Finance/CharacterStock/CharacterStock.js"></script>
+
+}
+
+<form id="frmSearch" name="frmSearch" method="post" onsubmit="return false;">
+    <input type="hidden" name="hdToday" id="hdToday" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+    <input type="hidden" name="hdBasicDate" id="hdBasicDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+
+    <input type="hidden" name="SearchSection" id="SearchSection" value="STOCKITEM" />
+    <input type="hidden" name="StartDate" id="StartDate" />
+    <input type="hidden" name="EndDate" id="EndDate" />
+    <input type="hidden" name="SearchComp" id="SearchComp" />
+    <input type="hidden" name="totalDataCount" id="totalDataCount" value="0" />
+    <input type="hidden" name="currentIndex" id="currentIndex" value="1" />
+    <input type="hidden" name="Page" id="Page" value="1" />
+    <input type="hidden" name="PageSize" id="PageSize" value="5" />
+</form>
+
+<h1 class="title"></h1>
+
+<!-- 뉴스 날짜 선택 -->
+<div class="contain-news-calendar">
+    <span class="prev"><button id="btnNext">다음주</button></span>
+    <div class="calendar-news-week">
+        <ul id="ulDate">
+            @for (int i = 0; i >= -6; i--)
+            {
+                DateTime dt = DateTime.Now;
+                DateTime addDt = dt.AddDays(i);
+                string strAddDate = addDt.ToString("yyyy-MM-dd");
+                <li @(dt.ToString("yyyy-MM-dd").Equals(strAddDate) ? "class=today" : "")><a href="javascript:CharacterStock.NewsSelDate('@strAddDate')">@addDt.ToString("MM-dd")</a></li>
+            }
+        </ul>
+    </div>
+    <span class="next"><button id="btnPrev">이전주</button></span>
+</div>
+<!-- //뉴스 날짜 선택 -->
+<!-- 뉴스 목록 -->
+<div class="contain-list-news">
+    <!-- News Block -->
+    <div class="article-news-list" id="divNewsList">
+        <input type="hidden" id="menuSeq" value="@currentMenuSeq"/>
+        <div class="contian-news" style="text-align:center">
+            로딩 중입니다.
+        </div>
+    </div>
+    <!-- //News Block -->
+</div>
+<!-- //뉴스 목록 -->
+<!-- Paginate -->
+<div class="box-paginate" id="divPaging"></div>
+<!-- //Paginate -->
+
+
+

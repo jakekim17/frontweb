@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "유럽";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+}
+@section scripts{
+    <script src="@wowTvScript/Finance/WorldStock/EUROPE.js"></script>
+}
+@*<div style="color: white; height: 200px; background: red; font-size: 20px; text-align: center; padding-top: 50px;" id="jobNeed">
+    차트 작업필요
+</div>*@
+<h1 class="title">유럽</h1>
+<!-- 2017-09-22 추가 -->
+<div class="tab-type1">
+    <ul class="col5">
+        <li class="btnMarketType on" id="999514"><a href="#none" id="cac40">프랑스</a></li>
+        <li class="btnMarketType" id="999507"><a href="#none" id="dax">독일</a></li>
+    </ul>
+</div>
+<form id="frmList_EUROPE">
+    <div id="divList">
+
+    </div>
+</form>
+
+<!-- Tab -->
+<div class="tab-type1">
+    <ul class="col3">
+        <li class="btnChart" id="7551"><a href="#none">일간</a></li>
+        <li class="btnChart" id="7552"><a href="#none">주간</a></li>
+        <li class="btnChart" id="7553"><a href="#none">월간</a></li>
+    </ul>
+</div>
+<!-- //Tab -->
+<!-- Top Information box -->
+<div class="box-top-type1">
+    <div class="inner-left">
+        <p class="text-normal" id="txtChart"></p>
+    </div>
+</div>
+<!-- Top Information box -->
+
+<div style="height:400px;">
+    <!-- Chart -->
+    <img id="ImgChart" />
+</div>
+

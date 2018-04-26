@@ -1,0 +1,141 @@
+﻿@using Wow
+@using Wow.Tv.FrontWeb.Areas.NewsCenter.Models
+
+@model PhotoListModel
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    AppState["BodyClass"] = "photo sub";
+    Layout = "~/Views/Shared/_MainLayout2.cshtml";
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+}
+
+<!-- 이슈 갤러리 start -->
+<div class="box-img-slider type02">
+    <div class="top-slider " id="topSlideArea">
+        <ul>
+            @if (Model.photoList != null && Model.photoList.Count > 0)
+            {
+                foreach (var item in Model.photoList)
+                {
+                    int index = Model.photoList.IndexOf(item);
+                    @*if (index == 0)
+                    {
+                        <input type="hidden" id="firstArticleId" value="@item.ARTICLEID" />
+                    }*@
+                    <li id="@item.ARTICLEID">
+                        <a href="javascript:void(0);">
+                            <img src="@WowExtensionMethod.NewsThumbnailPath("34S", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("34S")'" alt="@item.TITLE">
+                        </a>
+                    </li>
+                }
+            }
+            else
+            {
+                <li><img src="@Wow.WowExtensionMethod.NewsThumbnailOnError("34S")" alt="No Image"></li>
+            }
+        </ul>
+    </div>
+</div>
+<!--// 이슈 갤러리 end -->
+
+<div class="wrap">
+    <!-- Content Area -->
+    <div class="contain-photo">
+        <div class="wrap-adbox-right" data-sticky_parent>
+            <!-- 왼쪽 콘텐츠 영역 -->
+            <div class="section-cont" data-sticky_column>
+                <!-- 이미지 슬라이드 -->
+                <div class="photo-slider-images" id="middleSlideArea">
+                    <ul id="bxSliderArea">
+                        @if (Model.photoList != null && Model.photoList.Count > 0)
+                        {
+                            foreach (var item in Model.photoList)
+                            {
+                                <li id="@item.ARTICLEID">
+                                    <img src="@WowExtensionMethod.NewsThumbnailPath("34M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("34M")'" alt="@item.TITLE">
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li><img src="@Wow.WowExtensionMethod.NewsThumbnailOnError("34M")" alt="No Image"></li>
+                        }
+                    </ul>
+                </div>
+                <!-- //이미지 슬라이드 -->
+                <!-- 이 기사와 함께 많이 본 기사 -->
+                <div class="section-type1">
+                    <h2 class="title">이 기사와 함께 많이 본 기사</h2>
+                    <div class="contain-news-type1" id="divManySeeNews"></div>                 
+                </div>
+                <!-- //이 기사와 많이 본 기사 -->
+            </div>
+            <!-- //왼쪽 콘텐츠 영역 -->
+            <!-- 오른쪽 콘텐츠 영역 -->
+            <div class="right-area" data-sticky_column>
+                <div class="news-photo" id="newsPhotoCont"></div>
+                <!-- 배너영역2 -->
+                <div class="adv-area type2 wrap-right-adbox">
+                    @* AD Area Right 1. *@
+                    <div class="box-img-gray">
+                        <iframe width="250" height="320" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_4" title="AD Tag"></iframe>
+                    </div>
+
+                    @* AD Area Right 2. *@
+                    <div class="box-list-type">
+                        <iframe width="250" height="250" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_5" title="AD Tag"></iframe>
+                    </div>
+
+                    @* AD Area Right 3. *@
+                    <div class="box-img-gray">
+                        <iframe width="250" height="250" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_6" title="AD Tag"></iframe>
+                    </div>
+
+                    @* AD Area Right 4. *@
+                    <div class="box-list-type">
+                        <iframe width="250" height="320" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_11" title="AD Tag"></iframe>
+                    </div>
+
+                    @* AD Area Right 5. *@
+                    <div class="box-img-gray">
+                        <iframe width="250" height="250" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_12" title="AD Tag"></iframe>
+                    </div>
+                </div>
+                <!-- //배너영역2 -->
+            </div>
+            <!-- 오른쪽 콘텐츠 영역 -->
+        </div>
+    </div>
+</div>
+
+<script src="@wowTvScript/NewsCenter/Photo/PhotoList.js"></script>
+<form id="frmSearch" method="post">
+    <input type="hidden" name="SearchSection" value="PHOTO" />
+    <input type="hidden" name="SearchText" value="" />
+    <input type="hidden" name="SearchComp" value="" />
+    <input type="hidden" name="StartDate" value="@ViewBag.StartDate" />
+    <input type="hidden" name="EndDate" value="@ViewBag.EndDate" />
+    <input type="hidden" name="Page" value="@ViewBag.Page" />
+    <input type="hidden" name="PageSize" value="@ViewBag.PageSize" />
+</form>
+<script>
+
+    var photoSlider = $('#bxSliderArea').bxSlider({
+        minSlides: 1,
+        maxSlides: 1,
+        slideWidth: 600,
+        pager: false,
+        touchEnabled: false,
+        infiniteLoop: false
+    });
+
+    function GoToPhotoSlide(idx) {
+        photoSlider.goToSlide(idx);
+    }
+</script>

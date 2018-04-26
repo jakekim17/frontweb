@@ -1,0 +1,83 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.editVOD
+@using Wow.Tv.Middle.Model.Db49.wowtv
+
+@model ListModel<usp_GetCornerVODList_WEB_Result>
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    string programCode = ViewBag.ProgramCode;
+    string contentSeq = ViewBag.ContentSeq;
+
+    List<NTB_MENU> innerMenuList = ViewBag.InnerMenuList;
+    NTB_MENU currentInnerMenu = ViewBag.CurrentInnerMenu;
+}
+
+
+<form id="frmSearch">
+    <input type="hidden" id="Corner_hidProgramCode" name="programCode" value="@programCode" />
+    <input type="hidden" id="Corner_hidScCode" name="scCode" value="@currentInnerMenu.CONTENT_SEQ" />
+
+    <input type="hidden" name="currentIndex" value="0" />
+    <input type="hidden" name="pageSize" value="4" />
+</form>
+
+<!-- sub lnb03 메뉴 -->
+<div class="sub-visual-lnb03">
+    <div class="swiper-container tv-sub-visual sub-lnb01">
+        <div class="swiper-wrapper">
+            @foreach (var item in innerMenuList.Where(a => a.DEPTH > 1).OrderBy(a => a.SORD_ORDER))
+            {
+                <div class="swiper-slide @(item.MENU_SEQ == currentInnerMenu.MENU_SEQ ? "on" : "")" onclick="return ProgramMainIndex.BindContentPartial('/Broad/Corner/Index', '@item.CONTENT_SEQ');"><span>@item.MENU_NAME</span></div>
+            }
+            @*<div class="swiper-slide on"><span>이슈진단</span></div>
+            <div class="swiper-slide"><span>중국이슈</span></div>
+            <div class="swiper-slide"><span>긴급진단</span></div>
+            <div class="swiper-slide"><span>긴급대담</span></div>
+            <div class="swiper-slide"><span>특집대담</span></div>
+            <div class="swiper-slide"><span>특집진단</span></div>
+            <div class="swiper-slide"><span>빅샷인터뷰</span></div>
+            <div class="swiper-slide"><span>마켓트렌드</span></div>
+            <div class="swiper-slide"><span>IR센터</span></div>
+            <div class="swiper-slide"><span>엄종진단</span></div>*@
+        </div>
+    </div>
+    <div class="swiper-container-rtl01">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
+<!-- // sub lnb03 메뉴 -->
+<!-- 프로그램홈 일반형 목록 start -->
+<div class="section-area pb0">
+    <!-- list-media -->
+    <div class="list-media">
+        <div class="list-media-main">
+            <div class="cont-area">
+                <p class="tit">이슈진단</p>
+                <div class="info-area">
+                    <p>
+                        @MvcHtmlString.Create(currentInnerMenu.REMARK)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <ul id="divList">
+        </ul>
+    </div>
+    <!-- //list-media -->
+</div>
+<!--// 프로그램홈 일반형 목록 end -->
+<!-- paging start -->
+<div id="divPaging"></div>
+<!--// paging end -->
+
+
+
+
+<script src="@wowTvScript/Broad/Corner/Index.js?date=20171018170000"></script>
+

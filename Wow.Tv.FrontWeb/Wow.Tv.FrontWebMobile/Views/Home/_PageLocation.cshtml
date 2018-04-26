@@ -1,0 +1,60 @@
+﻿
+@using Wow.Tv.FrontWebMobile.MenuService
+@using Wow.Tv.Middle.Model.Db49.wowtv
+@using Wow.Tv.Middle.Model.Db49.wowtv.Menu
+
+@{
+    Layout = null;
+}
+
+@{
+    MenuServiceClient menuServiceClient = new MenuServiceClient();
+    string currentMenuSeq = Request["menuSeq"];
+
+    NTB_MENU currentMenu = new NTB_MENU();
+    NTB_MENU menu_1 = null;
+    NTB_MENU menu_2 = null;
+    NTB_MENU menu_3 = null;
+    if (String.IsNullOrEmpty(currentMenuSeq) == false)
+    {
+        currentMenu = menuServiceClient.GetAt(int.Parse(currentMenuSeq));
+
+        if (currentMenu.DEPTH == 1)
+        {
+            menu_1 = currentMenu;
+        }
+        else if (currentMenu.DEPTH == 2)
+        {
+            menu_1 = menuServiceClient.GetAt(currentMenu.UP_MENU_SEQ);
+            menu_2 = currentMenu;
+        }
+        else if (currentMenu.DEPTH == 3)
+        {
+            menu_2 = menuServiceClient.GetAt(currentMenu.UP_MENU_SEQ);
+            menu_3 = currentMenu;
+
+            menu_1 = menuServiceClient.GetAt(menu_2.UP_MENU_SEQ);
+        }
+    }
+}
+
+
+
+<!-- 로케이션 -->
+<div class="location">
+    <span class="is-ico is-myHome">Home</span>
+
+    @if (menu_1 != null)
+    {
+        <span>@menu_1.MENU_NAME</span>
+    }
+    @if (menu_2 != null)
+    {
+        <span>@menu_2.MENU_NAME</span>
+    }
+    @if (menu_3 != null)
+    {
+        <span>@menu_3.MENU_NAME</span>
+    }
+</div>
+<!-- // 로케이션 -->

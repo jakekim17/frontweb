@@ -1,0 +1,71 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model List<NUP_NEWS_MAIN_VOD_SELECT_Result>
+
+
+@{
+    Layout = null;
+
+    string uploadWebPath = System.Configuration.ConfigurationManager.AppSettings["UploadWebPath"];
+
+}
+
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="img-area">
+                <a href="#" onclick="return NewsCommon.GoNewsRead('@item.ARTICLEID');">
+                    <img src="@Wow.WowExtensionMethod.NewsListImage(item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" alt="">
+                </a>
+            </div>
+            <div class="cont-area">
+                <p class="tit">@item.TITLE</p>
+            </div>
+        </li>
+
+        @*<li>
+                <div class="img-area">
+                    <a href="#none">
+                        <img src="@wowTvStyle/Images/temp/temp_img_tv_main2.jpg" alt="">
+                    </a>
+                </div>
+                <div class="cont-area">
+                    <p class="tit">스타 장외주식</p>
+                </div>
+            </li>
+            <li>
+                <div class="img-area">
+                    <a href="#none">
+                        <img src="@wowTvStyle/Images/temp/temp_img_tv_main2.jpg" alt="">
+                    </a>
+                </div>
+                <div class="cont-area">
+                    <p class="tit">프로그램 타이틀 명 (최대 두줄까지 가능) 프로그램 타이틀 명 (최대 두줄까지 가능) 프로그램 타이틀 명 (최대 두줄까지 가능)</p>
+                </div>
+            </li>
+            <li>
+                <div class="img-area">
+                    <a href="#none">
+                        <img src="@wowTvStyle/Images/temp/temp_img_tv_main2.jpg" alt="">
+                    </a>
+                </div>
+                <div class="cont-area">
+                    <p class="tit">스타 장외주식</p>
+                </div>
+            </li>
+            <li>
+                <div class="img-area">
+                    <a href="#none">
+                        <img src="@wowTvStyle/Images/temp/temp_img_tv_main2.jpg" alt="">
+                    </a>
+                </div>
+                <div class="cont-area">
+                    <p class="tit">프로그램 타이틀 명 (최대 두줄까지 가능) 프로그램 타이틀 명 (최대 두줄까지 가능) 프로그램 타이틀 명 (최대 두줄까지 가능)</p>
+                </div>
+            </li>*@
+    }
+</ul>
+

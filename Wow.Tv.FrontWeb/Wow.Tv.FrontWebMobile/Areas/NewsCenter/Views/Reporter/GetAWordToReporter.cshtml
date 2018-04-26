@@ -1,0 +1,126 @@
+﻿@using Wow.Tv.Middle.Model.Common
+
+@{
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    Layout = null;
+
+    <script>
+        var isLogin = '@LoginHandler.IsLogin';
+        var isEasyLogin = '@LoginHandler.IsEasyLogin';
+    </script>
+}
+
+<div class="reporter-reply-area">
+    @if (ViewBag.IsAdd != "Y")
+    {
+        <div class="reply-box">
+            <!-- sns area -->
+            <ul class="news-sns" id="ulLogin" style="display:none;">
+                <li><a href="javascript:void(0);" class="sns-icon" id="btnHankyung"></a></li>
+                <li><a href="javascript:void(0);" class="sns-icon type02" id="btnFacebookLogin"></a></li>
+                @*<li><a href="javascript:void(0);" class="sns-icon type03"></a></li>*@
+                <li><a href="javascript:void(0);" class="sns-icon type04" id="btnKakaoLogin"></a></li>
+                <li><a href="javascript:void(0);" class="sns-icon type05" id="btnNaverLogin"></a></li>
+            </ul>
+            <!-- // sns area -->
+            <p class="text">
+                로그인을 하신 후 기자에게 소중한 한마디를 전해주세요.<br />
+                모든 글은 비공개로 작성됩니다.<br />
+                기사에 대한 문의는 해당 기사의 URL을 함께 적어주시면 보다<br />
+                정확하고 빠른 답변에 도움이 됩니다.
+            </p>
+            <form id="frmReply">
+                <input type="hidden" name="REPORTER_ID" value="@ViewBag.ReporterID" />
+                <textarea placeholder="내용을 입력하세요." class="txtContent"></textarea>
+                <textarea name="CONTENT" class="hidContent" style="display:none;"></textarea>
+                <div class="byte">0/<span>500</span></div>
+                <div class="btn-area position">
+                    <a href="javascript:void(0);" class="btn type02 btnSaveReply">등록</a>
+                </div>
+            </form>
+        </div>
+    }
+    @if (Model.ListData != null && Model.ListData.Count > 0)
+    {
+        foreach (var item in Model.ListData)
+        {
+            <div class="reply-box type02">
+                <!-- sns area -->
+                <div class="nickname-area">
+                    <div class="nickname">
+                        <p>@Html.Raw(Wow.WowExtensionMethod.MobileCommentIcon(item.ReplyData.LOGIN_TYPE))<span class="name">@item.ReplyData.NAME</span></p>
+                        <span class="data" id="data_@item.ReplyData.SEQ">@item.ReplyData.REG_DATE.ToString("yyyy-MM-dd") <span>@item.ReplyData.REG_DATE.ToString("HH:mm:ss")</span></span>
+                    </div>
+                </div>
+                <!-- // sns area -->
+                <p class="text" id="txt_@item.ReplyData.SEQ">@MvcHtmlString.Create(item.ReplyData.CONTENT)</p>
+                <div id="updateDiv_@item.ReplyData.SEQ"></div>
+                <div class="btn-area reply-btn txt-l" id="btnArea_@item.ReplyData.SEQ">
+                    <a href="javascript:void(0);" class="btn type05 btnSubReply" id="@item.ReplyData.SEQ">답글달기</a>
+                    <span class="position">
+                        @if (LoginHandler.IsLogin && LoginHandler.CurrentLoginUser.UserId == item.ReplyData.USER_ID)
+                        {
+                            <a href="javascript:void(0);" class="btn type04 btnReplyEdit" id="@item.ReplyData.SEQ">수정</a>
+                            <a href="javascript:void(0);" class="btn type04 btnReplyDelete" id="@item.ReplyData.SEQ">삭제</a>
+                        }
+                        else if (LoginHandler.IsEasyLogin && LoginHandler.CurrentEasyLoginUser.UserId == item.ReplyData.USER_ID)
+                        {
+                            <a href="javascript:void(0);" class="btn type04 btnReplyEdit" id="@item.ReplyData.SEQ">수정</a>
+                            <a href="javascript:void(0);" class="btn type04 btnReplyDelete" id="@item.ReplyData.SEQ">삭제</a>
+                        }
+                    </span>
+                </div>
+                <div class="input-text" id="divSubReply_@item.ReplyData.SEQ">
+                    <form id="frmSub_@item.ReplyData.SEQ">
+                        <input type="hidden" name="REPORTER_ID" value="@ViewBag.ReporterID" />
+                        <input type="hidden" name="MSEQ" value="@item.ReplyData.SEQ" />
+                        <textarea placeholder="내용을 입력하세요." class="txtContent"></textarea>
+                        <textarea name="CONTENT" class="hidContent" style="display:none;"></textarea>
+                        <div class="byte">0/<span>500</span></div>
+                        <div class="btn-area position">
+                            <a href="javascript:void(0);" class="btn type02 btnSaveReply" style="width:44px;">등록</a>
+                            <a href="javascript:void(0);" class="btn type02 btnSubReplyCancle" id="@item.ReplyData.SEQ" style="width:44px;margin-left:5px;">취소</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            if (item.SubReplyList != null && item.SubReplyList.Count > 0)
+            {
+                foreach (var subItem in item.SubReplyList)
+                {
+                    <div class="reply-box re-reply">
+                        <!-- sns area -->
+                        <div class="nickname-area">
+                            <div class="nickname">
+                                <p>@Html.Raw(Wow.WowExtensionMethod.MobileCommentIcon(subItem.LOGIN_TYPE))<span class="name">@subItem.NAME</span></p>
+                                <span class="data" id="data_@subItem.SEQ">@subItem.REG_DATE.ToString("yyyy-MM-dd") <span>@subItem.REG_DATE.ToString("HH:mm:ss")</span></span>
+                            </div>
+                        </div>
+                        <!-- // sns area -->
+                        <p class="text" id="txt_@subItem.SEQ">@MvcHtmlString.Create(subItem.CONTENT)</p>
+                        <div id="updateDiv_@subItem.SEQ"></div>
+                        <div class="btn-area reply-btn txt-l" id="btnArea_@subItem.SEQ">
+                            <span class="">
+                                @if (LoginHandler.IsLogin && LoginHandler.CurrentLoginUser.UserId == subItem.USER_ID)
+                                {
+                                    <a href="javascript:void(0);" class="btn type04 btnReplyEdit" id="@subItem.SEQ">수정</a>
+                                    <a href="javascript:void(0);" class="btn type04 btnReplyDelete" id="@subItem.SEQ">삭제</a>
+                                }
+                                else if (LoginHandler.IsEasyLogin && LoginHandler.CurrentEasyLoginUser.UserId == subItem.USER_ID)
+                                {
+                                    <a href="javascript:void(0);" class="btn type04 btnReplyEdit" id="@subItem.SEQ">수정</a>
+                                    <a href="javascript:void(0);" class="btn type04 btnReplyDelete" id="@subItem.SEQ">삭제</a>
+                                }
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
+</div>
+
+<script>
+    $('#totalDataCount').val("@Model.TotalDataCount");
+</script>
+

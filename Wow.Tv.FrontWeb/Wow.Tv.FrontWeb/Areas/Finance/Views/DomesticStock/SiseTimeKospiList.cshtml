@@ -1,0 +1,73 @@
+﻿@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+
+@model ListModel<usp_getSiseTimeKospi_new_Result>
+@{
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    //string wowTvScript = System.Configuration.ConfigurationManager.AppSettings["WowTvScript"].ToString();
+    Layout = null;
+}
+
+<script>
+    var totalDataCount_timeKospi = "@Model.TotalDataCount";
+</script>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<script src="@wowTvScript/Finance/DomesticStock/SiseTimeKospiList.js"></script>
+<!-- Table -->
+<div class="table-type1 row5">
+    <table>
+        <caption>시간대별 체결</caption>
+        <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>날짜</th>
+                <th>체결가</th>
+                <th>전일대비</th>
+                <th>변동량(천주)</th>
+                <th>거래량(천주)</th>
+                <th>거래대금(백만)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ListData.Count != 0)
+            {
+                foreach (var item in Model.ListData)
+                {
+                    <tr>
+                        <td>@item.DT</td><!--날짜-->
+                        <td class="number">@item.price</td><!--체결가-->
+                        <td>@Html.PublishChgPriceFormat(item.chgtype, item.chgprice)</td><!--전일대비-->
+                        <td>@Html.PublishUpDownFormat(item.prevolume, item.volume) </td><!--변동량(천주)-->
+                        <td>@Html.CommaFormat(item.volume)</td><!--거래량-->
+                        <td>@Html.CommaFormat(item.TradeMoney)</td><!--거래대금(백만)-->
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">데이터가 없습니다.</td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
+<!-- //Table -->
+
+<!-- Paginate -->
+<div id="divPaging_timeKospi" class="box-paginate"></div>
+<!-- //Paginate -->
+
+
+
+
+

@@ -1,0 +1,63 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+@model ListModel<usp_getDailyStockPricePop_Result>
+@{
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    Layout = null;
+}
+<script>
+    var totalDatacount_dayStockPrice = "@Model.TotalDataCount";
+</script>
+<script src="@wowTvScript/Finance/DomesticStock/GetStockNowPriceDayList.js"></script>
+<!-- start -->
+<h3 class="tit-line bd-none">일자별주가</h3>
+<div class="table-type1 type02 line mb0">
+    <table>
+        <caption>상세</caption>
+        <colgroup>
+            <col style="width:28%">
+            <col style="width:24%">
+            <col style="width:24%">
+            <col style="width:*">
+        </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">일자</th>
+                <th scope="col">전일비</th>
+                <th scope="col">등락률(%)</th>
+                <th scope="col">거래량㈜</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                @if (Model.ListData.Count > 0)
+                {
+                    foreach (var item in Model.ListData)
+                    {
+                        <tr>
+                            <td><strong class="num">@item.TRADEDATE</strong></td>
+                            <td class="txt-r"><strong>@Html.RecentlyStockChgPriceFormat(item.CHGTYPE, item.CHGPRICE)</strong></td>
+                            <td class="txt-r"><strong>@Html.RecentlyStockChgRateFormat(item.CHGTYPE, item.CHGRATE)</strong></td>
+                            <td class="txt-r"><strong class="num">@Html.CommaFormat(item.DEALING)</strong></td>
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">데이터가 없습니다.</td>
+                    </tr>
+                }
+                
+          
+            
+        </tbody>
+    </table>
+</div>
+<!--// end -->
+<!-- paging start -->
+<div id="divPaging_dayStockPrice" class="box-paginate"></div>
+<!--// paging end -->
+

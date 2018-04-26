@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    //Layout = "~/Areas/Finance/Views/Shared/_LayoutFinanceSubDomesticStock.cshtml";
+
+    AppState["WowTvStyle"] = System.Configuration.ConfigurationManager.AppSettings["WowTvStyle"];
+    AppState["WowTvScript"] = System.Configuration.ConfigurationManager.AppSettings["WowTvScript"];
+
+    AppState["BodyClass"] = "customer";
+    AppState["MainTitle"] = "고객센터";
+}

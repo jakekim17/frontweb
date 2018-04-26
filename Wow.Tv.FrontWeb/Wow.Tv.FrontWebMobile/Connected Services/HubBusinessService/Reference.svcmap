@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7ee56138-643b-49c1-b5e7-cae0a2927cdc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/NewsCenter/HubBusinessService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="HubBusinessService.xsd" MetadataType="Schema" ID="6bd1ae2b-f13a-43be-8958-e520c3c9a2ba" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/HubBusinessService.svc?xsd=xsd3" />
+    <MetadataFile FileName="HubBusinessService.disco" MetadataType="Disco" ID="a95ad859-2c8d-4621-8c48-c4d9a3fc06b0" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/HubBusinessService.svc?disco" />
+    <MetadataFile FileName="HubBusinessService1.xsd" MetadataType="Schema" ID="fcf3471e-8e04-47d9-ab91-8eacc53a6cbe" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/HubBusinessService.svc?xsd=xsd5" />
+    <MetadataFile FileName="HubBusinessService2.xsd" MetadataType="Schema" ID="74ebcee5-8aa4-4a0c-be4e-230a46974fbc" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/HubBusinessService.svc?xsd=xsd2" />
+    <MetadataFile FileName="HubBusinessService.wsdl" MetadataType="Wsdl" ID="14489192-cc35-4beb-a94c-cebcfda34efe" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/HubBusinessService.svc?wsdl" />
+    <MetadataFile FileName="HubBusinessService3.xsd" MetadataType="Schema" ID="2ace0aec-abd9-4ccc-a21c-5a9915ad067a" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/HubBusinessService.svc?xsd=xsd0" />
+    <MetadataFile FileName="HubBusinessService4.xsd" MetadataType="Schema" ID="9aef35c0-5f09-4d73-a627-15bcab682f0f" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/HubBusinessService.svc?xsd=xsd1" />
+    <MetadataFile FileName="HubBusinessService5.xsd" MetadataType="Schema" ID="565d6339-faca-42f2-ba9f-a5ddfabc94d6" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/HubBusinessService.svc?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,69 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@model ListModel<usp_web_GetSiseStockPlusK_Result>
+@{
+    ViewBag.Title = "IndustryPartUpperKosdaq";
+    Layout = null;
+
+    IndustryCondition condition = (IndustryCondition)ViewBag.IndustryCondition;
+    condition.MenuSeq = Convert.ToInt32(Request["menuSeq"]);
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+<script src="@wowTvScript/Finance/DomesticStock/IndustryPartUpperList.js"></script>
+
+@*<h2>IndustryPartUpperkosdaq</h2><div class="section-area">*@
+    <!-- 테이블-->
+<div class="section-area">
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+
+                @foreach (var item in Model.ListData)
+                {
+                    <tr>
+                        @*<td class="txt-l">
+                            @Html.ActionLink(item.korName, "IndustryPartDetail", "DomesticStock", new
+                       {
+                           Market = condition.Market,
+                           OrderBy = condition.OrderBy,
+                           TargetDt = condition.TargetDT,
+                           PartCode = item.partCode,
+                           PartName = item.korName,
+                           MenuSeq = condition.MenuSeq
+                       }, null)
+                        </td>*@
+
+                        <td>
+                            <a href="#none" onclick="IndustryPartUpperList.Detail('@ViewBag.IndustryCondition.Market',
+                                                                                '@ViewBag.IndustryCondition.TargetDT',
+                                                                                '@item.korName',
+                                                                                '@item.partCode',
+                                                                                    @ViewBag.IndustryCondition.MenuSeq);">@item.korName</a>
+                        </td>
+                        <td>@Html.PublishPriceFormat(item.ChgType, item.LastPrice)</td>
+                        <td> @Html.PublishChgPriceFormat(item.ChgType, item.ChgPrice)</td>
+                        <td>@Html.PublishUpDownSymbolPChangeFormat(item.ChgType, item.PChange)</td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+        <form id="frmPartUpperDetail">
+            <input type="hidden" id="Market" name="Market" />
+            <input type="hidden" id="TargetDt" name="TargetDt" />
+            <input type="hidden" id="PartName" name="PartName" />
+            <input type="hidden" id="PartCode" name="PartCode" />
+            <input type="hidden" id="MenuSeq" name="MenuSeq" />
+        </form>
+    </div>
+    <!-- // 테이블 -->
+</div>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article.Opinion" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article.Opinion" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8088/Opinion/OpinionService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" />
+  <xs:import schemaLocation="http://localhost:8088/Opinion/OpinionService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" />
+  <xs:complexType name="OpinionCondition">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" base="q1:BaseCondition">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Class" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Seq" type="xs:int" />
+          <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OpinionCondition" nillable="true" type="tns:OpinionCondition" />
+  <xs:complexType name="ArrayOfOpinionColumnModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OpinionColumnModel" nillable="true" type="tns:OpinionColumnModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOpinionColumnModel" nillable="true" type="tns:ArrayOfOpinionColumnModel" />
+  <xs:complexType name="OpinionColumnModel">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" minOccurs="0" name="List" nillable="true" type="q2:tblPlanArticle" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" minOccurs="0" name="SubList" nillable="true" type="q3:ArrayOfNUP_NEWS_SECTION_SELECT_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OpinionColumnModel" nillable="true" type="tns:OpinionColumnModel" />
+</xs:schema>

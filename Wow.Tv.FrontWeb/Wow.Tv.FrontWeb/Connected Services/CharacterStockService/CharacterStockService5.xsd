@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8088/Finance/CharacterStockService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/CharacterStockService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.editVOD" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/CharacterStockService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article.NewsCenter" />
+  <xs:import schemaLocation="http://localhost:8088/Finance/CharacterStockService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" />
+  <xs:element name="GetCurrentPrice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="stockCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentPriceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db22.stock" minOccurs="0" name="GetCurrentPriceResult" nillable="true" type="q1:usp_GetStockPrice_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockVODList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="stockCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStockVODListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.editVOD" minOccurs="0" name="GetStockVODListResult" nillable="true" type="q2:ArrayOfusp_byStockCodeGetVOD_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCharaterStockList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article.NewsCenter" minOccurs="0" name="condition" nillable="true" type="q3:NewsCenterCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCharaterStockListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Common" minOccurs="0" name="GetCharaterStockListResult" nillable="true" type="q4:ListModelOfCharacterStockModelV5IvmxGQ" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

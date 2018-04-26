@@ -1,0 +1,777 @@
+﻿@using System.Configuration
+@using Wow
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.FrontWeb.Areas.NewsCenter.Models
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.FrontWeb.Areas.Component.Models
+
+@model  NewsReadModel
+
+@{
+    //포토뉴스
+    bool isPhotoNews = ViewBag.isPhotoNews;
+    //기자 페이지 사용 유무
+    bool isReporter  = ViewBag.isReporter;
+    //종목 정보 유무
+    bool isStock     = ViewBag.isStock;
+    if (isPhotoNews)
+    {
+        AppState["BodyClass"] = "photo sub photo-detail";
+    }
+    else
+    {
+        AppState["BodyClass"] = "news sub";
+    }
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    NUP_NEWS_READ_SELECT_Result newsRead = Model.newsRead;
+
+    List<String> cardNewsImageList = new List<string>();
+    if (Model.newsRead != null)
+    {
+        if (newsRead.CARDNEWS != null && newsRead.CARDNEWS.Equals("Y"))
+        {
+            cardNewsImageList = WowExtensionMethod.HtmlSourceToImgSrclist(newsRead.CONTENT);
+        }
+    }
+
+    //이전,다음 기사
+    //List<NUP_NEWS_PREV_NEXT_SELECT_Result> newsPrevNext = Model.newsPrevNext;
+    //NUP_NEWS_PREV_NEXT_SELECT_Result newsPrev = null;
+    //NUP_NEWS_PREV_NEXT_SELECT_Result newsNext = null;
+
+    //if (newsPrevNext != null)
+    //{
+    //    newsPrev = newsPrevNext.Where(p => p.NEWS.Equals("PREV_NEWS")).FirstOrDefault();
+    //    newsNext = newsPrevNext.Where(p => p.NEWS.Equals("NEXT_NEWS")).FirstOrDefault();
+    //}
+
+    string titleReplace = string.Empty;
+    if (newsRead != null)
+    {
+        titleReplace = MvcHtmlString.Create(newsRead.TITLE).ToString().Replace("&#39;", "＇").Replace("&quot;", "＂").Replace("'", "＇").Replace("\"", "＂");
+        //titleReplace = newsRead.TITLE;
+    }
+
+    SnsLoginParameter snsLoginParameter = new SnsLoginParameter();
+    snsLoginParameter.LoginActionType = SnsLoginActionType.AutoEasyLogin;
+    snsLoginParameter.NaverReturnFunction = "NewsRead.NaverPopupResult";
+    snsLoginParameter.KakaoReturnFunction = "NewsRead.KakaoPopupResult";
+    snsLoginParameter.FacebookReturnFunction = "NewsRead.FacebookPopupResult";
+}
+
+@section metas{
+
+   @if (Model.newsRead != null)
+   {
+    <meta property="og:locale" content="kor" />
+    <meta property="og:type"   content="article" />
+    <meta property="og:title"  content="@titleReplace" />
+    <meta property="og:url"    content="http://@ConfigurationManager.AppSettings["DomainUrlFront"]/NewsCenter/News/Read?articleId=@Model.newsRead.ARTICLEID" />  
+    <meta property="og:image"  content="@Model.newsRead.IMGLINK" />
+    }
+}
+
+@section styles{
+    @*포토 상세 CSS*@
+    @if (isPhotoNews)
+    {
+        <link rel="stylesheet" href="@wowTvStyle/css/photo.css">
+    }
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/CommonCast.js"></script>
+    <script src="@wowTvScript/NewsCenter/News/ReadCast.js"></script>
+    <script src="@wowTvScript/MyPin/Scrap/Index.js"></script>
+    <script src="@wowTvScript/sticky.js"></script>
+    <script src="@wowTvScript/jquery.printThis.js"></script>
+    <script src="@wowTvScript/NewsCenter/News/ArticleComment.js"></script>
+
+    @* 당신에게 맞는 추천 뉴스(관리자 설정) *@
+    @if (ViewBag.viewPageRecomActive == "Y")
+    {
+    <script src="@wowTvScript/NewsCenter/NewsReadSearchApi.js"></script>
+    }
+
+    @* VOD 관련 뉴스 *@
+    @if (newsRead != null && newsRead.VOD_NUM != null && newsRead.VOD_NUM > 0)
+    {
+    <script src="@wowTvScript/NewsCenter/NewsReadMovieSearchApi.js"></script>
+    }
+ 
+    <script>
+        document.title = '@titleReplace';
+        var isLogin = '@LoginHandler.IsLogin';
+        var isEasyLogin = '@LoginHandler.IsEasyLogin';
+    </script>
+}
+
+@section googleAnalyticsScript{
+
+    @if (newsRead != null )
+    {
+        string writerDept = (newsRead.WRITER_DEPT == null ? "" : newsRead.WRITER_DEPT);
+        string writerId = (newsRead.WRITER_ID == null ? "" : newsRead.WRITER_ID);
+
+        //와우스타(와우 0204)
+        if(writerDept.Equals("D0130"))
+        {
+            @Html.Raw("        gtag('config', 'UA-51494055-33');");
+        }
+        //와우스포츠
+        else if (writerDept.Equals("D0131"))
+        {
+            @Html.Raw("        gtag('config', 'UA-51494055-17');");
+        }
+        //맥심코리아
+        else if (writerDept.Equals("D0135"))
+        {
+            @Html.Raw("        gtag('config', 'UA-51494055-22');");
+        }
+        //디지털 머니
+        else if (writerDept.Equals("D0141"))
+        {
+            @Html.Raw("        gtag('config', 'UA-51494055-24');");
+        }
+
+        //김주리
+        if (writerId.Equals("f0616"))
+        {
+            @Html.Raw("        gtag('config', 'UA-51494055-38');");
+        }
+        //김현경
+        else if (writerId.Equals("F0537"))
+        {
+            @Html.Raw("        gtag('config', 'UA-51494055-40');");
+        }
+        //이송이
+        else if (writerId.Equals("F0721"))
+        {
+            @Html.Raw("        gtag('config', 'UA-51494055-42');");
+        }
+        //이영호
+        else if (writerId.Equals("F0617"))
+        {
+            @Html.Raw("        gtag('config', 'UA-51494055-44');");
+        }
+    }
+}
+
+@section hardCodingAdArea{
+   @if (ViewBag.HardCodingAdList != null)
+   {
+       foreach (var item in ViewBag.HardCodingAdList)
+       {
+           if (item.AD_GUBUN == "PC" && !string.IsNullOrEmpty(item.AD_CONTENT))
+           {
+                @MvcHtmlString.Create(item.AD_CONTENT);
+            }
+        }
+    }
+}
+
+@if (newsRead == null)
+{
+    <div class="news-header-section">
+        <div class="title-area">
+            <p class="title-news">해당기사가 삭제되었거나 보유기간이 종료되었습니다. </p>
+        </div>
+    </div>
+}
+else
+{
+    <input type="hidden" id="hidNewsReadMovieVodNum" value="@newsRead.VOD_NUM" />
+
+    @section modalDiv{
+        <div id="divSubScriptPopup" class="modal fade" role="dialog"></div>
+        @*인쇄*@
+        <div class="modal fade" role="dialog" >
+            <div  id="divPrintPopup" class="popup-type1 print" style="display:none;" >
+                <div class="inner" >
+                    <h1 class="title">인쇄하기</h1>
+                    <a href="javascript:NewsRead.GetPrintPopUpClose();" class="pop-close-btn">닫기</a>
+                    <div class="content-box">
+                        <div class="btn-area">
+                            <div class="box-util-links">
+                                <span class="btn-print">
+                                    <a href="javascript:NewsRead.Print()">인쇄하기</a>
+                                    <span class="tooltip">인쇄</span>
+                                </span>
+                            </div>
+                        </div>
+                        @*뉴스 영역*@
+                        <div class="news-cont-area print" id="divPrintArea">
+                            @*제목 & 일자*@
+                            <div class="main-head">
+                                <span class="date">
+                                    @if (newsRead.ARTUPDATE != null)
+                                    {
+                                        @String.Format("{0} 수정 ", newsRead.ARTUPDATE.Value.ToString("yyyy-MM-dd HH:mm"));
+                                    }
+                                    else
+                                    {
+                                        @newsRead.ARTDATE.Value.ToString("yyyy-MM-dd HH:mm");
+                                    }
+                                </span>
+                                <strong class="tit">@titleReplace</strong>
+                            </div>
+                            @* 부제목 *@
+                            @if (!string.IsNullOrEmpty(newsRead.SUBTITLE))
+                            {
+                                <div class="sub-head">@newsRead.SUBTITLE</div>
+                            }
+                            @*뉴스 내용*@
+                            <p class="cont">
+                                @MvcHtmlString.Create(WowExtensionMethod.NewsContentReplace(newsRead.CONTENT, newsRead.COMPCODE))
+                            </p>
+                            @*기자 정보*@
+                            
+                            @if (newsRead.IS_BYLINE.ToUpper().Equals("TRUE"))
+                            {
+                                <div class="info-reporter">한국경제TV @newsRead.BYLINE_DEPT @newsRead.BYLINE_NAME @newsRead.BYLINE_POSITION @newsRead.BYLINE_EMAIL</div>
+                            }
+                            @* Copyright *@
+                            <div class="copyright">Copyrightⓒ한국경제TV. All Rights Reserved. 무단전재 및 재배포 금지</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //스크롤 내리면 제목,영상,이전기사,다음기사 따라 내려오는 스크립트
+            ui_scroll_2();
+        });
+    </script>
+    <!-- Content Area -->
+
+    @* 상단 배너영역 *@
+    <div class="adv-area text-center" style="width:100%;">
+        <iframe width="970" height="130" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_2" title="AD Tag"></iframe>
+    </div>
+    @* 좌측 배너영역 *@
+    <div class="adv-area left" style="width:120px; height:600px;">
+        <iframe src="http://ad.wowtv.co.kr/NetInsight/html/wowtv/wowtv_newscenter/wowtv_n_newscenter@tv_sub_left" width="120" height="600" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"></iframe>
+    </div>
+    @* 우측 배너영역 *@
+    <div class="adv-area right" style="width:120px; height:600px;padding-left:100px">
+        <iframe width="120" height="600" src="http://ad.adinc.kr/cgi-bin/PelicanC.dll?impr?pageid=089l&amp;out=iframe" allowtransparency="true" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+	<!-- //우측 배너영역 -->
+    <div class="news-header-section">
+        <form id="frm" name="frm" method="post" onsubmit="return false;">
+            <input type="hidden" name="menuSeq" id="menuSeq" value="@Request["menuSeq"]" />
+            <input type="hidden" name="subMenu" id="subMenu" value="@Request["subMenu"]" />
+            <input type="hidden" name="Class" id="Class" value="@Request["Class"]" />
+            <input type="hidden" name="SearchWowCode" id="SearchWowCode" value="@Request["wowcode"]" />
+            <input type="hidden" name="SearchSection" id="SearchSection" value="@Request["SearchSection"]" />
+            <input type="hidden" name="StartDate" id="StartDate" value="@Request["StartDate"]" />
+            <input type="hidden" name="EndDate" id="EndDate" value="@Request["EndDate"]" />
+            <input type="hidden" name="SearchComp" id="SearchComp" value="@Request["SearchComp"]" />
+            <input type="hidden" name="currentIndex" id="currentIndex" value="@Request["currentIndex"]" />
+            <input type="hidden" name="Page" id="Page" value="@Request["Page"]" />
+            <input type="hidden" name="articleId" id="articleId" value="@newsRead.ARTICLEID" />
+            <input type="hidden" name="reporter_Id" id="reporter_Id" value="@newsRead.WRITER_ID" />
+            <input type="hidden" name="tag" id="tag" value="@newsRead.TAG" />
+            <input type="hidden" name="selDateIndex" id="selDateIndex" value="@Request["selDateIndex"]" />
+        </form>
+        @* 타이틀 이전,다음기사 버튼 *@
+        <div class="title-area">
+            <p class="title-news">
+                @newsRead.TITLE@MvcHtmlString.Create(WowExtensionMethod.NewsGugunIcon(newsRead.GUBUN_NAME, "S"))
+            </p>
+            <span id="spPrev"></span>
+            <span id="spNext"></span>
+            @*@if (newsPrev != null)
+            {
+                <a href="javascript:NewsCommon.GoNewsView('@newsPrev.ARTICLEID')" class="btn-prev">prev</a>
+            }
+            @if (newsNext != null)
+            {
+                <a href="javascript:NewsCommon.GoNewsView('@newsNext.ARTICLEID')" class="btn-next">next</a>
+            }*@
+        </div>
+        @* 버튼영역 *@
+        <div class="box-util-button">
+            @* 핀, 페이스북, 트위터, 카카오 스토리, 블로그, 링크복사 *@
+            <div class="box-icon-sharesns">
+                @if (LoginHandler.IsLogin == true)
+                {
+                    <span class="btn-pin"><button onclick="co.PopupScrap('News', '@titleReplace', '@newsRead.ARTICLEID','@Request["menuSeq"]', '@Request.Url.AbsoluteUri.ToString()');">핀</button><span class="tooltip">핀하기</span></span>
+                }
+                else
+                {
+                    <span class="btn-pin"><button onclick="LoginConfirm()">핀</button><span class="tooltip">핀하기</span></span>
+                }
+                <span class="btn-facebook">
+                    @*<button onclick="Share.Facebook('@titleReplace')">페이스북</button>*@
+                    <button onclick="NewsFacebookShare('@Model.newsRead.ARTICLEID')">페이스북</button>
+                    <span class="tooltip">페이스북</span>
+                </span>
+                <span class="btn-twitter">
+                    <button onclick="Share.Twitter(location.pathname + location.search,'@titleReplace')">트위터</button>
+                    <span class="tooltip">트위터</span>
+                </span>
+                <span class="btn-kakaostory">
+                    <button onclick="Share.kakaostory(location.pathname + location.search,'@titleReplace')">카카오스토리</button>
+                    <span class="tooltip">카카오스토리</span>
+                </span>
+                <span class="btn-blog">
+                    <button onclick="Share.Naver(location.pathname + location.search,'@titleReplace')">블로그</button>
+                    <span class="tooltip">블로그</span>
+                </span>
+                <span class="btn-copyurl">
+                    <a href="#" onclick="PopupCopyLinkScript();">링크 복사</a>
+                    <span class="tooltip">링크 복사</span>
+                </span>
+            </div>
+            @* 기사 입력,수정일자, SNS Count *@
+            <div class="news-aside">
+                <p class="date-news">
+                    입력
+                    <span class="text-number">@newsRead.ARTDATE.Value.ToString("yyyy-MM-dd HH:mm")</span>&nbsp;&nbsp;
+                    @if (newsRead.ARTUPDATE != null)
+                    {
+                        @Html.Raw(String.Format("수정 <span class=\"text-number\">{0}</span>", newsRead.ARTUPDATE.Value.ToString("yyyy-MM-dd HH:mm")));
+                    }
+                </p>
+                <p class="sns-news">
+                    페이스북 노출 <span class="text-number" id="faceBookNum">0</span>
+                </p>
+            </div>
+            @* 번역, 구독하기, 목록, 댓글링크, 인쇄 *@
+            <div class="box-util-links">
+                @*구글번역**@
+                <div id="google_translate_element"></div>
+                @if (isReporter)
+                {
+                    <span class="btn-subscribe on"><button onclick="PopupSubScript('@newsRead.REPORTER_ID');location.href='#'">구독하기</button></span>
+                }
+                <span class="btn-list-link"><a href="javascript:NewsRead.GoNewsList()">목록으로</a></span>
+                @*관리자 => 댓글 사용여부*@
+                @if (ViewBag.commentActive == "Y")
+                {
+                    <span class="btn-reply-link">
+                        <a href="#divComment">댓글달기</a>
+                        <span class="tooltip">댓글</span>
+                    </span>
+                }
+                <span class="btn-print" name="spanNewsPrint">
+                    <a href="#">인쇄하기</a>
+                    <span class="tooltip">인쇄</span>
+                </span>
+                @* 본문 글자 조절 *@
+                <div class="box-zoom">
+                    <span class="btn-zoomin"><button onclick="ExpandFont('divNewsContent')">글자 크게</button></span>
+                    <span class="btn-zoomout"><button onclick="ReduceFont('divNewsContent')">글자 작게</button></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* 스크롤 내리면 제목,영상,이전기사,다음기사 따라 내려오는 Div(fix 기사) *@
+    <div class="box-hot-news")">
+        <div class="inner">
+            <h1 class="title02">@newsRead.TITLE</h1>
+            <span class="btn-sitemap"><button>SITE MAP</button></span>
+        </div>
+        @*이전, 다음 기사*@
+        <div class="bar-gray">
+            @*<div>
+                    @if (newsPrev != null)
+                    {
+                        <div class="prev-area">
+                            <a href="javascript:void(0)" class="btn-prev">prev</a>
+                            <a href="javascript:void(0)"> @newsPrev.TITLE</a>
+                        </div>
+                    }
+                    @if (newsNext != null)
+                    {
+                        <div class="next-area">
+                            <a href="javascript:NewsCommon.GoNewsView('@newsNext.ARTICLEID')">@newsNext.TITLE</a>
+                            <a href="javascript:void(0)" class="btn-next">next</a>
+                        </div>
+                    }
+                </div>*@
+            <div>
+                <div class="prev-area"></div>
+                <div class="next-area"></div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-right-adbox" data-sticky_parent>
+        <div class="section-content" data-sticky_column>
+            @* 영상 뉴스 DIV *@
+            @if (newsRead.VOD_NUM != null && newsRead.VOD_NUM > 0)
+            {
+                <div class="arti-video full bxslider">
+                    <div class="cont">
+                        @* VOD player Area *@
+                        <div class="box-video">                            
+                            <div id="divPlayImage" style="cursor:pointer">
+                                <img src="@WowExtensionMethod.NewsThumbnailPath("16B", "", newsRead.VOD_NUM, newsRead.VOD_EDITFOLDER, newsRead.VOD_IMAGE_B, newsRead.ARTDATE.Value)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16B")'" width="870" height="500" alt="">
+                                <span class="icon-play"></span>
+                            </div>
+                            @{ 
+                                TvPlayerModel tvPlayerParameter = new TvPlayerModel();
+                                tvPlayerParameter.PlayType = TvPlayTypeModel.ByScript;
+                                tvPlayerParameter.Width = 870;
+                                tvPlayerParameter.Height = 535;
+                                tvPlayerParameter.FloatingMode = true;
+                            }                            
+                            @Html.Partial("~/Areas/Component/Views/TvPlayer/TvPlayer.cshtml", tvPlayerParameter)
+                        </div>
+                        <div class="news-slider">
+                            <ul id="ulNewsReadMovieRefContent">
+                                @*<li>
+                                    <a href="#none">
+                                        <div>
+                                            <img src="@wowTvStyle/images/temp/temp_news13.png" alt="" />
+                                            <span class="icon-play medium"></span>
+                                        </div>
+                                        <p>현대차, 중국내 협력업체에 올봄부터 납품대금 지급...</p>
+                                    </a>
+                                </li>*@
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="btn-movie clearfix">
+                        <div class="btn-type2"> 
+                            <a href="javascript:void(0)"><span id="spanResize">영상펼침</span></a>
+                        </div>
+                    </div>
+                </div>
+            }
+            @* 부제목 *@
+            @if (!string.IsNullOrEmpty(newsRead.SUBTITLE))
+            {
+                <div class="box-headline">@newsRead.SUBTITLE</div>
+            }
+            @* 기사 내용 *@
+            <div class="box-news-body" id="divNewsContent">
+                @* 카드뉴스 *@
+                @if (newsRead.CARDNEWS != null && newsRead.CARDNEWS.Equals("Y"))
+                {
+                    <span class="btn-type2 slider-switch"><button>한 페이지로 보기</button></span>
+                    <br>
+                    <div class="news-slider-images bxslider" id="divCardNewsSlider">
+                        @if (cardNewsImageList.Count > 0)
+                        {
+                            <ul>
+                                @foreach (var item in cardNewsImageList)
+                                {
+                                    <li>
+                                        <img src="@item" alt="" style="width:600px" />
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                }
+                else
+                {
+                    @MvcHtmlString.Create(WowExtensionMethod.NewsContentReplace(newsRead.CONTENT, newsRead.COMPCODE))
+                }
+            </div>
+            @* 기사 태그 *@
+            @if (!string.IsNullOrEmpty(newsRead.TAG))
+            {
+                <div class="box-news-tags">
+                    @MvcHtmlString.Create(WowExtensionMethod.NewsHashTag(newsRead.TAG, 5,"READ"))
+                </div>
+            }
+
+            @*베스트 포토*@
+            @if (isPhotoNews)
+            {
+            <div id="divBestPhoto" class="box-img-slider type03"></div>
+            }
+
+            @* AD Area 1. *@
+            <div class="article-infor">
+                <iframe width="650" height="85" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_8" title="AD Tag"></iframe>
+            </div>
+
+
+            @* 바이라인 비노출이 아닐경우 || 파트너  *@
+            @if (newsRead.IS_BYLINE.ToUpper().Equals("TRUE") || isReporter)
+            {
+                @* 기자 정보 *@
+                if (isReporter)
+                {
+                <div class="article-repoter-infor" id="reporterArea"></div>
+                }
+                else
+                {
+                    if (newsRead.COMPCODE != null && newsRead.COMPCODE.Equals("WO"))
+                    {
+                    <div class="article-repoter-infor" >
+                        <div class="type2">
+                            <div class="repoter-aside">                        
+                                <p class="reporter" style="padding-top:10px">
+                                    @newsRead.COMP_NAME                            
+                                    &nbsp;@newsRead.BYLINE_DEPT
+                                    &nbsp;@newsRead.BYLINE_NAME
+                                    &nbsp;@newsRead.BYLINE_POSITION
+                                    @if (!string.IsNullOrEmpty(newsRead.BYLINE_EMAIL))
+                                    {
+                                        string mailTo = string.Format("&nbsp;<a class='link-mail' href='mailto:{0}'>{0}</a>", newsRead.BYLINE_EMAIL);
+                                        @MvcHtmlString.Create(mailTo);
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                }
+            }
+
+            @* 관련종목 정보&차트 *@
+            @if (isStock)
+            {
+            <div class="box-event-chart" id="stockArea"></div>
+            }
+            @* 버튼 & 감정 표현 *@
+            <div class="box-section-emotion">
+                @* 핀, 페이스북, 트위터, 카카오 스토리, 블로그, 링크복사 *@
+                <div class="box-icon-sharesns">
+                    @if (LoginHandler.IsLogin == true)
+                    {
+                        <span class="btn-pin"><button onclick="co.PopupScrap('News', '@titleReplace', '@newsRead.ARTICLEID','@Request["menuSeq"]', '@Request.Url.AbsoluteUri.ToString()');">핀</button><span class="tooltip">핀하기</span></span>
+                    }
+                    else
+                    {
+                        <span class="btn-pin"><button onclick="LoginConfirm()">핀</button><span class="tooltip">핀하기</span></span>
+                    }
+                    <span class="btn-facebook">
+                        @*<button onclick="Share.Facebook('@titleReplace')">페이스북</button>*@
+                        <button onclick="NewsFacebookShare('@Model.newsRead.ARTICLEID')">페이스북</button>
+                        <span class="tooltip">페이스북</span>
+                    </span>
+                    <span class="btn-twitter">
+                        <button onclick="Share.Twitter(location.pathname + location.search,'@titleReplace')">트위터</button>
+                        <span class="tooltip">트위터</span>
+                    </span>
+                    <span class="btn-kakaostory">
+                        <button onclick="Share.kakaostory(location.pathname + location.search,'@titleReplace')">카카오스토리</button>
+                        <span class="tooltip">카카오스토리</span>
+                    </span>
+                    <span class="btn-blog">
+                        <button onclick="Share.Naver(windolocation.pathname + location.search,'@titleReplace')">블로그</button>
+                        <span class="tooltip">블로그</span>
+                    </span>
+                    <span class="btn-copyurl">
+                        @*<button onclick="PopupCopyLinkScript();">링크 복사</button>*@
+                        <a href="#" onclick="PopupCopyLinkScript();">링크 복사</a>
+                        <span class="tooltip">링크 복사</span>
+                    </span>
+                </div>
+                @* 감정 표현 *@
+                <div class="box-emotion" id="divLikeit">
+                    <span class="btn-emotion1"><button>좋아요 <i>0</i></button></span>
+                    <span class="btn-emotion2"><button>싫어요 <i>0</i></button></span>
+                    <span class="btn-emotion3"><button>후속기사 원해요 <i>0</i></button></span>
+                </div>
+                @* 구독하기, 목록, 인쇄 *@
+                <div class="box-util-links">
+                    @if (isReporter)
+                    {
+                        <span class="btn-subscribe on"><button onclick="PopupSubScript('@newsRead.REPORTER_ID');location.href='#'">구독하기</button></span>
+                    }
+                    <span class="btn-list-link icon">
+                        <a href="javascript:NewsRead.GoNewsList()">목록으로</a>
+                        <span class="tooltip">목록</span>
+                    </span>
+                    <span class="btn-print" name="spanNewsPrint">
+                        <a href="#">인쇄하기</a>
+                        <span class="tooltip">인쇄</span>
+                    </span>
+                </div>
+            </div>
+            @* 관련뉴스 *@
+            <div class="list-news-type01">
+                <h2 class="title02">관련뉴스</h2>
+                <ul id="ulRelationNews"></ul>
+            </div>
+            @* AD Area 2. *@
+            <div class="adv-area" style="width:100%; height:140px;">
+                <iframe width="750" height="140" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_9" title="AD Tag"></iframe>
+            </div>
+
+            @* AD Area 3. *@
+            <div class="adv-area" style="width:100%; height:150px;">
+                <iframe width="650" height="150" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_10" title="AD Tag"></iframe>
+            </div>
+
+            @* Text&Link(관리자) + AD Banner(허브사업영역[뷰페이지 하단]) *@
+            <div class="box-cont-repoter" id="divTextAndLinkBanner"></div>
+            <p class="copyright-news">
+                Copyrightⓒ한국경제TV. All Rights Reserved. 무단전재 및 재배포 금지
+                @*ViewBag.commentActive : @ViewBag.commentActive <br />
+                    ViewBag.viewPageLikeActive : @ViewBag.viewPageLikeActive <br />
+                    ViewBag.viewPageSeeActive : @ViewBag.viewPageSeeActive <br />
+                    ViewBag.viewPageRecomActive : @ViewBag.viewPageRecomActive <br />*@
+            </p>
+            @*관리자 => 댓글 사용여부*@
+            @if (ViewBag.commentActive == "Y")
+            {
+                @* 댓글 아코디언 *@
+                <div class="box-cont-reply contain-reply" style="padding-top:100px;" id="divComment"></div>
+            }
+            @*관리자 => 이기사와 많이본 기사 *@
+            @if (ViewBag.viewPageSeeActive == "Y")
+            {
+                @* 이 기사와 많이 본 기사 6개 *@
+                <div class="section-type1">
+                    <h2 class="title">이 기사와 함께 많이 본 뉴스</h2>
+                    <div class="contain-news-type1" id="divReadManySeeNews"></div>
+                </div>
+            }
+            @*관리자 => 당신이 좋아할 만한 기사*@
+            @if (ViewBag.viewPageLikeActive == "Y")
+            {
+                @* 당신이 좋아할 만한 기사(PHOTO List)*@
+                <div class="section-type1">
+                    <h2 class="title">인기 갤러리</h2>
+                    <div class="contain-like-news bxslider" id="divReadPhotoNews"></div>
+                </div>
+            }
+
+            @* AD Area*@
+            <div class="adv-area text-center" style="width:100%; height:200px;">
+                <iframe src="http://adex.ednplus.com/xc/h/FyhqD7nq" width="870" height="200" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"></iframe>
+            </div>
+
+        </div>
+        @* Right Content *@
+        <div class="right-area" data-sticky_column id="divContentRight"></div>
+    </div>
+}
+
+@*관리자 => 당신에게 맞는 추천 뉴스 *@
+@if (ViewBag.viewPageRecomActive == "Y")
+{
+    @section WrapOutBottom {
+        @* 당신에게 맞는 추천 뉴스(검색엔진&드라마 솔루션) *@
+        <div class="best-infor-news">
+            <div class="section-type1" id="divRecomNews"></div>
+        </div>
+    }
+}
+
+    @* 구글번역 *@
+    <!-- google translate script Start -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: 'ko'
+                    , includedLanguages: 'ko,en,zh-CN,zh-TW,ja,id,th,vi'
+                    , layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                    , autoDisplay: false
+                }
+                , 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- google translate script end -->
+
+
+<script type="text/javascript">
+
+
+@* 기자정보 유무 *@
+@if (isReporter)
+{
+    /**
+     * @description 기자정보 호출
+     */
+    @:NewsRead.GetReporterInfo($("#reporter_Id").val(), $("#tag").val());
+}
+@* 종목 정보 유무 *@
+@if (isStock)
+{
+    /**
+     * @description 종목정보 호출
+     */
+    @:NewsRead.GetStockInfo($("#articleId").val());
+}
+
+@*포토 기사 여부 *@
+@if (isPhotoNews)
+{
+    /**
+     * @description 베스트 포토
+     */
+    @:NewsRead.GetReadBestPhotoNews();
+}
+
+@*관리자 => 댓글 사용여부 *@
+@if (ViewBag.commentActive == "Y")
+{
+    /**
+     * @description 댓글 리스트
+     */
+    @:NewsRead.GetArtComment();
+}
+
+@*관리자 => 당신이 좋아할 만한 기사 *@
+@if (ViewBag.viewPageLikeActive == "Y")
+{
+    /**
+     * @description 당신이 좋아할 만한 기사(포토리스트)
+     */
+    @:NewsRead.GetReadPhotoNews();
+}
+
+@*관리자 => 이기사와 많이본 기사 *@
+@if (ViewBag.viewPageSeeActive == "Y")
+{
+    /**
+     * @description 이기사와 많이본 기사
+     */
+    @:NewsRead.GetReadManySeeNews();
+}
+
+@*관리자 => 당신에게 맞는 추천 뉴스 *@
+@if (ViewBag.viewPageRecomActive == "Y")
+{
+    /**
+     * @description 당신에게 맞는 추천 뉴스
+     */
+    @:NewsRead.GetRecomNews();
+}
+
+
+@if (newsRead != null && newsRead.VOD_NUM != null && newsRead.VOD_NUM > 0)
+{
+
+    @: $("#divPlayImage").click(function() {
+    @:
+    @:    $(this).hide();
+    @:    TvPlayer.PlayVod(@newsRead.VOD_NUM);
+    @:});
+
+    @:$(".news.sub .btn-movie").click(function() {
+    @:    if ($(this).hasClass('active')) {
+    @:        //영상닫침
+    @:        TvPlayer.Resize(870, 490);
+    @:    } else {
+    @:        //영상펼침
+    @:        TvPlayer.Resize(1200, 676);
+    @:    }
+    @:});
+}
+
+</script>
+
+
+
+
+
+

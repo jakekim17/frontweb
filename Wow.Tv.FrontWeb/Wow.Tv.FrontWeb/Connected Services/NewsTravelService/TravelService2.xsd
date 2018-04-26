@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfArticleClass_Hanatour">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArticleClass_Hanatour" nillable="true" type="tns:ArticleClass_Hanatour" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArticleClass_Hanatour" nillable="true" type="tns:ArrayOfArticleClass_Hanatour" />
+  <xs:complexType name="ArticleClass_Hanatour">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArticleDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ArticleID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Contents" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Link1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Link2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tags" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Writer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="thumbnail" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArticleClass_Hanatour" nillable="true" type="tns:ArticleClass_Hanatour" />
+  <xs:complexType name="NTB_ARTICLE_LIKEIT_HANATOUR">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ARTICLE_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GOOD_COUNT" type="xs:int" />
+      <xs:element minOccurs="0" name="HATE_COUNT" type="xs:int" />
+      <xs:element minOccurs="0" name="REG_DATE" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WANT_COUNT" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NTB_ARTICLE_LIKEIT_HANATOUR" nillable="true" type="tns:NTB_ARTICLE_LIKEIT_HANATOUR" />
+  <xs:complexType name="ArrayOfNUP_NEWS_PREV_NEXT_SELECT_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NUP_NEWS_PREV_NEXT_SELECT_Result" nillable="true" type="tns:NUP_NEWS_PREV_NEXT_SELECT_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNUP_NEWS_PREV_NEXT_SELECT_Result" nillable="true" type="tns:ArrayOfNUP_NEWS_PREV_NEXT_SELECT_Result" />
+  <xs:complexType name="NUP_NEWS_PREV_NEXT_SELECT_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ARTDATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ARTICLEID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NEWS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TITLE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NUP_NEWS_PREV_NEXT_SELECT_Result" nillable="true" type="tns:NUP_NEWS_PREV_NEXT_SELECT_Result" />
+</xs:schema>

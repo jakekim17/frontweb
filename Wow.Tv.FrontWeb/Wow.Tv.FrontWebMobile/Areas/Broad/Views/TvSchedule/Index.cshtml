@@ -1,0 +1,70 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Common
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    string currentMenuSeq = Request["menuSeq"];
+
+
+    DateTime nowDate = DateTime.Now;
+    DateTime sun = nowDate.AddDays(0 - (int)(nowDate.DayOfWeek));
+    DateTime mon = sun.AddDays(1);
+    DateTime tue = sun.AddDays(2);
+    DateTime wed = sun.AddDays(3);
+    DateTime thu = sun.AddDays(4);
+    DateTime fri = sun.AddDays(5);
+    DateTime sat = sun.AddDays(6);
+}
+
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/tv.css">
+}
+
+
+@section scripts{
+    <script src="@wowTvScript/Broad/TvSchedule/Index.js?date=20171018170000"></script>
+}
+
+
+<form id="frm"></form>
+
+
+
+<!-- 소개부분 -->
+<div class="section-area intro-tit">
+    <h2>편성표</h2>
+</div>
+<!-- //소개부분 -->
+<!-- 주간 편성표 날짜 탭영역 -->
+<div class="section-area pd0 bd-t-grey">
+    <h3 class="pl15" id="btnFileDownLoad"><span class="icon ico-excel">엑셀 아이콘</span>주간 편성표</h3>
+    <!-- 날짜별 스케쥴 swipe -->
+    <div class="date-swipe-area01">
+        <div class="date-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide @(nowDate.DayOfWeek == DayOfWeek.Sunday ? "on" : "")"><a href="#" id="btnFirst" onclick="return TvScheduleIndex.BindSearchyList('@sun.ToDate()');">@(sun.ToString("MM/dd"))(일)</a></div>
+                <div class="swiper-slide @(nowDate.DayOfWeek == DayOfWeek.Monday ? "on" : "")"><a href="#" onclick="return TvScheduleIndex.BindSearchyList('@mon.ToDate()');">@(mon.ToString("MM/dd"))(월)</a></div>
+                <div class="swiper-slide @(nowDate.DayOfWeek == DayOfWeek.Tuesday ? "on" : "")"><a href="#" onclick="return TvScheduleIndex.BindSearchyList('@tue.ToDate()');">@(tue.ToString("MM/dd"))(화)</a></div>
+                <div class="swiper-slide @(nowDate.DayOfWeek == DayOfWeek.Wednesday ? "on" : "")"><a href="#" onclick="return TvScheduleIndex.BindSearchyList('@wed.ToDate()');">@(wed.ToString("MM/dd"))(수)</a></div>
+                <div class="swiper-slide @(nowDate.DayOfWeek == DayOfWeek.Thursday ? "on" : "")"><a href="#" onclick="return TvScheduleIndex.BindSearchyList('@thu.ToDate()');">@(thu.ToString("MM/dd"))(목)</a></div>
+                <div class="swiper-slide @(nowDate.DayOfWeek == DayOfWeek.Friday ? "on" : "")"><a href="#" onclick="return TvScheduleIndex.BindSearchyList('@fri.ToDate()');">@(fri.ToString("MM/dd"))(금)</a></div>
+                <div class="swiper-slide @(nowDate.DayOfWeek == DayOfWeek.Saturday ? "on" : "")"><a href="#" onclick="return TvScheduleIndex.BindSearchyList('@sat.ToDate()');">@(sat.ToString("MM/dd"))(토)</a></div>
+            </div>
+            <div class="swiper-container">
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+    <!-- //날짜별 스케쥴 swipe -->
+</div>
+<!-- //주간 편성표 날짜 탭영역 -->
+<!-- 날짜별 편성표 테이블 -->
+<div class="section-area pt0 pb25" id="divList"></div>
+<!-- 날짜별 편성표 테이블 -->
+
+
+

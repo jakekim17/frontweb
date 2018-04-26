@@ -1,0 +1,60 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@model ListModel<usp_GetThemaJisu_Result>
+
+@{
+    ViewBag.Title = "ThemaPart";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+}
+
+@section scripts{
+
+<script src="@wowTvScript/Finance/DomesticStock/ThemaPart.js"></script>
+
+    }
+
+@*<section class="container">*@
+
+    <!-- title area -->
+    <div class="section-area">
+        <h2>테마별</h2>
+
+    </div>
+    <!-- // title area -->
+    <!-- section-area -->
+    <div class="section-area">
+        <div class="table-type1">
+            <table>
+                <caption>관심종목 상세</caption>
+                <colgroup>
+                    <col style="width:auto">
+                    <col style="width:25%">
+                </colgroup>
+                <tbody>
+
+                    @foreach (var item in Model.ListData)
+                    {
+                        <tr>
+                            <td><a href="javascript:void(0)" class="detail">@item.PartName 
+                                <span class="icon tbl-arrow"></span></a>     
+                                <input type="hidden" id="PartNum" value="@item.PartNum" />
+                            </td>
+                            <td class="num">@Html.PublishChgRateFormat(item.Rate)</td>
+                            
+                        </tr>
+                    }                   
+                                      
+                                       
+                </tbody>
+            </table>
+            <form id="frmList_ThemaPartNameList">
+                <input type="hidden" id="currentPartNum" name="currentPartNum" />
+                <input type="hidden" id="currentPartName" name="currentPartName"/>
+                <input type="hidden" name="CurrentMenuSeq" id="CurrentMenuSeq" value="@Request["menuSeq"]" />
+            </form>
+        </div>
+    </div>
+    <!-- // section-area -->
+@*</section>*@

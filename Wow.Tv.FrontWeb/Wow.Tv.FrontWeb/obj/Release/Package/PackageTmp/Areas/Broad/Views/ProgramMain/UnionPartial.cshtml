@@ -1,0 +1,165 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.wowtv
+@using Wow.Tv.Middle.Model.Db49.broadcast
+@using Wow.Tv.Middle.Model.Db90.DNRS
+
+@model T_NEWS_PRG
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    NTB_PROGRAM_INTRO programIntro = ViewBag.ProgramIntro;
+    List<Wow.Tv.FrontWeb.CastService.ProgramCastModel> partnerList = ViewBag.CastList;
+    List<USP_GetBroadcast1ByWellList_Result> proWowWellList = ViewBag.ProWowWellList;
+    List<Pro_wowListStockKing> proStockKing3 = ViewBag.ProStockKing3;
+
+    int currentNumber = 0;
+}
+
+
+
+<script src="@wowTvScript/Broad/ProgramMain/UnionPartial.js?date=20171018170000"></script>
+
+
+
+
+<!-- 프로그램 정보 start -->
+<div class="box-program-name">
+    <div class="pro-img"><img src="@ViewBag.RectangleImg " alt="programImg"></div>
+
+    <div class="aside-title">
+        <div class="obj">
+            <h2 class="title05">@Model.PRG_NM</h2>
+            <p class="txt">
+                @MvcHtmlString.Create(programIntro.REMARK)
+            </p>
+            <ul class="broad-time">
+                <li>
+                    <span>방송시간</span>
+                    <span>@(Model.DayOfWeekString == null ? "" : String.Join("·", Model.DayOfWeekString)) @Model.BRO_START ~ @Model.BRO_END</span>
+                </li>
+                <li>
+                    <span>제작진</span>
+                    <span>@Model.GetPdTdNames(", ")</span>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="box-partner-infor bxslider">
+            <ul>
+                @foreach(var item in partnerList)
+                { 
+                <li>
+                    <a href="javascript:void(0)">
+                        <img src="@item.ImageUrl" alt="photoImg" width="70px" height="70px">
+                        <p>@item.ProgramCast.CAST_NAME</p>
+                        <span>@(item.ProgramCast.DayOfWeekString == null ? "" : String.Join("·", item.ProgramCast.DayOfWeekString))</span>
+                    </a>
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<!--// 프로그램 정보 end -->
+
+<div class="clearFix">
+
+    <!-- 특집방송 start -->
+    <div class="box-special-broad">
+
+        @foreach (var item in proWowWellList)
+        {
+        <div>
+            <img src="http://image.wownet.co.kr/@item.NEWPHOTO_SMALL" alt="specialImg" width="193px" height="119px">
+            <h2 class="title02">@item.BCONTENTS</h2>
+            <ul class="broad-time">
+                <li>
+                    <span>방송일자</span>
+                    <span>
+                        @if (String.IsNullOrEmpty(item.BRSTARTTIME) == true || item.BRSTARTTIME.Length < 8)
+                        {
+                        }
+                        else
+                        {
+                            @(item.BRSTARTTIME.Substring(0, 4) + "-" + item.BRSTARTTIME.Substring(4, 2) + "-" + item.BRSTARTTIME.Substring(6, 2))
+                        }
+                    </span>
+                </li>
+                <li>
+                    <span>방송시간</span>
+                    <span>
+                        @if (String.IsNullOrEmpty(item.BRSTARTTIME) == true || item.BRSTARTTIME.Length < 12)
+                        {
+                        }
+                        else
+                        {
+                            @(item.BRSTARTTIME.Substring(8, 2) + ":" + item.BRSTARTTIME.Substring(10, 2))
+                        }
+                        @if (String.IsNullOrEmpty(item.BRENDTIME) == true || item.BRENDTIME.Length < 12)
+                        {
+                        }
+                        else
+                        {
+                            @("~" + item.BRENDTIME.Substring(8, 2) + ":" + item.BRENDTIME.Substring(10, 2))
+                        }
+                    </span>
+                </li>
+            </ul>
+            <div class="btn-spec">
+                <a href="#" onclick="return ProgramMainUnionPartial.OpenPopup('http://wowpro.wownet.co.kr/pro/pro_main_new/pro_record_broadcast.asp?currPage=1&bcode=N04070000&proId=@item.Pro_ID&mseq=226&pro_search=@item.Pro_ID&skey=nickname');" class="icon01"><span>녹화방송</span></a>
+                <a href="#" onclick="return ProgramMainUnionPartial.OpenPopup('http://wowpro.wownet.co.kr/common/profileLink.asp?nickname=@(HttpUtility.UrlEncode(item.NICKNAME,System.Text.Encoding.GetEncoding("euc-kr")))&link=cafe');" target="_blank" class="icon02"><span>카페가기</span></a>
+                <a href="#" onclick="return ProgramMainUnionPartial.OpenPopup('http://wowpro.wownet.co.kr/pro/pro_main_new/profile.asp?proID=@item.Pro_ID&ptype=11');" class="icon03"><span>가입하기</span></a>
+            </div>
+        </div>
+        }
+    </div>
+    <!--// 특집방송 end -->
+    <!-- 실전투자 wow 스탁킹 top3 start -->
+    <div class="box-actu-invest">
+        <h2 class="title02">
+            실전투자 WOW 스탁킹 TOP3
+            <a href="#" onclick="return ProgramMainUnionPartial.OpenPopup('http://wowpro.wownet.co.kr/nbbs/board/list.asp?bcode=N04501610&mseq=3052');" class="btn-plus">더보기</a>
+        </h2>
+        <table class="table-type3">
+            <caption>실투자 WOW 스탁킹 TOP3 상세</caption>
+            <colgroup>
+                <col style="width:25%;">
+                <col style="width:25%;">
+                <col style="width:25%;">
+                <col style="width:25%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">순위</th>
+                    <th scope="col">파트너명</th>
+                    <th scope="col">현재수익률</th>
+                    <th scope="col">바로가기</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in proStockKing3)
+                {
+                    currentNumber++;
+                <tr>
+                    <td class="num">@currentNumber</td>
+                    <td>@item.NickName</td>
+                    <td class="font-color03">@item.Rate%</td>
+                    <td><a href="#" onclick="return ProgramMainUnionPartial.OpenPopup('http://www.wownet.co.kr/pro/pro_main_new/sub_main.asp?proID=@item.Pro_id');" class="btn-home">home</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="bann-area"><img src="@wowTvStyle/images/temp/temp_tv_23.png" alt="bannImg" style="cursor:pointer;" onclick="return ProgramMainUnionPartial.OpenPopup('http://www.wownet.co.kr/');"></div>
+    </div>
+    <!--// 실전투자 wow 스탁킹 top3 end -->
+</div>
+
+<div class="box-txt">
+    <p>본 프로그램에 소개되는 종목은 한국거래소 시장감시위원회에서 모니터링 중입니다.</p>
+</div>

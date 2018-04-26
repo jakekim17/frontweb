@@ -1,0 +1,128 @@
+﻿@using Wow
+@{
+    Layout = null;
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+<div class="box-cont-reply contain-reply" style="margin-top:0;">
+    <!-- <div class="reply-head">
+        <h2 class="title">댓글 <span>(0)</span></h2>
+        <span class="btn-switch"><button>열기</button></span>
+    </div> -->
+    <div class="reply-body" style="height:auto!important;">
+        <!-- 댓글 영역 -->
+        <div class="sect-reply">
+            <div class="header-reply">
+                <!-- SNS 로그인 -->
+                <div class="contain-login-sns" id="divLogin" style="display:none;">
+                    <div class="box-list-contact">
+                        <span class="btn-hankyung"><button type="button" id="btnHankyung">한국경제TV 로그인</button></span>
+                        <span class="division-bar"></span>
+                        <span class="btn-facebook on"><button type="button" id="btnFacebookLogin">Facebook 로그인</button></span>
+                        <span class="division-bar"></span>
+                        @*
+                        <span class="btn-twitter on"><button>Twitter 로그인</button></span>
+                        <span class="division-bar"></span>
+                        *@
+                        <span class="btn-kakaostory on"><button type="button" id="btnKakaoLogin">카카오 로그인</button></span>
+                        <span class="division-bar"></span>
+                        <span class="btn-naver on"><button type="button" id="btnNaverLogin">네이버 로그인</button></span>
+                    </div>
+                    <p>로그인을 하신 후 기자에게 소중한 한마디를 전해주세요.</p>
+                </div>
+                <!-- //SNS 로그인 -->
+                <!-- Reply 쓰기 -->
+                <form id="frmReply">
+                    <div class="box-write-reply">
+                        <input type="hidden" name="REPORTER_ID" value="@ViewBag.ReporterID" />
+                        <textarea class="txtContent" cols="30" rows="10"></textarea>
+                        <textarea name="CONTENT" class="hidContent" style="display:none;"></textarea>
+                        <div class="inner-right">
+                        <input type="button" class="btn-type1 btnSaveReply" value="등록">
+
+                        </div>
+                        <p class="type">0/500</p>
+                    </div>
+                </form>
+                <!-- //Reply 쓰기 -->
+                <!-- Reply 등록 -->
+                <div class="box-button reply">
+                    <div class="inner-left">
+                        <p>* 모든글은 비공개로 작성됩니다.</p>
+                        <p>* 기사에 대한 문의는 해당 기사의 URL을 함께 적어주시면 보다 정확하고 빠른 답변에 도움이 됩니다.</p>
+                    </div>
+                </div>
+                <!-- //Reply 등록 -->
+            </div>
+            <!-- Reply 목록 -->
+            <div class="body-reply">
+                @if (Model.ListData != null && Model.ListData.Count > 0)
+                {
+                    foreach (var item in Model.ListData)
+                    {
+                        <div class="artic-reply">
+                            @Html.Raw(WowExtensionMethod.CommentIcon(item.ReplyData.LOGIN_TYPE))
+                            <span class="name">@item.ReplyData.NAME</span>
+                            <span class="time">@item.ReplyData.REG_DATE.ToString("yyyy-MM-dd HH:mm")</span>
+                            <div class="text-reply txtReply" id="txt_@item.ReplyData.SEQ">@MvcHtmlString.Create(item.ReplyData.CONTENT)</div>
+                            <div id="updateDiv_@item.ReplyData.SEQ"></div>
+                            <div class="box-button-reply" id="btnDiv_@item.ReplyData.SEQ">
+                                <span class="btn-type4 btn-reply btnSubReply" id="@item.ReplyData.SEQ"><button type="button">답글달기</button></span>
+                                <div>
+                                    @if (LoginHandler.IsLogin && LoginHandler.CurrentLoginUser.UserId == item.ReplyData.USER_ID)
+                                    {
+                                        <span class="btn-type4 btnReplyEdit" id="@item.ReplyData.SEQ"><button type="button">수정</button></span>
+                                        <span class="btn-type4 btnReplyDelete" id="@item.ReplyData.SEQ"><button type="button">삭제</button></span>
+                                    }
+                                    else if (LoginHandler.IsEasyLogin && LoginHandler.CurrentEasyLoginUser.SnsId.ToString() == item.ReplyData.USER_ID)
+                                    {
+                                        <span class="btn-type4 btnReplyEdit" id="@item.ReplyData.SEQ"><button type="button">수정</button></span>
+                                        <span class="btn-type4 btnReplyDelete" id="@item.ReplyData.SEQ"><button type="button">삭제</button></span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="divsubReply" id="SubReply_@item.ReplyData.SEQ"></div>
+                        </div>
+                        if (item.SubReplyList != null && item.SubReplyList.Count > 0)
+                        {
+                            foreach (var subItem in item.SubReplyList)
+                            {
+                                 <!-- Sub Reply Block -->
+                                <div class="artic-reply sub">
+                                    @Html.Raw(WowExtensionMethod.CommentIcon(subItem.LOGIN_TYPE))
+                                    <span class="name">@subItem.NAME</span>
+                                    <span class="time">@subItem.REG_DATE.ToString("yyyy-MM-dd HH:mm")</span>
+                                    <div class="text-reply txtReply" id="txt_@subItem.SEQ">@MvcHtmlString.Create(subItem.CONTENT)</div>
+                                    <div id="updateDiv_@subItem.SEQ"></div>
+                                    <div class="box-button-reply" id="btnDiv_@subItem.SEQ">
+                                        @if (LoginHandler.IsLogin && LoginHandler.CurrentLoginUser.UserId == subItem.USER_ID)
+                                        {
+                                            <div>
+                                                <span class="btn-type4 btnReplyEdit" id="@subItem.SEQ"><button type="button">수정</button></span>
+                                                <span class="btn-type4 btnReplyDelete" id="@subItem.SEQ"><button type="button">삭제</button></span>
+                                            </div>
+                                        }
+                                        else if (LoginHandler.IsEasyLogin && LoginHandler.CurrentEasyLoginUser.SnsId.ToString() == subItem.USER_ID)
+                                        {
+                                            <div>
+                                                <span class="btn-type4 btnReplyEdit" id="@subItem.SEQ"><button type="button">수정</button></span>
+                                                <span class="btn-type4 btnReplyDelete" id="@subItem.SEQ"><button type="button">삭제</button></span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    <!-- Reply Block -->
+                    }
+                }
+            </div>
+            <!-- //Reply 목록 -->
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#totalDataCount').val("@Model.TotalDataCount");
+</script>

@@ -1,0 +1,83 @@
+﻿@using Wow.Tv.FrontWeb.MenuService;
+@using Wow.Tv.Middle.Model.Common;
+@using Wow.Tv.Middle.Model.Db49.wowtv;
+@using Wow.Tv.Middle.Model.Db49.wowtv.Menu;
+
+@{
+    MenuServiceClient menuServiceClient = new MenuServiceClient();
+    string currentMenuSeq = Request["menuSeq"];
+    NTB_MENU currentMenu = null;
+
+    int tempDepdh = 1;
+    MenuCondition menuCondition = new MenuCondition();
+    menuCondition.ChannelCode = "WowTv";
+    menuCondition.Depth = 1;
+    menuCondition.ActiveYn = "Y";
+    menuCondition.PageSize = -1;
+    if(String.IsNullOrEmpty(currentMenuSeq) == false)
+    {
+        tempDepdh = 2;
+        menuCondition.Depth = 2;
+        currentMenu = menuServiceClient.GetAt(int.Parse(currentMenuSeq));
+        if (currentMenu.DEPTH == 1)
+        {
+            menuCondition.UpMenuSeq = currentMenu.MENU_SEQ;
+        }
+        else if (currentMenu.DEPTH == 2)
+        {
+            menuCondition.UpMenuSeq = currentMenu.UP_MENU_SEQ;
+        }
+        else if (currentMenu.DEPTH == 3)
+        {
+            var upMenu = menuServiceClient.GetAt(currentMenu.UP_MENU_SEQ);
+            menuCondition.UpMenuSeq = upMenu.UP_MENU_SEQ;
+        }
+
+    }
+    var menuList_1 = menuServiceClient.SearchList(menuCondition);
+}
+
+<div class="inner">
+    <!-- Global Navigation -->
+    <nav class="navigation-global">
+        <ul>
+            @foreach (var menu1 in menuList_1.ListData)
+            {
+                menuCondition.UpMenuSeq = menu1.MENU_SEQ;
+                menuCondition.Depth = tempDepdh + 1;
+                var menuList_2 = menuServiceClient.SearchList(menuCondition);
+
+            <li class="on">
+                <a href="@menu1.Href" target="@menu1.LINK_TYPE_CODE">@menu1.MENU_NAME</a>
+                @if (menuList_2.ListData.Count > 0)
+                {
+                <ul>
+                    @foreach (var menu2 in menuList_2.ListData)
+                    {
+                    <li><a href="@menu2.Href" target="@menu2.LINK_TYPE_CODE">@menu2.MENU_NAME</a></li>
+                    }
+                </ul>
+                }
+            </li>
+            }
+        </ul>
+    </nav>
+    <!-- //Global Navigation -->
+    <!-- Family Links -->
+    <div class="links-family">
+        <a href="http://www.wowtv.co.kr/">한국경제TV</a>
+        <a href="http://www.wownet.co.kr/" target="_blank">와우넷</a>
+        <a href="http://www.wowfa.co.kr/" target="_blank">와우파</a>
+        <a href="http://www.wowstar.co.kr" target="_blank">와우스타</a>
+    </div>
+    <!-- //Family Links -->
+    <!-- Servece Links -->
+    <div class="links-service">
+        <a href="#">지역별채널</a>
+        <a href="#">편성표</a>
+        <a href="#">온에어</a>
+    </div>
+    <!-- //Service Links -->
+</div>
+
+

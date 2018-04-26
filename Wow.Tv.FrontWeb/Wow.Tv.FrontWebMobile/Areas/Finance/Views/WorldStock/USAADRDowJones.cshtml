@@ -1,0 +1,161 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Models
+@model USAADRDowJonesModel
+
+@{
+    ViewBag.Title = "USAADRDowJones";
+    Layout = null;
+}
+
+
+<div class="section-area">
+    <h3>다우 반도체</h3>
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+                @if (Model.SemiconductorList.ListData.Count > 0)
+                {
+                    foreach (var item in Model.SemiconductorList.ListData)
+                    {
+                        <tr>
+                            <td class="txt-l">@item.PART_NAME</td>
+                            <td>@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                            <td>@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                            <td>@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="section-area">
+    <h3>다우 방송, 광고</h3>
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+                @if (Model.MediaList.ListData.Count > 0)
+                {
+                    foreach (var item in Model.MediaList.ListData)
+                    {
+                        <tr>
+                            <td class="txt-l">@item.PART_NAME</td>
+                            <td>@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                            <td>@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                            <td>@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="section-area">
+    <h3>다우 보험</h3>
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+                @if (Model.InsuranceList.ListData.Count > 0)
+                {
+                    foreach (var item in Model.InsuranceList.ListData)
+                    {
+                        <tr>
+                            <td class="txt-l">@item.PART_NAME</td>
+                            <td>@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                            <td>@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                            <td>@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="section-area">
+    <h3>다우 소매</h3>
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+                @if (Model.RetailList.ListData.Count > 0)
+                {
+                    foreach (var item in Model.RetailList.ListData)
+                    {
+                        <tr>
+                            <td class="txt-l">@item.PART_NAME</td>
+                            <td>@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                            <td>@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                            <td>@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="section-area">
+    <h3>다우 에너지</h3>
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+                @if (Model.EnergyList.ListData.Count > 0)
+                {
+                    foreach (var item in Model.EnergyList.ListData)
+                    {
+                        <tr>
+                            <td class="txt-l">@item.PART_NAME</td>
+                            <td>@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                            <td>@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                            <td>@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="section-area">
+    <h3>다우 제약</h3>
+    <div class="table-type1 type02 line">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:auto">
+            </colgroup>
+            <tbody>
+                @if (Model.PharmacyList.ListData.Count > 0)
+                {
+                    foreach (var item in Model.PharmacyList.ListData)
+                    {
+                        <tr>
+                            <td class="txt-l">@item.PART_NAME</td>
+                            <td>@Html.PublishPriceFormat(item.U_CHG_GUBUN, item.U_PRICE)</td>
+                            <td>@Html.PublishChgPriceFormat(item.U_CHG_GUBUN, item.U_NET_CHG)</td>
+                            <td>@Html.PublishChgRateFormat(item.U_CHG_GUBUN, item.U_NET_CHGP)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

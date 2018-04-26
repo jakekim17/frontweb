@@ -1,0 +1,62 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.editVOD
+
+@model ListModel<usp_GetCornerVODList_WEB_Result>
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    string programCode = ViewBag.ProgramCode;
+    string contentSeq = ViewBag.ContentSeq;
+}
+
+
+
+<script src="@wowTvScript/Broad/Corner/SearchList.js?date=20171018170000"></script>
+
+
+<input type="hidden" id="CornerSearchList_hidTotalCount" value="@Model.TotalDataCount"  />
+
+<div class="list-media col4">
+    <!-- 5줄일 경우 col5, 4줄일 경우 col4를 class에 추가 -->
+    <ul>
+        @if (Model.ListData.Count == 0)
+            {
+            <!-- 검색 결과가 없을 시 -->
+            <li class="nodata">
+                <p>
+                    <strong class="tit">검색 결과가 없습니다.</strong>
+                </p>
+            </li>
+            <!-- //검색 결과가 없을 시 -->
+        }
+        else
+        {
+            foreach (var item in Model.ListData)
+            {
+                <li>
+                    <div class="img-area">
+                        <a href="#" onclick="return CornerIndex.OpenVod(@item.seq);">
+                            @*<span class="notice-area">
+                                    <span class="bx-notice type1">최신</span>
+                                    <span class="bx-notice type2">첫방송</span>
+                                </span>*@
+                            <img src="@item.thumbUrl" alt="" width="191px" height="104px">
+                        </a>
+                    </div>
+                    <p class="tit">@item.title</p>
+                    <div class="info-area">
+                        <span class="info left">@item.datetime</span>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+</div>
+<hr class="division0">
+<div class="box-paginate" id="divPaging"></div>
+
+

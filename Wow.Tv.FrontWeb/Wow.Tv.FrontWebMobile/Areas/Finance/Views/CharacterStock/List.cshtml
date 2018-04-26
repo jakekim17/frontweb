@@ -1,0 +1,112 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+
+@model  ListModel<CharacterStockModel>
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string menuSeq = Request["menuSeq"].ToString();
+
+    Layout = null;
+}
+
+@*<script>
+    var totalDataCount = "@Model.TotalDataCount";
+</script>*@
+
+    <!-- section-area -->
+<div class="section-area pd0">
+    <div class="list-thumb feature mt0">
+        <ul>
+            @if (Model.TotalDataCount > 0)
+            {
+                foreach (var item in Model.ListData)
+                {
+                    
+                    if (!string.IsNullOrEmpty(item.NewsData.IMAGE_FILE))
+                    {
+                        <li>
+                            <div class="thumb-area">
+                                <img src="@WowExtensionMethod.NewsThumbnailPath("11S", item.NewsData.THUMBNAIL_FILENM, item.NewsData.VOD_NUM, item.NewsData.IMAGE_DIR, item.NewsData.IMAGE_FILE, item.NewsData.ARTDATE.Value)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11S")'" alt="임시 이미지 영역">
+                            </div>
+
+                            @if (item.StockData != null)
+                            {
+
+                                <div class="cont-area">
+                                    <div class="inner">
+                                        <a href="javascript:CharacterStock.GoDetail('@item.NewsData.ARTICLEID');">
+                                            
+                                            <strong class="tit"><strong>@item.StockData.stock_nickname</strong>@item.NewsData.TITLE</strong>
+                                            <div class="txt-info-stock">
+                                                <strong>현재가 @String.Format("{0:#,##0}", item.StockData.curr_price)</strong>
+                                                <span>@Html.CharacterStockFormat((string)item.StockData.chg_type)</span>
+                                            </div>
+                                            <span class="txt-info">@item.NewsData.COMP_NAME</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="cont-only">
+                            @if (item.StockData != null)
+                            {
+                                @*<div class="cont-area">
+                                    <div class="inner">
+                                        <a href="javascript:CharacterStock.GoDetail('@item.NewsData.ARTICLEID');">
+                                            <span class="text-icon rad type04">단독</span>
+                                            <strong class="tit"><strong>@item.StockData.stock_nickname</strong>@item.NewsData.TITLE</strong>
+                                            <div class="txt-info-stock">
+                                                <strong>현재가 @String.Format("{0:#,##0}", item.StockData.curr_price)</strong>
+                                                <span>@Html.CharacterStockFormat((string)item.StockData.chg_type)</span>
+                                            </div>
+                                            <span class="txt-info">@item.NewsData.COMP_NAME</span>
+                                        </a>
+                                    </div>
+                                </div>*@
+                                <div class="cont-area wide">
+                                    <div class="inner">
+                                        <a href="javascript:CharacterStock.GoDetail('@item.NewsData.ARTICLEID');">
+                                          
+                                            <strong class="tit"><strong>@item.StockData.stock_nickname,</strong>@item.NewsData.TITLE</strong>
+                                            <div class="txt-info-stock">
+                                                <strong>현재가 @String.Format("{0:#,##0}", item.StockData.curr_price)</strong>
+                                                <span>@Html.CharacterStockFormat((string)item.StockData.chg_type)</span>
+                                            </div>
+                                            <span class="txt-info company">@item.NewsData.COMP_NAME</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            }
+                        </li>
+                    }
+
+                }
+            }
+            
+        </ul>
+        <!-- paging start -->
+        @*<div class="box-paginate" id="divPaging">
+
+        </div>*@
+        <!--// paging end -->
+    </div>
+</div>
+
+<form id="articleForm">
+    <input type="hidden" name="menuSeq" value="@menuSeq" />
+    <input type="hidden" id="articleId" name="articleId" />
+</form>
+<script>
+    $("#totalDataCount").val("@Model.TotalDataCount");
+</script>
+<!-- // section-area -->

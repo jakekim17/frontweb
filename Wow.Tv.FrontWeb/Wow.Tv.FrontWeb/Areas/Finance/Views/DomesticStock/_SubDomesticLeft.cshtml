@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+    //string currentFdMenuSeq = Request["fdLeftMenuSeq"];
+    string currentFdMenuSeq = Request["CurrentMenuSeq"];
+
+    if (String.IsNullOrEmpty(currentFdMenuSeq))
+    {
+        currentFdMenuSeq = "0";
+    }
+}
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<script>
+    $(document).ready(function () {
+        $(".navigation-local ul li").eq("@currentFdMenuSeq").addClass("on");
+
+        var leftMenu = $(".navigation-local ul li a");
+
+        leftMenu.click(function (index) {
+            var indexval = leftMenu.index(this);
+            $("#currentMenuSeq").val(indexval);
+            $("#fdFrm").attr("action", $(this).attr("href"));
+            $("#fdFrm").submit();
+            return false;
+        });
+    });
+
+</script>
+<form id="fdFrm">
+    <input type="hidden" id="currentMenuSeq" name="currentMenuSeq" value="0" />
+</form>
+
+<nav class="navigation-local">
+    <ul>
+        <li><a href="/Finance/DomesticStock/Kospi">코스피</a></li>
+        <li><a href="/Finance/DomesticStock/Kosdaq">코스닥</a></li>
+        <li><a href="/Finance/DomesticStock/Fut">선물</a></li>
+        <li><a href="/Finance/DomesticStock/Kospi200">코스피200</a></li>
+        <li><a href="/Finance/DomesticStock/ETF">ETF</a></li>
+        <li><a href="/Finance/DomesticStock/IndustryPart">업종별</a></li>
+        <li><a href="#">테마별</a></li>
+        <li><a href="#">상한가</a></li>
+        <li><a href="#">하한가</a></li>
+        <li><a href="#">업종상위</a></li>
+        <li><a href="#">시가총액</a></li>
+        <li><a href="#">투자자 매매동향</a></li>
+        <li><a href="#">외국인보유현황</a></li>
+    </ul>
+</nav>

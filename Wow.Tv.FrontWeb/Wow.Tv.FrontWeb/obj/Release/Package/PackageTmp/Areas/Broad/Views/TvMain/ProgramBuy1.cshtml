@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "ProgramBuy1";
+    Layout = "~/Views/Shared/_LayoutNone.cshtml";
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+}
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/common.css">
+    <link rel="stylesheet" href="@wowTvStyle/css/tv.css">
+}
+
+@section scripts{
+    <script>
+        function MoveStep2() {
+            if ($("#chAgree").prop("checked") == true) {
+                location.href = "./ProgramBuy2";
+            }
+            else {
+                alert("개인정보 수집이용에 동의하여 주셔야 합니다.");
+            }
+
+            return false;
+        }
+    </script>
+}
+
+<!-- POPUP Layer -->
+<div class="window-pop" style="display:block;"><!-- window 팝업으로 2018-01-08 window-pop 클래스명 변경 -->
+    <div class="inner">
+        @*<!-- title -->
+            <h1 class="title">TV프로그램 구매하기</h1>
+            <!-- // title -->
+            <a href="#" onclick="self.close();" class="pop-close-btn">닫기</a>*@
+        <!-- content -->
+        <div class="pop-top-box">
+            <h2>상품구매안내</h2>
+            <div class="top-box type2">
+                상품구매비용: VOD <strong class="num">33,000</strong>원 <span>(VAT 포함)</span><br>
+                입금계좌: 신한은행 <strong class="num">362-01-074480</strong><br>
+                예금주: 한국경제티브이
+            </div>
+        </div>
+        <div class="content-box">
+            <!-- 상품구매 안내-->
+            <div class="list-type2">
+                <ul>
+                    <li>VOD는 개인에게는 판매되지 않으며, 방송에 출연한 기업에게만 판매를 하고 있습니다.</li>
+                    <li>입금 시 회사명 또는 담당자명으로 입금을 해주시기 바랍니다.</li>
+                    <li>사업자등록증 사본을 꼭 첨부하여 주시기 바랍니다. (FAX로 보내실 때는 송신 후 꼭 연락을주세요)</li>
+                </ul>
+            </div>
+            <div class="box-information1">
+                <div class="list-type2">
+                    <strong class="tit">구매 불가 프로그램</strong>
+                    <ul>
+                        <li>VOD 주식강좌 (눈높이증권 / 알아야 번다 등)</li>
+                        <li>직업방송 (TV직업가드/직업방송강좌/직업 휴먼스토리 아름다운사람들/장애인 다큐 등)</li>
+                        <li>방송에 출연하지 않았거나, 사업자 미등록 기업</li>
+                    </ul>
+                    <strong class="tit">주의사항</strong>
+                    <ul>
+                        <li>구매요청서 작성시 본인의 과실로 인해 제작된 상품은 반품 및 환불이 불가</li>
+                        <li>구매요청서를 허위로 작성하거나, 사전동의 없이 VOD사용처 외의 다른 용도로 <br>사용하시거나, 무단복제 및 배포를 할 경우 법적 제제를 받을 수 있습니다.</li>
+                    </ul>
+                    <p class="text-notice-type1">VOD구매 문의전화:1599-0700</p>
+                    <p class="text-notice-type1">팩스번호:02-6676-0130</p>
+                </div>
+            </div>
+            <!-- //상품구매 안내-->
+            <!-- 개인정보 수집 및 이용 동의 -->
+            <div class="sub-section">
+                <div class="top-txt">개인정보 수집 및 이용 동의</div>
+                <p class="cont-info">
+                    비회원으로 구매하시려면 아래 약관에 동의 하신 후 <a href="#" onclick="return MoveStep2();">[다음 단계로 이동]</a><br>버튼을 클릭해 주십시오.
+                    <span class="text-notice-type1">구매정보 확인 및 문의 : 고객센터(1599-0700)</span>
+                </p>
+            </div>
+            <!-- //개인정보 수집 및 이용 동의 -->
+            <hr class="division0">
+            <!-- 개인정보 수집 및 이용에 대한 내용 -->
+            <div class="sub-section">
+                <div class="top-txt">개인정보 수집 및 이용에 대한 내용</div>
+                <div class="box-scroll" style="height:160px; color:#666">
+                    <div class="inner">
+                        ⊙ 수집하는 개인정보 항목 <br />
+                        &lt;비회원&gt;<br />
+                        이름, 유선전화번호, 휴대전화번호, 주소, 이메일, 신용카드 정보, 은행계좌 정보, 결제기록 등의 정보, 접속 로그, 접속 IP 정보<br />
+                        기업 비회원일 경우에는 담당자 부서명, 팩스번호 추가 수집합니다.<br />
+                        <br />
+                        ⊙ 개인정보의 수집 및 이용목적<br />
+                        회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다. <br />
+                        · 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산 콘텐츠 제공, 구매 및 요금 결제, 물품배송 또는 청구지 등 발송 <br />
+                        <br />
+                        ⊙ 개인정보의 보유 및 이용기간<br />
+                        회사는 위 수집 및 이용목적을 달성할 때까지 [비회원] 이용자의 개인정보를 보유 및 이용하게 됩니다. <br />
+                        개인정보의 수집 및 이용에 대한 동의를 철회하는 경우, 수집 및 이용목적이 달성되거나 보유 및 이용기간이 종료한 경우 해당 개인정보를 지체 없이 파기합니다.<br />
+                        단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다. <br />
+                        <br />
+                        · 보존 항목 : 계약 또는 청약철회 등에 관한 기록<br />
+                        · 보존 근거 : 전자상거래 등에서의 소비자보호에 관한 법률<br />
+                        · 보존 기간 : 5년<br />
+                        <br />
+                        · 보존 항목 : 대금결제 및 재화 등의 공급에 관한 기록 <br />
+                        · 보존 근거 : 전자상거래 등에서의 소비자보호에 관한 법률<br />
+                        · 보존 기간 : 5년<br />
+                        <br />
+                        · 보존 항목 : 소비자의 불만 또는 분쟁처리에 관한 기록<br />
+                        · 보존 근거 : 전자상거래 등에서의 소비자보호에 관한 법률<br />
+                        · 보존 기간 : 3년<br />
+                        <br />
+                        · 보존 항목 : 접속 로그, 접속 IP 정보 <br />
+                        · 보존 근거 : 통신비밀보호법<br />
+                        · 보존 기간 : 3개월<br />
+                    </div>
+                </div>
+                <!-- 약관 체크 -->
+                <div class="check-box">
+                    <label class="checkbox"><input type="checkbox" id="chAgree"> 개인정보 수집, 이용에 동의합니다.</label>
+                </div>
+                <!-- // 약관 체크 -->
+            </div>
+            <hr class="division3">
+            <div class="box-button">
+                <span class="btn-type1"><a href="#" onclick="return MoveStep2();">다음 단계로 이동</a></span>
+            </div>
+        </div>
+        <!-- content -->
+    </div>
+</div>
+<!-- POPUP Layer -->
+

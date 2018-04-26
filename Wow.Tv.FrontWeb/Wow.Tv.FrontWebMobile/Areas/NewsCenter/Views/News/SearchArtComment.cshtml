@@ -1,0 +1,47 @@
+﻿@using Wow
+@{
+    Layout = null;
+}
+
+@if (Model.ListData != null && Model.ListData.Count > 0)
+{
+    foreach (var item in Model.ListData)
+    {
+        if (item.OPEN_YN == "Y")
+        {
+            <li>
+                <div class="nickname">
+                    <strong class="name">@MvcHtmlString.Create(WowExtensionMethod.CommentMobileIcon(item.LOGIN_TYPE)) @item.USER_NAME</strong>
+                    <span class="data" id="divDate_@item.COMMENT_SEQ">@item.REG_DATE</span>
+                </div>
+                <div class="reply-text" id="divCmt_@item.COMMENT_SEQ">@item.COMMENT</div>
+                <div id="updateDiv_@item.COMMENT_SEQ"></div>
+                @if (LoginHandler.IsLogin && LoginHandler.CurrentLoginUser.UserId == item.REG_ID)
+                {
+                    <div class="btn-area txt-r" id="btnDiv_@item.COMMENT_SEQ">
+                        <a href="javascript:void(0)" class="btn type04 w-auto btnUpdate" id="@item.COMMENT_SEQ">수정</a>
+                        <a href="javascript:void(0)" class="btn type04 w-auto btnDelete" id="@item.COMMENT_SEQ">삭제</a>
+                    </div>
+                }
+                else if (LoginHandler.IsEasyLogin && LoginHandler.CurrentEasyLoginUser.SnsId.ToString() == item.REG_ID)
+                {
+                    <div class="btn-area txt-r" id="btnDiv_@item.COMMENT_SEQ">
+                        <a href="javascript:void(0)" class="btn type04 w-auto btnUpdate" id="@item.COMMENT_SEQ">수정</a>
+                        <a href="javascript:void(0)" class="btn type04 w-auto btnDelete" id="@item.COMMENT_SEQ">삭제</a>
+                    </div>
+                }
+            </li>
+        }
+        else if (item.OPEN_YN == "N")
+        {
+            <li class="del-admin">
+                <span class="icon ico-notice">알림</span>관리자에 의해 비공개(삭제)처리되었습니다.
+            </li>
+        }
+    }
+}
+
+<script>
+    $('#commentCnt').text('(@Model.TotalDataCount)개');
+    $('#totalDataCount').val(@Model.TotalDataCount);
+</script>

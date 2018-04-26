@@ -1,0 +1,608 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Models
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Fx
+@model WorldStockMainModel
+@{
+    ViewBag.Title = "해외증시";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string UserLoginUrl = AppState["UserLoginUrl"].ToString();
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+    string DomainUrlMember = AppState["DomainUrlMember"].ToString();
+    string DomainUrlMyPage = AppState["DomainUrlMyPage"].ToString();
+    int idx = 1;
+    
+}
+
+@section scripts{
+
+    @*@Scripts.Render("~/bundles/raphael")
+    @Scripts.Render("~/bundles/webponentcommon")
+    @Scripts.Render("~/bundles/webponentvisual")
+    @Scripts.Render("~/bundles/chart")
+    @Scripts.Render("~/bundles/chartstyle")*@
+    <script src="@wowTvScript/Finance/webponent/raphael.js"></script>
+    <script src="@wowTvScript/Finance/webponent/webponent.comm.common.js"></script>
+    <script src="@wowTvScript/Finance/webponent/chart/webponent.chart.js"></script>
+    <script src="@wowTvScript/Finance/webponent/chart/webponent.chart.style.js"></script>
+    <script src="@wowTvScript/Finance/Charts/stockChart.js"></script>    
+    <script src="@wowTvScript/Finance/WorldStock/index.js"></script>
+}
+
+<section class="container">
+
+    <!-- tab start -->
+    <div class="tab-area tab-btn">
+        <ul>
+            <li class="on" style="width: 33%;"><a href="javascript:void(0)" id="worldUsa">미국</a></li>
+            <li style="width: 33%;"><a href="javascript:void(0)" id="worldAsia">아시아</a></li>
+            <li style="width: 33.6667%;"><a href="javascript:void(0)" id="worldEurope">유럽</a></li>            
+        </ul>
+    </div>
+    <div class="tab-body">
+        <div class="tab-cont mt20 on">
+            <!-- 미국 start -->
+            <div class="swiper-container chart-slider">
+                <div class="swiper-wrapper pb30">
+                    <div class="swiper-slide on">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div id="chart-Dowjonse" class="chart_view" style="min-height: 200px;"></div>
+                                <div class="chart-obj">
+                                    <strong>다우존스</strong>
+                                    @Html.PublishPriceFormat(Model.DowJonesInfo.chgtype, Model.DowJonesInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.DowJonesInfo.chgtype, Model.DowJonesInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.DowJonesInfo.chgtype, Model.DowJonesInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <div id="chart-Nasdaq" class="chart_view" style="min-height: 200px;"></div>
+                                <div class="chart-obj">
+                                    <strong>나스닥</strong>
+                                   @Html.PublishPriceFormat(Model.NasdaqInfo.chgtype, Model.NasdaqInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.NasdaqInfo.chgtype, Model.NasdaqInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.NasdaqInfo.chgtype, Model.NasdaqInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div id="chart-SANDP500" class="chart_view" style="min-height: 200px;"></div>
+                                <div class="chart-obj">
+                                    <strong>S&P500</strong>
+                                    @Html.PublishPriceFormat(Model.SANDP500Info.chgtype, Model.SANDP500Info.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.SANDP500Info.chgtype, Model.SANDP500Info.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.SANDP500Info.chgtype, Model.SANDP500Info.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>                            
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                </div>
+
+                <!-- btn -->
+                <div class="swiper-pagination"></div>
+            </div>
+            <!--// 미국 end -->
+        </div>
+        <div class="tab-cont mt20">
+            <!-- 아시아 start -->
+            <div class="swiper-container chart-slider">
+                <div class="swiper-wrapper pb30">
+                    <div class="swiper-slide on">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div class="chart_view" id="chart_SHC" style="min-height: 200px;"></div>
+                                <div class="chart-obj">
+                                    <strong>상해종합</strong>
+                                    @Html.PublishPriceFormat(Model.SHCInfo.chgtype, Model.SHCInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.SHCInfo.chgtype, Model.SHCInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.SHCInfo.chgtype, Model.SHCInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <div class="chart_view" id="chart_HS" style="min-height: 200px;"></div>
+                                <div class="chart-obj" id="chart_HS" >
+                                    <strong>홍콩항생</strong>
+                                    @Html.PublishPriceFormat(Model.HSInfo.chgtype, Model.HSInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.HSInfo.chgtype, Model.HSInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.HSInfo.chgtype, Model.HSInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- chart start -->
+                        <div class="chart-part">
+                            <div class="chart-area">
+                                <div class="chart_view" id="chart_Nikkei" style="min-height: 200px;"></div>
+                                <div class="chart-obj">
+                                    <strong>니케이</strong>
+                                    @Html.PublishPriceFormat(Model.NikkeiInfo.chgtype, Model.NikkeiInfo.Price)
+                                    <ul class="stock-box">
+                                        <li>@Html.PublishChgPriceFormat(Model.NikkeiInfo.chgtype, Model.NikkeiInfo.ChgPrice)</li>
+                                        <li>@Html.DIndexChgRateFormat(Model.NikkeiInfo.chgtype, Model.NikkeiInfo.chgRate)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// chart end -->
+                    </div>
+                </div>
+
+                <!-- btn -->
+                <div class="swiper-pagination"></div>
+            </div>
+            <!--// 아시아 end -->
+        </div>
+        
+        <div class="tab-cont pb30 mt20">
+            <!-- 미국 start -->
+            <div class="chart-part">
+                <div class="chart-area">
+                    <div class="chart_view" id="chart_France"></div>
+                    <div class="chart-obj">
+                        <strong>프랑스 CAC40</strong>
+                        @Html.PublishPriceFormat(Model.CAC40Info.chgtype, Model.CAC40Info.Price)
+                        <ul class="stock-box">
+                            <li>@Html.PublishChgPriceFormat(Model.CAC40Info.chgtype, Model.CAC40Info.ChgPrice)</li>
+                            <li>@Html.PublishUpDownSymbolPChangeFormat(Model.CAC40Info.chgtype, Model.CAC40Info.chgRate)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="chart-area">
+                    <div class="chart_view" id="chart_Germany"></div>
+                    <div class="chart-obj">
+                        <strong>독일 DAX30</strong>
+                        @Html.PublishPriceFormat(Model.DAXInfo.chgtype, Model.DAXInfo.Price)
+                        <ul class="stock-box">
+                            <li>@Html.PublishChgPriceFormat(Model.DAXInfo.chgtype, Model.DAXInfo.ChgPrice)</li>
+                            <li>@Html.PublishUpDownSymbolPChangeFormat(Model.DAXInfo.chgtype, Model.DAXInfo.chgRate)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--// 미국 end -->
+        </div>
+       
+    </div>
+    <!--// tab end  -->
+    <!-- sub tab -->
+    <div class="swiper-container sub-gnb01 mt20">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide on"><span>미국</span></div>
+            <div class="swiper-slide"><span>아시아</span></div>
+            <div class="swiper-slide"><span>유럽</span></div>
+        </div>
+    </div>
+    <!-- // sub tab -->
+    <!--  tab view start -->
+    <div class="tab-body">
+        <div class="tab-cont pb30 on">
+            <!-- 미국 start -->
+            <div class="section-area pt0">
+
+                @*<p class="time-txt pr0">현지시각 <span class="num">2017-07-27 13:32</span> 기준</p>*@
+                <div class="table-type1 type02 line">
+                    <table>
+                        <caption>미국 상세</caption>
+                        <colgroup>
+                            <col style="width:34%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="txt-l">다우존스</td>
+                                <td class="txt-r">@Html.PublishPriceFormat(Model.DowJonesInfo.chgtype, Model.DowJonesInfo.Price)</td>
+                                <td class="txt-r">@Html.PublishChgPriceFormat(Model.DowJonesInfo.chgtype, Model.DowJonesInfo.ChgPrice)</td>
+                                <td class="txt-r">@Html.DIndexChgRateFormat(Model.DowJonesInfo.chgtype, Model.DowJonesInfo.chgRate)</td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">나스닥</td>
+                                <td class="txt-r">@Html.PublishPriceFormat(Model.NasdaqInfo.chgtype, Model.NasdaqInfo.Price)</td>
+                                <td class="txt-r">@Html.PublishChgPriceFormat(Model.NasdaqInfo.chgtype, Model.NasdaqInfo.ChgPrice)</td>
+                                <td class="txt-r">@Html.DIndexChgRateFormat(Model.NasdaqInfo.chgtype, Model.NasdaqInfo.chgRate)</td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">S&amp;P500</td>
+                                <td class="txt-r">@Html.PublishPriceFormat(Model.SANDP500Info.chgtype, Model.SANDP500Info.Price)</td>
+                                <td class="txt-r">@Html.PublishChgPriceFormat(Model.SANDP500Info.chgtype, Model.SANDP500Info.ChgPrice)</td>
+                                <td class="txt-r">@Html.DIndexChgRateFormat(Model.SANDP500Info.chgtype, Model.SANDP500Info.chgRate)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--// 미국 end -->
+
+        </div>
+        <div class="tab-cont pb30">
+            <!-- 아시아 start -->
+            <div class="section-area pt0">
+
+                @*<p class="time-txt pr0">현지시각 <span class="num">2017-07-27 13:32</span> 기준</p>*@
+                <div class="table-type1 type02 line">
+                    <table>
+                        <caption>아시아 상세</caption>
+                        <colgroup>
+                            <col style="width:34%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="txt-l">니케이 255</td>
+                                <td class="txt-r">@Html.PublishPriceFormat(Model.NikkeiInfo.chgtype, Model.NikkeiInfo.Price)</td>
+                                <td class="txt-r">@Html.PublishChgPriceFormat(Model.NikkeiInfo.chgtype, Model.NikkeiInfo.ChgPrice)</td>
+                                <td class="txt-r">@Html.DIndexChgRateFormat(Model.NikkeiInfo.chgtype, Model.NikkeiInfo.chgRate) </td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">상해종합</td>
+                                <td class="txt-r">@Html.PublishPriceFormat(Model.SHCInfo.chgtype, Model.SHCInfo.Price)</td>
+                                <td class="txt-r">@Html.PublishChgPriceFormat(Model.SHCInfo.chgtype, Model.SHCInfo.ChgPrice)</td>
+                                <td class="txt-r">@Html.DIndexChgRateFormat(Model.SHCInfo.chgtype, Model.SHCInfo.chgRate)</td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">항생</td>
+                                <td class="txt-r">@Html.PublishPriceFormat(Model.HSInfo.chgtype, Model.HSInfo.Price)<!-- 주가 --></td>
+                                <td class="txt-r">@Html.PublishChgPriceFormat(Model.HSInfo.chgtype, Model.HSInfo.ChgPrice)<!-- 등락 --></td>
+                                <td class="txt-r">@Html.DIndexChgRateFormat(Model.HSInfo.chgtype, Model.HSInfo.chgRate)<!-- 등락폭 --></td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">대만 가권</td>
+                                <td class="txt-r">@Html.PublishPriceFormat(Model.WTInfo.chgtype, Model.WTInfo.Price)</td>
+                                <td class="txt-r">@Html.PublishChgPriceFormat(Model.WTInfo.chgtype, Model.WTInfo.ChgPrice)</td>
+                                <td class="txt-r">@Html.PublishChgRateFormat(Model.WTInfo.chgtype, Model.WTInfo.chgRate)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--// 아시아 end -->
+        </div>
+        <div class="tab-cont pb30">
+            <!-- 유럽start -->
+            <div class="section-area pt0">
+
+                @*<p class="time-txt pr0">현지시각 <span class="num">2017-07-27 13:32</span> 기준</p>*@
+                <div class="table-type1 type02 line">
+                    <table>
+                        <caption>유럽 상세</caption>
+                        <colgroup>
+                            <col style="width:34%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                            <col style="width:22%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="txt-l">프랑스 CAC40</td>
+                                <td class="txt-r">@Html.PublishPriceFormat(Model.CAC40Info.chgtype, Model.CAC40Info.Price)</td>
+                                <td class="txt-r">@Html.PublishChgPriceFormat(Model.CAC40Info.chgtype, Model.CAC40Info.ChgPrice)<!-- 등락 --></td>
+                                <td class="txt-r">@Html.PublishUpDownSymbolPChangeFormat(Model.CAC40Info.chgtype, Model.CAC40Info.chgRate)<!-- 등락폭 --></td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">독일 DAX30</td>
+                                <td class="txt-r">@Html.PublishPriceFormat(Model.DAXInfo.chgtype, Model.DAXInfo.Price)<!-- 주가 --></td>
+                                <td class="txt-r">@Html.PublishChgPriceFormat(Model.DAXInfo.chgtype, Model.DAXInfo.ChgPrice)<!-- 등락 --></td>
+                                <td class="txt-r">@Html.PublishUpDownSymbolPChangeFormat(Model.DAXInfo.chgtype, Model.DAXInfo.chgRate)<!-- 등락폭 --></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!--// 유럽 end -->
+        </div>
+    </div>
+    <!-- // tab view end -->
+    <!-- sub tab -->
+    <div class="swiper-container sub-gnb01">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide on"><span>오늘의 공개방송</span></div>
+            <div class="swiper-slide"><span>해외 선물 파트너</span></div>
+        </div>
+    </div>
+    <!-- // sub tab -->
+    <!-- 오늘의 공개방송 / 해외 선물 파트너 tab start -->
+    <div class="tab-body">
+        <div class="tab-cont mlr15 pb30 on">
+            <!-- 오늘의 공개방송 start -->
+            <div class="swiper-container reporter-slider">
+                <div class="swiper-wrapper">
+
+                    @if (Model.TodayBroadCastInfo.ToList().Count > 0)
+                    {
+                        foreach (var item in Model.TodayBroadCastInfo.ToList())
+                        {
+                            string imgSrc = "http://image.wownet.co.kr" + item.NEWPHOTO_SMALL2.Replace("\\", "/");
+                            if (item.STATE == null || item.STATE.Value.Equals(0))
+                            {
+                                <div class="swiper-slide" style="margin-right: 15px;">
+                                    <div class="box-public-broadcasting">
+                                        <ul>
+                                            @*<li><a href="javascript:void(0)"><img src="@imgSrc" alt="photo"></a></li>*@
+                                            <li>
+                                               
+                                                <a href="#none" onclick="javascript:WorldStockIndex.TodayBroadCast()">
+                                                    <span class="ico-area icon02"></span> 
+                                                    <img src="@imgSrc" alt="photo">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                @*<a href="http://wowpro.wownet.co.kr/pro/pro_main_new/pro_record_broadcast.asp?currPage=1&bcode=N04070000&proId=@item.PRO_ID&mseq=226&pro_search=@item.PRO_ID&skey=nickname" class="tit-area">
+                                                        <strong>@item.NICKNAME @BroadcastFunction.GetInvestClass(item.INVESTKIND)</strong>
+                                                        <span>@item.BroadCastTime</span>
+                                                    </a>*@
+                                                <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/sub_main.asp?proID=@item.PRO_ID" class="tit-area" target="_blank">
+                                                    <strong>@item.NICKNAME <span class="txt">@BroadcastFunction.GetInvestClass(item.INVESTKIND)</span></strong>
+                                                    <span>@item.BroadCastTime</span>
+                                                </a>
+                                                
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="link-blue" onclick="javascript:WorldStockIndex.TodayBroadCast()">녹화방송</a>
+                                                <a href="javascript:void(0)" class="link-blue" onclick="javascript:WorldStockIndex.TodayBroadCast()">카페가기</a>
+                                                <a href="javascript:void(0)" class="link-blue" onclick="javascript:WorldStockIndex.TodayBroadCast()">가입</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                if (LoginHandler.IsLogin == true)
+                                {
+                                    <div class="swiper-slide" style="margin-right: 15px;">
+                                        <div class="box-public-broadcasting">
+                                            <ul>
+                                                @*<li><a href="javascript:void(0)"><img src="@imgSrc" alt="photo"></a></li>*@
+                                                <li>
+                                                    
+                                                    <a href="#none" onclick="javascript:WorldStockIndex.TodayBroadCast()">
+                                                        <span class="ico-area icon01"></span>
+                                                        <img src="@imgSrc" alt="photo">
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    @*<a href="http://wowpro.wownet.co.kr/pro/pro_main_new/pro_record_broadcast.asp?currPage=1&bcode=N04070000&proId=@item.PRO_ID&mseq=226&pro_search=@item.PRO_ID&skey=nickname" class="tit-area">
+                                                            <strong>@item.NICKNAME @BroadcastFunction.GetInvestClass(item.INVESTKIND)</strong>
+                                                            <span>@item.BroadCastTime</span>
+                                                        </a>*@
+                                                    <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/sub_main.asp?proID=@item.PRO_ID" class="tit-area" target="_blank">
+                                                        <strong>@item.NICKNAME <span class="txt">@BroadcastFunction.GetInvestClass(item.INVESTKIND)</span></strong>
+                                                        <span>@item.BroadCastTime</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="link-blue" onclick="javascript:WorldStockIndex.TodayBroadCast()">녹화방송</a>
+                                                    <a href="javascript:void(0)" class="link-blue" onclick="javascript:WorldStockIndex.TodayBroadCast()">카페가기</a>
+                                                    <a href="javascript:void(0)" class="link-blue" onclick="javascript:WorldStockIndex.TodayBroadCast()">가입</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="swiper-slide" style="margin-right: 15px;">
+                                        <div class="box-public-broadcasting">
+                                            <ul>
+                                                @*<li><a href="javascript:void(0)"><img src="@imgSrc" alt="photo"></a></li>*@
+                                                <li>
+                                                    
+                                                    <a href="#none" onclick="javascript:WorldStockIndex.TodayBroadCast()">
+                                                        <span class="ico-area icon01"></span>
+                                                        <img src="@imgSrc" alt="photo">
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    @*<a href="http://wowpro.wownet.co.kr/pro/pro_main_new/pro_record_broadcast.asp?currPage=1&bcode=N04070000&proId=@item.PRO_ID&mseq=226&pro_search=@item.PRO_ID&skey=nickname" class="tit-area">
+                                                            <strong>@item.NICKNAME @BroadcastFunction.GetInvestClass(item.INVESTKIND)</strong>
+                                                            <span>@item.BroadCastTime</span>
+                                                        </a>*@
+                                                    <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/sub_main.asp?proID=@item.PRO_ID" class="tit-area" target="_blank">
+                                                        <strong>@item.NICKNAME <span class="txt">@BroadcastFunction.GetInvestClass(item.INVESTKIND)</span></strong>
+                                                        <span>@item.BroadCastTime</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="link-blue" onclick="javascript:WorldStockIndex.TodayBroadCast()">녹화방송</a>
+                                                    <a href="javascript:void(0)" class="link-blue" onclick="javascript:WorldStockIndex.TodayBroadCast()">카페가기</a>
+                                                    <a href="javascript:void(0)" class="link-blue" onclick="javascript:WorldStockIndex.TodayBroadCast()">가입</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+
+                        }
+                    }
+                    else
+                    {
+
+                        <ul>
+                            <li>방송정보가 없습니다.</li>
+                        </ul>
+                    }
+                </div>
+            </div>
+            <!-- 오늘의 공개방송 end -->
+        </div>
+        <div class="tab-cont mlr15 pb30 ">
+            <!-- 해외 선물 파트너 start -->
+            <div class="swiper-container reporter-slider">
+                <div class="swiper-wrapper">
+
+                    @if (Model.WorldBestPartnerList.ListData.Count > 0)
+                    {
+                        foreach (var item in Model.WorldBestPartnerList.ListData)
+                        {
+                            <div class="swiper-slide">
+                                <!-- reporter 1 start -->
+                                <div class="box-public-broadcasting">
+                                    <ul>
+                                        <li><a href="javascript:WorldStockIndex.WordPartner()"><img src="http://image.wownet.co.kr/@item.NEWphoto_small" alt="photo"></a></li>
+                                        <li>
+                                            <a href="javascript:void(0)" class="tit-area">
+                                                <strong>@item.NickName</strong>
+                                                <span>기준일 @item.BaseDate</span>
+                                            </a>
+                                        </li>                                       
+                                    </ul>
+                                </div>
+                                <!--// reporter 1 end -->
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+            <!--// 해외 선물 파트너 end -->
+        </div>
+    </div>
+    <!--// 오늘의 공개방송 / 해외 선물 파트너 tab end -->
+
+
+    <div class="box-todayNew-trend type01">
+        <!-- 해외뉴스 start -->
+        <div class="section-area pd0">
+            <h3 class="tit-line plr15">해외뉴스</h3>
+            <ul class="list-type-todayNew">
+
+                @if (Model.WorldStockNewsList.ListData.Count > 0)
+                {
+                    foreach (var item in Model.WorldStockNewsList.ListData.Take(5))
+                    {
+                        <li>
+                            <a href="#none" onclick="return WorldStockIndex.GoNewsRead('@item.ARTICLEID')">@item.TITLE</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li>데이터가 없습니다.</li>
+                }
+            </ul>
+        </div>
+        <!--// 해외뉴스 end -->
+        <!-- ad start -->
+        <div class="section-area">
+            <div class="bann-img" style="display:none;">
+                <a href="http://www.wownet.co.kr/eventhome/wholelecture/20180113/sub_main.asp"><img src="@wowTvStyle/images/temp/180110_480x282_lecture_m.jpg" alt="bannerImg"></a>
+            </div>
+        </div>
+        <!--// ad end -->
+    </div>
+
+
+    <!-- 주식 강연회 start -->
+    @*<div class="section-area">
+        <h3>
+            주식 강연회
+            <a href="javascript:void(0)" class="btn-more">more</a>
+        </h3>
+        <ul class="list-type-stock">
+            
+            <li>
+                <span class="addr">서울</span>
+                <a href="javascript:void(0)">[1박2일] 한옥석 집중교육 한옥석 집중교육 한옥석 집중교육</a>
+                <span class="num">2017-07-08</span>
+            </li>
+            <li>
+                <span class="addr">서울</span>
+                <a href="javascript:void(0)">[1박2일] 한옥석 집중교육 한옥석 집중교육 한옥석 집중교육</a>
+                <span class="num">2017-07-08</span>
+            </li>
+            <li>
+                <span class="addr">서울</span>
+                <a href="javascript:void(0)">[1박2일] 한옥석 집중교육 한옥석 집중교육</a>
+                <span class="num">2017-07-08</span>
+            </li>
+        </ul>
+    </div>*@
+    <!--// 주식 강연회 end -->
+
+
+    <div class="box-bann-service01">
+        <!-- ad start -->
+        <div class="section-area mt15">
+            <div class="bann-img">
+                <a href="http://www.wownet.co.kr/eventhome/risingstock/sub_main.asp"><img src="@wowTvStyle/images/temp/180110_480x282_rising_m.jpg" alt="bannerImg"></a>
+            </div>
+        </div>
+        <!--// ad end -->
+        <!-- 와우 금융 서비스 start -->
+        <div class="section-area box-finan-serv">
+            <h3>와우 금융 서비스</h3>
+            <div>
+                <div>
+                    <a href="http://wowtv.co.kr/center/html/service_charge_month.asp?bcode=T07090100&mseq=158&m=09">
+                        <span class="is-ico-service ico-01"></span>
+                        <span>실시간 방송</span>
+                    </a>
+                    <a href="http://m.wownet.co.kr/pro/intro.asp">
+                        <span class="is-ico-service ico-02"></span>
+                        <span>파트너 방송</span>
+                    </a>
+                    <a href="http://www.wowfa.co.kr">
+                        <span class="is-ico-service ico-03"></span>
+                        <span>증권교육</span>
+                    </a>
+                    <a href="http://www.wowstar.co.kr/p2p/main.asp">
+                        <span class="is-ico-service ico-04"></span>
+                        <span>P2P 투자</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="javascript:void(0)" id="btnWowBand">
+                        <span class="is-ico-service ico-05"></span>
+                        <span>와우밴드</span>
+                    </a>
+                    <a href="javascript:void(0)" id="btnStock">
+                        <span class="is-ico-service ico-06"></span>
+                        <span>주식창</span>
+                    </a>
+                    <a href="javascript:void(0)" id="btnVOD">
+                        <span class="is-ico-service ico-07"></span>
+                        <span>VOD</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--// 와우 금융 서비스 end -->
+    </div>
+
+    <!-- ad start -->
+    <div class="section-area mb50 bann-two">
+        <div class="bann-img bm10">
+            <a href="http://m.wowtv.co.kr/Broad/ProgramMain/Index?menuSeq=644&programCode=P2250"><img src="@wowTvStyle/images/temp/temp_finance03.jpg" alt="bannerImg"></a>
+            <a href="http://m.wowtv.co.kr/Broad/ProgramMain/Index?menuSeq=644&programCode=P2236"><img src="@wowTvStyle/images/temp/temp_finance04.png" alt="bannerImg"></a>
+        </div>
+    </div>
+    <!--// ad end -->
+
+</section>
+

@@ -1,0 +1,449 @@
+@charset "utf-8"; /* 금융 */
+.ml5 {margin-left:5px !important;}
+.mt50 {margin-top:50px !important;}
+
+.wrap-adbox-right .section-content {float:left;width:900px;}
+
+/* 금융 */
+.article-detail-stock1 {overflow:hidden;margin-bottom:60px;border:1px solid #ebeaea;}
+.article-detail-stock1 .contain-chart {float:left;width:494px;height:398px;}
+.article-detail-stock1 .contain-list-stock {float:left;margin:0;padding:37px 50px;width:494px; /*height:398px; */box-sizing:border-box;border-left:1px solid #ebeaea;}
+.article-detail-stock1 .contain-list-stock .list-type2 li {margin:8px 0;}
+.article-detail-stock1 .contain-detail {float:left;padding:25px 40px;width:474px;box-sizing:border-box;}
+.article-detail-stock1 .contain-detail h1.title {margin:20px 0 5px 0;font-size:26px;color:#333;font-weight:500;}
+.article-detail-stock1 .contain-detail h2.title {margin:0 0 10px 0;font-size:16px;color:#333;font-weight:400;}
+
+/* 2017-10-24 수정 */
+.article-detail-stock1 .contain-detail .box-detail-stock:after {display:block; content:""; clear:both;}
+.article-detail-stock1 .contain-detail .box-detail-stock {margin:0 0 27px 0; font-size:16px; }
+/* .article-detail-stock1 .contain-detail .box-detail-stock .box span + span {display:inline-block;margin:0 0 0 5px; padding:0 24px 0 0;width:100px;text-align:right; background:url(../images/common/img_bar_division2.png) no-repeat right 8px;}
+.article-detail-stock1 .contain-detail .box-detail-stock .box span + span + span {display:inline-block;margin:0;padding:0;width:88px;background:none;} */
+.article-detail-stock1 .contain-detail .box-detail-stock .price-stock {font-size:36px; font-weight:500; float:left;}
+.article-detail-stock1 .contain-detail .box-detail-stock .box {float:right; display:block; min-width:100px; margin-top:15px; }
+
+.article-detail-stock1 .contain-detail .box-detail-stock .box span {display:inline-block; vertical-align:middle; background:url(../images/common/img_bar_division2.png) no-repeat right center; padding-right:15px;}
+.article-detail-stock1 .contain-detail .box-detail-stock .box span + span {margin-left:10px; background:none; padding-right:0;}
+.article-detail-stock1 .contain-detail .box-detail-stock .box span + span:before {vertical-align:middle;}
+.article-detail-stock1 .contain-detail .box-detail-stock .box .data-up.symbol::before {content:'+'; margin-top:-4px;}
+
+.article-detail-stock1 .contain-detail .box-detail-price1 {overflow:hidden;margin:0 0 25px 0;border-top:1px solid #999;}
+.article-detail-stock1 .contain-detail .box-detail-price1 dl {float:left;margin:0 0 0 0;padding:10px 20px 10px 0;width:50%;border-right:1px solid #ebeaea;border-bottom:1px solid #ebeaea;box-sizing:border-box;}
+.article-detail-stock1 .contain-detail .box-detail-price1 dl:nth-child(even) {padding:10px 0 10px 20px;border-right:none;}
+.article-detail-stock1 .contain-detail .box-detail-price1 dl dt {font-size:16px;color:#333;}
+.article-detail-stock1 .contain-detail .box-detail-price1 dl dt span {display:block;font-size:13px;color:#999;}
+.article-detail-stock1 .contain-detail .box-detail-price1 dl dd {margin:-9px 0 0 0;text-align:right;font-size:22px;color:#333;font-weight:500;}
+.article-detail-stock1 .contain-detail .box-detail-price1.alone dl dd {margin:3px 0 0 0;}
+.article-detail-stock1 .contain-detail .box-total-infor {margin:0 0 4px 0;text-align:right;font-size:13px;color:#999;}
+.article-detail-stock1 .contain-detail .box-total-infor span {color:#666;}
+.article-detail-stock1 .contain-detail .box-detail-price2 {overflow:hidden;margin:0 0 20px 0;border-top:1px solid #999;}
+.article-detail-stock1 .contain-detail .box-detail-price2 dl {float:left;width:50%;padding:0;border-bottom:1px solid #ebeaea;overflow:hidden;box-sizing:border-box;}
+.article-detail-stock1 .contain-detail .box-detail-price2 dl:nth-child(even) {padding:10px 0 10px 20px;}
+.article-detail-stock1 .contain-detail .box-detail-price2 dl:nth-child(odd) {padding:10px 20px 10px 0;background:url(../images/common/img_bar_division1.png) no-repeat right 50%;}
+.article-detail-stock1 .contain-detail .box-detail-price2.col3 {overflow:hidden;margin:0 0 20px 0;border-top:1px solid #999;}
+.article-detail-stock1 .contain-detail .box-detail-price2.col3 dl {float:left;width:33.3%;padding:10px 20px;border-bottom:none;overflow:hidden;box-sizing:border-box;background:url(../images/common/img_bar_division1.png) no-repeat right 50%;}
+.article-detail-stock1 .contain-detail .box-detail-price2.col3 dl:nth-child(3n) {padding:10px 0 10px 20px;background:none;}
+.article-detail-stock1 .contain-detail .box-detail-price2.col3 dl:first-child {padding:10px 20px 10px 0;background:url(../images/common/img_bar_division1.png) no-repeat right 50%;}
+.article-detail-stock1 .contain-detail .box-detail-price2 dl dt {float:left;line-height:27px;}
+.article-detail-stock1 .contain-detail .box-detail-price2 dl dd {float:right;font-size:16px;font-weight:500;}
+.article-detail-stock1 .contain-detail .box-detail-price3 {overflow:hidden;}
+.article-detail-stock1 .contain-detail .box-detail-price3 p {float:left;width:33.3%;font-size:14px;}
+.article-detail-stock1 .contain-detail .box-detail-price3 p + p {text-align:center;}
+.article-detail-stock1 .contain-detail .box-detail-price3 p + p + p {text-align:right;}
+.article-detail-stock1 .contain-detail .box-detail-price3 p span {margin:0 0 0 10px;font-size:16px;font-weight:400;}
+
+.calculator-exchangerate {padding:0 67px;background:#f7f7f7 url(../images/finance/bg_exchangerate.png) no-repeat 50%;}
+.calculator-exchangerate::after {content:'';display:table;width:100%;height:0;clear:both;}
+.calculator-exchangerate .box-exchangerate {float:left;margin:50px 75px;}
+.calculator-exchangerate .box-exchangerate .selector {display:block;margin-bottom:10px; box-sizing:border-box;}
+.calculator-exchangerate .box-exchangerate .selector select {height:38px;}
+.calculator-exchangerate .box-exchangerate .selector label {height:38px; line-height:38px;}
+.calculator-exchangerate .box-exchangerate .selector:before {height:38px; line-height:38px;}
+.calculator-exchangerate .box-exchangerate input[type="text"] {display:inline-block;margin-left:0;padding:0 10px 0 0;width:244px;height:40px;text-align:right;box-sizing:border-box;}
+.calculator-exchangerate .box-exchangerate .money {display:inline-block; width:20px; text-align:center; font-size:16px; color:#666}
+
+.finance .stock-text {padding:15px 0 15px 0;font-size:16px;color:#333;font-weight:300;}
+.finance .stock-text-area {margin:15px 0;}
+.finance .stock-text-area .stock-text {padding:0;}
+.finance .stock-text-area .stock-text + .stock-text {margin-top:3px;}
+.finance .stock-text .emphasize {color:#4f5eaf;}
+.finance .section-content.news-detail {position:relative;}
+.finance .section-content.news-detail .box-zoom {float:none; position:absolute; top:-50px; right:0; margin:0;}
+
+
+.cont-infor-relative {padding-left:20px;box-sizing:border-box;}
+.cont-infor-relative:first-child {padding-left:0;}
+.box-list-relative {}
+.box-list-relative ul {}
+.box-list-relative ul li {position:relative;margin-top:30px;padding:0 0 0 210px;min-height:114px;}
+.box-list-relative ul li:first-child {margin:0;}
+.box-list-relative ul li a {font-size:16px;color:#333;}
+.box-list-relative ul li .date {display:block;margin:10px 0 0 0;font-size:14px;}
+.box-list-relative ul li img {display:block;position:absolute;left:0;top:0;width:190px;height:114px;}
+
+.contain-group-rank100 {margin-bottom:40px;padding:25px 50px;border:1px solid #ebeaea;}
+.contain-group-rank100 a {font-size:16px;color:#333;}
+.contain-group-rank100 a:hover {color:#4f5eaf;}
+.contain-group-rank100 li {margin-top:8px;margin-bottom:8px;}
+.contain-group-rank100 li.on a {color:#4f5eaf;}
+
+.icon-deal {display:inline-block;margin:0;padding:0 8px 0 24px;height:28px;line-height:28px;font-size:13px;color:#666;border:1px solid #ccc;border-radius:14px;}
+.icon-deal.buying {background:url(../images/finance/img_icon_deal_buying.png) no-repeat 9px 9px;}
+.icon-deal.possesion {background:url(../images/finance/img_icon_deal_possesion.png) no-repeat 9px 9px;}
+.icon-deal.jump {background:url(../images/finance/img_icon_deal_jump.png) no-repeat 9px 9px;}
+.icon-deal.sell {background:url(../images/finance/img_icon_deal_sell.png) no-repeat 9px 9px;}
+.icon-deal.progress {background:url(../images/finance/img_icon_deal_progress.png) no-repeat 9px 9px;}
+
+.contain-infor-deal {margin-bottom:20px;}
+.contain-infor-deal .graph {margin-bottom:20px;}
+.contain-infor-deal li {margin:12px 0;font-size:14px;color:#333;}
+.contain-infor-deal li .icon-deal {margin-right:5px;}
+
+.radio.boxtype {display:block;margin:0 0 20px 0;padding:23px 50px 23px 70px;height:auto;line-height:150%;border:1px solid #ebeaea;background-position:40px 27px;}
+.radio.boxtype.checked {border:1px solid #4f5eaf;}
+.radio.boxtype .in-chart {display:block;float:right;margin:0 0 0 20px;width:125px;height:125px;}
+.radio.boxtype .in-title {display:block;margin:0 0 13px 0;font-size:16px;color:#333;font-weight:500;}
+.radio.boxtype .in-title span {color:#666;font-weight:300;}
+.radio.boxtype .in-text {display:block;font-size:14px;color:#666;font-weight:400;}
+
+.text-headline-topic a {display:block;margin:0 0 23px 0;font-size:28px;color:#121212;font-weight:700;}
+
+.header-main-finance {padding:50px 0 50px 0;text-align:right;}
+.header-main-finance::after {content:'';display:table;clear:both;}
+.header-main-finance h1.title {display:block;float:left;margin:-6px 40px 0 0;padding:0;font-size:30px;}
+.header-main-finance h1.title .code {display:inline-block;margin:12px 0 0 8px;vertical-align:top;font-size:16px;font-weight:400;}
+.header-main-finance .btn-type-dropdown {display:block;float:left;margin:0;padding:0;height:32px;border:1px solid #ccc;background:url(../images/common/img_dropdown1.png) no-repeat right 50%;}
+.header-main-finance .btn-type-dropdown.on {background:url(../images/common/img_dropdown1_on.png) no-repeat right 50%;}
+.header-main-finance .btn-type-dropdown button {display:block;padding:0 35px 0 15px;width:200px;height:32px;text-align:left;font-size:16px;color:#666;box-sizing:border-box;}
+.header-main-finance .text-realtime-reload {display:inline-block;margin:0 30px 0 0;}
+.header-main-finance .btn-type2 {margin:0 0 0 10px;}
+
+.box-partnersbanner {position:relative;width:450px;height:120px;background:url(../images/finance/bg_partnersbanner.png) no-repeat left top;}
+.box-partnersbanner a {display:block;padding:35px 30px;}
+.box-partnersbanner span {display:block;}
+.box-partnersbanner .name-program {font-size:14px;color:#fff;}
+.box-partnersbanner .title-program {font-size:24px;color:#fff;}
+.box-partnersbanner .btn-type-link {position:absolute;right:30px;bottom:35px;padding:0 30px 0 0;font-size:14px;color:#fff;font-weight:300;background:url(../images/finance/img_link_partnersbanner.png) no-repeat right 50%;}
+
+.box-data1 {margin:0 -1px -1px 0;padding:0 19px;border:1px solid #ccc;}
+.box-data1 dl {border-top:1px solid #ebeaea; max-height:48px;}
+.box-data1 dl:first-child {border:none;}
+.box-data1 dl::after {content:'';display:table;clear:both;}
+.box-data1 dt {float:left;padding:13px 0; box-sizing: border-box}
+.box-data1 dd {float:right;padding:12px 0; box-sizing: border-box}
+
+.section-detail-infor-default {overflow:hidden;border:1px solid #ebeaea;}
+.section-detail-infor-default .contain-detail1 {float:left;padding:8px 40px 0 40px;width:497px;height:86px;border-right:1px solid #ebeaea;border-bottom:1px solid #ebeaea;box-sizing:border-box;}
+.section-detail-infor-default .contain-detail1 .stock-area {display:block;}
+
+/* 2017-10-24 수정
+.section-detail-infor-default .contain-detail1 .stock-now {display:inline-block;font-size:42px;font-weight:700;}
+.section-detail-infor-default .contain-detail1 .stock-detail {display:inline-block;overflow:hidden;}
+.section-detail-infor-default .contain-detail1 .stock-detail dt {display:inline-block;margin:0 10px 0 15px;font-size:16px;}
+.section-detail-infor-default .contain-detail1 .stock-detail dd {display:inline-block;padding:0 0 0 18px;font-size:22px;background:url(../images/finance/img_bar_stock_now.png) no-repeat 7px 12px;}
+.section-detail-infor-default .contain-detail1 .stock-detail dt + dd {padding:0;background:none;}
+*/
+
+.section-detail-infor-default .contain-detail1:after {display:block; content:""; clear:both;}
+.section-detail-infor-default .contain-detail1 .stock-now {display:block;float:left;  font-size:36px;font-weight:700;}
+.section-detail-infor-default .contain-detail1 .stock-detail {display:block; float:right; overflow:hidden; padding-top:18px}
+.section-detail-infor-default .contain-detail1 .stock-detail dt {display:inline-block;margin:0 10px 0 15px;font-size:0; text-indent:-9999%; width:0; height:0; }
+.section-detail-infor-default .contain-detail1 .stock-detail dd {display:inline-block;padding:0 0 0 18px;font-size:18px;background:url(../images/finance/img_bar_stock_now.png) no-repeat 7px 8px;}
+.section-detail-infor-default .contain-detail1 .stock-detail dt + dd {padding:0;background:none;}
+.section-detail-infor-default .contain-detail1 .stock-detail dd.stop-deal {margin-top:-18px;}
+
+
+.section-detail-infor-default .contain-detail2 {float:left;width:700px;}
+.section-detail-infor-default .contain-detail2 dl {float:left;margin:0 0 0 -1px;width:176px;background:url(../images/finance/img_bar_stock_detail.png) no-repeat left 50%;border-bottom:1px solid #ebeaea;}
+.section-detail-infor-default .contain-detail2 dl dt {float:left;padding:0 0 0 15px;height:42px;line-height:42px;font-size:14px;font-weight:400;}
+.section-detail-infor-default .contain-detail2 dl dd {float:right;padding:0 15px 0 0;height:42px;text-align:right;line-height:42px;font-size:14px;font-weight:400;}
+.section-detail-infor-default .contain-detail2 dl dd span {font-size:16px;font-weight:500;} 
+.section-detail-infor-default .contain-detail3 {clear:both;padding:13px 40px;}
+.section-detail-infor-default .contain-detail3::after {content:'';display:table;clear:both;}
+.section-detail-infor-default .contain-detail3 p.title {float:left;position:relative;z-index:1;padding:0 10px 0 0;font-size:14px;color:#000;font-weight:700;background:#fff;}
+.section-detail-infor-default .contain-detail3 dl {float:left;margin:0 0 0 -1px;width:149px;background:url(../images/finance/img_bar_stock_detail.png) no-repeat left 50%;}
+.section-detail-infor-default .contain-detail3 dl dt {float:left;padding:0 0 0 20px;font-size:14px;line-height:16px;}
+.section-detail-infor-default .contain-detail3 dl dd {float:right;padding:0 20px 0 0;font-size:16px;color:#999;font-weight:500;line-height:16px;}
+
+.section-detail-infor-open {overflow:hidden;}
+.section-detail-infor-open .contain-detail1 {padding:8px 0 0 10px;width:395px;height:70px;box-sizing:border-box;}
+
+
+/* 2017-10-24 수정
+.section-detail-infor-open .contain-detail1 .stock-now {display:inline-block;font-size:36px;font-weight:700;}
+.section-detail-infor-open .contain-detail1 .stock-detail {display:inline-block;overflow:hidden;}
+.section-detail-infor-open .contain-detail1 .stock-detail dt {display:inline-block;margin:0 10px 0 15px;font-size:14px;}
+.section-detail-infor-open .contain-detail1 .stock-detail dd {display:inline-block;padding:0 0 0 18px;font-size:18px;background:url(../images/finance/img_bar_stock_now.png) no-repeat 7px 8px;}
+.section-detail-infor-open .contain-detail1 .stock-detail dt + dd {padding:0;background:none;}
+*/
+.section-detail-infor-open .contain-detail1:after {display:block; content:""; clear:both;}
+.section-detail-infor-open .contain-detail1 .stock-now {display:block;float:left;  font-size:36px;font-weight:700;}
+.section-detail-infor-open .contain-detail1 .stock-detail {display:block; float:right; overflow:hidden; padding-top:18px}
+.section-detail-infor-open .contain-detail1 .stock-detail dt {display:inline-block;margin:0 10px 0 15px;font-size:0; text-indent:-9999%; width:0; height:0; }
+.section-detail-infor-open .contain-detail1 .stock-detail dt + dd {padding:0;background:none;}
+.section-detail-infor-open .contain-detail1 .stock-detail dd {display:inline-block;padding:0 0 0 18px;font-size:18px;background:url(../images/finance/img_bar_stock_now.png) no-repeat 7px 8px;}
+.section-detail-infor-open .contain-detail1 .stock-detail dd.stop-deal {margin-top:-18px;}
+
+
+
+.section-detail-infor-open .contain-detail2 {float:left;width:395px;}
+.section-detail-infor-open .contain-detail2 dl {float:left;margin:0 0 0 -1px;width:198px;background:url(../images/finance/img_bar_stock_detail.png) no-repeat left 50%;border-bottom:1px solid #ebeaea;}
+.section-detail-infor-open .contain-detail2 dl dt {float:left;padding:0 0 0 15px;height:42px;line-height:42px;font-size:14px;font-weight:400;}
+.section-detail-infor-open .contain-detail2 dl dd {float:right;padding:0 15px 0 0;height:42px;text-align:right;line-height:42px;font-size:14px;font-weight:400;}
+.section-detail-infor-open .contain-detail2 dl dd span {font-size:18px;font-weight:500;}
+.section-detail-infor-open .contain-detail2 .box-foot {position:relative;width:auto;}
+.section-detail-infor-open .contain-detail2 .box-foot dt {position:absolute;left:0;top:0;}
+.section-detail-infor-open .contain-detail2 .box-foot dd {padding:0 0 0 100px;background:url(../images/finance/img_bar_stock_detail.png) no-repeat 82px 15px;}
+.section-detail-infor-open .box-detail-stock2 {margin-bottom:10px;border-top:1px solid #033333;border-bottom:1px solid #033333;}
+.section-detail-infor-open .box-detail-stock2 dl {overflow:hidden;text-align:right;}
+.section-detail-infor-open .box-detail-stock2 dt {float:left;font-size:22px;font-weight:700;line-height:58px;}
+.section-detail-infor-open .box-detail-stock2 dd {display:inline-block;line-height:58px;font-size:22px;}
+.section-detail-infor-open .box-detail-stock2 dd + dd {padding:0 0 0 28px;background:url(../images/finance/img_bar_stock_now.png) no-repeat 10px 24px;}
+.section-detail-infor-open .box-detail-stock2 dd .text {display:inline-block;margin:0 10px 0 0;font-size:16px;vertical-align:top;}
+
+
+.box-accordion-detail {position:relative;z-index:1;margin:-1px 0 60px 0;border-top:1px solid #999;}
+.box-accordion-detail .btn-accordion-detail {display:block;margin:-1px auto 0 auto;width:48px;height:32px;overflow:hidden;background:url(../images/finance/btn_accordion_detail.png) no-repeat 50%;border:1px solid #999;border-radius:3px;}
+.box-accordion-detail .btn-accordion-detail.on {background:url(../images/finance/btn_accordion_detail_on.png) no-repeat 50%;border:1px solid #999;border-radius:3px;}
+.box-accordion-detail .btn-accordion-detail button {display:block;width:48px;height:32px;text-indent:-10000px;}
+
+.box-investmentopinion {color:#999;line-height:150%;}
+
+.contain-infor-company {position:absolute;left:0;top:140px;z-index:2;width:765px;background:#fff;border:1px solid #ebe9ea;border-top:1px solid #353535;}
+.contain-infor-company .box-rows {padding:13px 40px;border-bottom:1px solid #ebe9ea;}
+.contain-infor-company .box-rows::after {content:'';display:table;clear:both;}
+.contain-infor-company .box-rows p {display:inline-block;padding:0 0 0 50px;font-size:16px;color:#333;background:url(../images/finance/img_bar_stock_detail.png) no-repeat 25px 7px;}
+.contain-infor-company .box-rows p:first-child {padding:0;background:none;}
+.contain-infor-company .box-rows p span {display:inline-block;margin:0 5px 0 0;font-weight:700;}
+.contain-infor-company .box-scroll {font-size:16px;color:#333;border:none;}
+.contain-infor-company .box-scroll .inner {padding:15px 40px;line-height:180%;}
+.contain-infor-company .box-rows .infor-name {float:left;margin:0;padding:0;line-height:45px;font-size:20px;color:#333;font-weight:700;}
+.contain-infor-company .box-rows .infor-business {float:right;margin:0;padding:0;line-height:42px;font-size:14px;color:#000;font-weight:700;background:none;}
+.contain-infor-company .box-rows .infor-business .text-site {margin:0 0 0 20px;}
+
+.box-infor-trading {margin-bottom:30px;border:1px solid #ebeaea;}
+.box-infor-trading .company {display:inline-block;padding:0 40px;line-height:80px;font-size:22px;color:#000;font-weight:700;vertical-align:middle;}
+.box-infor-trading .price {display:inline-block;margin:0 0 0 30px;vertical-align:middle;font-size:16px;line-height:80px;}
+.box-infor-trading .price span {display:inline-block;margin:0 0 4px 10px;font-size:42px;font-weight:700;vertical-align:middle;}
+.box-infor-trading .detail {padding:0 40px;border-top:1px solid #ebeaea;}
+.box-infor-trading .detail .title {display:inline-block;position:relative;z-index:1;margin:0 -40px 0 0;width:105px;line-height:44px;vertical-align:top;font-size:14px;color:#000;font-weight:700;background:#fff;}
+.box-infor-trading .detail dl {display:inline-block;padding:0 0 0 40px;width:145px;vertical-align:top;overflow:hidden;background:url(../images/finance/img_bar_stock_detail.png) no-repeat 20px 50%;box-sizing:border-box;}
+.box-infor-trading .detail dl dt {float:left;line-height:44px;font-size:14px;}
+.box-infor-trading .detail dl dd {float:right;line-height:44px;font-size:16px;color:#999;font-weight:700;}
+
+.box-infor-login {padding:20px 0;}
+.box-infor-login p {margin:17px 0;text-align:center;font-size:14px;color:#747474;}
+
+
+.finance .list-type-thumnail ul li {width:auto;margin: 0 27px 25px 0}
+
+
+
+.finance-opinion-view { background: url(../images/finance/finance_opinion_view.png) 0 0 no-repeat; width:395px; height:50px; margin-bottom:20px;}
+.finance-opinion-view ul:after {display:block; content:""; clear:both;}
+.finance-opinion-view li.on:after {display:block; content:""; width:17px; height:12px; background: url(../images/finance/finance_opinion_pointer.png) 0 0 no-repeat; position:absolute; top:-2px; left:50%; margin-left:-8px}
+.finance-opinion-view li {float:left; color:#fff; line-height:50px; font-size:14px; width:78px; text-align:center;  position:relative; box-sizing:border-box}
+.finance-opinion-view li span {display:block; position:relative;}
+.finance-opinion-view li span:after {display:block; content:""; width:1px; height:8px; background:#fff; position:absolute; top:22px; left:0;}
+.finance-opinion-view li:first-child span:after {display:none;}
+
+
+.box-chart {background:#666}
+
+/* 171031 finance_sub018_2.html css 깨짐으로 인해 common.css에 있던 css를 주석처리 해제 후 이동 > 모정훈  */
+.box-headline {margin:36px 0 0 0;padding:5px 20px;font-size:22px;color:#000;border-left:4px solid #ffd800;}/* 171031 finance_sub018_2.html css 깨짐으로 인해 주석처리 해제 > 모정훈  */
+.box-tags-news {margin:0 0 30px 0;}
+.box-tags-news >span {display:inline-block;margin:0 7px 0 0;padding:0 23px;height:42px;line-height:40px;font-size:16px;color:#666;background:#eef1f6;border-radius:21px;}
+.box-tags-news >span::before {/*content:'#';*/display:inline-block;}
+/* //171031 finance_sub018_2.html css 깨짐으로 인해 common.css에 있던 css를 주석처리 해제 후 이동 > 모정훈  */
+.box-util-button {border-top:1px solid #ebe9ea;}
+.article-infor-repoter .box-photo-reporter {position:absolute;left:23px;top:28px;width:92px;height:92px;background:#333;}
+.btn-print {background:none;}
+
+/* 종목 상세 > 뉴스/공시 > 뉴스/공시 상세 */
+.finance .cont-news-detail .secton-header-news {border-top:none;}
+
+.contain-block.chart-area {height:285px; background:#8c92a0; color:#fff;}
+
+
+/* main css area */
+
+/* layout */
+.fina-main-left-area{position:relative;float:left;width:510px;margin-top:60px;padding-right:30px;border-right:1px solid #ebe9ea;box-sizing:border-box;}
+.fina-main-left-area .tab-type1{margin-top:0}
+.fina-main-right-area{position:relative;float:right;width:689px;margin-top:60px;padding-left:30px;box-sizing:border-box;}
+
+/* tabs */
+.tab-body.type01{border-bottom:1px solid #999}
+.tab-body.type01 .text-realtime-reload{text-align:right;padding:27px 0 10px;}
+
+.tab-body .tab-cont.on {display: block;}
+.tab-body .tab-cont {display: none;}
+/* .tab-body.type01 .tab-cont {display: none;} */
+.tab-body.type01 .tab-cont .box{overflow:hidden;min-height:62px;border-top:1px solid #ebeaea;box-sizing:border-box;}
+.tab-body.type01 .tab-cont .box strong{font-size:16px;font-weight:400;font-weight:400;width:120px;line-height:62px;}
+.tab-body.type01 .tab-cont .box strong,
+.tab-body.type01 .tab-cont .box span{float:left;display:block;}
+.tab-body.type01 .tab-cont .box span{position:relative;display:block;text-align:center;padding-top:20px;width:108px;font-size:20px; font-family:'roboto', sans-serif;font-weight:500}
+.tab-body.type01 .tab-cont .box span.line:after{content:'';display:block;position:absolute;top:26px;left:0;width:2px;height:14px;background:#e4e4e4}
+.tab-body.type01 .tab-cont .box span.symbol:before{margin-top:-4px}
+.tab-body.type01 .tab-cont .box a.btn_openClose{float:right;display:block;overflow:hidden;text-indent:-999999em;margin-left:1px;margin-top:15px;width:34px;height:34px;background:#fff url('../images/finance/btn_fina_main_openClose.png') 0 -34px no-repeat;box-sizing:border-box;border:1px solid #ccc}
+.tab-body.type01 .tab-cont .box.on a.btn_openClose{background:#fff url('../images/finance/btn_fina_main_openClose.png') 0 0 no-repeat;}
+.tab-body.type01 .tab-cont .obj-view{display:none;overflow:hidden;border:1px solid #ebeaea;border-bottom:none;box-sizing:border-box;}
+.tab-body.type01 .tab-cont .obj-view.on {display:block;}
+.tab-body.type01 .tab-cont .end{display:none;height:54px;border-top:1px solid #999;box-sizing:border-box}
+.tab-body.type01 .tab-cont .end strong{width:80px;font-weight:700;}
+.tab-body.type01 .tab-cont .end strong,
+.tab-body.type01 .tab-cont .end p{display:inline-block;text-align:center;line-height:53px;}
+.tab-body.type01 .tab-cont .end p{position:relative;width:96px;padding-left:1px;box-sizing:border-box;}
+.tab-body.type01 .tab-cont .end p span{display:inline-block;vertical-align:top;margin-left:3px;font-weight:500;font-size:16px;font-family: 'roboto', sans-serif;}
+.tab-body.type01 .tab-cont .end p + p:after{content:'';display:block;position:absolute;top:50%;margin-top:-7px;left:0;width:1px;height:14px;background:#ebeaea}
+
+.tab-body.type02{margin-top:40px}
+.tab-body.type02 .btn-area .btn-type1,
+.tab-body.type02 .btn-area .btn-type2{min-width:110px;margin:0 3px}
+.tab-body.type02 .btn-area .btn-type2{float:none;}
+.tab-body.type02 .btn-type2{float:right;}
+.tab-body.type02 .tab-cont.on {display: block;}
+.tab-body.type02 .tab-cont {display:none;min-height:309px;text-align:center;} 
+.tab-body.type02 .tab-cont.mHeight{min-height:auto!important;}
+.tab-body.type02 .tab-cont .table-type1{margin-bottom:20px;}
+.tab-body.type02 .tab-cont .data-no .txt-data-no{margin-bottom:30px;padding-top:30px;}
+
+.tab-body.type03{margin-top:15px;}
+.tab-body.type03 .text-realtime-reload{text-align:right;}
+.tab-body.type03 .tab-cont .table-type1 td{padding:0 10px}
+
+.title05 .aside-right{float:right;margin-top:10px;font-size:11px;color:#999;font-family:'dotum';font-weight:normal}
+
+/* table */
+.tbl-type5{margin:9px 0 56px;}
+.tbl-type5 thead th{font-weight:400;height:30px;border-bottom:1px solid #333;box-sizing:border-box;}
+.tbl-type5 tbody td{text-align:center;height:41px;font-size:16px;color:#666;border-bottom:1px solid #ebe9ea;box-sizing:border-box; height:50px; line-height:50px;}
+.tbl-type5 tbody td:first-child{border-right:1px solid #ebe9ea;}
+
+.contain-block.chart-area {height:285px; background:#8c92a0; color:#fff;}
+
+/* btn */
+.title05 .btn-moreView{float:right;}
+.title05 .text-realtime-reload{float:right;line-height:18px}
+.btn-moreView{position:relative;padding:3px 12px 0 0;font-size:14px;font-weight:400}
+.btn-moreView:after{content:'+';display:block;position:absolute;top:3px;right:0;}
+
+/* banner */
+.m-imgBanner{overflow:hidden;width:480px;height:282px;margin-top:35px;}
+.m-imgBanner img{width:100%;}
+
+/* 베스트 파트너 */
+.best-partner .part-silder{position:relative;overflow:hidden; width:479px; height:119px;}
+.best-partner .part-silder > div img{float:left; margin-left:1px; margin-right:20px;width:119px;height:119px;border-radius:50%;}
+.best-partner .part-silder > div p{padding-top:18px;font-size:18px;color:#333;line-height:27px;}
+.best-partner .part-silder > div span{display:block;padding-top:5px;font-size:16px;color:#999;}
+.best-partner .part-silder > div .btn-area{position:absolute;top:3px;right:1px;}
+.best-partner .bx-wrapper .bx-pager{top:-48px;right:-5px;bottom:auto!important}
+.best-partner .bx-wrapper .bx-pager.bx-default-pager a{margin:0 4px;width:8px;height:8px;background:#ccc}
+.best-partner .bx-wrapper .bx-pager.bx-default-pager a:hover, 
+.best-partner .bx-wrapper .bx-pager.bx-default-pager a.active, 
+.best-partner .bx-wrapper .bx-pager.bx-default-pager a:focus{background:#4f5eaf}
+
+/* list */
+.list-type4 li .location{display:inline-block;vertical-align:middle;width:55px;font-size:16px;color:#4f5eaf}
+.list-type4 li a{display:inline-block;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.list-type4 li .day{display:inline-block;vertical-align:middle;text-align:right;width:80px;font-size:14px;color:#666;letter-spacing:-1px;}
+.list-type4.w_334 li a{width:334px;}
+.list-type4.w_390 li a{width:390px;}
+
+.list-type5{margin-top:26px;}
+.list-type5 li{font-size:16px;border-bottom:1px solid #ebe9ea}
+.list-type5 li:first-child a{font-size:22px;font-weight:700}
+.list-type5 li a{float:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:51px;text-align:left;color:#333;padding:0;width:530px;box-sizing:border-box;}
+.list-type5 li span{float:right;display:block;color:#999;line-height:51px;font-family:'roboto', sans-serif;font-weight:400;}
+
+.list-type6{margin-top:18px;border-top:1px solid #ebe9ea}
+.list-type6 li{border-bottom:1px solid #ebe9ea;}
+.list-type6 li a{position:relative;height:50px;line-height:50px;text-align:left;padding:0;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;box-sizing:border-box;}
+.list-type6 li:hover a,
+.list-type6 li:focus a,
+.list-type6 li:active a{padding-left:12px;color:#4f5eaf}
+.list-type6 li:hover a:after,
+.list-type6 li:focus a:after,
+.list-type6 li:active a:after{content:"";display:block;position:absolute;top:0;left:0;color:#4f5eaf;width:15px;height:50px;background:url('../images/finance/icon_over_arrow.png') 0 center no-repeat}
+
+
+/* 종목상담 프로그램 */
+.box-adv-program a{float:left;display:block;width:234px;height:64px;}
+.box-adv-program a + a{margin-left:11px;}
+
+/* 오늘의 공개방송 */
+.box-public-broadcasting ul{float:left;overflow:hidden;width:205px;}
+.box-public-broadcasting ul + ul{margin-left:22px}
+.box-public-broadcasting ul li .tit-area{display:block;margin-top:10px}
+.box-public-broadcasting ul li .tit-area strong{font-size:16px;font-weight:700;}
+.box-public-broadcasting ul li .tit-area strong,
+.box-public-broadcasting ul li .tit-area p{overflow:hidden;max-height:46px;}
+.box-public-broadcasting ul li .tit-area span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.box-public-broadcasting ul li .tit-area span{display:block;font-family:'roboto', sans-serif;font-weight:400;font-size:14px;color:#999;}
+.box-public-broadcasting ul li .tit-area strong .gray{color:#999}
+.box-public-broadcasting ul li .tit-area p{font-size:15px;margin-top:3px}
+.box-public-broadcasting ul li .link-blue{position:relative;display:inline-block;margin-top:10px;font-size:14px;color:#4f5eaf}
+.box-public-broadcasting ul li .link-blue + .link-blue{padding-left:25px;}
+.box-public-broadcasting ul li .link-blue + .link-blue:before{content:'';display:block;position:absolute;top:2px;left:0;margin-left:10px;width:1px;height:16px;background:#e0e0e0}
+.box-public-broadcasting ul li .link-blue + .link-blue:after{content:'';display:block;position:absolute;top:2px;left:1px;margin-left:10px;width:1px;height:16px;background:#dadada}
+
+.box-public-broadcasting ul li.icon-position {position:relative;}
+.box-public-broadcasting ul li.icon-position .icon {position:absolute; bottom:0; left:0;}
+
+
+
+
+/* 와우 금융 서비스 */
+.box-finan-serv > div{overflow:hidden;height:164px;padding:37px 30px;text-align:center;border:1px solid #ebe9ea;box-sizing:border-box;}
+.box-finan-serv > div > div{position:relative;display:inline-block;padding:0 55px 0 0}
+.box-finan-serv > div > div + div{padding:0 0 0 60px}
+.box-finan-serv > div > div + div:after{content:'';display:block;position:absolute;top:4px;left:0;width:1px;height:82px;background:#ebe9ea}
+.box-finan-serv > div > div > a{display:inline-block;width:105px;text-align:center;}
+.box-finan-serv > div > div > a + a{margin-left:55px;}
+.box-finan-serv > div > div + div > a + a{margin-left:26px;}
+.box-finan-serv > div > div > a span{display:block;padding-top:10px;}
+
+/* 특징주 뉴스 */
+.box-feature-news{margin-top:39px;}
+.box-feature-news .chart-view{float:left;overflow:hidden;border:1px solid #ebe9ea;box-sizing:border-box;}
+.box-feature-news .chart-cont{float:right;width:330px;}
+.box-feature-news .obj-name{font-size:26px;margin-bottom:5px}
+.box-feature-news .obj-name span{padding-left:10px;font-size:14px;font-family:'roboto', sans-serif;color:#999}
+.box-feature-news .price-stock{float:left;font-size:26px;}
+.box-feature-news .box{position:relative;float:right;font-size:20px;}
+.box-feature-news .box span + span{margin-left:5px;padding-left:10px;}
+.box-feature-news .box span + span:after{content:'';display:block;position:absolute;top:6px;left:0;width:2px;height:14px;background:#e4e4e4}
+
+
+.bdt-none{border-top:none!important}
+
+
+
+
+.tab-body .tab-cont:after,
+.tab-cont .box:after,
+.best-partner .part-silder > div:after,
+.box-adv-program:after,
+.box-public-broadcasting:after,
+.list-type5 li:after,
+.box-finan-serv:before,
+.box-feature-news:after,
+.box-feature-news .chart-cont .obj:after,
+.title05:after{
+	content:'';
+	clear:both;
+	display:block;
+	overflow:hidden;
+	visibility:hidden;
+}
+
+
+
+
+
+
+
+
+

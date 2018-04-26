@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+    string uploadWebPathRoot = AppState["UploadWebPathRoot"].ToString();
+    string uploadPlanArticlePath = AppState["UploadPlanArticlePath"].ToString();
+    string opinionUploadPath = uploadWebPathRoot + uploadPlanArticlePath;
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <a href="javascript:NewsCommon.GoNewsDetailView('opinion', '', '@item.CLASS', '@item.ARTICLEID')" class="obj-cont">
+            <div class="img-area">
+                @if (string.IsNullOrEmpty(item.COLUMNLIST_PHOTO))
+                {
+                    <img src="@Wow.WowExtensionMethod.NoImageProfile("82")" alt="">
+                }
+                else
+                {
+                    <img src="@(opinionUploadPath + item.COLUMNLIST_PHOTO)" alt="" onerror="this.src='@Wow.WowExtensionMethod.NoImageProfile("82")'">
+                }
+            </div>
+            <p class="txt">
+                @item.TITLE</p>
+            <p class="aside-area">
+                <span>@item.COLUMN_GUBUN/ @item.COLUMNLIST_NAME</span>
+            </p>
+        </a>
+    }
+}
+else
+{
+    <a href="javascript:void(0)">
+        등록된 내용이 없습니다.
+    </a>
+}

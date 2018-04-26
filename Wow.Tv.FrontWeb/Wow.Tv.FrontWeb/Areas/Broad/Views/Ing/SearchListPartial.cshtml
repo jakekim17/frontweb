@@ -1,0 +1,75 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db90.DNRS
+
+@model ListModel<tv_program>
+
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+
+
+
+<script src="@wowTvScript/Broad/Ing/SearchListPartial.js?date=20171018170000"></script>
+
+
+
+<input type="hidden" id="SearchListPartial_hidTotalCount" value="@Model.TotalDataCount" />
+<input type="hidden" id="SearchListPartial_hidTotalCountFormat" value="@Model.TotalDataCount.ToString("N0")" />
+
+<!-- list-media -->
+<div class="list-media col5">
+    <!-- 5줄일 경우 col5, 4줄일 경우 col4를 class에 추가 -->
+    <ul>
+        @if (Model.ListData.Count == 0)
+        {
+        <!-- 검색 결과가 없을 시 -->
+            <li class="nodata">
+                <p>
+                    <strong class="tit">검색 결과가 없습니다.</strong>
+                    <span class="cont">- 검색어가 맞는지 확인해 주세요.</span>
+                    <span class="cont">- 띄어쓰기가 맞는지 확인해 주세요.</span>
+                </p>
+            </li>
+        <!-- //검색 결과가 없을 시 -->
+        }
+        else
+        {
+            foreach (var item in Model.ListData)
+            {
+        <li>
+            <div class="img-area">
+                <a href="#" onclick="return IngSearchListPartial.GoBroadWatch('@item.Dep', '@item.Num');">
+                    <span class="notice-area">
+                        <!-- 알림표시할 경우 a태그에 span.notice-area 추가 -->
+                        @if (item.IsOneDayInner == true)
+                        {
+                        <span class="bx-notice type1">최신</span>
+                        }
+                    </span>
+                    <img src="@item.ThumImageUrl" alt="" width="220px" height="132px">
+                </a>
+            </div>
+            <p class="tit">@item.Program_Name</p>
+            <div class="info-area">
+                <span class="info">@(item.DayOfWeekString == null ? "" : String.Join("·", item.DayOfWeekString)) @item.broadStart</span>
+                <span class="info">@item.frontTimeString</span>
+            </div>
+        </li>
+            }
+        }
+    </ul>
+</div>
+<!-- //list-media -->
+<hr class="division0">
+<!-- Paginate -->
+<div class="box-paginate" id="SearchListPartial_divPaging">
+</div>
+<!-- //Paginate -->
+
+
+

@@ -1,0 +1,125 @@
+﻿@using Wow.Tv.Middle.Model.Db49.wowtv
+@using Wow.Tv.Middle.Model.Db90.DNRS
+
+@model NTB_PROGRAM_INTRO
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    T_NEWS_PRG newsProgram = ViewBag.NewsProgram;
+    List<Wow.Tv.FrontWeb.CastService.ProgramCastModel> castList = ViewBag.CastList;
+}
+
+
+
+<script src="@wowTvScript/Broad/ProgramIntro/Index.js?date=20171018170000"></script>
+
+
+<!-- 좌측 영역 -->
+<div class="left-section">
+
+    <!-- 베너 -->
+    <div class="partner-banner">
+        @if (String.IsNullOrEmpty(Model.AttachFile.REAL_WEB_PATH) == false)
+        {
+        <img src="@Model.AttachFile.REAL_WEB_PATH" alt="@newsProgram.PRG_NM">
+        }
+        <div class="text-box">
+            <strong class="title">@Model.TITLE </strong>
+            @MvcHtmlString.Create(Model.REMARK)
+        </div>
+    </div>
+    @if (newsProgram != null)
+    {
+        <!-- // 베너 -->
+        <h2>제작진</h2>
+        <!-- 출연진 리스트 -->
+        <!-- // 출연진 리스트 -->
+        <div class="affiche-area">
+            <!-- 출연진 정보 -->
+            <ul class="affiche-list">
+                @if (!string.IsNullOrEmpty(newsProgram.PD_NM) && newsProgram.PD_NM.Trim().Length > 0)
+                {
+                    <li>연출1 : <span> @newsProgram.PD_NM</span></li>
+                }
+                @if (!string.IsNullOrEmpty(newsProgram.PD2_NM) && newsProgram.PD2_NM.Trim().Length > 0)
+                {
+                    <li>연출2 :<span> @newsProgram.PD2_NM</span></li>
+                }
+                @if (!string.IsNullOrEmpty(newsProgram.TD_NM) && newsProgram.TD_NM.Trim().Length > 0)
+                {
+                    <li>작가1 :<span> @newsProgram.TD_NM</span></li>
+                }
+                @if (!string.IsNullOrEmpty(newsProgram.TD2_NM) && newsProgram.TD2_NM.Trim().Length > 0)
+                {
+                    <li>작가2 :<span> @newsProgram.TD2_NM</span></li>
+                }
+                @if (!string.IsNullOrEmpty(newsProgram.CP_NM) && newsProgram.CP_NM.Trim().Length > 0)
+                {
+                    <li>기타 :<span> @newsProgram.CP_NM</span></li>
+                }
+            </ul>
+            <!-- // 출연진 정보 -->
+        </div>
+    }
+    @if (castList.Count > 0)
+    {
+    <h2>출연진</h2>
+    <div class="affiche-area">
+        <!-- 출연진 정보 -->
+        <div class="affiche-box type02">
+            <ul class="list-box">
+                @foreach (var item in castList.Where(a => a.ProgramCast.CAST_TYPE == "Cast"))
+                {
+                    <li>
+                        @if (item.ProWowList != null)
+                        {
+                            <!-- 이미지 형 -->
+                            <div class="thumbnail-area">
+                                <span class="photo">
+                                    <img src="@item.ImageUrl" width="161px" height="161px;" alt="@(item.ProWowList == null ? "" : item.ProWowList.NickName)">
+                                </span>
+                                <div class="text-box">
+                                    <strong class="title">@item.ProWowList.NickName</strong>
+                                    <p class="day">출연 <span> @(item.ProgramCast.DayOfWeekString == null ? "" : String.Join("·", item.ProgramCast.DayOfWeekString))</span></p>
+                                    <p class="text">
+                                        @MvcHtmlString.Create(item.ProgramCast.REMARK)
+                                    </p>
+                                    <div class="btn-area">
+                                        <a href="#" onclick="return ProgramIntroIndex.OpenPopup('http://www.wownet.co.kr/pro/pro_main_new/sub_main.asp?proID=@item.ProWowList.Pro_id');" class="btn type1">홈</a>
+                                        <a href="#" onclick="return ProgramIntroIndex.OpenPopup('http://wowpro.wownet.co.kr/common/profileLink.asp?nickname=@(HttpUtility.UrlEncode(item.ProWowList.NickName, System.Text.Encoding.GetEncoding("euc-kr")))&link=cafe');" class="btn "><span class="icon2"></span>카페가입</a>
+                                        <a href="#" onclick="return ProgramIntroIndex.PartnerPin('@item.ProWowList.NickName', '@item.ProWowList.Pay_no');" class="btn type3"><span class="icon2"></span>핀하기</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- 이미지 형 -->
+                        }
+                        else
+                        {
+                            <p class="list-title">@item.ProgramCast.CAST_NAME</p>
+                        }
+                    </li>
+                }
+                @foreach (var item in castList.Where(a => a.ProgramCast.CAST_TYPE == "Make"))
+                {
+                <li>
+                    <!-- 텍스트 -->
+                    <p class="list-title">@item.ProgramCast.CAST_NAME</p>
+                    <!-- 텍스트 -->
+                </li>
+                }
+            </ul>
+        </div>
+        <!-- // 출연진 정보 -->
+    </div>
+    }
+
+</div>
+<!-- // 좌측 영역 -->
+<!-- 우측 영역 -->
+<div class="right-section" id="divBanner"></div>
+<!-- // 우측 영역 -->
+

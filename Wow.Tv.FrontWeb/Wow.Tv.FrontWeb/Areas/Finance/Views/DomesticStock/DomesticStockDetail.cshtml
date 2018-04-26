@@ -1,0 +1,424 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+
+@model usp_GetStockPrice_Result
+@{
+    ViewBag.Title = "DomesticStockDetail";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string UserLoginUrl = AppState["UserLoginUrl"].ToString();
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+
+    string searchStr = Request["searchStr"];
+    string tabSeq = Request["tabSeq"];
+    string boardType = Request["boardType"];
+
+
+    //tabSeq가 없을때
+    if (String.IsNullOrEmpty(tabSeq))
+    {
+        tabSeq = "0";
+    }
+
+    //boardType 없을때
+    if (String.IsNullOrEmpty(boardType))
+    {
+        boardType = "1";
+    }
+
+    DateTime curDate = new DateTime();
+
+    string sabuScore = ViewBag.SabuScore;
+    string imgUrl9101 = ViewBag.ImgUrl9101;
+    string[] investOpinion = ViewBag.InvestOpinion;
+
+    if (investOpinion == null)
+    {
+        investOpinion = new string[] { "0", "0", "0", "0", "0" };
+    }
+
+
+    //string opinionConsult = ViewBag.OpinionConsult;
+    //string maxInvestOpinion;
+    int maxInvestOpinionCnt;
+    int maxIndex = 0;
+    int i = 0;
+
+    string companyInfoIframeSrcStr = "http://comp.fnguide.com/SVO/Wownet/CompanyInfo.asp?gicode=" + Model.arj_code.Replace("A", "");
+
+    try
+    {
+        if (investOpinion.Length > 0 && investOpinion != null)
+        {
+            maxInvestOpinionCnt = Convert.ToInt32(investOpinion[0]);
+
+            for (i = 0; i < investOpinion.Length; i++)
+            {
+                if (maxInvestOpinionCnt <= Convert.ToInt32(investOpinion[i]))
+                {
+                    maxIndex = i;
+                    maxInvestOpinionCnt = Convert.ToInt32(investOpinion[i]);
+                }
+            }
+        }
+        else
+        {
+            //maxInvestOpinion = "중립";
+            maxInvestOpinionCnt = 0;
+        }
+    }
+    catch (NullReferenceException)
+    {
+        //maxInvestOpinion = "중립";
+        maxInvestOpinionCnt = 0;
+
+    }
+
+    // 기술적분석 텍스트
+    string tmpAnalysisUrl = "http://wownet3.8080.co.kr:8080/wowsearch.asp?trid=1001&code=" + Model.arj_code.Replace("A", "");
+
+    //로그인 유무 체크
+    bool loginResult = LoginHandler.IsLogin;
+
+    //나의 관심종목 유무
+    LoginUserInfo loginUserInfo = new LoginUserInfo();
+    bool myFavoriteResult = false;
+
+    if (loginResult == true)
+    {
+        loginUserInfo = LoginHandler.CurrentLoginUser;
+        myFavoriteResult = new Wow.Tv.FrontWeb.MyActiveService.MyActiveServiceClient().IsMyFavoriteJongMok(loginUserInfo, Model.arj_code.Replace("A", ""));
+    }
+
+    string arjCode = Model.arj_code.Replace("A", "");
+
+    bool checkStockHoliday = ViewBag.CheckStockHoliday;
+
+    //뉴스기사를 찾아가기위한 파라메터
+    //string articleId = Request["ArticleId"];
+
+}
+@section scripts{
+    <script src="@wowTvScript/Finance/DomesticStock/DomesticStockDetail.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".contain-aside").hide();
+            $(".contain-content").addClass("main");
+
+            MiddleData.CurrentStock("ITEM", '@Model.stock_code', 10, $("#realTimeStock_1 .middleStockData"), $("#realTimeStock_2 .middleStockData"), @checkStockHoliday.ToString().ToLower()); //상세
+            @*MiddleData.CurrentStock("ITEM", '@Model.stock_code', 10, $("#realTimeStock_2 .middleStockData"), @checkStockHoliday.ToString().ToLower()); //기본*@
+
+            $("#investOpinion_@maxIndex.ToString()").attr("class", "on");
+        });
+    </script>
+}
+<!-- Content Area -->
+<div class="contain-content main">
+
+    <!-- Content Area -->
+    @*<div style="color: white; height: 200px; background: red; font-size: 20px; text-align: center; padding-top: 50px;" id="jobNeed">
+        작업 진행중<br/>
+        
+        1. 리스트 제목 길이 처리 - 퍼블 적용 필요(예: 삼성전자/005930)<br />
+        5. 종목동영상 탭 > 리스트 (영상) > 팝업 수정 필요
+    </div>*@
+    <div class="header-main-finance">
+        <h1 class="title">
+            <a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@searchStr">@Model.stock_wanname</a>
+            <span class="code">@Model.arj_code.Replace("A", "")</span>
+        </h1>
+
+        <span class="btn-type-dropdown btn-company"><button>기업개요</button></span>
+
+        <p class="text-realtime-reload">
+            @if (Model.k_gbn == "1")
+            {
+                <span class="btn-type4"><a href="#none">코스피</a></span><!-- 171103 코스닥/코스피 구분 영역 추가 > 모정훈 -->
+            }
+            else
+            {
+                <span class="btn-type4"><a href="#none">코스닥</a></span><!-- 171103 코스닥/코스피 구분 영역 추가 > 모정훈 -->
+            }
+            <span class="title">실시간</span> @Html.MarketTimeStatus()  <span class="btn-type-reload"><button><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@searchStr">새로고침</a></button></span>
+        </p>
+        
+        <input type="hidden" id="loginUrl" value="@UserLoginUrl/?returnurl=@DomainUrlFront/Finance/DomesticStock/DomesticStockDetail?searchStr=@searchStr" />
+        
+        @if (loginResult == true && myFavoriteResult == true)
+        {
+            //로그인이 되어있고 관심종목에 등록이 되어있을때
+            <span class="btn-type2"><button>나의 관심종목</button></span>
+        }
+
+        @if (loginResult == true)
+        {
+            //로그인이 되었을때
+            <span class="btn-type2"><button id="favoriteStockReg">관심종목 등록</button></span>
+        }
+        else
+        {
+            //로그인이 안되었을때 로그인 요구
+            <span class="btn-type2"><button id="favoriteBtnAlertLogin">관심종목 등록</button></span>
+        }
+    </div>
+
+    <!-- 기본정보 -->
+    <div class="section-detail-infor-default" style="display:none" id="realTimeStock_2">
+        <div class="contain-detail1" >
+            <p class="stock-now">@Html.DomesticStockDetailPriceMiddleFormat(Model.chg_type, Model.curr_price)</p>
+            <dl class="stock-detail">
+                <dt>전일대비</dt>
+                @if (Model.mkt_halt != "0")
+                {
+                    curDate = Convert.ToDateTime(Model.data_day);
+                    <dd class="stop-deal">@curDate.Year 년 @curDate.Month 월 @curDate.Day 일 <br /> 거래정지된 종목입니다.</dd>
+                }
+                else
+                {
+                    <dd>@Html.DomesticStockDetailChgPriceMiddleFormat(Model.chg_type, Model.net_chg)</dd>
+                    <dd>@Html.DomesticStockDetailChgRateMiddleFormat(Model.chg_type, Model.curr_price, Model.net_chg)</dd>
+                }
+
+            </dl>
+        </div>
+        <div class="contain-detail2">
+            <dl>
+                <dt>전일</dt>
+                <dd>@Html.DomesticStockLastPriceFormat(Model.chg_type, Model.curr_price, Model.net_chg)</dd>
+            </dl>
+            <dl>
+                <dt>고가</dt>
+                <dd><span class="data-up">@Html.CommaFormat(Convert.ToInt32(Model.high_price ?? 0))</span></dd>
+            </dl>
+            <dl>
+                <dt>상한가</dt>
+                <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.highest_price ?? 0))</span></dd>
+            </dl>
+            <dl>
+                <dt>거래량</dt>
+                <dd><span class="data-normal">@Html.DomesticStockDetailVolumeMiddleFormat(Model.net_vol)</span></dd>
+            </dl>
+            <dl>
+                <dt>시가</dt>
+                <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.init_price ?? 0))</span></dd>
+            </dl>
+            <dl>
+                <dt>저가</dt>
+                <dd><span class="data-down">@Html.CommaFormat(Convert.ToInt32(Model.low_price ?? 0))</span></dd>
+            </dl>
+            <dl>
+                <dt>하한가</dt>
+                <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.lowest_price ?? 0))</span></dd>
+            </dl>
+            <dl>
+                <dt>거래대금</dt>
+                <dd><span class="data-normal">@Html.DomesticStockTradeCostMiddleFormat(Model.net_turnover)억</span></dd>
+            </dl>
+        </div>
+        <!--//0 : 강한매도, 1 매도, 2 중립, 3 매수, 4 강한매수 건수-->
+        <div class="contain-detail3">
+            <p class="title">와우매매신호</p>
+            <dl>
+                <dt><span class="data-up">@Html.DomesticStockDetailInvestOpinionFormat(maxIndex)</span> (강력매수</dt>
+                <dd><span class="data-normal">@investOpinion[4]</span></dd>
+            </dl>
+            <dl>
+                <dt>매수</dt>
+                <dd class="data-normal">@investOpinion[3]</dd>
+            </dl>
+            <dl>
+                <dt>중립</dt>
+                <dd class="data-normal">@investOpinion[2]</dd>
+            </dl>
+            <dl>
+                <dt>매도</dt>
+                <dd class="data-normal">@investOpinion[1]</dd>
+            </dl>
+            <dl>
+                <dt>강력매도</dt>
+                <dd class="data-normal">@investOpinion[0])</dd>
+            </dl>
+
+        </div>
+    </div>
+    <!-- //기본정보 -->
+    <!-- 상세정보 -->
+    <div class="section-detail-infor-open col3" id="realTimeStock_1">
+        <div class="contain-cols" style="padding-right:20px;width:411px;">
+            <div class="contain-detail1" >
+                <p class="stock-now">@Html.DomesticStockDetailPriceMiddleFormat(Model.chg_type, Model.curr_price)</p>
+                <dl class="stock-detail">
+                    <dt>전일대비</dt>
+                    @if (Model.mkt_halt != "0")
+                    {
+                        curDate = Convert.ToDateTime(Model.data_day);
+                        <dd class="stop-deal">@curDate.Year 년 @curDate.Month 월 @curDate.Day 일 <br /> 거래정지된 종목입니다.</dd>
+                    }
+                    else
+                    {
+                        <dd>@Html.DomesticStockDetailChgPriceMiddleFormat(Model.chg_type, Model.net_chg)</dd>
+                        <dd>@Html.DomesticStockDetailChgRateMiddleFormat(Model.chg_type, Model.curr_price, Model.net_chg)</dd>
+                    }
+                </dl>
+            </div>
+            <div class="box-detail-stock2">
+                <dl>
+                    <dt>사부점수</dt>
+                    <dd>@Html.PublishSabuScoreFormat(sabuScore)점</dd>
+                    <dd><span class="text">전일대비</span> @Html.PublishSabuScoreChgPoint(sabuScore)점</dd>
+                </dl>
+            </div>
+            <div class="contain-detail2">
+                <dl>
+                    <dt>시가</dt>
+                    <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.init_price??0))</span></dd>
+                </dl>
+                <dl>
+                    <dt>상한가</dt>
+                    <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.highest_price??0))</span></dd>
+                </dl>
+                <dl>
+                    <dt>고가</dt>
+                    <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.high_price??0))</span></dd>
+                </dl>
+                <dl>
+                    <dt>하한가</dt>
+                    <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.lowest_price??0))</span></dd>
+                </dl>
+                <dl>
+                    <dt>저가</dt>
+                    <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.low_price??0))</span></dd>
+                </dl>
+                <dl>
+                    <dt>시가총액</dt>
+                    <dd><span class="data-normal">@Html.DomesticStockDetailSigaTotalFormat(Model.list_sum)억</span></dd>
+                </dl>
+                <dl>
+                    <dt>발행주식</dt>
+                    <dd><span class="data-normal">@Html.DomesticStockDetailBalhangStockFormat(Model.list_num)만</span></dd>
+                </dl>
+                <dl>
+                    <dt>기준가</dt>
+                    <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.final_price??0))</span></dd>
+                </dl>
+                <dl>
+                    <dt>액면가</dt>
+                    <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.list_price??0))</span></dd>
+                </dl>
+                <dl>
+                    <dt>거래량</dt>
+                    <dd><span class="data-normal">@Html.DomesticStockDetailVolumeMiddleFormat(Model.net_vol)</span></dd>
+                </dl>
+                <dl>
+                    <dt>자본금</dt>
+                    <dd><span class="data-normal">@Html.CommaFormat(Convert.ToInt32(Model.capital??0))억</span></dd>
+                </dl>
+                <dl>
+                    <dt>거래대금</dt>
+                    <dd><span class="data-normal">@Html.DomesticStockTradeCostMiddleFormat(Model.net_turnover)억</span></dd>
+                </dl>
+                <dl class="box-foot">
+                    <dt>사부점수</dt>
+                    <dd>최승욱의 차트점수, 가치점수, 수급점수의 합</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="contain-cols" style="padding:0 20px;width:374px">
+            <h2 class="title">주가예측차트</h2>
+            <div class="box-chart" style="height:357px;">
+                <!-- 차트영역 -->
+                <img src="@imgUrl9101" alt="주가예측차트" />
+            </div>
+            <p class="text-type-blt1">투자판단의 참고사항이며 최종책임은 이용자에게 있음.</p>
+        </div>
+        <div class="contain-cols" style="padding-left:20px;width:395px">
+            <h2 class="title">투자의견 @maxInvestOpinionCnt@Html.DomesticStockDetailInvestOpinionFormat(maxIndex)</h2>
+            <!-- 2017-10-30 HTML 변경 -->
+            <div class="finance-opinion-view">
+                <ul>
+                    <li id="investOpinion_0"><span>강력매도</span></li>
+                    <li id="investOpinion_1"><span>매도</span></li><!-- on 클래스 추가 -->
+                    <li id="investOpinion_2"><span>중립</span></li>
+                    <li id="investOpinion_3"><span>매수</span></li>
+                    <li id="investOpinion_4"><span>강력매수</span></li>
+                </ul>
+            </div>
+            <!-- p style="margin-bottom:20px"><img src="../../images/finance/img_process_deal_small.png" alt="" ></p 2017-1030 삭제 -->
+            <!-- 2017-10-30 HTML 변경 -->
+
+            <div class="box-scroll" style="width:393px;height:315px;">
+                <div class="inner">
+                    <div class="box-investmentopinion">
+                        @*@Html.DomesticStockDetailInvestConsultFormat(opinionConsult)*@
+                        <iframe src="@tmpAnalysisUrl" style="width:100%; height: 275px;" scrolling="yes"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 상세정보 -->
+    <div class="box-accordion-detail">
+        <span class="btn-accordion-detail on"><button>닫기</button></span>
+    </div>
+
+    <!-- 기업개요 -->
+    <div class="contain-infor-company" style="display:none;overflow: auto;">
+        <iframe width="765" height="428" frameborder="0" scrolling="yes" src="@companyInfoIframeSrcStr.ToString()"></iframe>
+    </div>
+    <!-- //기업개요 -->
+
+    @*<div>탭 : @tabSeq / 하위탭 : @boardType</div>*@
+    <div class="tab-type1" id="boardContent">
+        <ul class="col7">
+            <li class="on"><a href="#none" id="totalInfo">종합정보</a></li>
+            <li><a href="#none" id="currPrice">현재가</a></li>
+            <li><a href="#none" id="predictionChart">주가예측차트</a></li>
+            <li><a href="#none" id="foreignerSecurity">외국인&middot;기관</a></li>
+            <li><a href="#none" id="newsNotices">뉴스&middot;공시</a></li>
+            <li><a href="#none" id="companyAnalysis">기업분석</a></li>
+            <li><a href="#none" id="stockVod">종목동영상</a></li>
+        </ul>
+    </div>
+
+    <input type="hidden" id="tabSeq" value="@tabSeq" />
+    <input type="hidden" id="boardType" value="@boardType" />
+    @*@if (!String.IsNullOrEmpty(articleId))
+    {
+        <input type="hidden" id="articleId" value="@articleId" />
+    }*@
+    
+    <div class="wrap-adbox-right">
+
+        <!-- 우측 광고 영역 -->
+        @Html.Partial("_DomesticStockDetailRight", Model.arj_code)
+        <!-- 우측 광고 영역 -->
+        
+        <!-- 종합정보 -->
+        <form id="frmList_DSDTab">
+            
+            <input type="hidden" name="shortCode" value="@Model.arj_code.Replace("A", "")" />
+            <input type="hidden" name="stockCode" value="@Model.stock_code" />
+            <input type="hidden" name="k_gbn" value="@Model.k_gbn" />
+            <input type="hidden" name="partCode1" value="@Model.part_code1" />
+            <input type="hidden" name="partCode2" value="@Model.part_code2" />
+            <input type="hidden" name="cName" value="@Model.stock_wanname" />
+            <input type="hidden" name="searchStr" value="@Model.stock_wanname" />
+            <input type="hidden" name="arjCode" id="arjCode" value="@arjCode" />
+            
+            <input type="hidden" name="chgType" value="@Model.chg_type" />
+            <input type="hidden" name="curPrice" value="@Model.curr_price" />
+
+            <div id="divList">
+
+            </div>
+        </form>
+        <!-- //종합정보 -->
+    </div>
+
+
+
+    <!-- Content Area -->
+
+
+</div>

@@ -1,0 +1,100 @@
+﻿@using Wow.Tv.Middle.Model.Db90.DNRS
+@using Wow.Tv.FrontWeb.Areas.Component.Models
+@using Wow
+
+@model tv_program
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    Model.FilePath = Model.FilePath.Replace("rtmp://cdnvod.wowtv.co.kr/wowtvvod/_definst_/mp4:", "http://cdnvod.wowtv.co.kr:8080/");
+
+    TvPlayerModel tvPlayerParameter = new TvPlayerModel();
+    tvPlayerParameter.IncludeVrixonScript = false;
+    tvPlayerParameter.PlayType = TvPlayTypeModel.TvReplay;
+    tvPlayerParameter.Num = Model.Num;
+    //tvPlayerParameter.Url = Model.FilePath;
+    tvPlayerParameter.Width = 405;
+    tvPlayerParameter.Height = 230;
+    tvPlayerParameter.OnScriptPlayEnd = "TvPlayerEnd";
+}
+
+
+<script type="text/javascript">
+    function TvPlayerEnd() {
+        $("#tvPlayerMoveEndContents").css("display", "");
+    }
+
+    $(document).on('click', '.mpv_button_group .mpv_play_button', function () {
+        if ($('#tvPlayerMoveEndContents').css('display') == "block") {
+            $('#tvPlayerMoveEndContents').css('display', 'none');
+        }
+    });
+
+    $(document).on('click', '#bntPlayVod', function () {
+        if ($('#tvPlayerMoveEndContents').css('display') == "block") {
+            $('.mpv_button_group .mpv_play_button').click();
+        }
+    });
+
+</script>
+<script src="@wowTvScript/NewsCenter/Common.js"></script>
+<script type="text/javascript" src="@wowTvScript/SearchApi.js?date=20180125124901"></script>
+<script type="text/javascript" src="@wowTvScript/Component/MovieSearchApi.js?date=20180125124901"></script>
+<script src="@wowTvScript/Broad/BroadWatch/PlayInfo.js?date=20171222170000"></script>
+
+<!-- 좌측 텍스트 박스 -->
+<div class="text-area">
+    <!-- 타이틀 -->
+    <h2 id="broadWatchtitle">@Model.Title</h2>
+    <!-- // 타이틀 -->
+    <!-- 날자 영역 -->
+    <div class="data-area">
+        <span class="data">@Model.BroadDate</span>
+        <span class="btn-type4"><a href="#" onclick="return BroadWatchPlayInfo.OpenVod(@Model.Num);">방송 새창보기</a></span>
+    </div>
+    <!-- //날자 영역 -->
+    <div class="text" id="broadWathTxt">
+        @MvcHtmlString.Create(Model.Contents)
+    </div>
+</div>
+<!-- // 좌측 텍스트 박스 -->
+<!-- 우측 영상 영역 -->
+<div class="movie-area">
+    <!-- 동영상 솔루션 영역 -->
+    @Html.Partial("~/Areas/Component/Views/TvPlayer/TvPlayer.cshtml", tvPlayerParameter)
+    <div class="play-program-area" style="display:none;" id="tvPlayerMoveEndContents">
+        <div class="inner">
+            <div class="list-play-program">
+                <ul>
+                    <li id="liAddContent1"></li>
+                    <li id="liAddContent2"></li>
+                    <!--<li>
+                        <a href="#none">
+                            <span class="box-icon type07">AD</span>
+                            <img src="../../images/temp/temp_popup_tv1.png" alt="">
+                            <span class="cont">4차 산업혁명 미래에 투자하라</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none">
+                            <span class="box-icon type07">AD</span>
+                            <img src="../../images/temp/temp_popup_tv1.png" alt="">
+                            <span class="cont">4차 산업혁명 미래에 투자하라</span>
+                        </a>
+                    </li>-->
+                </ul>
+            </div>
+            <a href="javascript:void(0)" class="play-btn" id="bntPlayVod">
+                <img src="@wowTvStyle/images/temp/temp_tv_play_btn.png" alt="임시 플레이버튼 이미지">
+            </a>
+        </div>
+    </div>
+</div>
+<!-- // 우측 영상 영역 -->
+<input type="hidden" id="hidPlayType" value="@tvPlayerParameter.PlayType" />
+<input type="hidden" id="hidNum" value="@tvPlayerParameter.Num" />
+

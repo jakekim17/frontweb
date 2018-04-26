@@ -1,0 +1,14 @@
+﻿
+@{
+    Layout = null;
+}
+
+@if (Model.ListData != null)
+{
+    foreach (var item in Model.ListData)
+    {
+        <div>
+            <a href="@item.LINK_URL" target="@item.LINK_TYPE"><img src="@item.AttachFile.REAL_WEB_PATH" alt="@item.TITLE" style="cursor:pointer;"></a>
+        </div>
+    }
+}

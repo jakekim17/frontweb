@@ -1,0 +1,300 @@
+﻿
+@using Wow.Tv.Middle.Model.Db49.Article
+@using Wow.Tv.FrontWeb.Areas.Component.Models
+@using Wow.Tv.FrontWeb.TvPlayerService
+@using Wow.Tv.FrontWeb.MemberInfoService
+@{
+    Layout = "/Views/Shared/_LayoutNone.cshtml";
+    AppState["BodyClass"] = "tv-popup";
+    string WowTvStyle = AppState["WowTvStyle"].ToString();
+
+    TvPlayerModel tvPlayerParameter = ViewBag.TvPlayerParameter;
+    tvPlayerParameter.Width = 475;
+    tvPlayerParameter.Height = 270;
+
+    string frontUrl = System.Configuration.ConfigurationManager.AppSettings["DomainUrlFront"];
+    string newsUrl = System.Configuration.ConfigurationManager.AppSettings["DomainUrlNews"];
+    string scriptUrl = System.Configuration.ConfigurationManager.AppSettings["WowTvScript"];
+    string styleUrl = System.Configuration.ConfigurationManager.AppSettings["WowTvStyle"];
+    string tvPlayUrlRtmpLive = System.Configuration.ConfigurationManager.AppSettings["TvPlayUrlRtmpLive"];
+    string uploadWebPath = System.Configuration.ConfigurationManager.AppSettings["UploadWebPathRoot"];
+}
+
+@{ 
+    List<NTB_HUB_BUSINESS> hubBusinessList = new Wow.Tv.FrontWeb.HubBusinessService.HubBusinessServiceClient().GetList().ListData.Where(a => a.DEL_YN == "N" && a.OPEN_YN == "Y").ToList();
+    hubBusinessList = hubBusinessList.Where(a => a.CODE == "PLAYER").ToList();
+}
+
+@section styles{
+    <link rel="stylesheet" href="@styleUrl/css/common.css" />
+    <link rel="stylesheet" href="@styleUrl/css/tv.css" />
+}
+
+@section scripts{
+    <script type="text/javascript">
+        function PartnerLiveClicked() {
+            window.open("http://www.wownet.co.kr/bill/chk_pay_cast.asp?route=w", "partnerlive", "width=700, height=500");
+        }
+        function TvPlayerViewDefault() {
+            TvPlayer.Resize(@tvPlayerParameter.Width, @tvPlayerParameter.Height);
+        }
+        function TvPlayerViewBigger() {
+            TvPlayer.Resize(723, 405);
+        }
+        function TvPlayerViewFullScreen() {
+            TvPlayer.FullScreen();
+        }
+        function PopupTvPlayerOnPlayEnd() {
+            $("#tvPlayerMoveEndContents").css("display", "");
+        }
+        function GoPlayLiveTv() {
+            if (IsLogin() == true) {
+                ConfirmMemGrade();
+            } else {
+                alert("로그인이 필요합니다.");
+                return false;
+            }
+        }
+        function ConfirmMemGrade() {
+            $.ajax({
+                method: 'POST',
+                url: "/Component/TvPlayer/ConfirmMemGrade",
+                success: function (data) {
+                    if (data.memberGrade == 0 || data.memberGrade == 1) {
+                        location.href = './PlayLiveTv';
+                    } else {
+                        if (confirm("골드회원 이상의 유료회원을 위한 서비스입니다.\r\n유료회원 서비스안내를 받으시겠습니까?") == true) {
+                            window.open("@System.Configuration.ConfigurationManager.AppSettings["WowNetUrl"]/center/13/tv_guide.asp?bcode=N13140000&mseq=533#4", "", "width=500, height=461");
+                            //opener.document.location.href = "@System.Configuration.ConfigurationManager.AppSettings["WowNetUrl"]/center/13/tv_guide.asp?bcode=N13140000&mseq=533#4";
+                        }
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $(document).on('click', '.mpv_button_group .mpv_play_button', function () {
+                if ($('#tvPlayerMoveEndContents').css('display') == "block") {
+                    $('#tvPlayerMoveEndContents').css('display', 'none');
+                }
+            });
+
+            $(document).on('click', '#bntPlayVod', function () {
+                $('.mpv_button_group .mpv_play_button').click();
+            });
+
+        });
+    </script>
+    <script src="@scriptUrl/NewsCenter/Common.js"></script>
+    <script type="text/javascript" src="@scriptUrl/SearchApi.js?date=20180125124901"></script>
+    <script type="text/javascript" src="@scriptUrl/Component/MovieSearchApi.js?date=20180125124901"></script>
+}
+<div class="wrap-popup">
+    @if (tvPlayerParameter.PlayType == TvPlayTypeModel.LiveTv || tvPlayerParameter.PlayType == TvPlayTypeModel.LiveAudio)
+    {
+        LiveTvInfoModel liveTvInfo = ViewBag.LiveInfo;
+        if (tvPlayerParameter.PlayType == TvPlayTypeModel.LiveAudio || ViewBag.MemberGrade == MemberGradeModel.GoldPlus || ViewBag.MemberGrade == MemberGradeModel.Gold)
+        {
+            <div class="tab-area">
+                <ul class="tabs">
+                    <li class="@(tvPlayerParameter.PlayType == TvPlayTypeModel.LiveTv ? "on" : "")">
+                        <a href="javascript:void(0);" onclick="GoPlayLiveTv();">TV 실시간</a>
+                    </li>
+                    <li class="@(tvPlayerParameter.PlayType == TvPlayTypeModel.LiveAudio ? "on" : "")"><a href="./PlayLiveAudio">AUDIO 실시간</a></li>
+                </ul>
+                <a href="#" class="expert-tab" onclick="PartnerLiveClicked(); return false;">파트너 실시간</a>
+                <div class="aside-area">
+                    <ul>
+                        <li><a href="@frontUrl" target="_blank">한경TV홈</a></li>
+                        <li><a href="@newsUrl" target="_blank">뉴스홈</a></li>
+                        <li><a href="http://www.wowtv.co.kr/Finance/DomesticStock/Index?menuSeq=358" target="_blank">증권홈</a></li>
+                        <li><a href="http://wowpro.wownet.co.kr/pro/intro.asp?bcode=N04000000&mseq=177" target="_blank">파트너스홈</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h1 class="bg-ci">한국경제TV</h1>
+            <div class="aside-tit">
+                <div class="tit-area">
+                    <h2 class="title02">
+                        <a href="@frontUrl/Broad/ProgramMain/Index?menuSeq=644&programCode=@liveTvInfo.ProgramId" target="_blank">@liveTvInfo.ProgramName</a>
+                        @if (liveTvInfo.PlanBroad == "FIRST")
+                        {
+                            <span class="box-icon">첫방송</span>
+                        }
+                        else if (liveTvInfo.PlanBroad == "OPEN")
+                        {
+                            <span class="box-icon">개편</span>
+                        }
+                        else
+                        {
+                            <span class="box-icon">&nbsp;</span>
+                        }
+                    </h2>
+                    <div>
+                        <strong>방송시간 : </strong>
+                        <span>@(liveTvInfo.DayOfTheWeekList == null ? "" : String.Join(", ", liveTvInfo.DayOfTheWeekList)) @liveTvInfo.StartTime ~ @liveTvInfo.EndTime</span>
+                        <strong>출연진 : </strong>
+                        <span>@String.Join(", ", liveTvInfo.PartnerNameList)</span>
+                    </div>
+                </div>
+                <div class="obj-area">
+                    <a href="#" onclick="TvPlayerViewDefault();" class="btn-p icon01 on">기본보기</a>
+                    <a href="#" onclick="TvPlayerViewBigger();" class="btn-p icon02">크게보기</a>
+                    @*<a href="#" onclick="TvPlayerViewFullScreen();" class="btn-p icon03">전체보기</a>*@
+                    <a href="https://help.wowtv.co.kr/IntegratedBoard/FAQ/Index/016002004/0?menuSeq=496#1521" class="btn-txt" target="_blank">※ 동영상이 재생되지 않을 때</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <script type="text/javascript">
+                if (confirm("골드회원 이상의 유료회원을 위한 서비스입니다.\r\n유료회원 서비스안내를 받으시겠습니까?") == true) {
+                    window.open("@System.Configuration.ConfigurationManager.AppSettings["WowNetUrl"]/center/13/tv_guide.asp?bcode=N13140000&mseq=533#4", "", "width=500, height=461");
+                    //opener.document.location.href = "@System.Configuration.ConfigurationManager.AppSettings["WowNetUrl"]/center/13/tv_guide.asp?bcode=N13140000&mseq=533#4";
+                }
+                self.close();
+            </script>
+        }
+    }
+    else if (tvPlayerParameter.PlayType == TvPlayTypeModel.TvReplay)
+    {
+        TvReplayInfoModel tvReplayInfo = ViewBag.TvReplayInfo;
+
+        <div class="tab-area">
+            <ul class="tabs">
+                <li class="@(tvPlayerParameter.PlayType == TvPlayTypeModel.LiveTv ? "on" : "")">
+                    <a href="javascript:void(0);" onclick="GoPlayLiveTv();">TV 실시간</a>
+                </li>
+                <li class="@(tvPlayerParameter.PlayType == TvPlayTypeModel.LiveAudio ? "on" : "")"><a href="./PlayLiveAudio">AUDIO 실시간</a></li>
+            </ul>
+            <a href="#" class="expert-tab" onclick="PartnerLiveClicked(); return false;">파트너 실시간</a>
+            <div class="aside-area">
+                <ul>
+                    <li><a href="@frontUrl" target="_blank">한경TV홈</a></li>
+                    <li><a href="@newsUrl" target="_blank">뉴스홈</a></li>
+                    <li><a href="http://www.wowtv.co.kr/Finance/DomesticStock/Index?menuSeq=358" target="_blank">증권홈</a></li>
+                    <li><a href="http://wowpro.wownet.co.kr/pro/intro.asp?bcode=N04000000&mseq=177" target="_blank">파트너스홈</a></li>
+                </ul>
+            </div>
+        </div>
+        <h1 class="bg-ci">한국경제TV</h1>
+        <div class="aside-tit">
+            <div class="tit-area">
+                <a href="@frontUrl/Broad/ProgramMain/Index?menuSeq=644&programCode=@tvReplayInfo.ProgramId" target="_blank"><h2 class="title02">@tvReplayInfo.ProgramName</h2></a>
+                <div>
+                    <strong>방송시간 : </strong>
+                    <span>@(tvReplayInfo.BroadDate.HasValue == true ? tvReplayInfo.BroadDate.Value.ToString("yyyy-MM-dd") : "")</span>
+                    <strong>출연진 : </strong>
+                    <span>@(tvReplayInfo.PartnerNameList == null ? "" : String.Join(", ", tvReplayInfo.PartnerNameList))</span>
+                </div>
+            </div>
+            <div class="obj-area">
+                <a href="#" onclick="TvPlayerViewDefault();" class="btn-p icon01 on">기본보기</a>
+                <a href="#" onclick="TvPlayerViewBigger();" class="btn-p icon02">크게보기</a>
+                @*<a href="#" onclick="TvPlayerViewFullScreen();" class="btn-p icon03">전체보기</a>*@
+                <a href="https://help.wowtv.co.kr/IntegratedBoard/FAQ/Index/016002004/0?menuSeq=496#1521" class="btn-txt" target="_blank">※ 동영상이 재생되지 않을 때</a>
+            </div>
+        </div>
+    }
+    else if (tvPlayerParameter.PlayType == TvPlayTypeModel.Vod)
+    {
+        VodInfoModel vodInfo = ViewBag.VodInfo;
+
+        <div class="ci-area">
+            <h1 class="bg-ci">한국경제TV</h1>
+            <div class="aside-tit">
+                <div class="tit-area">
+                    <h2 class="title02">
+                        @vodInfo.Subject
+                    </h2>
+                    <div>
+                        <strong>방송시간 : </strong>
+                        <span>@(vodInfo.InsertDate.HasValue == true ? vodInfo.InsertDate.Value.ToString("yyyy-MM-dd") : "")</span>
+                        <strong>출연진 : </strong>
+                        <span>&nbsp;</span>
+                    </div>
+                </div>
+                <div class="obj-area">
+                    <a href="#" onclick="TvPlayerViewDefault();" class="btn-p icon01 on">기본보기</a>
+                    <a href="#" onclick="TvPlayerViewBigger();" class="btn-p icon02">크게보기</a>
+                    @*<a href="#" onclick="TvPlayerViewFullScreen();" class="btn-p icon03">전체보기</a>*@
+                    <a href="https://help.wowtv.co.kr/IntegratedBoard/FAQ/Index/016002004/0?menuSeq=496#1521" class="btn-txt" target="_blank">※ 동영상이 재생되지 않을 때</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="movie-area">
+        <div class="seco-movie">
+            @if (tvPlayerParameter.PlayType == TvPlayTypeModel.TvReplay || tvPlayerParameter.PlayType == TvPlayTypeModel.Vod)
+            {
+                tvPlayerParameter.OnScriptPlayEnd = "PopupTvPlayerOnPlayEnd";
+            }
+            @Html.Partial("TvPlayer", tvPlayerParameter)
+            <div class="play-program-area" style="display:none;" id="tvPlayerMoveEndContents">
+                <div class="inner">
+                    <div class="list-play-program">
+                        <ul>
+                            <li id="liAddContent1"></li>
+                            <li id="liAddContent2"></li>
+                            @*<li>
+                                <a href="#none">
+                                    <span class="box-icon type07">AD</span>
+                                    <img src="../../images/temp/temp_popup_tv1.png" alt="">
+                                    <span class="cont">4차 산업혁명 미래에 투자하라</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#none">
+                                    <span class="box-icon type07">AD</span>
+                                    <img src="../../images/temp/temp_popup_tv1.png" alt="">
+                                    <span class="cont">4차 산업혁명 미래에 투자하라</span>
+                                </a>
+                            </li>*@
+                        </ul>
+                    </div>
+                    <a href="javascript:void(0)" class="play-btn" id="bntPlayVod"><img src="@WowTvStyle/images/temp/temp_tv_play_btn.png" alt="임시 플레이버튼 이미지"></a>
+                </div>
+            </div>
+        </div>
+        <div class="advert-area">
+            <img src="@styleUrl/images/temp/temp_tv_16.png" alt="advImg">
+        </div>
+    </div>
+    <div class="movie-slider bxslider">
+        <ul id="ulMovieContent">
+            @*<li>
+                <a href="javascript:void(0)">
+                    <img src="@styleUrl/images/temp/temp_tv_18.png" alt="movieImg">
+                    <p>잠실 5다지, 50층 주상복합 50층 주상복합</p>
+                </a>
+            </li>*@
+            @*<li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>마켓뷰 오늘과 내일</p></a></li>
+            <li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>대박천국 2부 [민심방송]</p></a></li>
+            <li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>대박천국 1부</p></a></li>
+            <li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>재테크 해피타임 'Yes P2P'</p></a></li>
+            <li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>파워인터뷰 The CEO</p></a></li>
+            <li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>보험 무엇이든 물어보세요</p></a></li>
+            <li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>실전투자 부동산재테크</p></a></li>
+            <li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>성공투자 부동산재테크</p></a></li>
+            <li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>뉴스포커스</p></a></li>
+            <li><a href="javascript:void(0)"><img src="/WowTvStyle/images/temp/temp_tv_18.png" alt="movieImg"><p>뉴스포커스22</p></a></li>*@
+        </ul>
+    </div>
+    <div class="adv-v-slider bxslider">
+        <ul>
+            @foreach (var item in hubBusinessList)
+            {
+                <li><a href="@item.HUB_URL" target="_blank"><img src="@(uploadWebPath + item.HUB_IMAGE.Replace("\\", "/"))" alt="@item.HUB_TITLE"></a></li>
+            }
+            @*<li><a href="javascript:void(0)"><img src="@styleUrl/images/temp/temp_tv_19.png" alt="vAdvImg"></a></li>
+            <li><a href="javascript:void(0)"><img src="@styleUrl/images/temp/temp_tv_19.png" alt="vAdvImg"></a></li>
+            <li><a href="javascript:void(0)"><img src="@styleUrl/images/temp/temp_tv_19.png" alt="vAdvImg"></a></li>
+            <li><a href="javascript:void(0)"><img src="@styleUrl/images/temp/temp_tv_19.png" alt="vAdvImg"></a></li>*@
+        </ul>
+    </div>
+</div>
+
+<input type="hidden" id="hidStyleUrl" value="@styleUrl" />
+<input type="hidden" id="hidPlayType" value="@tvPlayerParameter.PlayType" />
+<input type="hidden" id="hidNum" value="@tvPlayerParameter.Num" />

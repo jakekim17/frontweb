@@ -1,0 +1,44 @@
+﻿
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string uploadWebPathRoot = AppState["UploadWebPathRoot"].ToString();
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/Reporter/Index.js"></script>
+}
+
+<div class="reporter-search">
+    <form id="frmSearch">
+        <div class="btn-initial">
+            <p class="all"><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">전체</a></p>
+            <ul class="list">
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㄱ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㄴ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㄷ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㄹ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅁ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅂ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅅ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅇ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅈ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅊ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅋ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅌ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅍ</a></li>
+                <li><a href="javascript:void(0)" onclick="return ReporterIndex.ChangeData(this)">ㅎ</a></li>
+            </ul>
+        </div>
+        <div class="search-area">
+            <input type="text" id="txtSearchName" name="SearchName" placeholder="기자명을 입력하세요">
+            <span class="search-btn" id="btnSearch"></span>
+        </div>
+        <input type="hidden" id="CurrentMenuSeq" name="CurrentMenuSeq" value="@Request["menuSeq"]" />
+        <input type="hidden" id="hdSearchInitial" name="SearchInitial" />
+        <input type="hidden" id="hdSearchId" name="SearchId" />
+    </form>
+</div>
+
+<div class="reporter-search-contain" id="divReporterList"></div>

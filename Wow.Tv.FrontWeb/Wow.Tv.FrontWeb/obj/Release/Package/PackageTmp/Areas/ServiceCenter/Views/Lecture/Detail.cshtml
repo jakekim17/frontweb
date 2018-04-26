@@ -1,0 +1,123 @@
+﻿
+@{
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section scripts{
+    <script src="@wowTvScript/ServiceCenter/Lecture/Detail.js"></script>
+    <script>
+        var SchSEQ = @Model.ScheduleList[0].SEQ;
+    </script>
+}
+
+<h1 class="title">강연회-행사 안내</h1>
+
+<!--  board view -->
+<div class="board-view">
+    <!-- title -->
+    <div class="title-wrap">
+        <p class="title-sub">
+            @if (Model.LectureData.VIEW_SITE == "N")
+            {
+                <span class="site">와우넷</span><span class="space"></span>
+                if (Model.LectureData.MAIN_CTGR == "S")
+                {
+                    <span class="site-sub">주식</span>
+                }
+                else
+                {
+                    <span class="site-sub">행사</span>
+                }
+            }
+            else if (Model.LectureData.VIEW_SITE == "T")
+            {
+                <span class="site">한국경제TV</span><span class="space"></span>
+                if (Model.LectureData.MAIN_CTGR == "S")
+                {
+                    <span class="site-sub">주식</span>
+                }
+                else
+                {
+                    <span class="site-sub">행사</span>
+                }
+            }
+            else if (Model.LectureData.VIEW_SITE == "F")
+            {
+                <span class="site">와우파</span><span class="space"></span>
+                if (Model.LectureData.MAIN_CTGR == "S")
+                {
+                    <span class="site-sub">주식</span>
+                }
+                else
+                {
+                    <span class="site-sub">행사</span>
+                }
+            }
+            else if (Model.LectureData.VIEW_SITE == "S")
+            {
+                <span class="site">와우스타</span><span class="space"></span>
+                if (Model.LectureData.MAIN_CTGR == "S")
+                {
+                    <span class="site-sub">주식</span>
+                }
+                else
+                {
+                    <span class="site-sub">행사</span>
+                }
+            }
+            
+        </p>
+        <p class="title">@Model.LectureData.TITLE</p>
+        <div class="con-detail">@Html.Raw(Model.LectureData.CONTENTS)</div>
+        <!-- publisher -->
+        <div class="user-data-wrap">
+            <div class="user-data">
+                <strong class="tit">기간</strong>
+                <span class="data">2017-08-31 ~ 2017-09-24</span>
+            </div>
+            <div class="user-data">
+                <strong class="tit">참가비</strong>
+                @if (Model.LectureData.EXPENSE > 0)
+                {
+                    <span class="data">@Model.LectureData.EXPENSE<span>원</span></span>
+                }
+                else
+                {
+                    <span class="data">무료</span>
+                }
+                <strong class="tit">문의</strong>
+                <span class="data">@Model.LectureData.MANAGER (@Model.LectureData.PHONE)</span>
+            </div>
+        </div>
+        <!-- // publisher -->
+    </div>
+    <!-- // title -->
+
+    <hr class="division3 no-border">
+    <p class="con-tit">세부일정안내</p>
+    <!-- tab area -->
+    <div class="tab-type1">
+        <ul class="col4" id="UlSchedule">
+            @if (Model.ScheduleList.Count > 0)
+            {
+                string[] week = { "일", "월", "화", "수", "목", "금", "토" };
+                foreach (var item in Model.ScheduleList)
+                {
+                    var split = item.LECTURES_DATE.Split('-');
+                    <li><a href="#" onclick="return LectureDetail.SearchSchedule(@item.SEQ)">@split[1]<span>월</span>@split[2]일 (@week[(int)Convert.ToDateTime(item.LECTURES_DATE).DayOfWeek])</a></li>
+                }
+            }
+        </ul>
+    </div>
+    <!-- // tab area -->
+    <div id="divSch"></div>
+</div>
+<!-- // board view -->
+<!-- btn area -->
+<div class="inner-right">
+    <span class="btn-type4"><button>주소복사</button></span>
+    <span class="btn-type4"><button>인쇄</button></span>
+    <span class="btn-type1"><button>목록</button></span>
+</div>
+<!-- // btn area -->
+<!-- Content Area -->

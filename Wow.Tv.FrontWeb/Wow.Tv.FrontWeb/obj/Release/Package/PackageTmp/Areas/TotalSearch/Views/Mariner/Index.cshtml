@@ -1,0 +1,369 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model usp_GetStockPrice_Result
+@{
+    ViewBag.Title = "Index";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+
+    //로그인 유무 체크
+    bool loginResult = LoginHandler.IsLogin;
+    //나의 관심종목 유무
+    LoginUserInfo loginUserInfo = new LoginUserInfo();
+    bool myFavoriteResult = false;
+
+    if (loginResult == true)
+    {
+        loginUserInfo = LoginHandler.CurrentLoginUser;
+        myFavoriteResult = new Wow.Tv.FrontWeb.MyActiveService.MyActiveServiceClient().IsMyFavoriteJongMok(loginUserInfo, Model.arj_code.Replace("A", ""));
+    }
+
+    DateTime curDate = new DateTime();
+    string sabuScore = ViewBag.SabuScore;
+    string arjCode = Model.arj_code.Replace("A", "");
+
+
+    var list = ViewBag.hotStockList;
+
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var scriptRoot = "@AppState["WowTvScript"]";
+        var styleRoot = "@AppState["WowTvStyle"]";
+        var searchTerm = "@ViewBag.searchTerm";
+        var colTarget = "@ViewBag.colTarget";
+        var currentPage = "@ViewBag.currentPage";
+        var filterList = "@ViewBag.filterList";
+        var loginValue = "@loginResult";
+        callSearchSize(searchTerm);
+        //vodtopicker();
+        callSearchTopicker(searchTerm, colTarget, scriptRoot, styleRoot, currentPage, filterList, loginValue);
+        var ui_btn = $(".search-select-box .select-box .title");
+        var ui_check = $(".search-select-box .select-box .check-box li a");
+
+        ui_btn.click(function () {
+            $(this).parent().siblings().removeClass("on")
+
+            if ($(this).parent().hasClass("on")) {
+                $(this).parent().removeClass("on")
+            } else {
+                $(this).parent().addClass("on");
+            }
+        });
+
+        ui_check.click(function () {
+            $(this).parent().addClass("on").siblings().removeClass("on")
+        });
+        /* 캘린더 버튼 */
+        if ($('.search-local.date').length > 0) {
+            $('.search-local.date').datepicker({
+                autoclose: true,
+                language: "kr"
+            });
+        } else { }
+        $('.calendar-news-week ul li a').on('click', function () {
+            $('.calendar-news-week ul li a').removeClass('on');
+            $(this).addClass('on');
+        });
+        $(".bottom-box .tab-area li").click(function () {
+            var inx = $(this).index();
+            $(this).siblings().removeClass("on")
+            $(this).addClass("on")
+
+            $(this).parent().parent().next().children().siblings().removeClass("on")
+            $(this).parent().parent().next().find(".content:eq(" + inx + ")").addClass("on")
+
+        });
+        var arjCode = '@Model.arj_code.Replace("A", "")';
+        $("#favoriteStockReg").on("click", function () {
+            FavoriteStockReg(arjCode);
+        });
+
+        $("#favoriteBtnAlertLogin").on("click", function () {
+            alert("로그인 하세요.");
+        });
+    });
+</script>
+
+
+@section LayOutTopArea{
+<!-- 통합 GNB -->
+<div class="combine-area">
+
+    <div class="top-menu">
+        <div class="left-box">
+            <a href="/"><p class="logo"></p></a>
+            <!-- 2018-01-09 HTML 마크업 추가 -->
+            <span class="text"> 한국경제TV 패밀리 사이트의 통합검색입니다.</span>
+            <!-- // 2018-01-09 HTML 마크업 추가 -->
+        </div>
+        <div class="center-title">통합검색</div><!-- 2018-01-05 텍스트 수정 -->
+        <div class="right-box">
+            <ul>
+                <li><a href="/">한국경제TV</a></li>
+                <li><a href="http://www.wownet.co.kr/">와우넷</a></li>
+                <li><a href="http://www.wowfa.co.kr/">와우파</a></li>
+                <li><a href="http://www.wowstar.co.kr/">와우스타</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 검색 -->
+    <div class="combine-search-area">
+        <div class="search-area">
+            <!-- 인기 검색어 -->
+            <div class="best-search" id="trendKeyword">
+
+            </div>
+            <!-- // 인기 검색어 -->
+            <!-- 검색 INPUT -->
+            <div class="search-input">
+                <form name="searchForm" method="get" id="searchForm" action="/totalSearch/Mariner/Index">
+                    <div class="input-area">
+                        <input type="text" name="searchTerm" value="@ViewData["searchTerm"]" id="searchTerm" placeholder="검색어를 입력하세요" onfocus="dq_setTextbox('0',event);" onmousedown="dq_setTextbox('1',event);" onkeyUp="dq_setTextbox('1',event);" onkeypress="dq_handleEnter(event);" autocomplete="off"/>
+                        <input type="hidden" name="colTarget" value="@ViewData["colTarget"]" id="colTarget" />
+                        <input type="hidden" name="currentPage" value="@ViewData["currentPage"]" id="currentPage" />
+                        <input type="hidden" name="filterList" value="@ViewData["filterList"]" id="filterList" />
+                        <input type="hidden" name="currentPageStock" value="1" id="currentPageStock" />
+                        <a href="javascript:goTotalSearch() ;" class="btn">검색</a>
+                        <script type="text/javascript" src="@wowTvScript/TotalSearch/dqAutoComplete.js"></script>
+                        <div class="search-keyword-area" id="dqAuto" style="display:none;" onmouseover="dq_setMouseon();" onmouseout="dq_setMouseoff();">
+                        </div>
+                    </div>
+                </form>
+                <div class="hash-tag" id="tagKeyword">
+
+                </div>
+            </div>
+            <!-- // 검색 INPUT -->
+            <div class="search-gnb-area">
+                <ul>
+                    <li id="subTotal"><a href="javascript:changeColTarget('total');">통합검색 <span id="totalResultSize">(0)</span> </a></li>
+                    <li id="subStock"><a href="javascript:changeColTarget('stock');">종목 <span id="stockResultSize">(0)</span> </a></liid="subTotal">
+                    <li id="subProgram"><a href="javascript:changeColTarget('program');">프로그램 <span id="programResultSize">(0)</span> </a></li>
+                    <li id="subPerson"><a href="javascript:changeColTarget('person');">인물 <span id="personResultSize">(0)</span> </a></li>
+                    <li id="subNews"><a href="javascript:changeColTarget('news');">뉴스 <span id="newsResultSize">(0)</span> </a></li>
+                    <li id="subCafe"><a href="javascript:changeColTarget('cafe');">와우카페 <span id="cafeResultSize">(0)</span> </a></li>
+                    <li id="subPhoto"><a href="javascript:changeColTarget('photo');">포토 <span id="photoResultSize">(0)</span> </a></li>
+                    <li id="subVod"><a href="javascript:changeColTarget('vod');">동영상 <span id="vodResultSize">(0)</span> </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- // 검색 -->
+</div>
+<!-- // 통합 GNB -->
+}
+
+<div class="wrap">
+    <!-- 검색 컨테이너 -->
+    <!-- 검색 컨테이너 -->
+    <div class="search-container" id="stockData">
+        <div class="contain-content">
+            <!-- search title -->
+            <div id="stockCount"></div>
+            <!-- // search title -->
+            <!-- section divide -->
+            @if (@Model.stock_wanname != @Model.arj_code && (@ViewBag.colTarget == "total" || @ViewBag.colTarget == "stock"))
+            {
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        DomesticStockDetailTotalInfo.GetHpChart('7551', '@Model.arj_code.Replace("A", "")', '570', '400');
+                    });
+                </script>
+                <div class="section-divide">
+                    <div class="left-box">
+
+                        <!-- 20171121 내용 삭제 -->
+                        <!-- 실시간 종목 새로고침 -->
+                        <!-- // 실시간 종목 새로고침 -->
+                        <!-- //20171121 내용 삭제 -->
+                        <!-- 종목 타이틀 -->
+                        <div class="title-box">
+                            <strong class="title"><a href="javascript:goStockDetail('@Model.arj_code.Replace("A", "")');">@Model.stock_wanname <span>@Model.arj_code.Replace("A", "")</span></a></strong>
+                            <div class="right">
+                                @if (loginResult == true && myFavoriteResult == true)
+                                {
+                                    //로그인이 되어있고 관심종목에 등록이 되어있을때
+                                    <span class="btn-type2"><button>나의 관심종목</button></span>
+                                }
+                                @if (loginResult == true)
+                                {
+                                    //로그인이 되었을때
+                                    <span class="btn-type2" ><button id="favoriteStockReg" >관심종목 등록</button></span>
+                                }
+                                else
+                                {
+                                    //로그인이 안되었을때 로그인 요구
+                                    <span class="btn-type2"  ><button id="favoriteBtnAlertLogin" >관심종목 등록</button></span>
+                                }
+                            </div>
+                        </div>
+                        <!-- 종목 타이틀 -->
+                        <!-- 주가 영역 -->
+                        <div class="contain-number">
+                            <p class="stock-now"><span class="data-up">@Html.DomesticStockDetailPriceMiddleFormat(Model.chg_type, Model.curr_price)</span></p>
+                            <dl class="stock-detail">
+                                <dt>전일대비</dt>
+                                @if (Model.mkt_halt != "0")
+                                {
+                                    curDate = Convert.ToDateTime(Model.data_day);
+                                    <dd>@curDate.Year 년 @curDate.Month 월 @curDate.Day 일 <br /> 거래정지된 종목입니다.</dd>
+                                }
+                                else
+                                {
+                                    <dd>@Html.DomesticStockDetailChgPriceMiddleFormat(Model.chg_type, Model.net_chg)</dd>
+                                    <dd>@Html.DomesticStockDetailChgRateMiddleFormat(Model.chg_type, Model.curr_price, Model.net_chg)</dd>
+                                }
+
+                            </dl>
+                        </div>
+                        <!-- 주가 영역 -->
+                        <!-- 종목 영역 -->
+                        <div class="contain-score">
+                            <ul>
+                                <li>
+                                    <strong class="title">사부점수</strong>
+                                    <p class="score"><span>@sabuScore</span>점</p>
+                                </li>
+                                <li>
+                                    <strong class="title">전일대비</strong>
+                                    <p class="score"><span>@sabuScore</span>점</p>
+                                </li>
+                                <li>
+                                    <strong class="title">시가</strong>
+                                    <p class="score"><span>@Html.CommaFormat(Convert.ToInt32(Model.init_price ?? 0))</span></p>
+                                </li>
+                                <li>
+                                    <strong class="title">고가</strong>
+                                    <p class="score"><span>@Html.CommaFormat(Convert.ToInt32(Model.high_price ?? 0))</span></p>
+                                </li>
+                                <li>
+                                    <strong class="title">저가</strong>
+                                    <p class="score"><span>@Html.CommaFormat(Convert.ToInt32(Model.low_price ?? 0))</span></p>
+                                </li>
+                                <li>
+                                    <strong class="title">상한가</strong>
+                                    <p class="score"><span>@Html.CommaFormat(Convert.ToInt32(Model.highest_price ?? 0))</span></p>
+                                </li>
+                                <li>
+                                    <strong class="title">하한가</strong>
+                                    <p class="score"><span>@Html.CommaFormat(Convert.ToInt32(Model.lowest_price ?? 0))</span></p>
+                                </li>
+                                <li>
+                                    <strong class="title">시가총액</strong>
+                                    <p class="score"><span>@Html.DomesticStockDetailSigaTotalFormat(Model.list_sum)억</span></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="contion-information">
+                            <ul>
+                                <li>
+                                    <strong class="title"><span class="icon type1"></span>기업정보</strong>
+                                    <ul class="list">
+                                        <li><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.arj_code.Replace("A", "")&tabSeq=5">기업현황</a></li>
+                                        <li><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.arj_code.Replace("A", "")&tabSeq=5">기업개요</a></li>
+                                        <li><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.arj_code.Replace("A", "")&tabSeq=4">공시·전자공시</a></li>
+                                        <li><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.arj_code.Replace("A", "")&tabSeq=5">재무재표</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong class="title"><span class="icon type2"></span>주요정보</strong>
+                                    <ul class="list">
+                                        <li><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.arj_code.Replace("A", "")&tabSeq=1">현재가분석</a></li>
+                                        <li><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.arj_code.Replace("A", "")&tabSeq=4">증권가리포트</a></li>
+                                        <li><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@Model.arj_code.Replace("A", "")&tabSeq=2">주가예측차트</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- 종목 영역 -->
+                    </div>
+                    <div class="right-box">
+                        <!-- tab area -->
+                        <div class="tab-type2 sub-tab-type1">
+                            <ul class="col4">
+                                <li class="on"><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7551', '@Model.arj_code.Replace("A", "")', '570', '400');">일간</a></li>
+                                <li><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7552','@Model.arj_code.Replace("A", "")', '570', '400');">주간</a></li>
+                                <li><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('7553','@Model.arj_code.Replace("A", "")', '570', '400');">월간</a></li>
+                                <li><a href="javascript:DomesticStockDetailTotalInfo.GetHpChart('9101','@Model.arj_code.Replace("A", "")', '570', '400');">5일 주가예측</a></li>
+                            </ul>
+                        </div>
+                        <!-- // tab area -->
+                        <!-- 탭 내용
+                        <div class="content-area">
+                            <div class="content on">일봉</div>
+                            <div class="content">주봉</div>
+                            <div class="content">월봉</div>
+                            <div class="content">주가예측차트</div>
+                        </div> -->
+                        <div class="contain-area" id="stockPredictionChart">
+                            <img id="imgChart" />
+                            <input type="hidden" id="arjCode" value="@Model.arj_code" />
+                        </div>
+                        <!-- // 탭 내용 -->
+                    </div>
+                </div>
+            }
+            <!-- // section divide -->
+            <div id="stockContents"></div>
+
+            
+        </div>
+        <!-- //Content Area -->
+    </div>
+    @if (@ViewBag.colTarget == "total" || @ViewBag.colTarget == "stock")
+    {
+        if (list != null && list.Length > 0)
+        {
+            int count = 1;
+            <!-- 인기검색 종목 -->
+            <div class="best-stock-area" id="popularStock">
+                <div class="list-area">
+                    <strong class="title">인기검색종목</strong>
+                    <ul>
+                        @foreach (var item in list)
+                        {
+                            if (count < 6)
+                            {
+                                <li><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@item.arj_code.Replace("A", "")"><span>@count</span>@item.stock_name</a></li>
+                                count += 1;
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!-- // 인기검색 종목 -->
+        }
+    }
+    <!-- // 검색 컨테이너 -->
+    <div class="search-container" id="etcData">
+        <div class="contain-content">
+            <div id="programContents" class="content-wrap"></div>
+            <div id="personContents" class="content-wrap"></div>
+            <div id="newsContents" class="content-wrap"></div>
+            <div id="cafeContents" class="content-wrap"></div>
+            <div id="photoContents" class="content-wrap"></div>
+            <div id="vodContents" class="content-wrap"></div>
+        </div>
+    </div>
+    <!-- // 검색 컨테이너 -->
+    <!-- 검색 컨테이너 -->
+    <div class="search-container" id="noResult" style="display:none;">
+        <div class="contain-content">
+            <div class="search-absence">
+                <p class="top">
+                    '<span>@ViewData["searchTerm"]</span>' 에 대한 검색결과가 없습니다.
+                </p>
+                단어의 철자나 맞춤법이 맞는지 확인해 주세요. <br />
+                띄어쓰기를 넣어보거나 더 넓은 의미의 단어로 검색해 보세요.
+            </div>
+
+        </div>
+        <!-- //Content Area -->
+    </div>
+    <!-- // 웹툰 컨테이너 -->
+
+</div>

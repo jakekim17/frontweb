@@ -1,0 +1,70 @@
+﻿@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+
+@model ListModel<usp_web_getNowPriceTime_Result>
+@{
+    
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    Layout = null;
+}
+<script>
+    var totalDatacount_timeStockPrice = "@Model.TotalDataCount";
+</script>
+<script src="@wowTvScript/Finance/DomesticStock/GetStockNowPriceTimeList.js"></script>
+<!-- 현재가(10분 단위 체결 기준) start -->
+<h3 class="tit-line bd-none">현재가(10분 단위 체결 기준)</h3>
+<div class="table-type1 type02 line mb0">
+    <table>
+        <caption>상세</caption>
+        <colgroup>
+            <col style="width:20%">
+            <col style="width:20%">
+            <col style="width:20%">
+            <col style="width:20%">
+            <col style="width:*">
+        </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">체결시간</th>
+                <th scope="col">채결가</th>
+                <th scope="col">전일비</th>
+                <th scope="col">매도호가</th>
+                <th scope="col">매수호가</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ListData.Count > 0)
+            {
+                foreach (var item in Model.ListData)
+                {
+                    <tr>
+                        <td><strong class="num">@item.DT.ToString("HH:mm")</strong></td>
+                        <td><strong class="num">@Html.CommaFormat(item.PRICE)</strong></td>
+                        <td class="txt-r"><strong>@Html.RecentlyStockChgPriceFormat(item.CHGTYPE, item.CHGPRICE)</strong></td>
+                        <td class="txt-r"><strong class="num font-color05">@Html.CommaFormat(item.CALLBUY)</strong></td>
+                        <td class="txt-r"><strong class="num font-color04">@Html.CommaFormat(item.DEALING)</strong></td>
+                    </tr>
+                }
+
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5">데이터가 없습니다.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!--// 현재가(10분 단위 체결 기준) end -->
+<!-- paging start -->
+
+<div class="box-paginate" id="divPaging_timeStockPrice">
+    
+</div>
+
+
+<!--// paging end -->
+
+

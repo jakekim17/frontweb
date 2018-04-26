@@ -1,0 +1,257 @@
+﻿@using Wow.Tv.Middle.Model.Db49.Article;
+@using System.Text;
+
+@{
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string uploadWebPathRoot = AppState["UploadWebPathRoot"].ToString();
+    string reporterImage = string.Format("http://img.wowtv.co.kr/PcStyle/images/common/no_image_profile_82.gif");
+
+    if (!string.IsNullOrEmpty(ViewBag.reporterImage))
+    {
+        reporterImage = string.Format("{0}{1}", uploadWebPathRoot, ViewBag.reporterImage);
+    }
+
+    List<NUP_NEWS_SECTION_SELECT_Result> articleList = ViewBag.articleList;
+    List<NUP_NEWS_MAIN_SECTION_SELECT_Result> recomNewsAll = ViewBag.recomNewsAll;
+    List<NUP_NEWS_MAIN_SECTION_SELECT_Result> recomNewsEntSpo = ViewBag.recomNewsEntSpo;
+}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>한국경제TV</title>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" border="0" style="font-family:Dotum; font-size:12px; color:#333333; width:800px; margin:0 auto;" align="center" width="800">
+        @*상단 메뉴*@
+        <tr>
+            <td style="border-top:1px solid #525252; border-bottom:1px solid #ebe9ea; padding-top:25px; padding-bottom:20px;">
+                <table style="margin:0 auto;table-layout:fixed;border-collapse: collapse" width="800">
+                    <tr>
+                        <td style="border:0; width:485px;"><a href="http://www.wowtv.co.kr" target="_blank"><img src="@wowTvStyle/images/email/logo.png" alt="한국경제TV" border="0"></a></td>
+                        <td style="border:0; width:106px; margin:0; padding:0;"><a href="http://www.wownet.co.kr" target="_blank"><img src="@wowTvStyle/images/email/menu01.png" alt="와우넷" border="0"></a></td>
+                        <td style="border:0; width:106px; margin:0; padding:0;"><a href="http://www.wowfa.co.kr" target="_blank"><img src="@wowTvStyle/images/email/menu02.png" alt="와우파"  border="0"></a></td>
+                        <td style="border:0; width:106px; margin:0; padding:0;"><a href="http://www.wowstar.co.kr" target="_blank"><img src="@wowTvStyle/images/email/menu03.png" alt="와우스타"  border="0"></a></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top:20px;">
+                <table style="border:1px solid #cccccc; margin:0 auto; border:1px solid #cccccc; table-layout:fixed;border-collapse: collapse" width="800">
+                    <tr>
+                        <td style="padding:30px 150px 15px 150px;">
+                            @*기자 정보*@
+                            <table style="padding-bottom:20px; border-bottom:solid 1px #ccc;">
+                                <tr>
+                                    <td style="width:79px; height:78px; background:url(@reporterImage) no-repeat;)); background-size: 82px 82px;"></td>
+                                    <td style="width:20px"></td>
+                                    <td style="font-size:16px; vertical-align:top;">
+                                        <p style="display:inline-block; margin:0; padding:6px 13px 7px 33px; background-color:#4f5eaf; font-size:14px; color:#fff; background-image:url(@wowTvStyle/images/email/letter_check.png); background-repeat:no-repeat; background-position:13px center; border-radius:4px;">구독하신</p>
+                                        <b style="display:block; margin-top:10px; font-size:18px; color:#3a3a3a;"><span style="color:#4f5eaf; font-weight:bold;">'@ViewBag.reporterName @ViewBag.reporterPosition'</span>가 뉴스를 알려드립니다.</b>
+                                        <p style="margin:0; margin-top:10px">- 오늘의 기사:<span style="color:#4f5eaf; font-weight:bold;">3</span>건&nbsp;&nbsp;구독일:○○○○년 ○○월 ○○일</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>                    
+                    @foreach (var item in articleList)
+                    {
+                        bool isImage = false;
+
+                        if ((!string.IsNullOrEmpty(item.IMAGE_DIR) && !string.IsNullOrEmpty(item.IMAGE_FILE) )|| !string.IsNullOrEmpty(item.THUMBNAIL_FILENM))
+                        {
+                            isImage = true;
+                        }
+
+                        StringBuilder sb = new StringBuilder();
+
+                        if (!string.IsNullOrEmpty(item.TAG))
+                        {
+                            string[] words = item.TAG.Split(new char[] { ',' });
+                            int i = 0;
+                            foreach (string hashTags in words)
+                            {
+                                if (i < 3)
+                                {
+                                    string HashTagLink = string.Empty;
+
+                                    HashTagLink = string.Format("<span style='margin-right:10px;'>#{0}</span>", hashTags);
+
+                                    sb.AppendLine(HashTagLink);
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                                i++;
+                            }
+                        }
+                    <tr>
+                        <td style="padding:15px 150px 10px 150px;">
+                            <a href="http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=@item.ARTICLEID" target="_blank" style="text-decoration:none; color:#333; line-height:18px">
+                                <table style="border:1px solid #ebe9ea; width:494px; border-radius:10px;">
+                                    <tr>
+                                        <td style="display:inline-block; padding:30px 22px; text-align:center; padding-bottom:28px;">
+                                            <table>
+                                                <tr>
+                                                    <td style="display:inline-block; font-size:16px; text-align:center;width:438px;">
+                                                        @if (isImage)
+                                                        {
+                                                            <img style="width:438px;height:246px;" src="@Wow.WowExtensionMethod.NewsThumbnailPath("16B", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE.Value)" onerror="this.src='@Wow.WowExtensionMethod.NewsThumbnailOnError("16B")'" alt="">
+                                                        }
+                                                        <b style="display:block; @( isImage == true ? "margin-top:31px;" : "") font-size:17px; color:#000; text-align:left; ">
+                                                            @item.TITLE
+                                                        </b>
+                                                        @if (!string.IsNullOrEmpty(sb.ToString()))
+                                                        {
+                                                        <p style="text-align:left;margin-top:15px;margin-bottom:0;color:#656ea0;font-size:14px;">
+                                                            @Html.Raw(sb.ToString())
+                                                        </p>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                    
+                    @*오늘의 추천뉴스*@
+                    <tr>
+                        <td style="padding:20px 150px 0 150px;">
+                            <table style="padding-bottom:20px; width:100%; border-bottom:solid 1px #999;">
+                                <tr>
+                                    <td style="width:3px; background:#ffd800;"></td>
+                                    <td style="width:5px"></td>
+                                    <td style="font-size:16px;"><b>오늘의 추천뉴스</b></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    @foreach (var item in recomNewsAll)
+                    {
+                        int index = recomNewsAll.IndexOf(item) + 1;
+
+                        <tr style="display:inline-block;margin:0 150px;">
+                            <td style="border-bottom:solid 1px #ebe9ea;">
+                                <table>
+                                    <tr>
+                                        <td><p style="display:inline-block; width:31px; height:31px; border-radius:15px; background-color:#4352a2; color:#fff; font-size:16px; text-align:center; line-height:31px; margin:33px 0; margin-right:16px;">@index</p></td>
+                                        <td>
+                                            <a href="http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=@item.ARTICLEID" style="text-decoration:none; color:#333; line-height:18px; height:97px;" target="_blank">
+                                                <p style="display:inline-block; font-size:18px; vertical-align:middle; margin:0;line-height:30px;">@item.TITLE</p>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    }
+                    
+                    @foreach (var item in recomNewsEntSpo)
+                    {
+                        int index = recomNewsEntSpo.IndexOf(item) + 4;
+
+                        <tr style="display:inline-block;margin:0 150px;">
+                            <td style="border-bottom:solid 1px #ebe9ea;">
+                                <table>
+                                    <tr>
+                                        <td><p style="display:inline-block; width:31px; height:31px; border-radius:15px; background-color:#4352a2; color:#fff; font-size:16px; text-align:center; line-height:31px; margin:33px 0; margin-right:16px;">@index</p></td>
+                                        <td>
+                                            <a href="http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=@item.ARTICLEID" style="text-decoration:none; color:#333; line-height:18px; height:97px;" target="_blank">
+                                                <p style="display:inline-block; font-size:18px; vertical-align:middle; margin:0;line-height:30px;">@item.TITLE</p>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td style="padding:30px 150px 50px 150px; ">
+                            <table style="table-layout:fixed; border-collapse: collapse; border:0; width:100%;">
+                                <tr>
+                                    <td style="padding-top:25px; border-top:solid 1px #ebe9ea;" border="0" cellspacing="0" cellpadding="0">
+                                        <table style="table-layout:fixed;border-collapse: collapse;">
+                                            <tr>
+                                                <td border="0" cellspacing="0" cellpadding="0" width="1" height="20" align="left"><span style="width:2px; height:2px; background-color:#666666; display:inline-block; vertical-align:top; margin-top:4px"></span></td>
+                                                <td style="font-size:12px;; color:#999999; padding-left:5px" border="0" cellspacing="0" cellpadding="0">본 메일은 구독하기 신청하신 분에게 발송되는 메일입니다.</td>
+                                            </tr>
+                                            <tr>
+                                                <td border="0" cellspacing="0" cellpadding="0" width="1" height="20" align="left"><span style="width:2px; height:2px; background-color:#666666; display:inline-block; vertical-align:top; margin-top:4px"></span></td>
+                                                <td style="font-size:12px;; color:#999999; padding-left:5px" border="0" cellspacing="0" cellpadding="0">본 메일은 발신전용이며 궁금하신 사항은 <a href="http://help.wowtv.co.kr/IntegratedBoard/Inquiry/Index?menuSeq=491" target="_blank" style="text-decoration:none;">[고객센터]</a>를 이용해 주시기 바랍니다.</td>
+                                            </tr>
+                                            <tr>
+                                                <td border="0" cellspacing="0" cellpadding="0" width="1" height="20" align="left"><span style="width:2px; height:2px; background-color:#666666; display:inline-block; vertical-align:top; margin-top:4px"></span></td>
+                                                <td style="font-size:12px;; color:#999999; padding-left:5px" border="0" cellspacing="0" cellpadding="0">메일수신을 원치 않으시면 <a href="http://www.wowtv.co.kr//NewsCenter/Subscription/Reject?reporterId=@ViewBag.reporterId&rejectId=email" target="_blank" style="text-decoration:none;">[수신거부]</a>를 눌러주십시오.</td>
+                                            </tr>
+                                            <tr>
+                                                <td border="0" cellspacing="0" cellpadding="0" width="1" height="20" align="left"><span style="width:2px; height:2px; background-color:#666666; display:inline-block; vertical-align:top; margin-top:4px"></span></td>
+                                                <td style="font-size:12px;; color:#999999; padding-left:5px" border="0" cellspacing="0" cellpadding="0">If you are not a member or do not want to receive it, please click a <a href="http://www.wowtv.co.kr//NewsCenter/Subscription/Reject?reporterId=@ViewBag.reporterId&rejectId=email" target="_blank" style="text-decoration:none;">[Return button]</a></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        @*SNS*@
+        <tr style="display:block; margin-left:3px;">
+            <td style="display:block;">
+                <p style="position:relative; padding:32px 0 32px 47px; background-color:#eef1f6; font-size:12px; color:#808c9e;">
+                    한국경제TV의 SNS 채널에서 더욱 다채로운 소식을 받아보실 수 있습니다.
+                    <a href="https://twitter.com/HKWOWTV" target="_blank" style="background:url(@wowTvStyle/images/email/letter_sns.png) no-repeat; position:absolute; height: 36px; padding: 0; width: 36px; right:240px; top:50%; margin-top:-18px; text-indent:-9999em;">
+                        트위터
+                    </a>
+                    <a href="https://www.facebook.com/HKWOWTV" target="_blank" style="background:url(@wowTvStyle/images/email/letter_sns.png) no-repeat; position:absolute; height: 36px; padding: 0; width: 36px; right:195px; top:50%; margin-top:-18px; background-position:-45px 0; text-indent:-9999em;">
+                        페이스북
+                    </a>
+                    <a href="https://story.kakao.com/ch/hkwowtv" target="_blank" style="background:url(@wowTvStyle/images/email/letter_sns.png) no-repeat; position:absolute; height: 36px; padding: 0; width: 36px; right:150px; top:50%; margin-top:-18px; background-position:-90px 0; text-indent:-9999em;">
+                        카카오스토리
+                    </a>
+                    <a href="http://post.naver.com/my.nhn?memberNo=11761424" target="_blank" style="background:url(@wowTvStyle/images/email/letter_sns.png) no-repeat; position:absolute; height: 36px; padding: 0; width: 36px; right:105px; top:50%; margin-top:-18px; background-position:-135px 0; text-indent:-9999em;">
+                        네이버 포스트
+                    </a>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" border="0" align="center" width="800" style="margin:0 auto; table-layout:fixed;border-collapse: collapse">
+                    <tr>
+                        <td style="width:185px;" border="0" cellspacing="0" cellpadding="0"><a href="http://www.wowtv.co.kr" target="_blank"><img src="@wowTvStyle/images/email/foot_logo.png" alt="한국경제TV"  border="0"></a></td>
+                        <td style="font-size:12px;; color:#999999; line-height:20px" border="0" cellspacing="0" cellpadding="0">
+                            한국경제TV의 모든 콘텐츠는 저작권재법의 보호를 받습니다. <br />
+                            무단전재/복사/배포 등을 금지합니다.
+                        </td>
+                    </tr>
+                </table>
+                <table cellpadding="0" cellspacing="0" border="0" align="center" width="800" style="margin:0 auto; table-layout:fixed;border-collapse: collapse">
+                    <tr>
+                        <td style="font-size:12px;; color:#999999; line-height:20px" border="0" cellspacing="0" cellpadding="0">
+                            고객센터 1599-0700 · 상담시간 평일 08:00-23:30 · 일 12:00~ 22:00 · 공휴일 10:00~15:00<br />
+                            ㈜한국경제티브이 | 사장 송재조 | 서울시 영등포구 버드나루로 84(우:150-988) | Tel 02-6676-0000  사업자등록번호 : 1107-81-70183 <br />
+                            통신판매업신고번호 : 영등포구 2000-00571호 | 호스팅제공자 : ㈜한국경제티브이 | 기사배열 책임자 : 이성경 <br />
+                            Copyright ⓒ 한국경제TV. All Rights Reserved.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+

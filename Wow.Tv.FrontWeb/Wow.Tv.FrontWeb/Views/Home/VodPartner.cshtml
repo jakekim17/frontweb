@@ -1,0 +1,229 @@
+﻿@using Wow.Tv.Middle.Model.Db49.wowtv
+@using Wow.Tv.Middle.Model.Db49.broadcast
+@using Wow.Tv.Middle.Model.Db90.DNRS
+
+@model List<USP_GetRecommendPro3_Result>
+
+@{ 
+    Layout = null;
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    T_NEWS_PRG nowNewsProgram = ViewBag.NowNewsProgram;
+    List<Pro_wowList> nowProgramPartnerList = ViewBag.NowProgramPartnerList;
+    List<tv_program> broadWatchList = ViewBag.BroadWatchList;
+
+
+    bool isFirst = true;
+
+    int count = 0;
+    List<Wow.Tv.Middle.Model.Db89.WOWTV_BILL_DB.TItemPriceMst> partnerListCurrent = null;
+    List<Wow.Tv.Middle.Model.Db89.WOWTV_BILL_DB.TItemPriceMst> partnerList1 = ViewBag.PartnerList1;
+    List<Wow.Tv.Middle.Model.Db89.WOWTV_BILL_DB.TItemPriceMst> partnerList2 = ViewBag.PartnerList2;
+    List<Wow.Tv.Middle.Model.Db89.WOWTV_BILL_DB.TItemPriceMst> partnerList3 = ViewBag.PartnerList3;
+}
+
+
+@if (nowNewsProgram == null || nowProgramPartnerList == null || nowProgramPartnerList.Count == 0)
+{
+    <div class="contain-area">
+            <div class="box-text">
+                <p class="title">실시간<br /> 온라인 방송</p>
+                <p class="txt">
+                    멀리 가려면 <br /> 함께 가십시오!<br />
+                    <span>와우넷 파트너</span>가<br />
+                    도와드리겠습니다
+                </p>
+            </div>
+            <!-- 컨텐츠 내용  -->
+
+            <div class="box-content">
+                <ul class="public-list">
+                    @foreach (var item in Model)
+                    {
+                    <li class="@(isFirst == true ? "on" : "")">
+                        <div class="text-info">
+                            <div class="left-box">
+                                <p title="@item.NICKNAME">
+
+                                    @if (item.STATE == null || item.STATE.Value.Equals(0))
+                                    {
+                                    }
+                                    else if (item.STATE.Value.Equals(1) || item.STATE.Value.Equals(3) || item.STATE.Value.Equals(4))
+                                    {
+                                        if (LoginHandler.IsLogin == true)
+                                        {
+                                            <img src="@wowTvStyle/images/main/main_icon.png" alt="@item.NICKNAME" style="cursor:pointer" onclick="Pro_Open('@item.BROOM', '@item.PRODUCT_ID_1', '@item.BMEMTYPE', 'L');">
+                                        }
+                                        else
+                                        {
+                                            <img src="@wowTvStyle/images/main/main_icon.png" alt="@item.NICKNAME" style="cursor:pointer" onclick="Pro_Open_Cast('@item.BROOM','@item.PRODUCT_ID_1','@item.BMEMTYPE','L','tv');">
+                                        }
+                                    }
+                                    else if (item.STATE.Value.Equals(2))
+                                    {
+                                    }
+
+                                </p>
+                                <!-- span class="bg_green">무료방송</span -->
+
+                                <div class="president-title">
+                                    @Wow.Fx.BroadcastFunction.GetInvestClass(item.INVESTKIND) <strong>@item.NICKNAME</strong>
+                                </div>
+
+                                <p class="txt">
+                                    @item.Intro_Profile
+                                </p>
+                                <div class="box">
+                                    @{
+                                        if (count == 0)
+                                        {
+                                            partnerListCurrent = partnerList1;
+                                        }
+                                        else if (count == 1)
+                                        {
+                                            partnerListCurrent = partnerList2;
+                                        }
+                                        else if (count == 2)
+                                        {
+                                            partnerListCurrent = partnerList3;
+                                        }
+                                        count++;
+                                    }
+
+                                    @if (partnerListCurrent.Count > 0)
+                                    {
+                                        <strong>특별 이벤트</strong>
+                                    }
+                                    @foreach (var item2 in partnerListCurrent)
+                                    {
+                                    <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/profile.asp?proID=@item.PRO_ID&ptype=11" target="_blank">
+                                        <p> - @item2.ItemName </p>
+                                        <p class="ml10">@item2.Price.ToString("N0") + <span>@item2.ApplyDetail 일 무료연장</span></p>
+                                    </a>
+                                    }
+                                </div>
+                                @*<div class="president-title">
+                                    @Wow.Fx.BroadcastFunction.GetInvestClass(item.INVESTKIND) <strong>@item.NICKNAME</strong>
+                                </div>*@
+                            </div>
+                            <div class="right-box" title="@item.NICKNAME">
+                                <img src="http://image.wownet.co.kr/@item.NewPhoto_Recommend" alt="@item.NICKNAME">
+                            </div>
+                        </div>
+                        <ul class="box-list">
+                            <li><a href="http://wowpro.wownet.co.kr/pro/pro_main_new/pro_record_broadcast.asp?currPage=1&bcode=N04070000&proId=@item.PRO_ID&mseq=226&pro_search=@item.PRO_ID&skey=nickname" target="_blank" class="ico">녹화방송</a></li>
+                            <li><a href="http://wowpro.wownet.co.kr/common/profileLink.asp?nickname=@(HttpUtility.UrlEncode(item.NICKNAME, System.Text.Encoding.GetEncoding("euc-kr")))&link=cafe" target="_blank" class="ico type02">카페가기</a></li>
+                            <li><a href="http://wowpro.wownet.co.kr/pro/pro_main_new/profile.asp?proID=@item.PRO_ID&ptype=11" target="_blank" class="ico type03">가입하기</a></li>
+                        </ul>
+                    </li>
+                                            isFirst = false;
+                                        }
+                </ul>
+            </div>
+            <!-- // 컨텐츠 내용  -->
+            <div class="partner-list">
+                <strong>파트너 <br />공개방송</strong>
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        @*<li class="@(isFirst == true ? "on" : "")"><a href="javascript:void(0)"><img src="@item.NEWPHOTO_SMALL" alt=""></a></li>*@
+                        <li class="@(isFirst == true ? "on" : "")" title="@item.NICKNAME"><a href="javascript:void(0)"><img src="http://image.wownet.co.kr@(item.NEWPHOTO_BIG.Replace("\\", "/"))" alt="@item.NICKNAME"></a></li>
+                    @*<input type="hidden" value="@item.NEWPHOTO_BIG" />
+                    <input type="hidden" value="@item.NewPhoto_Recommend" />
+                    <input type="hidden" value="@item.NEWPHOTO_SMALL2" />
+                    <input type="hidden" value="@item.PHOTO_BIG" />
+                    <input type="hidden" value="@item.PHOTO_EXPERT" />
+                    <input type="hidden" value="@item.PHOTO_SERVICE" />
+                    <input type="hidden" value="@item.PHOTO_SMALL" />*@
+
+                        isFirst = false;
+                    }
+                </ul>
+            </div>
+        </div>
+}
+else
+{
+    <div class="contain-area">
+        <!-- 컨텐츠 내용  -->
+        <div class="box-content type02">
+            <ul class="public-list">
+                @foreach (var item in nowProgramPartnerList)
+                {
+                    <li class="@(isFirst == true ? "on" : "")">
+                        <strong class="big-title">“@nowNewsProgram.PRG_NM”</strong>
+                        <div class="text-info">
+                            <div class="left-box">
+                                <div class="president-title">
+                                    <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/profile.asp?proID=@item.Pro_id&ptype=11" target="_blank"><strong>@item.NickName</strong></a>
+                                </div>
+                                <p class="txt">
+                                    @if(String.IsNullOrEmpty(item.Profile) == false)
+                                    {
+                                        if(item.Profile.Length > 35)
+                                        {
+                                            @item.Profile.Substring(0, 35)
+                                        }
+                                        else
+                                        {
+                                            @item.Profile
+                                        }
+                                    }
+                                </p>
+                                <ul class="box-list">
+                                    <li><a href="http://wowpro.wownet.co.kr/pro/pro_main_new/pro_record_broadcast.asp?currPage=1&bcode=N04070000&proId=@item.Pro_id&mseq=226&pro_search=@item.Pay_no&skey=nickname" target="_blank" class="ico">녹화방송</a></li>
+                                    <li style="margin-left:10px;"><a href="http://wowpro.wownet.co.kr/common/profileLink.asp?nickname=@(HttpUtility.UrlEncode(item.NickName, System.Text.Encoding.GetEncoding("euc-kr")))&link=cafe" target="_blank" class="ico type02">카페가기</a></li>
+                                    <li style="margin-left:10px;"><a href="http://wowpro.wownet.co.kr/pro/pro_main_new/profile.asp?proID=@item.Pro_id&ptype=11" target="_blank" class="ico type03">가입하기</a></li>
+                                </ul>
+                            </div>
+                            <div class="right-box" title="@item.NickName">
+                                <a href="http://wowpro.wownet.co.kr/pro/pro_main_new/profile.asp?proID=@item.Pro_id&ptype=11" target="_blank"><img src="http://image.wownet.co.kr/@item.NEWPhoto_Recommend" alt="@item.NickName"></a>
+                            </div>
+                        </div>
+                    </li>
+                    isFirst = false;
+                }
+            </ul>
+
+            <div class="partner-list">
+                <p class="tit">출연<br /> 파트너</p>
+                <ul>
+                    @{ 
+                        isFirst = true;
+                        foreach (var item in nowProgramPartnerList)
+                        {
+                        <li class="@(isFirst == true ? "on" : "")"><a href="javascript:void(0)" title="@item.NickName"><img src="http://image.wownet.co.kr@(item.NEWphoto_big.Replace("\\", "/"))" alt="@item.NickName"></a></li>
+
+                                isFirst = false;
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- // 컨텐츠 내용  -->
+        <div class="movie-list">
+            <strong>최근 영상 보기</strong>
+            <div class="movie">
+                <ul>
+                    @foreach (var item in broadWatchList)
+                    {
+                    <li>
+                        <a href="#" onclick="return PopupPlayTvReplay(@item.Num);" title="@item.Program_Name">
+                            <div title="@item.Program_Name">
+                                <img src="@item.ThumImageUrl" alt="@item.Program_Name">
+                                <span class="icon-play small"></span>
+                            </div>
+                            @item.Program_Name
+                        </a>
+                    </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+
+

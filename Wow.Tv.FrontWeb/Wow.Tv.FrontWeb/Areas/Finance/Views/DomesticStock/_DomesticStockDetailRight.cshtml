@@ -1,0 +1,54 @@
+﻿@model string
+@{ 
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    //string arjCode = "A" + Model;
+}
+<script type="text/javascript" src="@wowTvScript/Finance/DomesticStock/_DomesticStockDetailRight.js"></script>
+<div class="section-common">
+
+    <div class="tab-type3" id="consultInvestTab">
+        <ul class="col2">
+            <li class="on"><a href="#none" id="stockConsult">종목상담</a></li>
+            <li><a href="#none" id="invest">투자전략</a></li>
+        </ul>
+    </div>
+    <!--종목상담/투자전략-->
+    <form id="frmList_DSDRightConsultInvestList">
+        <input type="hidden" id="arjCode" name="arjCode" value="@Model" />
+        <input type="hidden" id="ctCode" name="ctCode" value="15" />
+        <div id="divList">
+
+        </div>
+    </form>
+
+    <hr class="division2 no-border">
+
+    <a href="http://board.wownet.co.kr/board/consultation/list.asp?bcode=N03010100&mseq=166 " target="_blank"><img src="@wowTvStyle/images/temp/temp_links1.png" alt=""></a>
+
+    <hr class="division2 no-border">
+
+    <div class="tab-type3" id="hotSearchFavoriteTab">
+        <ul class="col2">
+            <li class="on"><a href="#none" id="hotSearch">인기검색종목</a></li>
+            <li><a href="#none" id="favorite">나의관심종목</a></li>
+        </ul>
+    </div>
+
+    <form id="frmList_DSDRightHFList">
+        <input type="hidden" name="arjCode" value="@Model"/>
+        <div id="divList">
+
+        </div>
+    </form>
+
+    <hr class="division2 no-border">
+
+    <form id="frmList_DSDRightTBList">
+        <div id="divList">
+
+        </div>
+    </form>
+
+</div>
+

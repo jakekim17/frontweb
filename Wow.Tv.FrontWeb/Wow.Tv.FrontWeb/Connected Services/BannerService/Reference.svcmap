@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cbf26b55-7cfd-4cba-8e2c-c5d42400ca24" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/MyProgram/BannerService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BannerService.xsd" MetadataType="Schema" ID="253e7a64-3baa-4894-858e-be6292bd9ede" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/BannerService.svc?xsd=xsd4" />
+    <MetadataFile FileName="BannerService1.xsd" MetadataType="Schema" ID="6e5a81fa-df14-48e6-ae68-34f0779a8ecd" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/BannerService.svc?xsd=xsd5" />
+    <MetadataFile FileName="BannerService.disco" MetadataType="Disco" ID="c0e4ce55-c3f7-46ed-9015-9b79545e21cd" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/BannerService.svc?disco" />
+    <MetadataFile FileName="BannerService.wsdl" MetadataType="Wsdl" ID="77756d48-7cf0-4957-9340-c0f7f5fb19fa" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/BannerService.svc?wsdl" />
+    <MetadataFile FileName="BannerService2.xsd" MetadataType="Schema" ID="3290c17f-fb0e-4082-a257-467a000d56a4" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/BannerService.svc?xsd=xsd3" />
+    <MetadataFile FileName="BannerService3.xsd" MetadataType="Schema" ID="c49aa7df-e158-4362-b580-1e381b9ac6cf" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/BannerService.svc?xsd=xsd2" />
+    <MetadataFile FileName="BannerService4.xsd" MetadataType="Schema" ID="969a4285-b670-4227-a977-4ae8d21f5d85" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/BannerService.svc?xsd=xsd1" />
+    <MetadataFile FileName="BannerService5.xsd" MetadataType="Schema" ID="3e3e2085-a35d-472a-9fc3-7b6a9ecdb3fe" SourceId="1" SourceUrl="http://localhost:8088/MyProgram/BannerService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

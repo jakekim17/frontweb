@@ -1,0 +1,94 @@
+﻿@model IList<Wow.Tv.Middle.Model.Db49.wownet.TAB_SCRAP_MENU>
+
+
+@{
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    var condition = ViewBag.Condition as ScrapCondition;
+}
+
+<script>
+    var pinType = "@condition.PinType";
+    var scrapId ="@condition.ScrapId";
+</script>
+<script type="text/javascript" src="@wowTvScript/Popup/PopupScrap.js"></script>
+
+
+
+<div class="popup-area" style="display:block;">
+    <div class="dimBg"></div>
+    <!-- POPUP Layer -->
+    <div id="divPopupScrap" class="pop-layer">
+
+        <div class="title-area">
+            <strong class="title">
+                핀하기
+            </strong>
+        </div>
+
+
+        <!-- // title -->
+        <!-- content -->
+        <div class="content-area">
+            <div class="box-section">
+                <h3>
+                    @if (condition.PinType.Equals("Report"))
+                    {
+                        @:마이핀 - 기자
+                    }
+                    else if (condition.PinType.Equals("Program"))
+                    {
+                        @:마이핀 - 프로그램
+                    }
+                    else if (condition.PinType.Equals("Partner"))
+                    {
+                        @:마이핀 - 파트너
+                    }
+                </h3>
+                <p class="mb10">
+                    @if (condition.PinType.Equals("Report"))
+                    {
+                        @:"@condition.Name" 기자를 핀 하시겠습니까?
+
+                    }
+                    else if (condition.PinType.Equals("Program"))
+                    {
+                        @:"@condition.Name" 프로그램을 핀 하시겠습니까?
+                    }
+                    else if (condition.PinType.Equals("Partner"))
+                    {
+                        @:"@condition.Name" 파트너를 핀 하시겠습니까?
+                    }
+                </p>
+                <div class="list-dotted pb15">
+                    <ul>
+                        <li>
+                            @if (condition.PinType.Equals("Report"))
+                            {
+                                @:기자를 '핀'하시면 해당 기자의 새로운 뉴스를 '마이페이지 > 나의 핀'에서 쉽게 보실 수 있습니다.
+                            }
+                            else if (condition.PinType.Equals("Program"))
+                            {
+                                @:프로그램을 '핀'하시면 해당 프로그램을 '마이페이지 > 나의 핀'에서 쉽게 보실 수 있습니다.
+                            }
+                            else if (condition.PinType.Equals("Partner"))
+                            {
+                                @:파트너를 '핀'하시면 해당 해당 파트너를 '마이페이지 > 나의 핀'에서 쉽게 보실 수 있습니다.
+                            }
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-area">
+                    <ul class="btn-list">
+                        <li><a href="#none" class="btn type01" id="btnPinSave">핀</a></li>
+                        <li><a href="#none" class="btn type05" id="btnCancel">취소</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <span class="pop-btn"><a href="#none">닫기</a></span>
+        <!-- // 컨텐츠 -->
+    </div>
+
+</div>

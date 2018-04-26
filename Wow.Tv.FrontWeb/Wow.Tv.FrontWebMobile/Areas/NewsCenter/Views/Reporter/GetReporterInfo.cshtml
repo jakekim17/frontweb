@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNone.cshtml";
+
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string uploadWebPathRoot = AppState["UploadWebPathRoot"].ToString();
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Reporter/GetReporterInfo.js"></script>
+}
+
+    <!-- Header -->
+    <header class="header">
+        <a href="javascript:GetReporterInfo.GoReporterDetail()" class="icon top-arrow"></a>
+        <h1>기자정보입력</h1>
+    </header>
+    <!-- //Header -->
+
+    <form id="frm">
+        <input type="hidden" name="SearchId" id="SearchId" value="@ViewBag.Condition.SearchId" />
+        <input type="hidden" name="SearchName" value="@ViewBag.Condition.SearchName" />
+        <input type="hidden" id="CurrentMenuSeq" name="CurrentMenuSeq" value="@Request["menuSeq"]" />
+    </form>
+
+    <!-- container -->
+    <section class="container">
+        <form id="frmReporterInfo">
+            <div class="reporter-info-input">
+                <h3>프로필 이미지</h3>
+                <div class="file-box">
+                    @{
+                        if (Model != null && Model.IMAGE_URL != null)
+                        {
+                            var splitURL = Model.IMAGE_URL.Split('/');
+                            <input type="text" class="file-name" name="txtImgURL" readonly="readonly"
+                                   value="@(Model.IMAGE_URL == "no_img_reporter.gif" ? "" : splitURL[splitURL.Length - 1])">
+                        }
+                        else
+                        {
+                            <input type="text" class="file-name" name="txtImgURL" readonly="readonly" placeholder="첨부파일">
+                        }
+                    }
+                    <label for="uploadBtn" class="btn-file">찾아보기</label>
+                    <a href="#none" class="file-btn">삭제</a><!-- 2017-11-22 html 추가 -->
+                    <input type="file" id="uploadBtn" class="upload-btn" name="IMAGE_URL">
+                </div>
+                <h3>이름</h3>
+                <input type="text" readonly="readonly" value="@Model.USER_NM" />
+                <h3>부서</h3>
+                <input type="text" readonly="readonly" value="@Model.DEPT_NM" />
+                <h3>이메일</h3>
+                <input type="text" name="EMAIL" value="@Model.EMAIL" />
+                <h3>
+                    페이스북
+                    <span class="checkbox-area">
+                        노출
+                        @if (Model.FACEBOOK_VIEW_YN == "Y")
+                        {
+                            <input type="checkbox" id="c1" name="FACEBOOK_VIEW_YN" value="Y" checked>
+
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="c1" name="FACEBOOK_VIEW_YN" value="Y">
+                        }
+                        <label for="c1"><em></em></label>
+                    </span>
+                </h3>
+                <input type="text" name="FACEBOOK_URL" value="@Model.FACEBOOK" />
+                <h3>
+                    트위터
+                    <span class="checkbox-area">
+                        노출
+                        @if (Model.TWITTER_VIEW_YN == "Y")
+                        {
+                            <input type="checkbox" id="c2" name="TWITTER_VIEW_YN" value="Y" checked>
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="c2" name="TWITTER_VIEW_YN" value="Y">
+                        }
+                        <label for="c2"><em></em></label>
+                    </span>
+                </h3>
+                <input type="text" name="TWITTER_URL" value="@Model.TWITTER" />
+                <h3>
+                    블로그
+                    <span class="checkbox-area">
+                        노출
+                        @if (Model.BLOG_VIEW_YN == "Y")
+                        {
+                            <input type="checkbox" id="c3" name="BLOG_VIEW_YN" value="Y" checked>
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="c3" name="BLOG_VIEW_YN" value="Y">
+                        }
+                        <label for="c3"><em></em></label>
+                    </span>
+                </h3>
+                <input type="text" name="BLOG_URL" value="@Model.BLOG" />
+
+                <h3>자기소개</h3>
+                <textarea placeholder="입력하세요" name="INTRODUCTION" id="txtIntro" val="@Model.INTRODUCTION">@Model.INTRODUCTION</textarea>
+                @{
+                    var strLen = Model.INTRODUCTION.Length;
+                    <div class="byte">@strLen/<span>500</span></div>
+                }
+                
+                <div class="btn-area">
+                    <ul class="btn-list">
+                        <li><a href="#none" class="btn type01" id="btnSaveInfo">등록</a></li>
+                        <li><a href="#none" class="btn type05" id="btnCancle">취소</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="hidden" name="REPORTER_ID" value="@Model.REPORTER_ID" />
+        </form>
+    </section>
+    <!-- // container -->
+
+<script>
+    $('.wrap').addClass('full');
+</script>

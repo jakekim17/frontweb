@@ -1,0 +1,69 @@
+﻿@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+
+@{
+    Layout = null;
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+}
+
+<div class="table-type1">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>N</th>
+                <th>종목명</th>
+                <th>현재가</th>
+                <th>전일대비</th>
+                <th>등락률(%)</th>
+                <th>거래량</th>
+                <th>뉴스/공시</th>
+                <th>매매신호</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Length > 0)
+            {
+                var i = 0;
+                foreach (var item in Model)
+                {
+                    i++;
+                    <tr>
+                            @*<td>@Model.IndexOf(item)</td>*@
+                            @if (i < 10)
+                            {
+                                var iStr = "0" + i;
+                                <td>@iStr</td>
+                            }
+                            else
+                            {
+                                <td>@i</td>
+                            }
+                            @*<td class="text"><a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@item.arj_code.Replace("A", "")">@item.stock_name</a></td>*@
+                            <td class="text"><a href="#none" onclick="GetHotSearchList.DomesticStockDetailGo('@DomainUrlFront','@item.arj_code.Replace("A", "")')">@item.stock_name</a></td>
+                            <td class="number">@String.Format("{0:#,##0}", item.curr_price)</td>
+                            <td class="number">@Html.DomesticStockDetailPriceMiddleFormat((string)item.chg_type, (int)item.net_chg)</td>
+                            <td class="number">@Html.DomesticStockDetailChgRateMiddleFormat((string)item.chg_type, (int)item.curr_price, (int)item.net_chg)</td>
+                            <td class="number">@String.Format("{0:#,##0}", item.net_vol)</td>
+                            <td>
+                                <span class="btn-type4"><a href="#none" onclick="GetHotSearchList.DomesticStockDetailNewsGo('@DomainUrlFront','@item.arj_code.Replace("A", "")')">뉴스</a></span>
+                                <span class="btn-type4"><a href="#none" onclick="GetHotSearchList.DomesticStockDetailNoticeGo('@DomainUrlFront','@item.arj_code.Replace("A", "")')">공시</a></span>
+                            </td>
+                            <td>
+                                <span class="btn-type4"><a href="#none" onclick="GetHotSearchList.DomesticStockDetailPredictionChartGo('@DomainUrlFront','@item.arj_code.Replace("A", "")')">보기</a></span>
+                            </td>
+                        </tr>
+                }
+            }   
+        </tbody>
+    </table>
+</div>

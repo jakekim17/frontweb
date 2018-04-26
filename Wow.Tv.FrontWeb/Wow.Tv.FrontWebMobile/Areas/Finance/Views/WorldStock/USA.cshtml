@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "다우지수";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+}
+@section scripts{
+
+    <script src="@wowTvScript/Finance/WorldStock/USA.js"></script>
+<script src="@wowTvScript/Finance/webponent/raphael.js"></script>
+<script src="@wowTvScript/Finance/webponent/webponent.comm.common.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.style.js"></script>
+<script src="@wowTvScript/Finance/Charts/stockChart.js"></script>
+<script src="@wowTvScript/Finance/WorldStock/DowJones.js"></script>
+
+}
+
+<section class="container">
+  
+    <!-- title area -->
+    <div class="section-area">
+        <h2>다우지수</h2>
+    </div>
+    <!-- // title area -->
+    <!-- sub tab -->
+    <div class="swiper-container sub-gnb01 type02 swiper-container-horizontal">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide on"><span>다우지수</span></div>
+            <div class="swiper-slide"><span>나스닥지수</span></div>
+            <div class="swiper-slide"><span>S&amp;P500</span></div>
+            <div class="swiper-slide" id="usaAdr"><span>주요업종지수</span></div>
+            <div class="swiper-slide"><span>한국물ADR</span></div>
+            <input type="hidden" id="MarketType" />
+        </div>
+    </div>
+    <!-- // sub tab -->
+    <!-- 해외증시 지수 -->
+    <form id="frmList_USA">
+        <input type="hidden" id="currentMenuSeq" value="@currentMenuSeq" />
+        <div id="divList">
+
+        </div>
+    </form>
+    <input type="hidden" id="menuTab" value="@ViewBag.menuTab" />
+
+    
+    <!-- // section-area -->
+
+
+    <div class="tab-area">
+        <ul>
+            <li class="btnChart" id="7551" style="width: 33%;"><a href="javascript:void(0)">일간</a></li>
+            <li class="btnChart" id="7552" style="width: 33%;"><a href="javascript:void(0)">주간</a></li>
+            <li class="btnChart" id="7553" style="width: 33.6667%;"><a href="javascript:void(0)">월간</a></li>
+        </ul>
+    </div>
+
+
+    <!-- chart start -->
+    <div class="section-area mb50">
+        <p class="time-txt btn-area pr0 mt10" id="txtChart"></p>
+        <div class="box-type-chart">
+            <div class="chart-view">
+                <img id="ImgChart" alt="chart" style="width:100%">
+            </div>
+        </div>
+    </div>
+    <!--// chart end -->
+
+</section>

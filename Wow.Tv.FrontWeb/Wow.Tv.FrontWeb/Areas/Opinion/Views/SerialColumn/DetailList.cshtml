@@ -1,0 +1,200 @@
+﻿
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string uploadWebPathRoot = AppState["UploadWebPathRoot"].ToString();
+    string uploadPlanArticlePath = AppState["UploadPlanArticlePath"].ToString();
+    string opinionUploadPath = string.Format("{0}{1}", uploadWebPathRoot, uploadPlanArticlePath);
+    AppState["BodyClass"] = "opinion sub";
+
+    DateTime nowDate = DateTime.Now;
+    DateTime basicDate = DateTime.Now;
+
+    if (!string.IsNullOrEmpty(Request["StartDate"]) && !string.IsNullOrEmpty(Request["selDateIndex"]))
+    {
+        try
+        {
+            int selDateIndex = Math.Abs(int.Parse(Request["selDateIndex"]));
+
+            basicDate = Convert.ToDateTime(Request["StartDate"]);
+            basicDate = basicDate.AddDays(selDateIndex);
+        }
+        catch (Exception e)
+        {
+            Wow.Fx.WowLog.Write(string.Format("/NewsCenter/News/Index : {0} ", e.Message));
+        }
+    }
+
+}
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/news.css">
+}
+
+@section scripts{
+    <script src="@wowTvScript/Opinion/SerialColumn/DetailList.js"></script>
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/sticky.js"></script>
+    <script>
+        var text = "@ViewBag.condition.Text";
+        var seq = "@ViewBag.condition.Seq";
+        var classId = "@Request.QueryString["Class"]";
+    </script>
+}
+<!-- Content Area -->
+<div class="wrap-adbox-right point-height" data-sticky_parent style="padding-top:20px;">
+    <div class="section-cont" data-sticky_column>
+        <form id="frmSearch" name="frmSearch" method="post" onsubmit="return false;">
+            <input type="hidden" name="SearchSection" id="SearchSection" value="@Request["subMenu"]" />
+            <input type="hidden" name="SearchComp" id="SearchComp" />
+            <input type="hidden" name="totalDataCount" id="totalDataCount" value="0" />
+            <input type="hidden" name="currentIndex" id="currentIndex" value="@(string.IsNullOrEmpty(Request["currentIndex"]) ? "1" : Request["currentIndex"])" />
+            <input type="hidden" name="Page" id="Page" value="1" />
+            <input type="hidden" name="PageSize" id="PageSize" value="20" />
+            <input type="hidden" name="opinionUploadPath" id="opinionUploadPath" value="@opinionUploadPath" />
+            <input type="hidden" name="uploadWebPathRoot" id="uploadWebPathRoot" value="@uploadWebPathRoot" />
+        </form>
+        <!-- start -->
+        <div class="opinion-aside-area">
+            <select id="selector01">
+                @for (int i = 0; i < Model.Length; i++)
+                {
+                    if (Model[i].SEQ == ViewBag.condition.Seq)
+                    {
+                        <option value="@(Model[i].SEQ + "_" + Model[i].EXTRACTION_TEXT)" selected>@Model[i].TITLE &nbsp; &nbsp; </option>
+                    }
+                    else
+                    {
+                        <option value="@(Model[i].SEQ + "_" + Model[i].EXTRACTION_TEXT)">@Model[i].TITLE &nbsp; &nbsp; </option>
+                    }
+                }
+            </select>
+            @* 구글번역 **@
+            <div id="google_translate_element"></div>
+            <div class="obj-view"></div>
+        </div>            
+        @*
+        <div class="top-search-box">
+            <!-- Search box section -->
+            <div class="search-section">
+                <div class="selector full">
+                    <label for="selector01">전체</label>
+                    <select id="selector01">
+                        @for (int i = 0; i < Model.Length; i++)
+                        {
+                            if (Model[i].SEQ == ViewBag.condition.Seq)
+                            {
+                                <option value="@(Model[i].SEQ + "_" + Model[i].EXTRACTION_TEXT)" selected>@Model[i].TITLE</option>
+                            }
+                            else
+                            {
+                                <option value="@(Model[i].SEQ + "_" + Model[i].EXTRACTION_TEXT)">@Model[i].TITLE </option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="obj-view">
+            <img src="" alt="">
+        </div>
+        *@
+        <!--// end -->
+        <!-- 뉴스 목록 -->
+        <div class="contain-list-news" id="divNewsList">
+            <div class="article-news-list">
+                <div class="contian-news" style="vertical-align:middle;text-align:center;">
+                </div>
+            </div>
+        </div>
+        <!-- //뉴스 목록 -->
+        <!-- Paginate -->
+        <div class="box-paginate" id="divPaging"></div>
+        <!-- //Paginate -->
+        <div class="box-button">
+            <div class="inner">
+                <span class="btn-type4"><button onclick="NewsCommon.GoOpinionHome()">홈으로</button></span>
+            </div>
+        </div>
+    </div>
+    <!-- cont right start -->
+    <div class="right-area  mgt_0" id="divContentRight" data-sticky_column></div>
+    <!--// cont right end -->
+</div>
+<!-- Content Area -->
+<input type="hidden" name="text" id="text" />
+<!-- google translate script Start -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'ko'
+                , includedLanguages: 'ko,en,zh-CN,zh-TW,ja,id,th,vi,tl'
+                , layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                , autoDisplay: false
+            }
+            , 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- google translate script end -->
+
+@section LastScriptArea{
+    <script type="text/javascript">
+
+        // 오른쪽 컨텐츠 + 광고영역 스크롤 / Generated by CoffeeScript 1.9.2
+        (function () {
+            var reset_scroll;
+
+            $(function () {
+                return $("[data-sticky_column]").stick_in_parent({
+                    parent: "[data-sticky_parent]"
+                });
+            });
+
+            reset_scroll = function () {
+                var scroller;
+                scroller = $("body,html");
+                scroller.stop(true);
+                if ($(window).scrollTop() !== 0) {
+                    scroller.animate({
+                        scrollTop: 0
+                    }, "fast");
+                }
+                return scroller;
+            };
+
+            window.scroll_it = function () {
+                var max;
+                max = $(document).height() - $(window).height();
+                return reset_scroll().animate({
+                    scrollTop: max
+                }, max * 3).delay(100).animate({
+                    scrollTop: 0
+                }, max * 3);
+            };
+
+            window.scroll_it_wobble = function () {
+                var max, third;
+                max = $(document).height() - $(window).height();
+                third = Math.floor(max / 3);
+                return reset_scroll().animate({
+                    scrollTop: third * 2
+                }, max * 3).delay(100).animate({
+                    scrollTop: third
+                }, max * 3).delay(100).animate({
+                    scrollTop: max
+                }, max * 3).delay(100).animate({
+                    scrollTop: 0
+                }, max * 3);
+            };
+
+            $(window).on("resize", (function (_this) {
+                return function (e) {
+                    return $(document.body).trigger("sticky_kit:recalc");
+                };
+            })(this));
+
+        }).call(this);
+    </script>
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8335e723-9caf-498d-a75d-aa20fb985c6f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/NewsCenter/NewsMainService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="NewsMainService.xsd" MetadataType="Schema" ID="5ccda00b-3bb9-42ab-ac89-cbfff1c517ba" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsMainService.svc?xsd=xsd0" />
+    <MetadataFile FileName="NewsMainService1.xsd" MetadataType="Schema" ID="45a0d970-10d8-41b4-9fd5-8f69e7a01e61" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsMainService.svc?xsd=xsd1" />
+    <MetadataFile FileName="NewsMainService.disco" MetadataType="Disco" ID="3f418d01-26c8-4d15-9583-7e9a0af403ac" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsMainService.svc?disco" />
+    <MetadataFile FileName="NewsMainService2.xsd" MetadataType="Schema" ID="3b2564ff-fecb-488f-ad06-97d9a492ce30" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsMainService.svc?xsd=xsd3" />
+    <MetadataFile FileName="NewsMainService3.xsd" MetadataType="Schema" ID="7b8c3992-1b9b-45f9-9683-01c3ef6ce77c" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsMainService.svc?xsd=xsd4" />
+    <MetadataFile FileName="NewsMainService.wsdl" MetadataType="Wsdl" ID="45af0498-9d6b-49da-9d2f-1f68d8b30534" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsMainService.svc?wsdl" />
+    <MetadataFile FileName="NewsMainService4.xsd" MetadataType="Schema" ID="d56bfe0e-6bf0-4940-9fd7-58a979b11372" SourceId="1" SourceUrl="http://localhost:8088/NewsCenter/NewsMainService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,50 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model ListModel<usp_GetThemaOnline_Result>
+@{
+    Layout = null;
+    string mainLinkStr = "";
+    string newsLinkStr = "";
+    string gongsiLinkStr = "";
+    string sangdamLinkStr = "";
+    string toronLinkStr = "";
+    string mamaLinkStr = "";
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+}
+
+
+<p class="title-accordion">금융</p>
+<table>
+    <tr>
+        <th>종목명</th>
+        <th>현재가</th>
+        <th>전일대비</th>
+        <th>등락률</th>
+        <th>거래량</th>
+        <th>뉴스/공시</th>
+        <th>상담&middot;토론</th>
+        <th>매매신호</th>
+    </tr>
+    @foreach (var item in Model.ListData)
+    {
+        //mainLinkStr = "http://dev.wownet.co.kr/search/main/main.asp?mseq=419&searchStr=" + Html.LinkStr(item.stockcode);
+        //newsLinkStr = "http://dev.wownet.co.kr/search/news/news.asp?searchStr=" + Html.LinkStr(item.stockcode) +"&arjCode=" + item.stockcode.ToString() + "&boardType=1";
+        //sangdamLinkStr = "http://sise.wownet.co.kr/search/counsel/counsel.asp?searchStr=" + Html.LinkStr(item.stockcode) + "&arjCode=" + item.stockcode + "&boardType=1";
+        sangdamLinkStr = "http://board.wownet.co.kr/board/consultation/list.asp?bcode=N03010100&mseq=166";
+        //mamaLinkStr = "http://dev.wownet.co.kr/search/preview/preview.asp?searchStr=" + Html.LinkStr(item.stockcode) + "&arjCode=" + item.stockcode;
+        <tr>
+            @*<td>@Html.ActionLink(item.stockname, "DomesticStockDetail", "DomesticStock", new { searchStr = item.stockcode.Replace("A", "") }, null) </td>*@
+            <td><a href="#none" onclick="DomesticStockThema.DomesticStockDetailGo('@DomainUrlFront','@item.stockcode.Replace("A", "")');">@item.stockname</a></td>
+            <td>@Html.PublishPriceFormat(item.ChgType, String.Format("{0:#,##0}", item.curPrice))<!--현재가--></td>
+            <td>@Html.PublishChgPriceFormat(item.ChgType, String.Format("{0:#,##0}", item.NetChg))<!--전일대비--></td>
+            <td>@Html.ThemaRateFormat(item.ChgType, Convert.ToDecimal(item.Rate))<!--등락율--></td>
+            <td class="number">@String.Format("{0:#,##0}", item.Volume)</td>
+            <td><span class="btn-type4"><a href="#none" onclick="DomesticStockThema.DomesticStockDetailNewsNoticeGo('@DomainUrlFront','@item.stockcode.Replace("A", "")');">보기</a></span></td>
+            <td><span class="btn-type4"><a href="@sangdamLinkStr">보기</a></span></td>
+            <td><span class="btn-type4"><a href="#none" onclick="DomesticStockThema.DomesticStockDetailPredictionChartGo('@DomainUrlFront','@item.stockcode.Replace("A", "")');">보기</a></span></td>
+        </tr>
+    }
+    
+</table>
+

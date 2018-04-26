@@ -1,0 +1,28 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model List<NUP_NEWS_MAIN_VOD_SELECT_Result>
+
+
+@{
+    Layout = null;
+
+    string uploadWebPath = System.Configuration.ConfigurationManager.AppSettings["UploadWebPath"];
+
+}
+
+
+@foreach (var item in Model)
+{
+<a href="#" onclick="return NewsCommon.GoNewsRead('@item.ARTICLEID');">
+    <img src="@Wow.WowExtensionMethod.NewsListImage(item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" alt="인기영상뉴스" width="285" height="160">
+    <p class="icon-play medium"></p>
+    <span>
+        @item.TITLE
+    </span>
+</a>
+}
+
+
+
+

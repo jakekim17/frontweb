@@ -1,0 +1,646 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+
+@model usp_GetStockPrice_Result
+@{
+    ViewBag.Title = "DomesticStockDetail";
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string UserLoginUrl = AppState["UserLoginUrl"].ToString();
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+
+    string searchStr = Request["searchStr"];
+    string tabSeq = Request["tabSeq"];
+    string boardType = Request["boardType"];
+
+
+    //tabSeq가 없을때
+    if (String.IsNullOrEmpty(tabSeq))
+    {
+        tabSeq = "0";
+    }
+
+    //boardType 없을때
+    if (String.IsNullOrEmpty(boardType))
+    {
+        boardType = "1";
+    }
+
+    DateTime curDate = new DateTime();
+
+    string sabuScore = ViewBag.SabuScore;
+    //string imgUrl9101 = ViewBag.ImgUrl9101;
+    string[] investOpinion = ViewBag.InvestOpinion;
+
+    if (investOpinion == null)
+    {
+        investOpinion = new string[] { "0", "0", "0", "0", "0" };
+    }
+
+
+    //string opinionConsult = ViewBag.OpinionConsult;
+    //string maxInvestOpinion;
+    int maxInvestOpinionCnt;
+    int maxIndex = 0;
+    int i = 0;
+
+    string companyInfoIframeSrcStr = "http://comp.fnguide.com/SVO/Wownet/CompanyInfo.asp?gicode=" + Model.arj_code.Replace("A", "");
+
+    try
+    {
+        if (investOpinion.Length > 0 && investOpinion != null)
+        {
+            maxInvestOpinionCnt = Convert.ToInt32(investOpinion[0]);
+
+            for (i = 0; i < investOpinion.Length; i++)
+            {
+                if (maxInvestOpinionCnt <= Convert.ToInt32(investOpinion[i]))
+                {
+                    maxIndex = i;
+                    maxInvestOpinionCnt = Convert.ToInt32(investOpinion[i]);
+                }
+            }
+        }
+        else
+        {
+            //maxInvestOpinion = "중립";
+            maxInvestOpinionCnt = 0;
+        }
+    }
+    catch (NullReferenceException)
+    {
+        //maxInvestOpinion = "중립";
+        maxInvestOpinionCnt = 0;
+
+    }
+
+    // 기술적분석 텍스트
+    string tmpAnalysisUrl = "http://wownet3.8080.co.kr:8080/wowsearch.asp?trid=1001&code=" + Model.arj_code.Replace("A", "");
+
+    //로그인 유무 체크
+    bool loginResult = LoginHandler.IsLogin;
+
+    //나의 관심종목 유무
+    LoginUserInfo loginUserInfo = new LoginUserInfo();
+    bool myFavoriteResult = false;
+
+    if (loginResult == true)
+    {
+        loginUserInfo = LoginHandler.CurrentLoginUser;
+        myFavoriteResult = new Wow.Tv.FrontWebMobile.MyActiveService.MyActiveServiceClient().IsMyFavoriteJongMok(loginUserInfo, Model.arj_code.Replace("A", ""));
+    }
+
+    string arjCode = Model.arj_code.Replace("A", "");
+
+    bool checkStockHoliday = ViewBag.CheckStockHoliday;
+
+    //뉴스기사를 찾아가기위한 파라메터
+    //string articleId = Request["ArticleId"];
+
+}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <!-- meta name="viewport" content="width=device-width, initial-scale=1.0"-->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>한국경제TV</title>
+    <link rel="stylesheet" href="@wowTvStyle/css/fonts.css">
+    <link rel="stylesheet" href="@wowTvStyle/css/common.css">
+    <link rel="stylesheet" href="@wowTvStyle/css/finance.css">
+
+    <script type="text/javascript" src="@wowTvScript/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="@wowTvScript/design.js"></script>
+    <!-- plugin -->
+    <link rel="stylesheet" href="@wowTvStyle/css/swiper.min.css">
+    <script type="text/javascript" src="@wowTvScript/swiper.min.js"></script>
+
+    <script type="text/javascript" src="@wowTvScript/paging.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Common.js"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="@wowTvScript/jquery.cookie.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Define.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Finance/finance_common.js"></script>
+    <script type="text/javascript" src="@wowTvScript/Finance/middleStockData.js"></script>
+    <script type="text/javascript" src="@wowTvScript/SearchApi.js?date=20171220161500"></script>
+
+
+    <script src="@wowTvScript/Finance/DomesticStock/DomesticStockDetail.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            MiddleData.CurrentStock("ITEM", '@Model.stock_code', 10, $("#realTimeStock_1 .middleStockData"), @checkStockHoliday.ToString().ToLower()); //상세
+            @*
+            MiddleData.CurrentStock("ITEM", '@Model.stock_code', 10, $("#realTimeStock_2 .middleStockData"), @checkStockHoliday.ToString().ToLower()); //기본
+            $("#investOpinion_@maxIndex.ToString()").attr("class", "on");
+            *@
+
+            $("#investOpinion_@maxIndex.ToString()").attr("class", "txt on");
+        });
+    </script>
+
+</head>
+<body class="finance sub">
+    <!-- 해당 메뉴의 class로 분기처리 -->
+
+    <div class="wrap">
+        <!-- 전체 메뉴 -->
+        <div class="sitemap-area">
+            <div class="dimmed">
+                <div class="btn-box">
+                    <a href="#none" class="home-btn"><span class="icon home"></span>홈</a>
+                    <a href="#none" class="close-btn"></a>
+                </div>
+                <!-- login box start -->
+                <div class="login-area" style="display:">
+                    <div class="btn-area">
+                        <p class="txt">로그인하시면 다양한 혜택을 받으실 수 있습니다.</p>
+                        <ul class="btn-list">
+                            <li><a href="javascript:void(0);" class="btn type01 w-typeAuto01">로그인</a></li>
+                            <li><a href="javascript:void(0);" class="btn type05 w-typeAuto01">회원가입</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--// login box end -->
+                <!-- login box start -->
+                <div class="login-area">
+                    <div class="mark-area">
+                        <!-- 패밀리등급 - class="ico-class ico-family" / vip 등급- class="ico-class ico-vip" / vvip등급 - class="ico-class ico-vvip" -->
+                        <span class="ico-class ico-family">family</span>
+                    </div>
+                    <div class="btn-area">
+                        <p class="txt">안녕하세요. <strong>김한국</strong>님</p>
+                        <ul class="btn-list">
+                            <li><a href="javascript:void(0);" class="btn type01 w-typeAuto01">로그아웃</a></li>
+                            <li><a href="javascript:void(0);" class="btn type05 w-typeAuto01">마이페이지</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--// login box end -->
+                <!-- box mywow infor start -->
+                <div class="box-mywow-infor">
+                    <div class="box is-ico-Gnb ico-img01">
+                        <span class="aside">나의 보유 캐시</span>
+                        <strong class="stress"><span class="num">19,9990</span> 원</strong>
+                        <span class="btn-area"><a href="javascript:void(0)" class="btn type04 w-auto">캐시 충전하기</a></span>
+                    </div>
+                    <div class="box is-ico-Gnb ico-img02">
+                        <span class="aside">나의 보유 쿠폰</span>
+                        <strong class="stress"><span class="num">5</span> 장</strong>
+                        <span class="btn-area"><a href="javascript:void(0)" class="btn type04 w-auto">쿠폰등록하기</a></span>
+                    </div>
+                    <div class="box is-ico-Gnb ico-img03">
+                        <span class="aside">나의 투자 파트너</span>
+                        <strong class="stress">한옥석 투자자</strong>
+                        <span class="btn-area"><a href="javascript:void(0)" class="btn type04 w-auto">파트너 다시 찾기</a></span>
+                    </div>
+                    <div class="box is-ico-Gnb ico-img04">
+                        <span class="aside">나의 1:1문의</span>
+                        <strong class="stress">문의<span class="num">0</span> / 답변<span class="num">0</span></strong>
+                        <span class="btn-area"><a href="javascript:void(0)" class="btn type04 w-auto">나의 글 모음</a></span>
+                    </div>
+                </div>
+                <!--// box mywow infor end -->
+                <!-- 전체메뉴 -->
+                <div class="menu-list">
+                    <ul class="menu">
+                        <li>
+                            <a href="javascript:void(0)">TV <span class="icon"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="javascript:void(0)">증권</a></li>
+                                <li><a href="javascript:void(0)">부동산</a></li>
+                                <li><a href="javascript:void(0)">보험</a></li>
+                                <li><a href="javascript:void(0)">핀테크</a></li>
+                                <li><a href="javascript:void(0)">특집방송</a></li>
+                                <li><a href="javascript:void(0)">인기방송</a></li>
+                                <li><a href="javascript:void(0)">전체프로그램</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">뉴스 <span class="icon"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="javascript:void(0)">최신뉴스</a></li>
+                                <li><a href="javascript:void(0)">증권</a></li>
+                                <li><a href="javascript:void(0)">경제</a></li>
+                                <li><a href="javascript:void(0)">산업·IT</a></li>
+                                <li><a href="javascript:void(0)">정치·사회·국제</a></li>
+                                <li><a href="javascript:void(0)">생활문화</a></li>
+                                <li><a href="javascript:void(0)">취업</a></li>
+                                <li><a href="javascript:void(0)">통신원 리포트</a></li>
+                                <li><a href="javascript:void(0)">카드뉴스</a></li>
+                                <li><a href="javascript:void(0)">오피티언</a></li>
+                                <li><a href="javascript:void(0)">기자</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">연예·스포츠 <span class="icon"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="javascript:void(0)">연예·스타</a></li>
+                                <li><a href="javascript:void(0)">스포츠</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">금융 <span class="icon"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="javascript:void(0)">국내증시</a></li>
+                                <li><a href="javascript:void(0)">해외증시</a></li>
+                                <li><a href="javascript:void(0)">시장지표</a></li>
+                                <li><a href="javascript:void(0)">특징주</a></li>
+                                <li><a href="javascript:void(0)">중국</a></li>
+                                <li><a href="javascript:void(0)">매매신호</a></li>
+                                <li><a href="javascript:void(0)">인기검색종목</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">부동산 <span class="icon"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="javascript:void(0)">부동산 뉴스</a></li>
+                                <li><a href="javascript:void(0)">지자체 뉴스(전국N)</a></li>
+                                <li><a href="javascript:void(0)">분양 클로즈업</a></li>
+                                <li><a href="javascript:void(0)">부동산 투자의 맥</a></li>
+                                <li><a href="javascript:void(0)">부동산 컨설팅</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">포토·영상 <span class="icon"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="javascript:void(0)">포토</a></li>
+                                <li><a href="javascript:void(0)">영상</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">웹툰 <span class="icon"></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">티비텐플러스<span class="icon"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="javascript:void(0)">Enter</a></li>
+                                <li><a href="javascript:void(0)">Life</a></li>
+                                <li><a href="javascript:void(0)">Shop</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 전체메뉴 -->
+            </div>
+        </div>
+        <!-- // 전체 메뉴 -->
+        <!-- Header -->
+        <header class="header">
+            <article class="header-top">
+                <div class="btn-back">
+                    <a href="javascript:void(0)" class="btn" id="historyBack">prev</a>
+                </div>
+                <h1 class="tit-01">
+                    <a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@searchStr">@Model.stock_wanname</a>
+                    <span class="num">(@Model.arj_code.Replace("A", ""))</span>
+                </h1>
+            </article>
+            <!-- 상단 탑 메뉴 -->
+            <!-- 상단 탑 메뉴 -->
+            <div class="swiper-container finance-gnb h-chan"></div>
+            <!-- // 상단 탑 메뉴 -->
+
+        </header>
+        <!-- //Header -->
+        <!-- container -->
+        <section class="container bdt-col03">
+
+            <div class="section-area mt20 mb20">
+                <div class="list-dotted">
+                    <ul>
+                        <li>
+                            <span class="font-color03"> 실시간 </span> @Html.MarketTimeStatus()
+                            <div class="btn-area txt-inline mt0">
+                                <a href="/Finance/DomesticStock/DomesticStockDetail?searchStr=@searchStr" class="btn type04 small">새로고침<span class="icon reset"></span></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- btn start -->
+                <div class="btn-area mt10">
+                    <input type="hidden" id="loginUrl" value="@UserLoginUrl/?returnurl=@DomainUrlFront/Finance/DomesticStock/DomesticStockDetail?searchStr=@searchStr" />
+
+                    @if (loginResult == true && myFavoriteResult == true)
+                    {
+                        <a href="javascript:void(0)" class="btn type05 w-auto">나의 관심종목</a>
+                    }
+
+                    @if (loginResult == true)
+                    {
+                        //로그인이 되었을때
+                        <a href="javascript:void(0)" id="favoriteStockReg" class="btn type05 w-auto">관심종목 등록</a>
+                    }
+                    else
+                    {
+                        //로그인이 안되었을때 로그인 요구
+                        <a href="javascript:void(0)" id="favoriteBtnAlertLogin" class="btn type05 w-auto">관심종목 등록</a>
+                    }       
+                </div>
+                <!--// btn end -->
+            </div>
+
+
+
+            <!-- stock business -->
+            <div class="stock-index pt0" id="realTimeStock_1">
+
+
+                <div class="box-cont">
+                    <strong class="obj">사부점수</strong>
+                    <div class="cont">
+                        <p class="score-type">
+                            @Html.PublishSabuScoreChgPoint(sabuScore)
+                            <span class="txt">점</span>
+                        </p>
+                        <p class="score-type">
+                            전일대비
+                            @Html.PublishSabuScoreChgPoint(sabuScore)
+                            <span class="txt">점</span>
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="box-cont01">
+                    <span class="tit">사부점수</span>
+                    <span class="obj">최승욱의 차트점수, 가치점수, 수급점수의 합</span>
+                </div>
+
+
+                <div class="box txt-c">
+                    <div class="stock-area type01">
+                        @Html.DomesticStockDetailPriceMiddleFormat(Model.chg_type, Model.curr_price)
+                    </div>
+                    <ul class="stock-box type01">
+                        @if (Model.mkt_halt != "0")
+                        {
+                            curDate = Convert.ToDateTime(Model.data_day);
+                            <li class="stop-deal">@curDate.Year 년 @curDate.Month 월 @curDate.Day 일 <br /> 거래정지된 종목입니다.</li>
+                        }
+                        else
+                        {
+                            @*<li>@Model.chg_type / @Model.net_chg</li>
+                            <li>@Model.chg_type  / @Model.curr_price / @Model.net_chg</li>*@
+                            <li>@Html.DomesticStockDetailChgPriceMiddleFormat(Model.chg_type, Model.net_chg)</li>
+                            <li>@Html.DomesticStockDetailChgRateMiddleFormat(Model.chg_type, Model.curr_price, Model.net_chg)</li>
+                        }
+                        
+                    </ul>
+                </div>
+
+
+                <!-- 테이블-->
+                <div class="table-type1 type01">
+                    <table>
+                        <caption>상세</caption>
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:25%">
+                            <col style="width:25%">
+                            <col style="width:*">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="txt-l">시가</td>
+                                <td class="txt-r"><strong class="num">@Html.CommaFormat(Convert.ToInt32(Model.init_price ?? 0))</strong></td>
+                                <td class="txt-l">거래량</td>
+                                <td class="txt-r"><strong class="num">@Html.DomesticStockDetailVolumeMiddleFormat(Model.net_vol)</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">고가</td>
+                                <td class="txt-r"><strong class="num">@Html.CommaFormat(Convert.ToInt32(Model.high_price ?? 0))</strong></td>
+                                <td class="txt-l">거래대금</td>
+                                <td class="txt-r"><strong class="num">@Html.DomesticStockTradeCostMiddleFormat(Model.net_turnover) 억</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="txt-l">저가</td>
+                                <td class="txt-r"><strong class="num">@Html.CommaFormat(Convert.ToInt32(Model.low_price ?? 0))</strong></td>
+                                <td class="txt-l">시가총액</td>
+                                <td class="txt-r"><strong class="num">@Html.DomesticStockDetailSigaTotalFormat(Model.list_sum) 억</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- // 테이블 -->
+
+            </div>
+            <!-- // stock business -->
+            <!-- start -->
+            <div class="section-area pt0 mb20">
+                <ul class="box-type-sell-view">
+                    <li>
+                        <a href="javascript:void(0)" class="btn-open">주가예측차트</a>
+                        <div class="bar-cont">
+
+                            <!-- chart start -->
+                            <div class="section-area pd0 mb15">
+                                <p class="time-txt btn-area pr0 mt10">
+                                    @*<span class="font-color03">@Model.stock_wanname</span>*@
+                                    @*<span class="num">2017/06/12 ~ 2017/07/31</span>*@
+                                </p>
+                                <div class="box-type-chart">
+                                    <div class="chart-view">
+                                        <img alt="주가예측차트" style="width:100%; height: 357px;" id="predictionChart">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--// chart end -->
+
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" class="btn-open">투자의견 @maxInvestOpinionCnt@Html.DomesticStockDetailInvestOpinionFormat(maxIndex)</a>
+                        <div class="bar-cont">
+                            <div class="box-sell-bar">
+                                
+                                <span class="txt" id="investOpinion_0">
+                                    강력매도
+                                    <em class="arrow-view"></em>
+                                </span>
+                                <span class="txt" id="investOpinion_1">
+                                    매도
+                                    <em class="arrow-view"></em>
+                                </span>
+                                <span class="txt" id="investOpinion_2">
+                                    중립
+                                    <em class="arrow-view"></em>
+                                </span>
+                                <span class="txt" id="investOpinion_3">
+                                    매수
+                                    <em class="arrow-view"></em>
+                                </span>
+                                <span class="txt" id="investOpinion_4">
+                                    강력매수
+                                    <em class="arrow-view"></em>
+                                </span>
+
+                            </div>
+                            <div class="box-view">
+                                <iframe src="@tmpAnalysisUrl" style="width:100%; height: 275px;" scrolling="yes"></iframe>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--// end -->
+            <!-- Slider Menu start -->
+            <h5 class="blind">sub gnb</h5>
+            <div class="swiper-container sub-gnb01 mb0">
+                <div class="swiper-wrapper" id="boardContent">
+                    <div class="swiper-slide on"><span id="totalInfo">종합정보</span></div>
+                    <div class="swiper-slide"><span id="currPrice">현재가</span></div>
+                    <div class="swiper-slide"><span id="foreignerSecurity">외국인·기관</span></div>
+                    <div class="swiper-slide"><span id="newsNotices">뉴스·공시</span></div>
+                    @*기획요청으로 삭제 2017.12.28 <div class="swiper-slide"><span id="companyAnalysis">기업분석</span></div>*@
+                    <div class="swiper-slide"><span id="stockVod">종목동영상</span></div>
+                </div>
+            </div>
+
+            <input type="hidden" id="tabSeq" value="@tabSeq" />
+            <input type="hidden" id="boardType" value="@boardType" />
+
+            <form id="frmList_DSDTab">
+                <input type="hidden" name="arjCode" id="arjCode" value="@arjCode" />
+                <input type="hidden" name="shortCode" id="shortCode" value="@arjCode" />
+                <input type="hidden" name="stockCode" value="@Model.stock_code" />
+                <input type="hidden" name="k_gbn" value="@Model.k_gbn" />
+                <input type="hidden" name="partCode1" value="@Model.part_code1" />
+                <input type="hidden" name="partCode2" value="@Model.part_code2" />
+                <input type="hidden" name="cName" value="@Model.stock_wanname" />
+                <input type="hidden" name="searchStr" value="@Model.stock_wanname" />
+                
+
+                <input type="hidden" name="chgType" value="@Model.chg_type" />
+                <input type="hidden" name="curPrice" value="@Model.curr_price" />
+
+                <div id="divList">
+
+                </div>
+            </form>
+            
+
+
+        </section>
+        <!-- // container -->
+        <!-- footer -->
+        <footer>
+
+            <!-- icon start -->
+            <div class="box-footer-icon">
+                <a href="javascript:void(0)" class="box-facebook">Facebook</a>
+                <a href="javascript:void(0)" class="box-twitter">Twitter</a>
+                <a href="javascript:void(0)" class="box-kakaostory">KakaoStory</a>
+                <a href="javascript:void(0)" class="box-youtube">YouTube</a>
+                <a href="javascript:void(0)" class="box-writer">Writer</a>
+            </div>
+            <!--// icon end -->
+            <!-- btn start -->
+            <div class="box-footer-btn">
+                <a href="javascript:void(0)">서비스 이용약관</a>
+                <a href="javascript:void(0)">개인정보처리방침</a>
+                <a href="javascript:void(0)">기사배열 기본방침</a>
+                <a href="javascript:void(0)" class="view-comInfor"><span>사업자정보</span></a>
+                <a href="javascript:void(0)" class="view-site"><span>한국경제TV 패밀리 사이트</span></a>
+            </div>
+            <!--// btn end -->
+            <!-- 사업자정보 start -->
+            <div class="box-footer-comInfor">
+                <p class="txt-exmp">한국경제TV의 모든 콘텐츠는 저작권재법의 보호를 받습니다. <br>무단전재/복사/배포 등을 금지합니다.</p>
+                <div class="box-comInfor">
+                    <div>
+                        <p>㈜한국경제티브이</p>
+                        <span>사장 송재조 서울시 영등포구 버드나루로 </span>
+                    </div>
+                    <div>
+                        <p>84(우:150-988)</p>
+                        <span>Tel 02-6676-0000</span>
+                    </div>
+                    <div>
+                        <p>사업자등록번호 1107-81-70183</p>
+                        <span>통신판매업신고번호 영등포구 </span>
+                    </div>
+                    <div>
+                        <p>2000-00571호</p>
+                        <span>호스팅제공자 : ㈜한국경제티브이 </span>
+                    </div>
+                    <div>
+                        <span>기사배열 책임자 : 이성경</span>
+                    </div>
+                </div>
+                <div class="btn-footer-area">
+                    <a href="javascript:void(0)">회사소개</a>
+                    <a href="javascript:void(0)">광고(인터넷TV)</a>
+                    <a href="javascript:void(0)">제휴안내</a>
+                </div>
+            </div>
+            <!--// 사업자정보 end -->
+            <!-- 한국경제TV 패밀리 사이트 start -->
+            <div class="box-footer-site">
+                <div>
+                    <strong>한국경제 TV그룹</strong>
+                    <ul>
+                        <li><a href="" target="_blank">한국경제TV</a></li>
+                        <li><a href="http://www.wownet.co.kr" target="_blank">와우넷</a></li>
+                        <li><a href="http://www.wowfa.co.kr" target="_blank">와우파</a></li>
+                        <li><a href="http://www.wowstar.co.kr" target="_blank">WOW스타</a></li>
+                        <li><a href="http://www.tv10.co.kr" target="_blank">티비텐플러스</a></li>
+                        <li><a href="http://tesat.wowfa.co.kr/" target="_blank">TESAT</a></li>
+                        <li><a href="http://m.wowtv.co.kr" target="_blank">한국경제TV모바일</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>한경미디어그룹</strong>
+                    <ul>
+                        <li><a href="http://www.hankyung.com" target="_blank">한국경제신문</a></li>
+                        <li><a href="http://www.hankyung.com/" target="_blank">한국경제매거진</a></li>
+                        <li><a href="http://www.hankyung.com/" target="_blank">BOOK</a></li>
+                        <li><a href="http://ac.hankyung.com" target="_blank">한경아카데미</a></li>
+                        <li><a href="http://tenasia.hankyung.com/" target="_blank">텐아시아</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>모바일앱</strong>
+                    <ul>
+                        <li><a href="https://play.google.com/store/apps/details?id=kr.co.wowtv.wowtv" target="_blank">한국경제TV앱</a></li>
+                        <li><a href="https://play.google.com/store/apps/developer?id=%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9CTV." target="_blank">주식창앱</a></li>
+                        <li><a href="http://www.wownet.co.kr/daebakne/daebak/menu_info.asp?bcode=N74010400&&mseq=1954&tab=1&mseq=2772" target="_blank">와우넷앱</a></li>
+                        <li><a href="http://www.wownet.co.kr/wowband/sub_main.asp?bcode=S04020000&mseq=2936" target="_blank">와우밴드앱</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=kr.tvten.android.air" target="_blank">티비텐플러스앱</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--// 한국경제TV 패밀리 사이트 end -->
+            <!-- copyright start -->
+            <div class="box-footer-copy">
+                <ul class="footer-bottom">
+                    <li><a href="javascript:void(0)">고객센터</a></li>
+                    <li><a href="javascript:void(0)">1599-0700</a></li>
+                </ul>
+                <section class="coypright">Copyright &copy; 한국경제TV  All Right Reserved</section>
+            </div>
+            <!--// copyright end -->
+            <!-- pc버전 보기 start -->
+            <div class="btn-footer-pcview">
+                <a href="javascript:void(0)"><span>PC버전 보기</span></a>
+            </div>
+            <!--// pc버전 보기 end -->
+
+
+        </footer>
+        <!-- // footer -->
+
+    </div>
+
+    
+    <script type="text/javascript" src="@wowTvScript/design_in.js"></script>
+</body>
+
+</html>
+

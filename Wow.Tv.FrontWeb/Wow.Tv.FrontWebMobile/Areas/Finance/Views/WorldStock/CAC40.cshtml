@@ -1,0 +1,82 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock.Finance
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+
+@model usp_wownet_Europe_Index_online_Result
+@{
+    ViewBag.Title = "프랑스CAC40";
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+    Layout = null;
+}
+
+<script src="@wowTvScript/Finance/webponent/raphael.js"></script>
+<script src="@wowTvScript/Finance/webponent/webponent.comm.common.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.js"></script>
+<script src="@wowTvScript/Finance/webponent/chart/webponent.chart.style.js"></script>
+<script src="@wowTvScript/Finance/Charts/stockChart.js"></script>
+<script src="@wowTvScript/Finance/WorldStock/CAC40.js"></script>
+
+@*<script>
+    $(document).ready(function () {
+        FinanceChartJs.UsaTimeChartData("D", "D", $(".chart-view"));
+    });
+</script>*@
+
+<div class="stock-index">
+    <div class="box">
+        <dl class="stock-area">
+            <dt>프랑스</dt>
+            @Html.PublishPriceFormat2(Model.chgtype, Model.Price)
+        </dl>
+        <ul class="stock-box">
+            <li>@Html.PublishChgPriceFormat(Model.chgtype, Model.ChgPrice)</li>
+            <li>@Html.PublishUpDownSymbolPChangeFormat(Model.chgtype, Model.chgRate)</li>
+        </ul>
+    </div>
+    <!-- 테이블-->
+    <div class="table-type1">
+        <table>
+            <caption>관심종목 상세</caption>
+            <colgroup>
+                <col style="width:50%">
+                <col style="width:50%">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td class="txt-l">고가<strong>@Model.MaxPrice</strong></td>
+                    <td class="txt-l">거래량<strong>@Model.OpenPrice</strong></td>
+                </tr>
+                <tr>
+                    <td class="txt-l">저가<strong>@Model.MinPrice</strong></td>
+                    <td class="txt-l">전일증가<strong>@Model.Vol</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- // 테이블 -->
+</div>
+<!-- 해외증시 지수 -->
+<!-- chart start -->
+<div class="section-area mb50">
+    <p class="time-txt pr0">현지시각 <span class="num">@Html.CurrentTimeFormat(Model.LocalTime.ToString())</span>기준</p>
+    <div class="box-type-chart">
+        <div class="chart-view">
+
+        </div>
+    </div>
+</div>
+<!--// chart end -->
+
+<div class="tab-area">
+    <ul>
+        <li class="on" style="width: 100%;"><a href="#none">일별</a></li>
+    </ul>
+</div>
+<form id="frmList_CAC40">
+    <input type="hidden" id="pageSize" name="pageSize" value="7" />
+    <input type="hidden" id="currentIndex" name="currentIndex" />
+    <div id="divList">
+
+    </div>
+</form>

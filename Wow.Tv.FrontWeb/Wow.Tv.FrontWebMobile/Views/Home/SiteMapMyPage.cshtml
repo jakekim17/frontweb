@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+
+}
+
+
+@if (LoginHandler.IsLogin == true)
+{
+
+        <!-- box mywow infor start -->
+    <div class="box-mywow-infor">
+        <div class="box is-ico-Gnb ico-img01">
+            <span class="aside">나의 보유 캐시</span>
+            <strong class="stress"><span class="num">@ViewBag.MyCash</span> 원</strong>
+            <span class="btn-area"><a href="javascript:void(0)" class="btn type04 w-auto" onclick="SiteMap.MyPageCash()">캐시 충전하기</a></span>
+        </div>
+        <div class="box is-ico-Gnb ico-img02">
+            <span class="aside">나의 보유 쿠폰</span>
+            <strong class="stress"><span class="num">@ViewBag.HaveCouponCount</span> 장</strong>
+            <span class="btn-area"><a href="javascript:void(0)" class="btn type04 w-auto" onclick="SiteMap.MyPageCoupon()">쿠폰등록하기</a></span>
+        </div>
+        <div class="box is-ico-Gnb ico-img03">
+            <span class="aside">나의 투자 파트너</span>
+            <strong class="stress">@ViewBag.MyPartnerName</strong>
+            <span class="btn-area"><a href="javascript:void(0)" class="btn type04 w-auto" onclick="SiteMap.MyPagePartner()">파트너 다시 찾기</a></span>
+        </div>
+        <div class="box is-ico-Gnb ico-img04">
+            <span class="aside">나의 1:1문의</span>
+            <strong class="stress">문의<span class="num">@(ViewBag.InquiryCount)</span> / 답변<span class="num">@(ViewBag.ReplyCount)</span></strong>
+            <span class="btn-area"><a href="javascript:void(0)" class="btn type04 w-auto" onclick="SiteMap.MyPageWrite()">나의 글 모음</a></span>
+        </div>
+    </div>
+}
+
+

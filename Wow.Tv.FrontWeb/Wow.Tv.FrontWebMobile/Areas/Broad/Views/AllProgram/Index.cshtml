@@ -1,0 +1,49 @@
+﻿
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    string currentMenuSeq = Request["menuSeq"];
+}
+
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/tv.css">
+}
+
+
+@section scripts{
+    <script src="@wowTvScript/Broad/AllProgram/Index.js?date=20171018170000"></script>
+}
+
+
+<!-- 소개부분 -->
+<div class="section-area intro-tit">
+    <h2>전체프로그램</h2>
+</div>
+<!-- //소개부분 -->
+<form id="frmSearch">
+    <!-- 검색영역 -->
+    <div class="search-area">
+        <div class="search-basic">
+            <select name="year">
+                @for (int i = DateTime.Now.Year; i > DateTime.Now.Year - 10; i--)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <input type="text" name="programName" placeholder="검색어를 입력하세요." />
+            <div class="btn-area">
+                <a href="#" id="btnSearch" class="btn type03 full">검색하기</a>
+            </div>
+
+            <input type="hidden" id="hidProgramNameTermStart" name="ProgramNameTermStart" value="ㄱ" />
+            <input type="hidden" id="hidProgramNameTermEnd" name="ProgramNameTermEnd" value="ㄴ" />
+            <input type="hidden" name="currentIndex" value="0" />
+            <input type="hidden" name="pageSize" value="12" />
+        </div>
+    </div>
+    <!-- //검색영역 -->
+</form>
+<div id="divList"></div>
+

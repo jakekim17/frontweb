@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db49.Article" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="usp_WOWTVNewsCenterView_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ARTID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARTTEXT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARTTITLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DESKDATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EMAIL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IMGDir" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IMGFile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IMGFullURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ITIME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Press" type="xs:int" />
+      <xs:element minOccurs="0" name="STOCKCODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Thumbnail_type1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Thumbnail_type2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USERNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="arttype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="imglink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="sel_icon" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="wowcode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="usp_WOWTVNewsCenterView_Result" nillable="true" type="tns:usp_WOWTVNewsCenterView_Result" />
+</xs:schema>

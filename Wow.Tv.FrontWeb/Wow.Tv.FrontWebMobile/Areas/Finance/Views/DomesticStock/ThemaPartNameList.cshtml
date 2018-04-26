@@ -1,0 +1,53 @@
+﻿@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@model ListModel<usp_GetThemaOnline_Result>
+@{
+    ViewBag.Title = "ThemaPartNameList";
+
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+}
+@section scripts{
+    <script src="@wowTvScript/Finance/DomesticStock/ThemaPart.js"></script>
+}
+<section class="container">
+   
+    <!-- // 로케이션 -->
+    <!-- title area -->
+    <div class="section-area">
+        <h2>테마별</h2>
+    </div>
+    <!-- // title area -->
+    <!-- stock business -->
+    <div class="stock-business type02">
+        <a href="/Finance/DomesticStock/ThemaPart?menuSeq=@currentMenuSeq" class="ico-prev"><span class="icon prev"></span></a>
+        <strong class="title">@ViewBag.PartName</strong>
+    </div>
+    <!-- // stock business -->
+    <div class="section-area">
+        <!-- 테이블-->
+        <div class="table-type1 type02 line">
+            <table>
+                <caption>관심종목 상세</caption>
+                <colgroup>
+                    <col style="width:auto">
+                </colgroup>
+                <tbody>
+
+                    @foreach (var item in Model.ListData)
+                    {
+                        <tr>
+                            <td class="txt-l"><a href="#none" onclick="DomesticStockThemaPart.DomesticStockDetailGo('@DomainUrlFront','@item.stockcode.Replace("A", "")');">@item.stockname</a></td>
+                            <td>@Html.PublishPriceFormat(item.ChgType, String.Format("{0:#,##0}", item.curPrice))</td>
+                            <td>@Html.PublishChgPriceFormat(item.ChgType, String.Format("{0:#,##0}", item.NetChg))</td>
+                            <td>@Html.PublishChgRateFormat(Convert.ToDecimal(item.Rate))<!--등락율--></td>
+                        </tr>
+                    }                   
+                </tbody>
+            </table>
+        </div>
+        <!-- // 테이블 -->
+    </div>
+</section>

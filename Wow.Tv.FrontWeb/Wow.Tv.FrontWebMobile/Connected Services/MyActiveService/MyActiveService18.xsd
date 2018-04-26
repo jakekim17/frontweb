@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db51.WOWMMS" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Wow.Tv.Middle.Model.Db51.WOWMMS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfNUP_MMS_LOG_SELECT_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NUP_MMS_LOG_SELECT_Result" nillable="true" type="tns:NUP_MMS_LOG_SELECT_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNUP_MMS_LOG_SELECT_Result" nillable="true" type="tns:ArrayOfNUP_MMS_LOG_SELECT_Result" />
+  <xs:complexType name="NUP_MMS_LOG_SELECT_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ROWCNT" type="xs:int" />
+      <xs:element minOccurs="0" name="ROWNUM" type="xs:long" />
+      <xs:element minOccurs="0" name="TR_CALLBACK" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TR_ETC1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TR_ETC3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TR_ETC4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TR_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TR_MSG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TR_RSLTDATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TR_SENDDATE" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NUP_MMS_LOG_SELECT_Result" nillable="true" type="tns:NUP_MMS_LOG_SELECT_Result" />
+</xs:schema>

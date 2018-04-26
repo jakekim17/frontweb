@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c2bca46e-a263-4a7b-8112-a290b59da19a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/MainManage/MainManageService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MainManageService.xsd" MetadataType="Schema" ID="698b09d4-e8f9-49fe-b464-bbf3e02af4b0" SourceId="1" SourceUrl="http://localhost:8088/MainManage/MainManageService.svc?xsd=xsd1" />
+    <MetadataFile FileName="MainManageService1.xsd" MetadataType="Schema" ID="05d75e4b-87c3-4870-a449-f059348b7b04" SourceId="1" SourceUrl="http://localhost:8088/MainManage/MainManageService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MainManageService2.xsd" MetadataType="Schema" ID="82c05909-853b-4c9a-bb1c-300a1acc2ff3" SourceId="1" SourceUrl="http://localhost:8088/MainManage/MainManageService.svc?xsd=xsd4" />
+    <MetadataFile FileName="MainManageService.disco" MetadataType="Disco" ID="a100787a-df81-42a2-bec5-607be6ba3a1f" SourceId="1" SourceUrl="http://localhost:8088/MainManage/MainManageService.svc?disco" />
+    <MetadataFile FileName="MainManageService3.xsd" MetadataType="Schema" ID="e955e248-a01f-4710-a6a6-f626d9d7437f" SourceId="1" SourceUrl="http://localhost:8088/MainManage/MainManageService.svc?xsd=xsd3" />
+    <MetadataFile FileName="MainManageService.wsdl" MetadataType="Wsdl" ID="13a14b81-b05a-441b-adfd-95143911efa4" SourceId="1" SourceUrl="http://localhost:8088/MainManage/MainManageService.svc?wsdl" />
+    <MetadataFile FileName="MainManageService4.xsd" MetadataType="Schema" ID="0e20f662-fbae-436f-8d8f-a8df6b515818" SourceId="1" SourceUrl="http://localhost:8088/MainManage/MainManageService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

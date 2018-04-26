@@ -1,0 +1,51 @@
+﻿
+@using Wow
+@using Wow.Fx;
+@using Wow.Tv.Middle.Model.Db49.Article
+
+@model NTB_ARTICLE_LIKEIT
+
+@{
+    Layout = null;
+
+    int goodCount = 0;
+    int hateCount = 0;
+    int wantCount = 0;
+    string cookieLikeitGubun = "";
+
+    if (Model != null)
+    {
+        goodCount = Model.GOOD_COUNT;
+        hateCount = Model.HATE_COUNT;
+        wantCount = Model.WANT_COUNT;
+        cookieLikeitGubun = CookieMgr.GetCookie("Likeit_" + Model.ARTICLE_ID, "likeitGubun", false, new EncryptTypeEnum());
+    }
+    
+}
+<div>
+    <a href="javascript:NewsRead.Likeit('GOOD');">
+        <p class="icon @(cookieLikeitGubun.Equals("GOOD") ? "on" : "")"></p>
+        <div class="text">
+            <p class="like">좋아요</p>
+            <span class="num">@goodCount.ToString("#,##0") </span>
+        </div>
+    </a>
+</div>
+<div>
+    <a href="javascript:NewsRead.Likeit('HATE');">
+        <p class="icon type02 @(cookieLikeitGubun.Equals("HATE") ? "on" : "")"></p>
+        <div class="text">
+            <p class="like">싫어요</p>
+            <span class="num">@hateCount.ToString("#,##0")</span>
+        </div>
+    </a>
+</div>
+<div>
+    <a href="javascript:NewsRead.Likeit('WANT');">
+        <p class="icon type03 @(cookieLikeitGubun.Equals("WANT") ? "on" : "")"></p>
+        <div class="text">
+            <p class="like">후속기사 원해요</p>
+            <span class="num">@wantCount.ToString("#,##0")</span>
+        </div>
+    </a>
+</div>

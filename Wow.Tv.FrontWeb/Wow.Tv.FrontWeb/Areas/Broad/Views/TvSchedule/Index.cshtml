@@ -1,0 +1,65 @@
+﻿@using Wow
+@using Wow.Tv.Middle.Model.Db49.wowtv
+
+@model NTB_ATTACH_FILE
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    DateTime nowDate = DateTime.Now;
+    DateTime sun = nowDate.AddDays(0 - (int)(nowDate.DayOfWeek));
+    DateTime mon = sun.AddDays(1);
+    DateTime tue = sun.AddDays(2);
+    DateTime wed = sun.AddDays(3);
+    DateTime thu = sun.AddDays(4);
+    DateTime fri = sun.AddDays(5);
+    DateTime sat = sun.AddDays(6);
+
+}
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/tv.css">
+}
+
+@section scripts{
+    <script src="@wowTvScript/Broad/TvSchedule/Index.js?date=20171018170000"></script>
+}
+
+
+
+<h1 class="title">편성표 <span class="btn-view-more"><span class="btn-type2"><a href="#" target="_blank" id="btnFileDownLoad">주간 편성표(큐톤표)</a></span></span></h1>
+
+<!-- 뉴스 날짜 선택 -->
+<div class="contain-news-calendar">
+    @*<span class="prev"><button>전주</button></span>*@
+    <div class="calendar-news-week">
+        <ul>
+            <li @(nowDate.DayOfWeek == DayOfWeek.Sunday ? "class=today" : "")><a href="#" class="devWeek">@(sun.ToString("MM/dd"))(일)<input type="hidden" value="@sun.ToDate()" /></a></li>
+            <li @(nowDate.DayOfWeek == DayOfWeek.Monday ? "class=today" : "")><a href="#" class="devWeek">@(mon.ToString("MM/dd"))(월)<input type="hidden" value="@mon.ToDate()" /></a></li>
+            <li @(nowDate.DayOfWeek == DayOfWeek.Tuesday ? "class=today" : "")><a href="#" class="devWeek">@(tue.ToString("MM/dd"))(화)<input type="hidden" value="@tue.ToDate()" /></a></li>
+            <li @(nowDate.DayOfWeek == DayOfWeek.Wednesday ? "class=today" : "")><a href="#" class="devWeek">@(wed.ToString("MM/dd"))(수)<input type="hidden" value="@wed.ToDate()" /></a></li>
+            <li @(nowDate.DayOfWeek == DayOfWeek.Thursday ? "class=today" : "")><a href="#" class="devWeek">@(thu.ToString("MM/dd"))(목)<input type="hidden" value="@thu.ToDate()" /></a></li>
+            <li @(nowDate.DayOfWeek == DayOfWeek.Friday ? "class=today" : "")><a href="#" class="devWeek">@(fri.ToString("MM/dd"))(금)<input type="hidden" value="@fri.ToDate()" /></a></li>
+            <li @(nowDate.DayOfWeek == DayOfWeek.Saturday ? "class=today" : "")><a href="#" class="devWeek">@(sat.ToString("MM/dd"))(토)<input type="hidden" value="@sat.ToDate()" /></a></li>
+        </ul>
+    </div>
+    @*<span class="next"><button>다음주</button></span>*@
+</div>
+<input type="hidden" id="hidNowDate" value="@nowDate.ToDate()" />
+<!-- //뉴스 날짜 선택 -->
+<!-- table -->
+<div class="table-type2 list2" id="divList">
+</div>
+<!-- table -->
+<!-- 한국경제TV 방송 목록 보기 start -->
+<div class="box-type02">
+    <h2 class="title02">한국경제TV 방송 목록 보기</h2>
+    <a href="javascript:void(0)" class="btn-arrow">arrow</a>
+</div>
+<div class="box-line-type01" id="divProgramList">
+</div>
+<!--// 한국경제TV 방송 목록 보기 end -->
+
+
+<form id="frm"></form>

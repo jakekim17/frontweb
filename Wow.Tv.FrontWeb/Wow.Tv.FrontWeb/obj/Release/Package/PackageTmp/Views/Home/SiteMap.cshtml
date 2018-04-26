@@ -1,0 +1,77 @@
+﻿@using Wow.Tv.FrontWeb.MenuService;
+@using Wow.Tv.Middle.Model.Common;
+@using Wow.Tv.Middle.Model.Db49.wowtv;
+@using Wow.Tv.Middle.Model.Db49.wowtv.Menu;
+
+@{
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+
+    AppState["BodyClass"] = "site-map";
+    AppState["MainTitle"] = "사이트맵";
+
+    Layout = "~/Views/Shared/_MainLayOut.cshtml";
+
+}
+
+
+
+@{
+    MenuServiceClient menuServiceClient = new MenuServiceClient();
+    MenuCondition menuCondition = new MenuCondition();
+    menuCondition.ChannelCode = "WowTv";
+    menuCondition.Depth = 1;
+    menuCondition.ActiveYn = "Y";
+    menuCondition.PageSize = -1;
+    var menuList_1 = menuServiceClient.SearchList(menuCondition);
+}
+
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/opinion.css">
+}
+
+
+<!-- Content Area -->
+<div class="sitemap-area">
+    <ul class="box">
+        @foreach (var item in menuList_1.ListData)
+        {
+            menuCondition.UpMenuSeq = item.MENU_SEQ;
+            menuCondition.Depth = item.DEPTH + 1;
+            var menuList_2 = menuServiceClient.SearchList(menuCondition);
+
+        <li>
+            <a href="@item.Href" target="@item.LINK_TYPE_CODE"><strong class="title">@item.MENU_NAME</strong></a>
+            @if (menuList_2.ListData.Count > 0)
+            {
+            <ul class="menu-list">
+                @foreach (var item2 in menuList_2.ListData)
+                {
+                    menuCondition.UpMenuSeq = item2.MENU_SEQ;
+                    menuCondition.Depth = item2.DEPTH + 1;
+                    var menuList_3 = menuServiceClient.SearchList(menuCondition);
+                <li>
+                    <a href="@item2.Href" target="@item2.LINK_TYPE_CODE">@item2.MENU_NAME</a>
+                    @if (menuList_3.ListData.Count > 0)
+                    {
+                    <ul>
+                        @foreach (var item3 in menuList_3.ListData)
+                        {
+                        <li><a href="@item3.Href" target="@item3.LINK_TYPE_CODE">- @item3.MENU_NAME</a></li>
+                        }
+                    </ul>
+                    }
+                </li>
+                }
+            </ul>
+            }
+        </li>
+        }
+    </ul>
+
+
+</div>
+<!-- Content Area -->
+
+

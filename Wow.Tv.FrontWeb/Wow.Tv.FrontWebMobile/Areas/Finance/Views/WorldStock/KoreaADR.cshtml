@@ -1,0 +1,50 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db22.stock
+@using Wow.Tv.FrontWebMobile.Areas.Finance.Helpers
+@model ListModel<usp_web_korea_adr_Result>
+
+@{
+    ViewBag.Title = "KoreaADR";
+    Layout = null;
+    string wowTvScript = AppState["WowTvScript"].ToString();
+    string currentMenuSeq = Request["menuSeq"];
+}
+<section class="container">
+    <!-- 로케이션 -->
+    @*<div class="location">
+        <span class="is-ico is-myHome">Home</span>
+        <span>국내증시</span>
+        <span>ETF</span>
+    </div>*@
+    <!-- // 로케이션 -->
+    <!-- title area -->
+    <div class="section-area">
+        <h2>한국물ADR</h2>
+    </div>
+
+
+    <p class="time-txt">현지시각 2017-07-27 13:32 기준</p>
+    <div class="section-area">
+        <div class="table-type1 type02 line">
+            <table>
+                <caption>관심종목 상세</caption>
+                <colgroup>
+                    <col style="width:auto">
+                </colgroup>
+                <tbody>
+                    @foreach (var item in Model.ListData)
+                    {
+                        <tr>
+                            <td class="txt-l">@item.part_name</td>
+                            <td>@Html.PublishPriceFormat(item.chgType, item.price)</td>
+                            <td>@Html.PublishChgPriceFormat(item.chgType, item.chgPrice)</td>
+                            <td>@Html.PublishChgRateFormat(item.chgType, item.chgRate) </td>
+                        </tr>
+                    }                   
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>

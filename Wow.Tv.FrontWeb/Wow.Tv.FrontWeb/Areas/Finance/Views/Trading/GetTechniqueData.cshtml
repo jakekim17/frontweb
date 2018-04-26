@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+    string DomainUrlFront = AppState["DomainUrlFront"].ToString();
+    string searchDate = ViewBag.SearchDate;
+    if(searchDate == null)
+    {
+        ViewBag.SearchDate = string.Format("{0:yyyy-MM-dd}", DateTime.Now);
+    }
+}
+<div class="box-top-type1">
+    <div class="inner-right">
+        <p class="text-type-blt1 text-state">총 <span class="emphasize">@Model.Count</span>종목이 검색되었습니다.</p>
+    </div>
+    <div class="inner-left">
+        <!-- Search box Local -->
+        <div class="search-local date">
+            <input type="text" id="txtDate" class="form-control" value="@ViewBag.SearchDate">
+            <span class="btn-calendar" id="datePicker"><button>달력</button></span>
+        </div>
+        <input type="button" id="btnSearch" value="검색" class="btn-type3">
+    </div>
+</div>
+
+
+<div class="table-type1">
+    <table>
+        <caption></caption>
+        <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>종목명</th>
+                <th>종목코드</th>
+                <th>현재가</th>
+                <th>전일대비</th>
+                <th>등락률</th>
+                <th>시가</th>
+                <th>고가/저가</th>
+                <th>거래량</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                double rate = 0.0;
+                if (Int32.Parse(item[4]) - Int32.Parse(item[5]) != 0)
+                {
+                    rate = Double.Parse(item[5]) / (Double.Parse(item[4]) - Double.Parse(item[5])) * 100;
+                    rate = Math.Round(rate, 2);
+                }
+                var RateStr = rate.ToString();
+                //string chgPrice = item[5];
+                <tr>
+                    <td class="text"><a href="#none" onclick="return OverseasTechnique.DomesticStockDetailGo('@DomainUrlFront', '@item[0]')">@item[8]</a></td> 
+                    <td>@item[0]</td>
+                    <td class="number">@String.Format("{0:#,###}", Int32.Parse(item[4]))</td>
+                    @if (Int32.Parse(item[5]) > 0)
+                    {
+                        <td class="number"><span class="data-up icon">@String.Format("{0:#,##0}", Int32.Parse(item[5])).Replace("+", "")</span></td>
+                        <td class="number"><span class="data-up symbol">@RateStr%</span></td>
+                    }
+                    else if (Int32.Parse(item[5]) < 0)
+                    {
+                        <td class="number"><span class="data-down icon">@String.Format("{0:#,##0}", Int32.Parse(item[5])).Replace("-", "")</span></td>
+                        <td class="number"><span class="data-down">@RateStr%</span></td>
+                    }
+                    else
+                    {
+                        <td class="number"><span class="">@item[5]</span></td>
+                        <td class="number"><span class="">0.00</span></td>
+                    }
+                    <td class="number">@String.Format("{0:#,###}", Int32.Parse(item[1]))</td>
+                    <td class="number">@String.Format("{0:#,###}", Int32.Parse(item[2]))<br>@String.Format("{0:#,###}", Int32.Parse(item[3]))</td>
+                    <td class="number">@String.Format("{0:#,###}", Int32.Parse(item[6]))</td>
+                </tr>
+                
+            }  
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+}
+
+@if (Model.ListData != null && Model.ListData.Count > 0)
+{
+    <div class="banner-type4">
+        <a href="@Model.ListData[0].LINK_URL" target="@Model.ListData[0].LINK_TYPE">
+            <img src="@Model.ListData[0].AttachFile.REAL_WEB_PATH" alt="@Model.ListData[0].TITLE" style="cursor:pointer;">
+        </a>
+    </div>
+    <div class="banner-type4">
+        <!-- banner-area swipe -->
+        <div class="swiper-container ui-slider">
+            <div class="swiper-wrapper">
+                @foreach (var item in Model.ListData)
+                {
+                    if (Model.ListData.IndexOf(item) > 0)
+                    {
+                        <div class="swiper-slide content-box">
+                            <a href="@item.LINK_URL" target="@item.LINK_TYPE">
+                                <img src="@item.AttachFile.REAL_WEB_PATH" alt="@item.TITLE" style="cursor:pointer;">
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+            <!-- btn -->
+            <div class="swiper-pagination"></div>
+            <!-- btn -->
+        </div>
+    </div>
+}

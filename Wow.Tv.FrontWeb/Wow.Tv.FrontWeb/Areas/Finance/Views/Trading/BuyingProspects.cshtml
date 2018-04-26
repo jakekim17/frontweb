@@ -1,0 +1,93 @@
+﻿
+@{
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section scripts{
+    <script src="@wowTvScript/Finance/Trading/BuyingProspects.js"></script>
+    <script>
+        //var menuSeq = @Request["menuSeq"];
+    </script>
+}
+<h1 class="title">매수유망패턴</h1>
+
+<div class="list-type1">
+    <ul>
+        <li>[강력한 리얼서치 엔진으로 분봉, 일봉상에서 원하는 조건에 맞는 종목을 실시간으로 찾아주는 서비스입니다.</li>
+        <li>원하는 유망종목을 장중 언제든지 찾아낼 수 있습니다.</li>
+        <li>본 내용은 투자판단의 참고사항이며, 투자판단의 최종책임은 본 서비스를 이용하시는 이용자에게 있습니다.</li>
+    </ul>
+</div>
+
+<hr class="division3 no-border">
+
+<div class="tab-type1">
+    <ul class="col3">
+        <li id="6001" class="btnPattern"><a href="#">급등패턴</a></li>
+        <li id="6003" class="btnPattern"><a href="#">상승초기형</a></li>
+        <li id="6005" class="btnPattern"><a href="#">바닥탈출 후 상승패턴</a></li>
+    </ul>
+</div>
+
+<div id="Div6001" class="DivPattern" hidden>
+    <h2 class="title">급등패턴</h2>
+    <label class="radio boxtype">
+        <input type="radio" class="radioPattern" id="radio_6001">
+        <span class="in-chart"></span><!-- Chart -->
+        <span class="in-title">세력개입 급등 초기 종목 포착<span>(중기:1주일 이상)</span></span>
+        <span class="in-text">
+            급등주는 주도세력의 매집 강도로 포착되며 이는 거래량에서 실마리를 찾을 수 있습니다. 특히 급등 초기에는 급격한 거래 증가가 수반되는 특징을 보입니다.
+            주가가 상승을 시작하며 이전에 보이지 않았던 대량의 세력 매집이 지속되는 경우 급등주가 될 가능성은 높아집니다. 급등 초기 포착은 상승초기 매집 세력의 강도 측정을 통해 유망종목을 포착합니다.
+        </span>
+    </label>
+    <label class="radio boxtype">
+        <input type="radio" class="radioPattern" id="radio_6002">
+        <span class="in-chart"></span><!-- Chart -->
+        <span class="in-title">횡보 바닥 탈출 종목 포착<span>(중기:1주일 이상)</span></span>
+        <span class="in-text">
+            바닥권에서 횡보세를 보이며 충분한 기간 조정을 거친후 바닥 탈출을 시도하는 상승초기 패턴으로 진바닥 확인 가능성이 높은 종목을 포착합니다.
+        </span>
+    </label>
+</div>
+<div id="Div6003" class="DivPattern" hidden>
+    <h2 class="title">상승초기형</h2>
+
+    <label class="radio boxtype">
+        <input type="radio" class="radioPattern" id="radio_6003">
+        <span class="in-chart"></span><!-- Chart -->
+        <span class="in-title">이중바닥후 상승시도 종목 포착<span>(중기:1주일 이상)</span></span>
+        <span class="in-text">
+            이중 바닥으로 지지선을 강하게 구축한후 상승세로 전환을 시도하는 종목을 포착합니다. 이중바닥패턴은 전저점의 지지력이 강해 매도세력 소진으로 추정할 수 있습니다. 이중 바닥패턴 중 단기 매집 흔적이 강한 종목을 포착합니다.
+        </span>
+    </label>
+    <label class="radio boxtype">
+        <input type="radio" class="radioPattern" id="radio_6004">
+        <span class="in-chart"></span><!-- Chart -->
+        <span class="in-title">조정후 2차 급등 가능 종목 포착<span>(중기:1주일 이상)</span></span>
+        <span class="in-text">
+            급등시세를 한차례 보인후 짧은 조정을 거친 후 재차 급등하는 패턴으로 공격적인 유형입니다. 신고가 가능성이 높다는 전제로 하이리스크 하이리턴 패턴입니다. 20일 이동평균선을 하향이탈시 적극적인 매도 대응이 필요합니다.
+        </span>
+    </label>
+</div>
+<div id="Div6005" class="DivPattern" hidden>
+    <h2 class="title">바닥탈출 후 상승패턴</h2>
+    <label class="radio boxtype">
+        <input type="radio" class="radioPattern" id="radio_6005">
+        <span class="in-chart"></span><!-- Chart -->
+        <span class="in-title">상승추세선상의 일시조정 종목 포착<span>(단기, 중기 : 1주일 전후)</span></span>
+        <span class="in-text">
+            바닥을 확인한 후 완만한 상승 추세로 전환한 패턴으로 단기적으로 탄력적인 상승이 기대되는 종목을 포착합니다.
+        </span>
+    </label>
+    <label class="radio boxtype">
+        <input type="radio" class="radioPattern" id="radio_6006">
+        <span class="in-chart"></span><!-- Chart -->
+        <span class="in-title">V자 패턴 후 재상승 종목 포착<span>(단기 : 1주일 이내)</span></span>
+        <span class="in-text">
+            급격한 하락세를 보인후 급반등 하는 패턴으로 단기 수익이 가능한 종목을 포착합니다. 반등 출발 시점은 신뢰도가 떨어지는 단점이 있어 반등후 지지선을 구축한 종목을 포착합니다.
+        </span>
+    </label>
+</div>
+<hr class="division2 no-border">
+
+<div id="dataArea"></div>

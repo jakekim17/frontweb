@@ -1,0 +1,64 @@
+﻿@using Wow.Tv.Middle.Model.Common
+@using Wow.Tv.Middle.Model.Db49.editVOD
+@using Wow.Tv.FrontWeb.Areas.Finance.Helpers
+@model ListModel<usp_web_listSubTopvod6_Result>
+@{
+    ViewBag.Title = "DomesticStockDetailRightCommonInvestList";
+    Layout = null;
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+}
+
+@*<div class="list-type-thumnail small bxslider">
+    <ul>
+        @if (Model.ListData.Count > 0)
+        {
+            foreach (var item in Model.ListData)
+            {
+                <li>
+                    <a href="#none">
+                        <img src="@Html.DomesticStockDetailRightConsultImgUrl(item.ArticleID, item.EditFolder, item.Image_S)" alt="" width="250" height="161" onclick="PopupPlayVod('@item.vodNum')" onerror="this.src='@wowTvStyle/images/common/no_image_16m.jpg'">
+                        <span class="title" onclick="PopupPlayVod(@item.vodNum)">@item.subject</span>
+                        <span class="date">@item.insdate.ToString("MM.dd")</span>
+                    </a>
+                    
+                </li>
+            }
+        }
+        else
+        {
+            <li>데이터가 존재하지 않습니다.</li>
+        }
+
+    </ul>
+
+</div>*@
+
+@if (Model.ListData.Count > 0)
+{
+    
+    <div class="list-type-thumnail small bxslider">
+        <ul>
+            @foreach (var item in Model.ListData)
+            {
+           
+            <li>
+                <a href="#none">
+                    <img src="@Html.DomesticStockDetailRightConsultImgUrl(item.ArticleID, item.EditFolder, item.Image_S)" alt="" width="250" height="161" onclick="PopupPlayVod('@item.vodNum')" onerror="this.src='@wowTvStyle/images/common/no_image_16m.jpg'">
+                    <span class="title" onclick="PopupPlayVod(@item.vodNum)">@item.subject</span>
+                    <span class="date">@item.insdate.ToString("MM.dd")</span>
+                </a>
+
+            </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="list-type-thumnail small">
+        <ul>
+            <li>데이터가 없습니다.</li>
+        </ul>
+    </div>
+}
+

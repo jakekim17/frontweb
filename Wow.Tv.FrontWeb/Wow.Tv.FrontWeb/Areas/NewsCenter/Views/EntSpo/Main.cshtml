@@ -1,0 +1,392 @@
+﻿@using Wow
+@{ 
+    Layout = "/Views/Shared/_MainLayOut2.cshtml";
+    AppState["BodyClass"] = "entertain";
+
+    string wowTvStyle = AppState["WowTvStyle"].ToString();
+    string wowTvScript = AppState["WowTvScript"].ToString();
+}
+
+@section styles{
+    <link rel="stylesheet" href="@wowTvStyle/css/entertain.css">
+}
+
+@section scripts{
+    <script src="@wowTvScript/NewsCenter/Common.js"></script>
+    <script src="@wowTvScript/NewsCenter/EntSpo/Main.js"></script>
+    <script src="@wowTvScript/NewsCenter/NewsEntSpoSearchApi.js?date=20171216150000"></script>
+
+    <script src="@wowTvScript/jquery.timeago/jquery.timeago.js"></script>
+    <script src="@wowTvScript/jquery.timeago/jquery.timeago.ko.js"></script>
+}
+
+<div class="wrap">
+    <!-- Content Area -->
+    <div class="contain-entertain main">
+        <!-- head-news-area -->
+        <div class="head-news-area">
+            <div class="box-area">
+                <div class="box">
+                    @if (Model.TopList != null && Model.TopList.Count > 0)
+                    {
+                        <!-- left content -->
+                        <div class="left-box">
+                            @Html.Raw(WowExtensionMethod.EntSpoHashTag(Model.TopList[0].TAG))
+                            <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@Model.TopList[0].ARTICLEID')">
+                                @Html.Raw(WowExtensionMethod.NewsGugunIcon(Model.TopList[0].GUBUN_NAME))
+                                <img src="@WowExtensionMethod.NewsThumbnailPath("16B", Model.TopList[0].THUMBNAIL_FILENM, Model.TopList[0].VOD_NUM, Model.TopList[0].IMAGE_DIR, Model.TopList[0].IMAGE_FILE, Model.TopList[0].ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16B")'" alt="">
+                                <span class="title">@Html.Raw(WowExtensionMethod.ToStrong( WowExtensionMethod.SubStringWidthPad(Model.TopList[0].TITLE, 50), Model.TopList[0].BOLD_YN))</span>
+                                <p class="cont">@WowExtensionMethod.RemoveTag(WowExtensionMethod.RemoveTagAndReplace(Model.TopList[0].CONTENTS_CUT, 0, true))</p>
+                            </a>
+                        </div>
+                        <!-- // left content -->   
+
+                        <!-- right content -->
+                        <div class="right-box">
+                            @foreach (var item in Model.TopList)
+                                {
+                                    if (Model.TopList.IndexOf(item) > 0)
+                                    {
+                                    <div>
+                                        @Html.Raw(WowExtensionMethod.EntSpoHashTag(item.TAG))
+                                        <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@item.ARTICLEID')">
+                                            @*<span class='hash-tag'>@wowextensionmethod.newshashtag(item.tag)</span>*@
+                                            @Html.Raw(WowExtensionMethod.NewsGugunIcon(item.GUBUN_NAME))
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)"  onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'" alt="">
+                                            <span class="title">
+                                                @Html.Raw(WowExtensionMethod.ToStrong(WowExtensionMethod.SubStringWidthPad(item.TITLE, 50), item.BOLD_YN))
+                                            </span>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <!-- // right content -->
+                    }
+                    else
+                    {
+                        <div class="left-box"> 등록된 내용이 없습니다. </div>
+                        <div class="right-box"> <div>등록된 내용이 없습니다.</div></div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- //head-news-area -->
+        <!-- sub-news-area -->
+        <div class="sub-news-area">
+            <!-- left-box -->
+            <div class="left-box">
+                <ul class="sub-news1">
+                    @if (Model.EntList != null && Model.EntList.Count > 0)
+                    {
+                        foreach (var item in Model.EntList)
+                        {
+                            if (Model.EntList.IndexOf(item) == 0)
+                            {
+                                <li class="img-news">
+                                    <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@item.ARTICLEID')">
+                                        <span class="img-area">
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'" alt="">
+                                        </span>
+                                        <span class="article">
+                                            <span class="tit">
+                                                @Html.Raw(WowExtensionMethod.NewsGugunIcon(item.GUBUN_NAME))
+                                                @Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))
+                                            </span>
+                                            <span class="cont">@WowExtensionMethod.RemoveTag(WowExtensionMethod.RemoveTagAndReplace(item.CONTENTS_CUT, 0, true))</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+                            else if (Model.EntList.IndexOf(item) < 6)
+                            {
+                                <li>
+                                    <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@item.ARTICLEID')">
+                                        @Html.Raw(WowExtensionMethod.NewsGugunIcon(item.GUBUN_NAME))
+                                        @Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <li>등록된 내용이 없습니다.</li>
+                    }
+                </ul>
+            </div>
+            <!-- //left-box -->
+            <!-- right-box -->
+            <div class="right-box">
+                <ul class="sub-news2">
+                    @if (Model.SpoList != null && Model.SpoList.Count > 0)
+                    {
+                        foreach (var item in Model.SpoList)
+                        {
+                            if (Model.SpoList.IndexOf(item) < 2)
+                            {
+                                <li>
+                                    <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@item.ARTICLEID')">
+                                        <span class="img-area">
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("11M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("11M")'" alt="">
+                                        </span>
+                                        <span class="article">
+                                            <span class="tit">
+                                                @Html.Raw(WowExtensionMethod.NewsGugunIcon(item.GUBUN_NAME))
+                                                @Html.Raw(WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))
+                                            </span>
+                                            <span class="cont">@WowExtensionMethod.RemoveTag(WowExtensionMethod.RemoveTagAndReplace(item.CONTENTS_CUT, 0, true))</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <li>등록된 내용이 없습니다.</li>
+                    }
+                </ul>
+            </div>
+            <!-- //right-box -->
+        </div>
+    <!-- //sub-news-area -->
+
+    </div>
+    <!-- //Content Area -->
+</div>
+
+<div class="wrap type2">
+    <!-- Content Area -->
+    <div class="contain-entertain main">
+        <!-- sub-issue-area -->
+        <div class="sub-issue-area">
+            <div class="hash-area" id="divIssueKeyWord">
+            </div>
+            <div class="list-issue">
+                <div class="box-area" id="divIssueNewsArticle">
+                </div>
+
+                <!-- 박스 4 -->
+                <div class="bx-type2">
+                    <strong class="tit">이슈 모아보기</strong>
+                    <div class="input-area">
+                        <input type="text" id="txtAutoCompleteWord" placeholder="" />
+                        <a href="#none" class="btn" id="btnSearchCompleteWord">검색</a>
+
+                        <div class="auto-complete-area" id="divAutoComplete" style="display:none;">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="list-rank" id="ulIssueCollection">
+                    </ul>
+                </div>
+                <!-- //박스 4 -->
+            </div>
+            <!-- 더보기 버튼 -->
+            <a href="#none" class="add-btn">더보기</a>
+            <!-- // 더보기 버튼 -->
+        </div>
+        <!-- //sub-issue-area -->
+    </div>
+    <!-- //Content Area -->
+</div>
+
+<div class="wrap">
+    <!-- Content Area -->
+    <div class="contain-entertain main">
+        <!-- sub-rank-area -->
+        <div class="sub-rank-area">
+            <!-- 171020 클래스 네이밍 수정 -->
+            <!-- left-box -->
+            <div class="left-box">
+                <ul class="list-thumb">
+                    @if (Model.EntList != null && Model.EntList.Count > 0)
+                    {
+                        foreach (var item in Model.EntList)
+                        {
+                            if (Model.EntList.IndexOf(item) >= 6 && Model.EntList.IndexOf(item) < 10)
+                            {
+                                if (Model.EntList.IndexOf(item) == 6)
+                                {
+                                    <li class="main-news">
+                                        <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@item.ARTICLEID')">
+                                            <img src="@WowExtensionMethod.NewsThumbnailPath("16B", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16B")'" alt="">   
+                                            <span class="tit">@Html.Raw(Wow.WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))</span>
+                                            <span class="cont">
+                                               @WowExtensionMethod.RemoveTag(WowExtensionMethod.RemoveTagAndReplace(item.CONTENTS_CUT, 0, true))
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="hot">
+                                        <!-- 폰트 강조시 li class="hot" 추가 -->
+                                        <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@item.ARTICLEID')">
+                                            @if (item.SECTION_NAME != null)
+                                            {
+                                                <span class="box-icon01 type2">@item.SECTION_NAME</span>
+                                            }
+                                            <span class="img-area">
+                                                <img src="@WowExtensionMethod.NewsThumbnailPath("16M", item.THUMBNAIL_FILENM, item.VOD_NUM, item.IMAGE_DIR, item.IMAGE_FILE, item.ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'" alt="">
+                                            </span>
+                                            <span class="tit">
+                                                @Html.Raw(WowExtensionMethod.NewsGugunIcon(item.GUBUN_NAME))
+                                                @Html.Raw(Wow.WowExtensionMethod.ToStrong(item.TITLE, item.BOLD_YN))
+                                            </span>
+                                            <span class="date">@item.ARTDATE.ToString("yyyy-MM-dd")</span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <li class="main-news">등록된 내용이 없습니다.</li>
+                    }
+                    @if (Model.SpoList != null && Model.SpoList.Count > 0)
+                    {
+                        for (var i = 3; i < 6; i++)
+                        {
+                            <li>
+                                <a href="javascript:NewsCommon.GoNewsDetailView('entspo','','','@Model.SpoList[i].ARTICLEID')">
+                                    @if (Model.SpoList[i].SECTION_NAME != null)
+                                    {
+                                        <span class="box-icon01 type2">@Model.SpoList[i].SECTION_NAME</span>
+                                    }
+                                    <span class="img-area">
+                                        <img src="@WowExtensionMethod.NewsThumbnailPath("16M", Model.SpoList[i].THUMBNAIL_FILENM, Model.SpoList[i].VOD_NUM, Model.SpoList[i].IMAGE_DIR, Model.SpoList[i].IMAGE_FILE, Model.SpoList[i].ARTDATE)" onerror="this.src='@WowExtensionMethod.NewsThumbnailOnError("16M")'" alt="">
+                                    </span>
+                                    <span class="tit">
+                                        @Html.Raw(WowExtensionMethod.NewsGugunIcon(Model.SpoList[i].GUBUN_NAME))
+                                        @Html.Raw(Wow.WowExtensionMethod.ToStrong(Model.SpoList[i].TITLE, Model.SpoList[i].BOLD_YN))
+                                    </span>
+                                    <span class="date">@Model.SpoList[i].ARTDATE.ToString("yyyy-MM-dd")</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li >등록된 내용이 없습니다.</li>
+                    }
+                </ul>
+            </div>
+            <!-- //left-box -->
+            <!-- right-box -->
+            <div class="right-box">
+                <div class="rank-search">
+                    <ul class="list-rank" id="ulRankingTag">
+                        @*<li><span class="num">#</span><a href="#none">엑소 공식</a></li>
+                        <li><span class="num">#</span><a href="#none">엑소 공식</a></li>
+                        <li><span class="num">#</span><a href="#none">엑소 공식</a></li>
+                        <li><span class="num">#</span><a href="#none">엑소 공식</a></li>*@
+                    </ul>
+                </div>
+                <div class="rank-news">
+                    <h2 id="AAA">랭킹뉴스</h2>
+                    <ul class="list-best" id="ulRankingNews">                        
+                    </ul>
+                </div>
+            </div>
+            <!-- //right-box -->
+        </div>
+        <!-- //sub-rank-area -->
+        <!-- much-section-area -->
+        <div class="much-section-area">
+            <!-- left much -->
+            <div class="much-left">
+                <h2>카드뉴스<a href="" class="more">더보기</a></h2>
+                <div class="card-news-area" id="divCardNews"></div>
+                <!-- // 카드 뉴스 -->
+            </div>
+            <!-- // left much -->
+            <!-- right much -->
+            <div class="much-right">
+                <h2>많이 본 뉴스<a href="#" class="more">더보기</a></h2>
+                <!-- 텝 영역 -->
+                <div class="main-tab-area type2">
+                    <ul class="tab">
+                        <li class="on"><a href="#none">뉴스</a></li>
+                        <li><a href="#none">연예·스포츠</a></li>
+                        <li><a href="#none">SNS</a></li>
+                    </ul>
+                    <div class="box-area" id="divManySeeNews"></div>
+                </div>
+                <!-- 텝 영역 -->
+            </div>
+            <!-- // right much -->
+        </div>
+        <!-- // much-section-area -->
+    </div>
+    <!-- //Content Area -->
+</div>
+
+<!-- 이슈 갤러리 start -->
+<div class="box-img-slider">
+    <h2 class="title01">
+        이슈 갤러리
+        @*<a href="javascript:NewsCommon.GoPhotoList();" class="btn-ico plus">more</a>*@
+    </h2>
+    <div class="box-img-slider">
+        <div class="main_hot_sale">
+            <div class="new-slider type02">
+                <div class="bn" id="photoNewsSlider">
+                    <ul class="swiper-wrapper" id="divPhotoNews"></ul>
+                </div>
+            </div>
+            <a href="#" class="swiper-bn-left">이전 배너 보기</a>
+            <a href="#" class="swiper-bn-right">다음 배너 보기</a>
+        </div>
+    </div>
+</div>
+<!--// 이슈 갤러리 end -->
+<div class="wrap">
+    <!-- Content Area -->
+    <div class="contain-content pdt_0">
+        <!-- 3단 start -->
+        <div class="box-3dabth">
+            <!-- 핫한 뉴우스 start -->
+            <div class="box-type-new">
+                <h2 class="title01" id="h2HotNews">핫한 뉴우스</h2>
+            </div>
+            <!--// 핫한 뉴우스 end -->
+            <div class="box-sns-channel">
+                <strong class="tit">
+                    한국경제TV의 SNS채널에서 더욱<br>
+                    다채로운 소식을 받아보실 수 있습니다
+                </strong>
+                <span class="sub-tit">친구신청 하러 가기</span>
+                <div class="btn-sns-channel-area">
+                    <a href="https://www.facebook.com/HKWOWTV" class="btn-sns-channel facebook" target="_blank">페이스북</a>
+                    <a href="https://story.kakao.com/ch/hkwowtv" class="btn-sns-channel kakaostory" target="_blank">카카오스토리</a>
+                    <a href="http://post.naver.com/my.nhn?memberNo=11761424" class="btn-sns-channel naver-post" target="_blank">네이버 포스트</a>
+                    <a href="https://www.youtube.com/user/hkwowtv" class="btn-sns-channel youtube" target="_blank">유투브</a>
+                </div>
+            </div>
+            @* 섹션메인면 우측하단 배너*@
+            <div class="box-event">
+                <h2 class="blind">AD + Area</h2>
+                <div>
+                    <iframe width="300" height="300" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" src="http://nvapi.feeldmc.com/ad/p/in/v1_0/evnt?slotid=stw_koreawowtv_14" title="AD Tag"></iframe>
+                </div>
+            </div>
+            <!--// 광고 이미지  end -->
+        </div>
+        <!--// 3단 end -->
+        @*와우넷,와우파,와우스타 탭 컨텐츠*@
+        @Html.Partial("~/Views/Home/WowNetFaStar.cshtml")
+    </div>
+    <!-- //Content Area -->
+</div>

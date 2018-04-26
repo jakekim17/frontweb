@@ -1,1 +1,0 @@
-﻿$("#divPaging_dayDowJones").html(totalDataCount, $("#frmList_DownJones > #currentIndex").val(), $("#frmList_DownJones > #pageSize").val(), $("WorldStockDowJones.SiseDayDowJonesList"));

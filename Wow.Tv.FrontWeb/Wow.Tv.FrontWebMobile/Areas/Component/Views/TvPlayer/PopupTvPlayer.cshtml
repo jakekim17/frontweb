@@ -1,8 +1,0 @@
-﻿@using Wow.Tv.FrontWebMobile.Areas.Component.Models
-@{
-    Layout = "/Views/Shared/_LayoutNone.cshtml";
-
-    TvPlayerModel tvPlayerParameter = ViewBag.TvPlayerParameter;
-    tvPlayerParameter.AutoSize = true;
-}
-@Html.Partial("~/Areas/Component/Views/TvPlayer/TvPlayer.cshtml", tvPlayerParameter)
